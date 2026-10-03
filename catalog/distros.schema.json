@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/memton80/linux-install-helper/main/catalog/distros.schema.json",
+  "title": "Linux Install Helper distribution catalog",
+  "description": "List of Linux distributions that Linux Install Helper can download, verify and write to a USB drive. See catalog/README.md for the documentation of every field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "updated", "distros"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "description": "Version of this schema. The application refuses catalogs with a version it does not know.",
+      "type": "integer",
+      "const": 1
+    },
+    "updated": {
+      "description": "Date of the last change (YYYY-MM-DD). Used to pick the newest catalog when offline.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "distros": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/distro" }
+    }
+  },
+  "definitions": {
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s/$.?#][^\\s]*$",
+      "maxLength": 2048
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "fingerprint": {
+      "description": "Full OpenPGP v4 fingerprint (40 hexadecimal characters, no spaces).",
+      "type": "string",
+      "pattern": "^[0-9A-F]{40}$"
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "fr"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "fr": { "type": "string", "minLength": 1, "maxLength": 300 }
+      }
+    },
+    "distro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "version", "family", "categories", "description", "homepage", "color", "architecture", "image"],
+      "properties": {
+        "id": {
+          "description": "Stable identifier, lowercase letters, digits and dashes.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,48}$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "edition": {
+          "description": "Optional edition shown next to the name (Desktop, Server, KDE Plasma...).",
+          "type": "string",
+          "maxLength": 60
+        },
+        "version": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "family": {
+          "type": "string",
+          "enum": ["debian", "ubuntu", "fedora", "arch", "opensuse", "other"]
+        },
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["beginner", "desktop", "lightweight", "server", "security", "rolling", "developer"]
+          }
+        },
+        "desktop": {
+          "description": "Desktop environment, or \"None\" for server images.",
+          "type": "string",
+          "maxLength": 40
+        },
+        "description": { "$ref": "#/definitions/localizedText" },
+        "homepage": { "$ref": "#/definitions/httpsUrl" },
+        "color": {
+          "description": "Brand color used for the distribution badge.",
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "architecture": {
+          "type": "string",
+          "enum": ["x86_64", "aarch64"]
+        },
+        "secureBoot": {
+          "description": "false when the image does not boot with Secure Boot enabled (a warning is shown).",
+          "type": "boolean",
+          "default": true
+        },
+        "requirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ramMb": { "type": "integer", "minimum": 256 },
+            "diskGb": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "image": { "$ref": "#/definitions/image" }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "size", "urls"],
+      "properties": {
+        "fileName": {
+          "description": "Name of the ISO file when the catalog was last updated.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._+-]+\\.iso$"
+        },
+        "size": {
+          "description": "Size in bytes of the ISO file.",
+          "type": "integer",
+          "minimum": 1048576
+        },
+        "urls": {
+          "description": "Official download URLs, best first. The application falls back to the next one on failure.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/httpsUrl" }
+        },
+        "sha256": {
+          "description": "SHA-256 of the ISO, when no checksum file is published.",
+          "$ref": "#/definitions/sha256"
+        },
+        "checksum": {
+          "description": "Official checksum file (sha256sum or BSD format, optionally clearsigned).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["url"],
+          "properties": {
+            "url": { "$ref": "#/definitions/httpsUrl" }
+          }
+        },
+        "signature": {
+          "description": "OpenPGP signature of the checksum file or of the image.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "target", "fingerprints"],
+          "properties": {
+            "kind": { "type": "string", "enum": ["detached", "clearsigned"] },
+            "target": { "type": "string", "enum": ["checksum", "image"] },
+            "url": { "$ref": "#/definitions/httpsUrl" },
+            "fingerprints": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "#/definitions/fingerprint" }
+            }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "kind": { "const": "detached" } } },
+              "then": { "required": ["url"] }
+            },
+            {
+              "if": { "properties": { "kind": { "const": "clearsigned" } } },
+              "then": { "properties": { "target": { "const": "checksum" } } }
+            }
+          ]
+        },
+        "resolve": {
+          "description": "How to find a newer image when the distribution publishes a new point release.",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "pattern"],
+              "properties": {
+                "type": { "const": "checksum-pattern" },
+                "pattern": {
+                  "description": "Regular expression matched against the file names listed in the checksum file. The highest version wins.",
+                  "type": "string",
+                  "minLength": 3
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "url", "urlField", "sha256Field"],
+              "properties": {
+                "type": { "const": "json" },
+                "url": { "$ref": "#/definitions/httpsUrl" },
+                "urlField": { "type": "string", "minLength": 1 },
+                "sha256Field": { "type": "string", "minLength": 1 },
+                "sizeField": { "type": "string", "minLength": 1 },
+                "versionField": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        },
+        "hybrid": {
+          "description": "true when the ISO is an isohybrid image that can be written as-is to a USB drive.",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "anyOf": [
+        { "required": ["sha256"] },
+        { "required": ["checksum"] },
+        { "required": ["resolve"], "properties": { "resolve": { "properties": { "type": { "const": "json" } } } } }
+      ]
+    }
+  }
+}
