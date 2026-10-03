@@ -28,7 +28,7 @@ The [`check-links`](../.github/workflows/check-links.yml) workflow checks every 
 | `edition` | no | Edition shown after the name (`Cinnamon`, `Server`...). |
 | `version` | yes | Version shown in the list (`22.3 (Zena)`). |
 | `family` | yes | `ubuntu`, `debian`, `fedora`, `arch`, `opensuse` or `other`. |
-| `categories` | yes | One or more of `beginner`, `desktop`, `lightweight`, `server`, `security`, `rolling`, `developer`. |
+| `categories` | yes | One or more of `beginner`, `desktop`, `lightweight`, `server`, `security`, `rolling`, `developer`, `gaming` (good choice for games: recent drivers, Steam ready). |
 | `desktop` | no | Desktop environment, `None` for server images. |
 | `description` | yes | `{ "en": "...", "fr": "..." }`, one sentence, 300 characters max. |
 | `homepage` | yes | Official website (HTTPS). |

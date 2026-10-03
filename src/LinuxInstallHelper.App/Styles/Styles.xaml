@@ -269,6 +269,27 @@
         <Setter Property="IsTextSelectionEnabled" Value="True" />
     </Style>
 
+    <!-- Advisor -->
+    <Style x:Key="PageContentInnerStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="12" />
+    </Style>
+
+    <Style x:Key="AdvisorNameStackStyle" TargetType="StackPanel">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AdvisorReasonPanelStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="Margin" Value="0,2,0,2" />
+    </Style>
+
+    <Style x:Key="AdvisorReasonIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
+    </Style>
+
     <!-- Linux tour (progress page) -->
     <Style x:Key="TourHeaderGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />

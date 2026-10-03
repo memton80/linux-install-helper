@@ -171,7 +171,7 @@
       "edition": "Cinnamon",
       "version": "22.3 (Zena)",
       "family": "ubuntu",
-      "categories": ["beginner", "desktop"],
+      "categories": ["beginner", "desktop", "gaming"],
       "desktop": "Cinnamon",
       "description": {
         "en": "Familiar for Windows users, elegant and easy to use, with lots of software out of the box.",
@@ -235,7 +235,7 @@
       "edition": "Workstation",
       "version": "44",
       "family": "fedora",
-      "categories": ["desktop", "developer"],
+      "categories": ["desktop", "developer", "gaming"],
       "desktop": "GNOME",
       "description": {
         "en": "Cutting-edge and reliable, sponsored by Red Hat. A vanilla GNOME desktop loved by developers.",
@@ -300,7 +300,7 @@
       "edition": "KDE Plasma",
       "version": "26.1.0",
       "family": "arch",
-      "categories": ["desktop", "rolling"],
+      "categories": ["desktop", "rolling", "gaming"],
       "desktop": "KDE Plasma",
       "description": {
         "en": "The power of Arch Linux made friendly: graphical installer, curated updates and the Plasma desktop.",
@@ -393,7 +393,7 @@
       "name": "Pop!_OS",
       "version": "24.04 LTS",
       "family": "ubuntu",
-      "categories": ["beginner", "desktop", "developer"],
+      "categories": ["beginner", "desktop", "developer", "gaming"],
       "desktop": "COSMIC",
       "description": {
         "en": "By System76, with the new COSMIC desktop, smart window tiling and great hardware support.",

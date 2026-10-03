@@ -193,8 +193,9 @@ public static class DistroCategories
     public const string Security = "security";
     public const string Rolling = "rolling";
     public const string Developer = "developer";
+    public const string Gaming = "gaming";
 
-    public static IReadOnlyList<string> All { get; } = [Beginner, Desktop, Lightweight, Server, Security, Rolling, Developer];
+    public static IReadOnlyList<string> All { get; } = [Beginner, Desktop, Lightweight, Server, Security, Rolling, Developer, Gaming];
 }
 
 public static class DistroArchitectures

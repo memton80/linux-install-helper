@@ -34,6 +34,11 @@
             BackRequested="OnBackRequested"
             ItemInvoked="OnItemInvoked">
             <NavigationView.MenuItems>
+                <NavigationViewItem x:Uid="NavAdvisor" Tag="Advisor">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE82F;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem x:Uid="NavDistros" Tag="Distros">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7B8;" />

@@ -48,7 +48,7 @@ public sealed partial class MainWindow : Window
     {
         if (!_navigation.NavigateTo(pageKey))
         {
-            _navigation.NavigateTo(PageKeys.Distros);
+            _navigation.NavigateTo(PageKeys.Advisor);
         }
     }
 
@@ -60,7 +60,7 @@ public sealed partial class MainWindow : Window
             return;
         }
 
-        if (key is PageKeys.Distros or PageKeys.LocalIso)
+        if (key is PageKeys.Advisor or PageKeys.Distros or PageKeys.LocalIso)
         {
             // Starting over from the menu: forget the previous choices.
             _wizard.Reset();

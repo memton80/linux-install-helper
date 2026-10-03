@@ -158,6 +158,9 @@
   <data name="Category_developer" xml:space="preserve">
     <value>Développeurs</value>
   </data>
+  <data name="Category_gaming" xml:space="preserve">
+    <value>Jeux vidéo</value>
+  </data>
   <data name="Distro_NoSecureBoot" xml:space="preserve">
     <value>Secure Boot à désactiver</value>
   </data>
@@ -1062,5 +1065,170 @@ sudo dnf upgrade                      # Fedora</value>
   </data>
   <data name="Check_power_Body" xml:space="preserve">
     <value>Pendant l'installation, gardez un portable branché sur secteur et connectez-vous à Internet pour récupérer les mises à jour et les pilotes.</value>
+  </data>
+  <data name="NavAdvisor.Content" xml:space="preserve">
+    <value>Quelle distribution ?</value>
+  </data>
+  <data name="AdvisorHeader.Text" xml:space="preserve">
+    <value>Quelle distribution choisir ?</value>
+  </data>
+  <data name="AdvisorSubtitle.Text" xml:space="preserve">
+    <value>Il existe beaucoup de versions de Linux, appelées « distributions ». Répondez à 6 questions : l'application vous conseille celle qui vous convient le mieux, expliquée simplement.</value>
+  </data>
+  <data name="Advisor_QuestionTitle" xml:space="preserve">
+    <value>{0}. {1}</value>
+  </data>
+  <data name="Advisor_Q1" xml:space="preserve">
+    <value>Avez-vous déjà utilisé Linux ?</value>
+  </data>
+  <data name="Advisor_Q1_A1" xml:space="preserve">
+    <value>Jamais, je découvre</value>
+  </data>
+  <data name="Advisor_Q1_A2" xml:space="preserve">
+    <value>Un peu, je l'ai déjà essayé</value>
+  </data>
+  <data name="Advisor_Q1_A3" xml:space="preserve">
+    <value>Oui, je suis à l'aise, terminal compris</value>
+  </data>
+  <data name="Advisor_Q2" xml:space="preserve">
+    <value>Sur quel ordinateur allez-vous l'utiliser ?</value>
+  </data>
+  <data name="Advisor_Q2_A1" xml:space="preserve">
+    <value>Un PC récent ou correct (4 Go de mémoire ou plus)</value>
+  </data>
+  <data name="Advisor_Q2_A2" xml:space="preserve">
+    <value>Un vieux PC ou un PC peu puissant (moins de 4 Go de mémoire)</value>
+  </data>
+  <data name="Advisor_MemoryHint" xml:space="preserve">
+    <value>Pour info, ce PC a {0} Go de mémoire.</value>
+  </data>
+  <data name="Advisor_Q3" xml:space="preserve">
+    <value>Qu'allez-vous surtout faire ?</value>
+  </data>
+  <data name="Advisor_Q3_A1" xml:space="preserve">
+    <value>Internet, e-mails, bureautique, photos et vidéos</value>
+  </data>
+  <data name="Advisor_Q3_A2" xml:space="preserve">
+    <value>Jouer à des jeux vidéo</value>
+  </data>
+  <data name="Advisor_Q3_A3" xml:space="preserve">
+    <value>Programmer ou faire de l'informatique avancée</value>
+  </data>
+  <data name="Advisor_Q4" xml:space="preserve">
+    <value>Quel style d'écran préférez-vous ?</value>
+  </data>
+  <data name="Advisor_Q4_A1" xml:space="preserve">
+    <value>Proche de Windows : une barre des tâches et un menu en bas à gauche</value>
+  </data>
+  <data name="Advisor_Q4_A2" xml:space="preserve">
+    <value>Moderne et épuré, un peu comme sur un Mac</value>
+  </data>
+  <data name="Advisor_Q4_A3" xml:space="preserve">
+    <value>Peu importe</value>
+  </data>
+  <data name="Advisor_Q5" xml:space="preserve">
+    <value>Pour les mises à jour, que préférez-vous ?</value>
+  </data>
+  <data name="Advisor_Q5_A1" xml:space="preserve">
+    <value>La tranquillité : que tout marche, sans surprise</value>
+  </data>
+  <data name="Advisor_Q5_A2" xml:space="preserve">
+    <value>Les dernières nouveautés, même s'il y a parfois un petit bug</value>
+  </data>
+  <data name="Advisor_Q5_A3" xml:space="preserve">
+    <value>Peu importe</value>
+  </data>
+  <data name="Advisor_Q6" xml:space="preserve">
+    <value>Accepteriez-vous de changer un réglage du BIOS de l'ordinateur ?</value>
+  </data>
+  <data name="Advisor_Q6_Hint" xml:space="preserve">
+    <value>Certaines distributions demandent de désactiver le « Secure Boot » dans les réglages de démarrage du PC.</value>
+  </data>
+  <data name="Advisor_Q6_A1" xml:space="preserve">
+    <value>Non, je préfère éviter</value>
+  </data>
+  <data name="Advisor_Q6_A2" xml:space="preserve">
+    <value>Oui, si on m'explique comment faire</value>
+  </data>
+  <data name="AdvisorRecommend.Content" xml:space="preserve">
+    <value>Voir mon conseil</value>
+  </data>
+  <data name="AdvisorAllDistros.Content" xml:space="preserve">
+    <value>Voir toutes les distributions</value>
+  </data>
+  <data name="AdvisorBestTitle.Text" xml:space="preserve">
+    <value>Notre conseil pour vous</value>
+  </data>
+  <data name="AdvisorOthersTitle.Text" xml:space="preserve">
+    <value>Autres bons choix</value>
+  </data>
+  <data name="Advisor_CreateBest" xml:space="preserve">
+    <value>Créer ma clé avec {0}</value>
+  </data>
+  <data name="Advisor_Choose" xml:space="preserve">
+    <value>Choisir {0}</value>
+  </data>
+  <data name="Advisor_Requirements" xml:space="preserve">
+    <value>Il lui faut au moins {0} Go de mémoire et {1} Go d'espace sur le disque pour l'installer.</value>
+  </data>
+  <data name="Advisor_Reason_Beginner" xml:space="preserve">
+    <value>Pensée pour les débutants : tout se fait à la souris</value>
+  </data>
+  <data name="Advisor_Reason_Lightweight" xml:space="preserve">
+    <value>Légère : elle reste rapide même sur un vieux PC</value>
+  </data>
+  <data name="Advisor_Reason_Gaming" xml:space="preserve">
+    <value>Bien adaptée aux jeux : pilotes récents, Steam facile à installer</value>
+  </data>
+  <data name="Advisor_Reason_Development" xml:space="preserve">
+    <value>Appréciée des développeurs : outils récents et faciles à installer</value>
+  </data>
+  <data name="Advisor_Reason_LikeWindows" xml:space="preserve">
+    <value>Ressemble à Windows : vous ne serez pas perdu</value>
+  </data>
+  <data name="Advisor_Reason_Modern" xml:space="preserve">
+    <value>Un bureau moderne et épuré</value>
+  </data>
+  <data name="Advisor_Reason_Stable" xml:space="preserve">
+    <value>Stable : les mises à jour sont testées longtemps avant d'arriver</value>
+  </data>
+  <data name="Advisor_Reason_Latest" xml:space="preserve">
+    <value>Toujours les dernières versions des logiciels</value>
+  </data>
+  <data name="Advisor_Reason_SecureBoot" xml:space="preserve">
+    <value>Démarre sans rien changer dans le BIOS</value>
+  </data>
+  <data name="Simple_ubuntu-desktop" xml:space="preserve">
+    <value>La version de Linux la plus utilisée au monde. Elle est soutenue par une entreprise, on trouve de l'aide partout, et elle reçoit des mises à jour de sécurité pendant 5 ans.</value>
+  </data>
+  <data name="Simple_lubuntu" xml:space="preserve">
+    <value>Ubuntu en version allégée : un bureau très simple qui demande peu de ressources, idéal pour redonner vie à un vieil ordinateur.</value>
+  </data>
+  <data name="Simple_debian-live" xml:space="preserve">
+    <value>Une des plus anciennes distributions, réputée pour sa solidité : elle change peu et ne casse presque jamais. Un peu moins guidée pour les débutants.</value>
+  </data>
+  <data name="Simple_linuxmint-cinnamon" xml:space="preserve">
+    <value>Le choix le plus souvent conseillé à ceux qui quittent Windows : le menu, la barre des tâches et les fenêtres fonctionnent comme sous Windows, et tout est prêt à l'emploi.</value>
+  </data>
+  <data name="Simple_linuxmint-xfce" xml:space="preserve">
+    <value>Linux Mint en version plus légère : la même simplicité, proche de Windows, mais plus rapide sur les ordinateurs anciens ou peu puissants.</value>
+  </data>
+  <data name="Simple_fedora-workstation" xml:space="preserve">
+    <value>Moderne et soignée, avec les toutes dernières versions des logiciels, deux fois par an. Très appréciée des développeurs et des passionnés.</value>
+  </data>
+  <data name="Simple_manjaro-kde" xml:space="preserve">
+    <value>Toujours à jour, avec un bureau KDE très personnalisable qui rappelle Windows. Pour ceux qui aiment avoir les dernières nouveautés et bricoler un peu.</value>
+  </data>
+  <data name="Simple_opensuse-leap" xml:space="preserve">
+    <value>Une distribution sérieuse et stable, avec un outil de configuration complet. Plutôt pour ceux qui ont déjà un peu d'expérience.</value>
+  </data>
+  <data name="Simple_opensuse-tumbleweed" xml:space="preserve">
+    <value>Mise à jour en continu tout en étant testée automatiquement avant chaque mise à jour. Pour les utilisateurs à l'aise qui veulent les dernières versions.</value>
+  </data>
+  <data name="Simple_popos" xml:space="preserve">
+    <value>Faite par un fabricant d'ordinateurs, elle est simple, belle et très bonne pour les jeux et le travail. Elle demande de désactiver le Secure Boot dans le BIOS.</value>
+  </data>
+  <data name="Simple_zorin-core" xml:space="preserve">
+    <value>Conçue pour ceux qui viennent de Windows : son bureau lui ressemble beaucoup, et elle est très facile à prendre en main.</value>
   </data>
 </root>

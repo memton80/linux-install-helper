@@ -66,6 +66,7 @@ function Wait-ForText([System.Diagnostics.Process] $process, [string] $text, [in
 }
 
 $runs = @(
+    @{ Page = "Advisor";  Theme = "light"; Lang = "fr-FR"; Expect = "Avez-vous déjà utilisé Linux" },
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },

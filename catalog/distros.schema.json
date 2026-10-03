@@ -75,7 +75,7 @@
           "uniqueItems": true,
           "items": {
             "type": "string",
-            "enum": ["beginner", "desktop", "lightweight", "server", "security", "rolling", "developer"]
+            "enum": ["beginner", "desktop", "lightweight", "server", "security", "rolling", "developer", "gaming"]
           }
         },
         "desktop": {

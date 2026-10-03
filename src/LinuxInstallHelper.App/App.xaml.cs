@@ -66,7 +66,7 @@ public partial class App : Application
 
         var settings = Services.GetRequiredService<ISettingsStore>().Current;
         Services.GetRequiredService<IThemeService>().Apply(_startup.Theme ?? settings.Theme);
-        _window.Start(_startup.Page ?? PageKeys.Distros);
+        _window.Start(_startup.Page ?? PageKeys.Advisor);
         _window.Activate();
     }
 
@@ -137,6 +137,7 @@ public partial class App : Application
         services.AddSingleton<MainWindow>();
 
         // View models (the distributions list keeps its state while navigating)
+        services.AddSingleton<AdvisorViewModel>();
         services.AddSingleton<DistrosViewModel>();
         services.AddTransient<LocalIsoViewModel>();
         services.AddTransient<DriveViewModel>();

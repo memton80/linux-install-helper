@@ -3,6 +3,7 @@ namespace LinuxInstallHelper.App.Services;
 /// <summary>Keys of the pages the <see cref="INavigationService"/> can show.</summary>
 public static class PageKeys
 {
+    public const string Advisor = "Advisor";
     public const string Distros = "Distros";
     public const string LocalIso = "LocalIso";
     public const string Restore = "Restore";
