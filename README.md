@@ -14,6 +14,10 @@ French. See [In English](#in-english) below.*
 
 ![Liste des distributions](docs/screenshots/distros-light-fr-fr.png)
 
+<sub>Les captures sont produites automatiquement par le test de démarrage de la CI (artefact `screenshots` du
+workflow [Build](https://github.com/memton80/linux-install-helper/actions/workflows/build.yml)) et copiées dans
+[`docs/screenshots`](docs/screenshots).</sub>
+
 ## Fonctionnalités
 
 - **Catalogue de 15 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
