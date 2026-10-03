@@ -103,7 +103,7 @@ public class OpenPgpVerifierTests
         Assert.Contains("\n- dash line that must be escaped", result.Content);
         Assert.Equal(
             "0361c13141e6f57e24d6ee5227066c33a45f7f92a95f41d0bbd343e4fd05da18",
-            ChecksumFile.Parse(result.Content).Find("Fedora-Like-1.0.x86_64.iso"));
+            ChecksumFile.Parse(result.Content).Find("Fedora-Like-1.0.x86_64.iso")!.Hash);
     }
 
     [Fact]

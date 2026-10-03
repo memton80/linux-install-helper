@@ -24,7 +24,7 @@ public class ImageResolverTests
         var resolved = await Resolver(UbuntuServer()).ResolveAsync(TestDistros.Get("ubuntu-desktop"));
 
         Assert.Equal("ubuntu-26.04.1-desktop-amd64.iso", resolved.FileName);
-        Assert.Equal(UbuntuHash, resolved.Sha256);
+        Assert.Equal(UbuntuHash, resolved.Hash);
         Assert.Equal(SignatureStatus.Verified, resolved.ChecksumSignature);
         Assert.Equal(Fixtures.UbuntuFingerprint, resolved.ChecksumSigner);
         Assert.Equal("26.04.1", resolved.Version);
@@ -54,7 +54,7 @@ public class ImageResolverTests
 
         Assert.Equal(SignatureStatus.Unavailable, resolved.ChecksumSignature);
         Assert.NotNull(resolved.Warning);
-        Assert.Equal(UbuntuHash, resolved.Sha256);
+        Assert.Equal(UbuntuHash, resolved.Hash);
     }
 
     [Fact]
@@ -122,7 +122,7 @@ public class ImageResolverTests
 
         var resolved = await Resolver(new StubHttpHandler()).ResolveAsync(inline);
 
-        Assert.Equal(UbuntuHash, resolved.Sha256);
+        Assert.Equal(UbuntuHash, resolved.Hash);
         Assert.Equal(SignatureStatus.NotProvided, resolved.ChecksumSignature);
     }
 
@@ -152,7 +152,7 @@ public class ImageResolverTests
         Assert.Equal("pop-os_24.04_amd64_generic_31.iso", resolved.FileName);
         Assert.Equal("31", resolved.Build);
         Assert.Equal(3221225472, resolved.Size);
-        Assert.Equal(UbuntuHash, resolved.Sha256);
+        Assert.Equal(UbuntuHash, resolved.Hash);
         Assert.Equal("https://iso.pop-os.org/24.04/amd64/generic/31/pop-os_24.04_amd64_generic_31.iso", resolved.Urls[0].ToString());
         Assert.Contains(resolved.Urls, u => u.ToString() == pop.Image.Urls[0]);
     }
@@ -193,6 +193,22 @@ public class ImageResolverTests
 
         Assert.True(tumbleweed.Image.LatestAlias);
         Assert.Null(resolved.Size);
-        Assert.Equal(hash, resolved.Sha256);
+        Assert.Equal(hash, resolved.Hash);
+    }
+
+    [Fact]
+    public async Task Latest_alias_follows_the_build_named_in_its_checksum_file()
+    {
+        var leap = TestDistros.Get("opensuse-leap");
+        var unsigned = TestDistros.WithImage(leap, TestDistros.Copy(leap.Image, clearSignature: true));
+        var sha512 = new string('e', 128);
+        var handler = new StubHttpHandler().Add(leap.Image.Checksum!.Url, $"{sha512}  Leap-16.0-offline-installer-x86_64-Build178.27.install.iso\n");
+
+        var resolved = await Resolver(handler).ResolveAsync(unsigned);
+
+        Assert.Equal("Leap-16.0-offline-installer-x86_64-Build178.27.install.iso", resolved.FileName);
+        Assert.Equal(HashAlgorithmKind.Sha512, resolved.HashAlgorithm);
+        Assert.Equal(sha512, resolved.Hash);
+        Assert.EndsWith("/offline/Leap-16.0-offline-installer-x86_64-Build178.27.install.iso", resolved.Urls[0].ToString());
     }
 }

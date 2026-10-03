@@ -46,7 +46,8 @@ public sealed partial class ImageResolver : IImageResolver
 
         var fileName = image.FileName;
         string? version = null;
-        var sha256 = image.Sha256?.ToLowerInvariant();
+        var hash = image.Sha256?.ToLowerInvariant();
+        var algorithm = HashAlgorithmKind.Sha256;
         var signatureStatus = SignatureStatus.NotProvided;
         string? signer = null;
         string? warning = null;
@@ -77,23 +78,25 @@ public sealed partial class ImageResolver : IImageResolver
             var listed = checksums.Find(fileName)
                 ?? throw new VerificationException(VerificationFailure.NotListed, $"{fileName} is not listed in {checksumUrl}.");
 
-            if (sha256 is not null && fileName == image.FileName && !string.Equals(sha256, listed, StringComparison.Ordinal))
+            if (hash is not null && fileName == image.FileName
+                && (listed.Algorithm != HashAlgorithmKind.Sha256 || !string.Equals(hash, listed.Hash, StringComparison.Ordinal)))
             {
                 throw new VerificationException(
                     VerificationFailure.ChecksumMismatch,
                     $"The SHA-256 in the catalog does not match the official checksum file for {fileName}.");
             }
 
-            sha256 = listed;
+            hash = listed.Hash;
+            algorithm = listed.Algorithm;
         }
         else if (image.Resolve?.Type == ResolveTypes.ChecksumPattern && image.Resolve.Pattern is not null)
         {
             version = CaptureVersion(image.Resolve.Pattern, fileName);
         }
 
-        if (sha256 is null)
+        if (hash is null)
         {
-            throw new VerificationException(VerificationFailure.ChecksumUnavailable, $"No SHA-256 is known for {fileName}.");
+            throw new VerificationException(VerificationFailure.ChecksumUnavailable, $"No checksum is known for {fileName}.");
         }
 
         if (fileName != image.FileName)
@@ -108,7 +111,8 @@ public sealed partial class ImageResolver : IImageResolver
             Version = version,
             Size = fileName == image.FileName && !image.LatestAlias ? image.Size : null,
             Urls = BuildUrls(image, fileName),
-            Sha256 = sha256,
+            Hash = hash,
+            HashAlgorithm = algorithm,
             ChecksumSignature = signatureStatus,
             ChecksumSigner = signer,
             Warning = warning,
@@ -125,6 +129,12 @@ public sealed partial class ImageResolver : IImageResolver
         if (checksums.Find(image.FileName) is not null)
         {
             return (image.FileName, pattern is null ? null : CaptureVersion(pattern, image.FileName));
+        }
+
+        // A per-image checksum file of an alias ("...-Current.iso") names the real build: use it.
+        if (pattern is null && image.LatestAlias && checksums.Entries.Count == 1)
+        {
+            return (checksums.FileNames.Single(), null);
         }
 
         if (pattern is not null)
@@ -278,7 +288,7 @@ public sealed partial class ImageResolver : IImageResolver
             Build = build,
             Size = size,
             Urls = urls,
-            Sha256 = sha256.ToLowerInvariant(),
+            Hash = sha256.ToLowerInvariant(),
             ChecksumSignature = SignatureStatus.NotProvided,
         };
     }

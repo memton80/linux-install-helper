@@ -38,7 +38,7 @@ internal sealed class DistroCheckResult
 
     public string Summary => Resolved is null
         ? "image could not be resolved"
-        : $"{Resolved.FileName} ({FormatSize(ServerSize)}), checksum {SignatureText}";
+        : $"{Resolved.FileName} ({FormatSize(ServerSize)}), {Resolved.HashAlgorithm} {SignatureText}";
 
     public string SignatureText => Resolved?.ChecksumSignature switch
     {

@@ -2,26 +2,37 @@ using System.Text.RegularExpressions;
 
 namespace LinuxInstallHelper.Core.Verification;
 
+public enum HashAlgorithmKind
+{
+    Sha256,
+    Sha512,
+}
+
+/// <param name="FileName">File name (directories stripped), empty for a hash written alone.</param>
+/// <param name="Algorithm">Algorithm deduced from the hash length.</param>
+/// <param name="Hash">Lowercase hexadecimal hash.</param>
+public sealed record ChecksumEntry(string FileName, HashAlgorithmKind Algorithm, string Hash);
+
 /// <summary>
-/// Parser for the SHA-256 checksum files published by distributions:
-/// GNU coreutils (<c>hash  file</c>, <c>hash *file</c>) and BSD (<c>SHA256 (file) = hash</c>) formats.
-/// Lines for other algorithms and comments are ignored.
+/// Parser for the checksum files published by distributions: GNU coreutils (<c>hash  file</c>,
+/// <c>hash *file</c>) and BSD (<c>SHA256 (file) = hash</c>) formats, SHA-256 or SHA-512.
+/// When a file is listed with both algorithms, SHA-256 is kept. Other lines are ignored.
 /// </summary>
 public sealed partial class ChecksumFile
 {
-    private readonly Dictionary<string, string> _entries;
+    private readonly Dictionary<string, ChecksumEntry> _entries;
 
-    private ChecksumFile(Dictionary<string, string> entries, string? unnamedHash)
+    private ChecksumFile(Dictionary<string, ChecksumEntry> entries, ChecksumEntry? unnamed)
     {
         _entries = entries;
-        UnnamedHash = unnamedHash;
+        UnnamedEntry = unnamed;
     }
 
-    /// <summary>File name → lowercase SHA-256.</summary>
-    public IReadOnlyDictionary<string, string> Entries => _entries;
+    /// <summary>Entries by file name.</summary>
+    public IReadOnlyDictionary<string, ChecksumEntry> Entries => _entries;
 
     /// <summary>A hash written alone on a line (some <c>.sha256</c> files have no file name).</summary>
-    public string? UnnamedHash { get; }
+    public ChecksumEntry? UnnamedEntry { get; }
 
     public IEnumerable<string> FileNames => _entries.Keys;
 
@@ -29,8 +40,8 @@ public sealed partial class ChecksumFile
     {
         ArgumentNullException.ThrowIfNull(content);
 
-        var entries = new Dictionary<string, string>(StringComparer.Ordinal);
-        string? unnamed = null;
+        var entries = new Dictionary<string, ChecksumEntry>(StringComparer.Ordinal);
+        ChecksumEntry? unnamed = null;
 
         foreach (var rawLine in content.Split('\n'))
         {
@@ -43,44 +54,60 @@ public sealed partial class ChecksumFile
             var bsd = BsdLine().Match(line);
             if (bsd.Success)
             {
-                Add(entries, bsd.Groups["name"].Value, bsd.Groups["hash"].Value);
+                var algorithm = bsd.Groups["alg"].Value == "SHA512" ? HashAlgorithmKind.Sha512 : HashAlgorithmKind.Sha256;
+                if (bsd.Groups["hash"].Length == ExpectedLength(algorithm))
+                {
+                    Add(entries, bsd.Groups["name"].Value, algorithm, bsd.Groups["hash"].Value);
+                }
+
                 continue;
             }
 
             var gnu = GnuLine().Match(line);
             if (gnu.Success)
             {
-                Add(entries, gnu.Groups["name"].Value, gnu.Groups["hash"].Value);
+                Add(entries, gnu.Groups["name"].Value, AlgorithmOf(gnu.Groups["hash"].Value), gnu.Groups["hash"].Value);
                 continue;
             }
 
             var alone = HashOnlyLine().Match(line);
             if (alone.Success)
             {
-                unnamed ??= alone.Groups["hash"].Value.ToLowerInvariant();
+                var hash = alone.Groups["hash"].Value;
+                unnamed ??= new ChecksumEntry(string.Empty, AlgorithmOf(hash), hash.ToLowerInvariant());
             }
         }
 
         return new ChecksumFile(entries, unnamed);
     }
 
-    /// <summary>Returns the hash for <paramref name="fileName"/> (falls back to an unnamed hash when it is the only entry).</summary>
-    public string? Find(string fileName)
+    /// <summary>Returns the entry for <paramref name="fileName"/> (falls back to an unnamed hash when it is the only content).</summary>
+    public ChecksumEntry? Find(string fileName)
     {
-        if (_entries.TryGetValue(fileName, out var hash))
+        if (_entries.TryGetValue(fileName, out var entry))
         {
-            return hash;
+            return entry;
         }
 
-        return _entries.Count == 0 ? UnnamedHash : null;
+        return _entries.Count == 0 ? UnnamedEntry : null;
     }
 
-    private static void Add(Dictionary<string, string> entries, string name, string hash)
+    public static int ExpectedLength(HashAlgorithmKind algorithm) => algorithm == HashAlgorithmKind.Sha512 ? 128 : 64;
+
+    private static HashAlgorithmKind AlgorithmOf(string hash) => hash.Length == 128 ? HashAlgorithmKind.Sha512 : HashAlgorithmKind.Sha256;
+
+    private static void Add(Dictionary<string, ChecksumEntry> entries, string name, HashAlgorithmKind algorithm, string hash)
     {
         var normalized = NormalizeName(name);
-        if (normalized.Length > 0)
+        if (normalized.Length == 0)
         {
-            entries.TryAdd(normalized, hash.ToLowerInvariant());
+            return;
+        }
+
+        var entry = new ChecksumEntry(normalized, algorithm, hash.ToLowerInvariant());
+        if (!entries.TryGetValue(normalized, out var existing) || (existing.Algorithm == HashAlgorithmKind.Sha512 && algorithm == HashAlgorithmKind.Sha256))
+        {
+            entries[normalized] = entry;
         }
     }
 
@@ -92,12 +119,12 @@ public sealed partial class ChecksumFile
         return slash >= 0 ? trimmed[(slash + 1)..] : trimmed;
     }
 
-    [GeneratedRegex(@"^SHA256\s*\((?<name>.+)\)\s*=\s*(?<hash>[0-9a-fA-F]{64})$", RegexOptions.CultureInvariant)]
+    [GeneratedRegex(@"^(?<alg>SHA256|SHA512)\s*\((?<name>.+)\)\s*=\s*(?<hash>[0-9a-fA-F]+)$", RegexOptions.CultureInvariant)]
     private static partial Regex BsdLine();
 
-    [GeneratedRegex(@"^(?<hash>[0-9a-fA-F]{64})\s+\*?(?<name>\S.*)$", RegexOptions.CultureInvariant)]
+    [GeneratedRegex(@"^(?<hash>[0-9a-fA-F]{128}|[0-9a-fA-F]{64})\s+\*?(?<name>\S.*)$", RegexOptions.CultureInvariant)]
     private static partial Regex GnuLine();
 
-    [GeneratedRegex(@"^(?<hash>[0-9a-fA-F]{64})$", RegexOptions.CultureInvariant)]
+    [GeneratedRegex(@"^(?<hash>[0-9a-fA-F]{128}|[0-9a-fA-F]{64})$", RegexOptions.CultureInvariant)]
     private static partial Regex HashOnlyLine();
 }

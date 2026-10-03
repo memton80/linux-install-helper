@@ -1,4 +1,5 @@
 using LinuxInstallHelper.Core.Catalog;
+using LinuxInstallHelper.Core.Verification;
 
 namespace LinuxInstallHelper.Core.Images;
 
@@ -34,8 +35,11 @@ public sealed record ResolvedImage
     /// <summary>Download URLs, best first.</summary>
     public required IReadOnlyList<Uri> Urls { get; init; }
 
-    /// <summary>Expected SHA-256, lowercase hexadecimal.</summary>
-    public required string Sha256 { get; init; }
+    /// <summary>Expected hash of the ISO, lowercase hexadecimal.</summary>
+    public required string Hash { get; init; }
+
+    /// <summary>SHA-256 in most cases, SHA-512 when the distribution only publishes that.</summary>
+    public HashAlgorithmKind HashAlgorithm { get; init; } = HashAlgorithmKind.Sha256;
 
     public SignatureStatus ChecksumSignature { get; init; } = SignatureStatus.NotProvided;
 
