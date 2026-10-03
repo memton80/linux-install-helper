@@ -1,4 +1,6 @@
 using LinuxInstallHelper.App.Views;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -22,7 +24,13 @@ public sealed class NavigationService : INavigationService
         [PageKeys.About] = typeof(AboutPage),
     };
 
+    private readonly ILogger _logger;
     private Frame? _frame;
+
+    public NavigationService(ILogger<NavigationService>? logger = null)
+    {
+        _logger = (ILogger?)logger ?? NullLogger.Instance;
+    }
 
     public event EventHandler<string>? Navigated;
 
@@ -37,7 +45,12 @@ public sealed class NavigationService : INavigationService
         _frame = frame;
         _frame.Navigated += OnFrameNavigated;
         _frame.Navigating += OnFrameNavigating;
+        _frame.NavigationFailed += OnNavigationFailed;
     }
+
+    // XAML only reports "NavigationFailed was unhandled": log the page and the real error first.
+    private void OnNavigationFailed(object sender, NavigationFailedEventArgs e) =>
+        _logger.LogError(e.Exception, "Could not open {Page}: {Message}", e.SourcePageType?.FullName, e.Exception?.ToString());
 
     public bool NavigateTo(string pageKey, object? parameter = null, bool clearHistory = false)
     {
