@@ -1,0 +1,45 @@
+# Temporary: fetches data that cannot be reached from the development sandbox. Removed in the next commit.
+name: Temporary catalog probe
+
+on:
+  push:
+    paths: ['.github/workflows/tmp-catalog-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: openSUSE keys
+        run: |
+          export GNUPGHOME=$(mktemp -d)
+          for url in https://download.opensuse.org/tumbleweed/repo/oss/repodata/repomd.xml.key \
+                     https://download.opensuse.org/distribution/leap/16.0/repo/oss/repodata/repomd.xml.key; do
+            echo "== $url"
+            curl -fsSL "$url" -o key.asc || continue
+            gpg --show-keys --with-colons key.asc | grep -E '^(pub|fpr|uid)' | head -6
+            gpg --batch --quiet --import key.asc
+          done
+          for fpr in $(gpg --list-keys --with-colons | awk -F: '/^pub/{getline; print $10}'); do
+            echo "===== MINIMAL KEY $fpr"
+            gpg --list-keys "$fpr" | head -3
+            gpg --armor --export-options export-minimal --export "$fpr"
+          done
+          echo "== verify Tumbleweed checksum signature"
+          base=https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso
+          curl -fsSL "$base.sha256" -o tw.sha256 && curl -fsSL "$base.sha256.asc" -o tw.sha256.asc && gpg --verify tw.sha256.asc tw.sha256 || true
+          cat tw.sha256 || true
+
+      - name: Leap and Zorin listings
+        run: |
+          echo "== Leap offline dir"
+          curl -fsSL https://download.opensuse.org/distribution/leap/16.0/offline/ | grep -oE 'href="[^"?]+"' | sort -u | head -40 || true
+          echo "== Leap sha256"
+          curl -fsSL https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha256 || true
+          curl -fsSIL https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso | grep -iE '^(HTTP|content-length|location)' || true
+          echo "== Zorin ibiblio"
+          curl -fsSL https://distro.ibiblio.org/zorinos/18/SHA256SUMS.txt || true
+          curl -fsSL https://distro.ibiblio.org/zorinos/18/ | grep -oE 'href="[^"?]+"' | sort -u | head -30 || true
