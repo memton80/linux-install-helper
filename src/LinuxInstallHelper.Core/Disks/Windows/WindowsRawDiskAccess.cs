@@ -308,7 +308,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
         return _bytesWritten == 0
             ? new UsbWriteException(
                 UsbWriteFailure.WriteBlocked,
-                $"{context} Nothing was written: security software that protects disks, such as Microsoft Defender's controlled folder access, may be blocking this application.")
+                $"{context} Nothing was written: the drive may be faulty, or security software that protects disks, such as Microsoft Defender's controlled folder access, may be blocking this application.")
             : new UsbWriteException(UsbWriteFailure.DeviceError, $"{context} Unplug the drive, plug it back in and try again.");
     }
 
