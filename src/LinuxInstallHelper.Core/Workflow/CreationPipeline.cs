@@ -67,6 +67,7 @@ public sealed record CreationResult(
     bool Downloaded,
     SignatureStatus ChecksumSignature,
     SignatureStatus ImageSignature,
+    string? Signer,
     bool WriteVerified,
     bool Ejected,
     string? EjectError,
@@ -186,13 +187,14 @@ public sealed class CreationPipeline : ICreationPipeline
             image.Downloaded,
             image.Resolved?.ChecksumSignature ?? SignatureStatus.NotProvided,
             image.ImageSignature,
+            image.Resolved?.ChecksumSigner ?? image.ImageSigner,
             written.Verified,
             ejected,
             ejectError,
             image.Resolved);
     }
 
-    private sealed record PreparedImage(string Path, string Hash, HashAlgorithmKind Algorithm, bool Downloaded, SignatureStatus ImageSignature, ResolvedImage? Resolved);
+    private sealed record PreparedImage(string Path, string Hash, HashAlgorithmKind Algorithm, bool Downloaded, SignatureStatus ImageSignature, ResolvedImage? Resolved, string? ImageSigner = null);
 
     private async Task<PreparedImage> PrepareDistroImageAsync(CreationJob job, Distro distro, Run run, CancellationToken cancellationToken)
     {
@@ -239,7 +241,7 @@ public sealed class CreationPipeline : ICreationPipeline
             try
             {
                 var cached = await VerifyAsync(path, resolved, run, cancellationToken).ConfigureAwait(false);
-                return new PreparedImage(path, cached.Hash, cached.Algorithm, false, cached.ImageSignature, resolved);
+                return new PreparedImage(path, cached.Hash, cached.Algorithm, false, cached.ImageSignature, resolved, cached.Signer);
             }
             catch (VerificationException ex) when (ex.Failure == VerificationFailure.ChecksumMismatch)
             {
@@ -278,7 +280,7 @@ public sealed class CreationPipeline : ICreationPipeline
             throw;
         }
 
-        return new PreparedImage(path, verified.Hash, verified.Algorithm, true, verified.ImageSignature, resolved);
+        return new PreparedImage(path, verified.Hash, verified.Algorithm, true, verified.ImageSignature, resolved, verified.Signer);
     }
 
     private async Task<ImageVerificationResult> VerifyOrDeleteAsync(string path, ResolvedImage resolved, Run run, CancellationToken cancellationToken)

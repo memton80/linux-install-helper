@@ -58,7 +58,7 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
 
         var signed = result.ChecksumSignature == SignatureStatus.Verified || result.ImageSignature == SignatureStatus.Verified;
         Signature = signed
-            ? _localizer.Format("Done_Signed", DisplayFormatter.Fingerprint(result.Resolved?.ChecksumSigner))
+            ? _localizer.Format("Done_Signed", DisplayFormatter.Fingerprint(result.Signer))
             : _wizard.IsLocalIso ? _localizer.Get("Done_LocalImage") : _localizer.Get("Done_NotSigned");
 
         Ejected = result.Ejected;
