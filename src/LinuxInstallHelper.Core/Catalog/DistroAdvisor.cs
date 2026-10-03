@@ -53,6 +53,12 @@ public enum UpdatePace
     NoPreference,
 }
 
+/// <summary>The answers to the questionnaire.</summary>
+/// <param name="Experience">How well the user knows Linux.</param>
+/// <param name="Power">The computer the distribution is for.</param>
+/// <param name="Use">What the computer is mostly used for.</param>
+/// <param name="Look">The preferred desktop style.</param>
+/// <param name="Updates">The preferred pace of updates.</param>
 /// <param name="AvoidFirmwareSettings">The user would rather not change a setting of the UEFI/BIOS (Secure Boot).</param>
 public sealed record AdvisorAnswers(
     LinuxExperience Experience,
