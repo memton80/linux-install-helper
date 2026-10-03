@@ -343,17 +343,17 @@
       "requirements": { "ramMb": 4096, "diskGb": 40 },
       "image": {
         "fileName": "Leap-16.0-offline-installer-x86_64.install.iso",
-        "size": 4509876224,
+        "size": 4538236928,
         "latestAlias": true,
         "urls": [
           "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso"
         ],
-        "checksum": { "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha256" },
+        "checksum": { "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha512" },
         "signature": {
           "kind": "detached",
           "target": "checksum",
-          "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha256.asc",
-          "fingerprints": ["AD485664E901B867051AB15F35A2F86E29B700A4", "22C07BA534178CD02EFE22AAB88B2FD43DBDC284"]
+          "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha512.asc",
+          "fingerprints": ["AD485664E901B867051AB15F35A2F86E29B700A4"]
         }
       }
     },
@@ -384,7 +384,7 @@
           "kind": "detached",
           "target": "checksum",
           "url": "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso.sha256.asc",
-          "fingerprints": ["AD485664E901B867051AB15F35A2F86E29B700A4", "22C07BA534178CD02EFE22AAB88B2FD43DBDC284"]
+          "fingerprints": ["AD485664E901B867051AB15F35A2F86E29B700A4"]
         }
       }
     },
