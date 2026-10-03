@@ -11,7 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="NJsonSchema" />
+  </ItemGroup>
+
+  <!-- The versioned catalog is embedded as the offline fallback. -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\catalog\distros.json" LogicalName="catalog/distros.json" />
+    <EmbeddedResource Include="..\..\catalog\distros.schema.json" LogicalName="catalog/distros.schema.json" />
+    <EmbeddedResource Include="..\..\catalog\keys\*.asc" LogicalName="catalog/keys/%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
