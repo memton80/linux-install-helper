@@ -19,13 +19,19 @@ internal static class NativeMethods
     public const uint FsctlLockVolume = 0x00090018;
     public const uint FsctlUnlockVolume = 0x0009001C;
     public const uint FsctlDismountVolume = 0x00090020;
+    public const uint FsctlAllowExtendedDasdIo = 0x00090083;
     public const uint IoctlDiskGetDriveGeometryEx = 0x000700A0;
-    public const uint IoctlDiskDeleteDriveLayout = 0x0007C100;
+    public const uint IoctlDiskIsWritable = 0x00070024;
     public const uint IoctlDiskUpdateProperties = 0x00070140;
     public const uint IoctlStorageQueryProperty = 0x002D1400;
     public const uint IoctlVolumeGetVolumeDiskExtents = 0x00560000;
 
+    public const int ErrorAccessDenied = 5;
+    public const int ErrorWriteProtect = 19;
+
     public const int CrSuccess = 0;
+
+    public static readonly IntPtr InvalidHandleValue = new(-1);
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     public static extern SafeFileHandle CreateFileW(
@@ -68,6 +74,17 @@ internal static class NativeMethods
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetVolumeNameForVolumeMountPointW(string volumeMountPoint, [Out] char[] volumeName, uint bufferLength);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    public static extern IntPtr FindFirstVolumeW([Out] char[] volumeName, uint bufferLength);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool FindNextVolumeW(IntPtr findVolume, [Out] char[] volumeName, uint bufferLength);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool FindVolumeClose(IntPtr findVolume);
 
     [DllImport("cfgmgr32.dll", CharSet = CharSet.Unicode)]
     public static extern int CM_Locate_DevNodeW(out uint devInst, string deviceId, uint flags);

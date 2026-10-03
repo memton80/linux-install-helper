@@ -26,15 +26,21 @@ public sealed class WindowsRawDiskAccess : IRawDiskAccess
 internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
 {
     private const int LockAttempts = 20;
+    private const int WriteAttempts = 4;
     private static readonly TimeSpan LockDelay = TimeSpan.FromMilliseconds(500);
+    private static readonly TimeSpan RetryDelay = TimeSpan.FromSeconds(1);
 
+    private readonly DiskInfo _info;
     private readonly SafeFileHandle _disk;
-    private readonly List<SafeFileHandle> _volumes;
+    private readonly bool _diskLocked;
+    private readonly Dictionary<string, SafeFileHandle> _volumes;
     private readonly ILogger _logger;
 
-    private PhysicalDriveDevice(SafeFileHandle disk, List<SafeFileHandle> volumes, int sectorSize, long size, ILogger logger)
+    private PhysicalDriveDevice(DiskInfo info, SafeFileHandle disk, bool diskLocked, Dictionary<string, SafeFileHandle> volumes, int sectorSize, long size, ILogger logger)
     {
+        _info = info;
         _disk = disk;
+        _diskLocked = diskLocked;
         _volumes = volumes;
         SectorSize = sectorSize;
         Size = size;
@@ -47,15 +53,14 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
 
     public static PhysicalDriveDevice Open(DiskInfo disk, ILogger logger)
     {
-        var volumes = new List<SafeFileHandle>();
+        var volumes = new Dictionary<string, SafeFileHandle>(StringComparer.OrdinalIgnoreCase);
+        SafeFileHandle? handle = null;
         try
         {
-            foreach (var path in VolumeDevicePaths(disk))
-            {
-                volumes.Add(LockAndDismount(path, logger));
-            }
+            // Windows silently drops raw writes that land on a mounted volume, so every volume of the drive is locked first.
+            LockVolumes(disk, volumes, logger);
 
-            var handle = NativeMethods.CreateFileW(
+            handle = NativeMethods.CreateFileW(
                 disk.DevicePath,
                 NativeMethods.GenericRead | NativeMethods.GenericWrite,
                 NativeMethods.FileShareRead | NativeMethods.FileShareWrite,
@@ -68,12 +73,25 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Windows refused to open {disk.DevicePath}: {LastError()}");
             }
 
-            var geometry = NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskGetDriveGeometryEx, null, 256);
-            if (geometry is null)
+            // Like Rufus: lift the I/O boundary checks and lock the drive itself; neither is supported everywhere, so failures are ignored.
+            if (NativeMethods.Ioctl(handle, NativeMethods.FsctlAllowExtendedDasdIo) is null)
             {
-                handle.Dispose();
-                throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Cannot read the geometry of {disk.DevicePath}: {LastError()}");
+                logger.LogDebug("FSCTL_ALLOW_EXTENDED_DASD_IO failed on {Device}: {Error}", disk.DevicePath, LastError());
             }
+
+            var diskLocked = NativeMethods.Ioctl(handle, NativeMethods.FsctlLockVolume) is not null;
+            if (!diskLocked)
+            {
+                logger.LogDebug("FSCTL_LOCK_VOLUME failed on {Device}: {Error}", disk.DevicePath, LastError());
+            }
+
+            if (NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskIsWritable) is null && Marshal.GetLastWin32Error() == NativeMethods.ErrorWriteProtect)
+            {
+                throw WriteProtected();
+            }
+
+            var geometry = NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskGetDriveGeometryEx, null, 256)
+                ?? throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Cannot read the geometry of {disk.DevicePath}: {LastError()}");
 
             // DISK_GEOMETRY_EX: DISK_GEOMETRY (BytesPerSector at offset 20), then LARGE_INTEGER DiskSize at offset 24.
             var sectorSize = BitConverter.ToInt32(geometry, 20);
@@ -83,18 +101,13 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 sectorSize = 512;
             }
 
-            // Forget the old partition table so that Windows does not remount anything while writing.
-            if (NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskDeleteDriveLayout) is null)
-            {
-                logger.LogDebug("IOCTL_DISK_DELETE_DRIVE_LAYOUT failed on {Device}: {Error}", disk.DevicePath, LastError());
-            }
-
-            logger.LogInformation("Opened {Device}: {Size} bytes, {Sector}-byte sectors, {Volumes} volume(s) locked", disk.DevicePath, size, sectorSize, volumes.Count);
-            return new PhysicalDriveDevice(handle, volumes, sectorSize, size, logger);
+            logger.LogInformation("Opened {Device}: {Size} bytes, {Sector}-byte sectors, drive locked: {DiskLocked}", disk.DevicePath, size, sectorSize, diskLocked);
+            return new PhysicalDriveDevice(disk, handle, diskLocked, volumes, sectorSize, size, logger);
         }
         catch
         {
-            foreach (var volume in volumes)
+            handle?.Dispose();
+            foreach (var volume in volumes.Values)
             {
                 volume.Dispose();
             }
@@ -108,16 +121,45 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
         fixed (byte* pointer = data)
         {
             var done = 0;
+            var attempt = 1;
             while (done < data.Length)
             {
                 var position = offset + done;
                 var overlapped = new NativeOverlapped { OffsetLow = (int)(position & 0xFFFFFFFF), OffsetHigh = (int)(position >> 32) };
-                if (!NativeMethods.WriteFile(_disk, pointer + done, (uint)(data.Length - done), out var written, &overlapped) || written == 0)
+                var ok = NativeMethods.WriteFile(_disk, pointer + done, (uint)(data.Length - done), out var written, &overlapped);
+                var error = Marshal.GetLastWin32Error();
+                if (ok && written > 0)
                 {
-                    throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Write error at byte {position}: {LastError()}. Was the drive unplugged?");
+                    done += (int)written;
+                    attempt = 1;
+                    continue;
                 }
 
-                done += (int)written;
+                if (!ok && error == NativeMethods.ErrorWriteProtect)
+                {
+                    throw WriteProtected();
+                }
+
+                // A write that "succeeds" with 0 bytes, or is denied, hits a volume that Windows mounted in the meantime
+                // (for instance the RAW volume it creates over a drive without a partition table).
+                var reason = ok ? "0 bytes written" : Describe(error);
+                if (ok || error == NativeMethods.ErrorAccessDenied)
+                {
+                    if (attempt >= WriteAttempts)
+                    {
+                        throw new UsbWriteException(
+                            UsbWriteFailure.DeviceError,
+                            $"Windows blocked the write at byte {position} ({reason}): a volume of the USB drive is still mounted. Unplug the drive, plug it back in and try again.");
+                    }
+
+                    _logger.LogWarning("Write at byte {Position} blocked ({Reason}), locking the volumes of the drive again (attempt {Attempt}/{Max})", position, reason, attempt, WriteAttempts);
+                    attempt++;
+                    Thread.Sleep(RetryDelay);
+                    RelockVolumes();
+                    continue;
+                }
+
+                throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Write error at byte {position}: {reason}. Was the drive unplugged?");
             }
         }
     }
@@ -131,9 +173,12 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
             {
                 var position = offset + done;
                 var overlapped = new NativeOverlapped { OffsetLow = (int)(position & 0xFFFFFFFF), OffsetHigh = (int)(position >> 32) };
-                if (!NativeMethods.ReadFile(_disk, pointer + done, (uint)(buffer.Length - done), out var read, &overlapped) || read == 0)
+                var ok = NativeMethods.ReadFile(_disk, pointer + done, (uint)(buffer.Length - done), out var read, &overlapped);
+                var error = Marshal.GetLastWin32Error();
+                if (!ok || read == 0)
                 {
-                    throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Read error at byte {position}: {LastError()}. Was the drive unplugged?");
+                    var reason = ok ? "0 bytes read" : Describe(error);
+                    throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Read error at byte {position}: {reason}. Was the drive unplugged?");
                 }
 
                 done += (int)read;
@@ -153,26 +198,67 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
     {
         // Ask Windows to read the new partition table written by the image.
         NativeMethods.Ioctl(_disk, NativeMethods.IoctlDiskUpdateProperties);
-        _disk.Dispose();
+        if (_diskLocked)
+        {
+            NativeMethods.Ioctl(_disk, NativeMethods.FsctlUnlockVolume);
+        }
 
-        foreach (var volume in _volumes)
+        _disk.Dispose();
+        ReleaseVolumes();
+        _logger.LogDebug("Raw access released");
+    }
+
+    private void ReleaseVolumes()
+    {
+        foreach (var volume in _volumes.Values)
         {
             NativeMethods.Ioctl(volume, NativeMethods.FsctlUnlockVolume);
             volume.Dispose();
         }
 
-        _logger.LogDebug("Raw access released");
+        _volumes.Clear();
     }
 
-    private static IEnumerable<string> VolumeDevicePaths(DiskInfo disk)
+    /// <summary>
+    /// Locks again every volume currently on the drive. Windows may have replaced a volume since it was locked, even under the
+    /// same GUID path, leaving a handle on a device that no longer exists: all the handles are released first.
+    /// </summary>
+    private void RelockVolumes()
     {
-        var paths = disk.VolumePaths.Select(p => p.TrimEnd('\\')).ToList();
-        if (paths.Count == 0)
+        ReleaseVolumes();
+        try
         {
-            paths.AddRange(disk.DriveLetters.Select(l => $@"\\.\{l.TrimEnd('\\')}"));
+            LockVolumes(_info, _volumes, _logger);
+        }
+        catch (UsbWriteException ex) when (ex.Failure == UsbWriteFailure.VolumeBusy)
+        {
+            // The drive is already partly written: this is no longer a "nothing was written" failure.
+            throw new UsbWriteException(UsbWriteFailure.DeviceError, ex.Message, ex);
+        }
+    }
+
+    private static void LockVolumes(DiskInfo disk, Dictionary<string, SafeFileHandle> locked, ILogger logger)
+    {
+        foreach (var path in VolumeDevicePaths(disk))
+        {
+            locked[path] = LockAndDismount(path, logger);
         }
 
-        return paths.Distinct(StringComparer.OrdinalIgnoreCase);
+        logger.LogInformation("{Count} volume(s) of disk {Number} locked and dismounted {Volumes}", locked.Count, disk.Number, locked.Keys);
+    }
+
+    /// <summary>
+    /// Every volume stored on the drive, by GUID path so that a volume is never opened (and locked) twice under two names.
+    /// A volume is only ever locked after Windows confirmed that it lies on this drive.
+    /// </summary>
+    private static List<string> VolumeDevicePaths(DiskInfo disk)
+    {
+        var known = disk.VolumePaths.Select(p => p.TrimEnd('\\'))
+            .Concat(disk.DriveLetters.Select(Volumes.NameOf).OfType<string>());
+        return Volumes.OnDisk(disk.Number)
+            .Concat(known.Where(path => Volumes.DiskNumbers(path).Contains(disk.Number)))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
     }
 
     private static SafeFileHandle LockAndDismount(string path, ILogger logger)
@@ -199,6 +285,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                     logger.LogDebug("FSCTL_DISMOUNT_VOLUME failed on {Path}: {Error}", path, LastError());
                 }
 
+                logger.LogDebug("Locked and dismounted {Path}", path);
                 return handle;
             }
 
@@ -211,5 +298,10 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
             $"The volume {path} is in use. Close the windows and programs that use the USB drive, then try again.");
     }
 
-    private static string LastError() => new Win32Exception(Marshal.GetLastWin32Error()).Message;
+    private static UsbWriteException WriteProtected() =>
+        new(UsbWriteFailure.DeviceError, "The USB drive is write-protected. Turn off its protection switch (on the drive or the card adapter) and try again.");
+
+    private static string Describe(int error) => $"{new Win32Exception(error).Message} (error {error})";
+
+    private static string LastError() => Describe(Marshal.GetLastWin32Error());
 }

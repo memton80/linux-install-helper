@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -198,40 +197,19 @@ public sealed class WindowsDiskService : IDiskService
         }
 
         var mountPoint = new string(volumePath).TrimEnd('\0');
-        string device;
-        if (mountPoint.Length == 3 && mountPoint[1] == ':')
-        {
-            device = $@"\\.\{mountPoint[0]}:";
-        }
-        else
-        {
-            var volumeName = new char[1024];
-            if (!NativeMethods.GetVolumeNameForVolumeMountPointW(mountPoint, volumeName, (uint)volumeName.Length))
-            {
-                return [];
-            }
-
-            device = new string(volumeName).TrimEnd('\0').TrimEnd('\\');
-        }
-
-        using var handle = NativeMethods.OpenForQuery(device);
-        if (handle.IsInvalid)
-        {
-            _logger.LogDebug("Cannot open {Device}: {Error}", device, new Win32Exception(Marshal.GetLastWin32Error()).Message);
-            return [];
-        }
-
-        var extents = NativeMethods.Ioctl(handle, NativeMethods.IoctlVolumeGetVolumeDiskExtents, null, 4096);
-        if (extents is null)
+        var device = mountPoint.Length == 3 && mountPoint[1] == ':' ? $@"\\.\{mountPoint[0]}:" : Volumes.NameOf(mountPoint);
+        if (device is null)
         {
             return [];
         }
 
-        // VOLUME_DISK_EXTENTS: DWORD count, padding, then DISK_EXTENT { DWORD DiskNumber; LARGE_INTEGER Start; LARGE_INTEGER Length } (24 bytes each).
-        var count = BitConverter.ToInt32(extents, 0);
-        return Enumerable.Range(0, Math.Min(count, (extents.Length - 8) / 24))
-            .Select(i => BitConverter.ToInt32(extents, 8 + (i * 24)))
-            .ToList();
+        var disks = Volumes.DiskNumbers(device);
+        if (disks.Count == 0)
+        {
+            _logger.LogDebug("Cannot find the disk of {Device}", device);
+        }
+
+        return disks;
     }
 
     private static List<ManagementObject> Query(ManagementScope scope, string wql)
