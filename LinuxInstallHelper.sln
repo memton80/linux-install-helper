@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{21B8D714
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxInstallHelper.Core.Tests", "tests\LinuxInstallHelper.Core.Tests\LinuxInstallHelper.Core.Tests.csproj", "{B2C540FF-47A4-41A7-81F9-2F3E3EA75FB5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F7D875BB-0DE2-48F4-BED4-7637756AECB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxInstallHelper.LinkChecker", "tools\LinuxInstallHelper.LinkChecker\LinuxInstallHelper.LinkChecker.csproj", "{F5112305-1343-4699-BDF7-BF7620F08C36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +38,15 @@ Global
 		{B2C540FF-47A4-41A7-81F9-2F3E3EA75FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2C540FF-47A4-41A7-81F9-2F3E3EA75FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2C540FF-47A4-41A7-81F9-2F3E3EA75FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5112305-1343-4699-BDF7-BF7620F08C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5112305-1343-4699-BDF7-BF7620F08C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5112305-1343-4699-BDF7-BF7620F08C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5112305-1343-4699-BDF7-BF7620F08C36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1E2888F8-A814-47B1-9F94-42D26B384B4C} = {2E4D038D-C7EC-4AAE-B4E0-D6BF0FEEABC2}
 		{E218CCCE-82DD-47D6-9385-C8FBE06AE899} = {2E4D038D-C7EC-4AAE-B4E0-D6BF0FEEABC2}
 		{B2C540FF-47A4-41A7-81F9-2F3E3EA75FB5} = {21B8D714-4118-47FE-A1CD-B0BCF5C05D6B}
+		{F5112305-1343-4699-BDF7-BF7620F08C36} = {F7D875BB-0DE2-48F4-BED4-7637756AECB3}
 	EndGlobalSection
 EndGlobal
