@@ -547,6 +547,12 @@ Cette opération est irréversible.</value>
   <data name="Error_DeviceError" xml:space="preserve">
     <value>Windows a signalé une erreur en accédant à la clé USB. Vérifiez qu'elle est toujours branchée, essayez un autre port USB ou une autre clé.</value>
   </data>
+  <data name="Error_WriteBlocked_Title" xml:space="preserve">
+    <value>Windows a bloqué l'écriture</value>
+  </data>
+  <data name="Error_WriteBlocked" xml:space="preserve">
+    <value>Windows a refusé d'écrire sur la clé USB sans signaler d'erreur. Rien n'a été écrit. Cela vient en général de l'accès contrôlé aux dossiers de Microsoft Defender ou d'un antivirus qui protège les disques : dans Sécurité Windows, ouvrez Protection contre les virus et menaces &gt; Gérer la protection contre les ransomwares &gt; Autoriser une application via l'Accès contrôlé aux dossiers, ajoutez Linux Install Helper, puis réessayez.</value>
+  </data>
   <data name="Error_VerificationFailed_Title" xml:space="preserve">
     <value>La clé USB est défectueuse</value>
   </data>

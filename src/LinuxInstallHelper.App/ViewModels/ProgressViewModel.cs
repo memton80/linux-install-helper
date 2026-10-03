@@ -194,7 +194,8 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
             // Nothing is written when the target is refused up front; otherwise the drive may be half written.
             DriveMayBeUnusable = wasWriting && ex is not UsbWriteException
             {
-                Failure: UsbWriteFailure.TargetChanged or UsbWriteFailure.TargetRejected or UsbWriteFailure.ImageTooLarge or UsbWriteFailure.VolumeBusy,
+                Failure: UsbWriteFailure.TargetChanged or UsbWriteFailure.TargetRejected or UsbWriteFailure.ImageTooLarge or UsbWriteFailure.VolumeBusy
+                    or UsbWriteFailure.WriteBlocked,
             };
             MarkRunningStage(StageState.Failed);
             Logs.Add(new LogItemViewModel(description.Message, _localizer));

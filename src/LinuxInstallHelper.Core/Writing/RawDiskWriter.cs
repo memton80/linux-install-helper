@@ -72,7 +72,7 @@ public sealed class RawDiskWriter : IUsbWriter
         {
             ImageWriteEngine.WipeTail(device);
         }
-        catch (UsbWriteException ex) when (ex.Failure == UsbWriteFailure.DeviceError)
+        catch (UsbWriteException ex) when (ex.Failure is UsbWriteFailure.DeviceError or UsbWriteFailure.WriteBlocked)
         {
             _logger.LogWarning(ex, "Could not wipe the end of disk {Number}, writing the image anyway", disk.Number);
         }

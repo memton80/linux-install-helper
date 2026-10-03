@@ -35,6 +35,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
     private readonly bool _diskLocked;
     private readonly Dictionary<string, SafeFileHandle> _volumes;
     private readonly ILogger _logger;
+    private long _bytesWritten;
 
     private PhysicalDriveDevice(DiskInfo info, SafeFileHandle disk, bool diskLocked, Dictionary<string, SafeFileHandle> volumes, int sectorSize, long size, ILogger logger)
     {
@@ -101,7 +102,9 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 sectorSize = 512;
             }
 
-            logger.LogInformation("Opened {Device}: {Size} bytes, {Sector}-byte sectors, drive locked: {DiskLocked}", disk.DevicePath, size, sectorSize, diskLocked);
+            logger.LogInformation(
+                "Opened {Device}: {Size} bytes, {Sector}-byte sectors, drive locked: {DiskLocked}, controlled folder access: {Cfa}",
+                disk.DevicePath, size, sectorSize, diskLocked, ControlledFolderAccess.Describe());
             return new PhysicalDriveDevice(disk, handle, diskLocked, volumes, sectorSize, size, logger);
         }
         catch
@@ -131,6 +134,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 if (ok && written > 0)
                 {
                     done += (int)written;
+                    _bytesWritten += written;
                     attempt = 1;
                     continue;
                 }
@@ -141,15 +145,14 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 }
 
                 // A write that "succeeds" with 0 bytes, or is denied, hits a volume that Windows mounted in the meantime
-                // (for instance the RAW volume it creates over a drive without a partition table).
-                var reason = ok ? $"0 bytes written, last error: {Describe(error)}" : Describe(error);
+                // (for instance the RAW volume it creates over a drive without a partition table), or was dropped by security
+                // software that protects disks. The last error says nothing then: the driver's status is in the OVERLAPPED.
+                var reason = ok ? $"0 bytes written, {DescribeStatus(overlapped.InternalLow)}" : Describe(error);
                 if (ok || error == NativeMethods.ErrorAccessDenied)
                 {
                     if (attempt >= WriteAttempts)
                     {
-                        throw new UsbWriteException(
-                            UsbWriteFailure.DeviceError,
-                            $"Windows blocked the write at byte {position} ({reason}): a volume of the USB drive is still mounted. Unplug the drive, plug it back in and try again.");
+                        throw Blocked(position, reason);
                     }
 
                     _logger.LogWarning("Write at byte {Position} blocked ({Reason}), locking the volumes of the drive again (attempt {Attempt}/{Max})", position, reason, attempt, WriteAttempts);
@@ -230,7 +233,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
         {
             LockVolumes(_info, _volumes, _logger);
         }
-        catch (UsbWriteException ex) when (ex.Failure == UsbWriteFailure.VolumeBusy)
+        catch (UsbWriteException ex) when (ex.Failure == UsbWriteFailure.VolumeBusy && _bytesWritten > 0)
         {
             // The drive is already partly written: this is no longer a "nothing was written" failure.
             throw new UsbWriteException(UsbWriteFailure.DeviceError, ex.Message, ex);
@@ -298,10 +301,30 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
             $"The volume {path} is in use. Close the windows and programs that use the USB drive, then try again.");
     }
 
+    private UsbWriteException Blocked(long position, string reason)
+    {
+        var context = $"Windows blocked the write at byte {position} ({reason}) although {_volumes.Count} volume(s) of the drive are locked; "
+            + $"controlled folder access: {ControlledFolderAccess.Describe()}.";
+        return _bytesWritten == 0
+            ? new UsbWriteException(
+                UsbWriteFailure.WriteBlocked,
+                $"{context} Nothing was written: security software that protects disks, such as Microsoft Defender's controlled folder access, may be blocking this application.")
+            : new UsbWriteException(UsbWriteFailure.DeviceError, $"{context} Unplug the drive, plug it back in and try again.");
+    }
+
     private static UsbWriteException WriteProtected() =>
         new(UsbWriteFailure.DeviceError, "The USB drive is write-protected. Turn off its protection switch (on the drive or the card adapter) and try again.");
 
     private static string Describe(int error) => $"{new Win32Exception(error).Message} (error {error})";
 
     private static string LastError() => Describe(Marshal.GetLastWin32Error());
+
+    /// <summary>Describes the NTSTATUS that the I/O manager stored in <c>OVERLAPPED.Internal</c>.</summary>
+    private static string DescribeStatus(IntPtr internalLow)
+    {
+        var status = unchecked((int)(long)internalLow);
+        return status == 0
+            ? "status 0x00000000"
+            : $"status 0x{status:X8}: {new Win32Exception(NativeMethods.RtlNtStatusToDosError(status)).Message}";
+    }
 }

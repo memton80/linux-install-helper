@@ -40,6 +40,9 @@ public enum UsbWriteFailure
     /// <summary>Windows refused or failed the raw access.</summary>
     DeviceError,
 
+    /// <summary>Windows dropped the writes without an error, typically because of security software. Nothing was written.</summary>
+    WriteBlocked,
+
     /// <summary>What was read back from the drive differs from the image.</summary>
     VerificationFailed,
 }

@@ -67,6 +67,9 @@ internal static class NativeMethods
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool FlushFileBuffers(SafeFileHandle file);
 
+    [DllImport("ntdll.dll")]
+    public static extern int RtlNtStatusToDosError(int status);
+
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetVolumePathNameW(string fileName, [Out] char[] volumePathName, uint bufferLength);
