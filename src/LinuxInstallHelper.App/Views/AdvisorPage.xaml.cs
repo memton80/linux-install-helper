@@ -17,12 +17,12 @@ public sealed partial class AdvisorPage : Page
 
     public AdvisorViewModel ViewModel { get; }
 
-    // Show the suggestion as soon as it appears, below the questions.
+    // The suggestion replaces the questions (and the other way round): start reading it from the top.
     private void OnViewModelChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(AdvisorViewModel.HasResult) && ViewModel.HasResult)
+        if (e.PropertyName == nameof(AdvisorViewModel.HasResult))
         {
-            DispatcherQueue.TryEnqueue(() => ResultsPanel.StartBringIntoView());
+            DispatcherQueue.TryEnqueue(() => PageScroll.ChangeView(null, 0, null, disableAnimation: true));
         }
     }
 }

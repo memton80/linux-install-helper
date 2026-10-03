@@ -48,14 +48,14 @@
         </DataTemplate>
     </Page.Resources>
 
-    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+    <ScrollViewer x:Name="PageScroll" Style="{StaticResource PageScrollViewerStyle}">
         <StackPanel Style="{StaticResource PageContentStackStyle}">
             <StackPanel Style="{StaticResource PageHeaderStackStyle}">
                 <TextBlock x:Uid="AdvisorHeader" Style="{StaticResource PageTitleStyle}" />
                 <TextBlock x:Uid="AdvisorSubtitle" Style="{StaticResource PageSubtitleStyle}" />
             </StackPanel>
 
-            <ItemsControl ItemsSource="{x:Bind ViewModel.Questions}">
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Questions}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
@@ -74,14 +74,21 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <StackPanel Style="{StaticResource ButtonRowStyle}">
+            <StackPanel Style="{StaticResource ButtonRowStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
                 <Button x:Uid="AdvisorRecommend" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RecommendCommand}" />
                 <HyperlinkButton x:Uid="AdvisorAllDistros" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
                 <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsLoading), Mode=OneWay}" />
             </StackPanel>
 
             <StackPanel x:Name="ResultsPanel" Style="{StaticResource PageContentInnerStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasResult), Mode=OneWay}">
-                <TextBlock x:Uid="AdvisorBestTitle" Style="{StaticResource SectionTitleStyle}" />
+                <Grid Style="{StaticResource TourHeaderGridStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Uid="AdvisorBestTitle" Style="{StaticResource SectionTitleStyle}" />
+                    <Button x:Uid="AdvisorEdit" Grid.Column="1" Command="{x:Bind ViewModel.EditAnswersCommand}" />
+                </Grid>
                 <ItemsControl ItemsSource="{x:Bind ViewModel.Best}" ItemTemplate="{StaticResource AdvisorResultTemplate}" />
                 <TextBlock x:Uid="AdvisorOthersTitle" Style="{StaticResource SectionTitleStyle}" />
                 <ItemsControl ItemsSource="{x:Bind ViewModel.Alternatives}" ItemTemplate="{StaticResource AdvisorResultTemplate}">
@@ -91,6 +98,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
+                <HyperlinkButton x:Uid="AdvisorAllDistrosResults" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

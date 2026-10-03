@@ -1156,6 +1156,12 @@ sudo dnf upgrade                      # Fedora</value>
   <data name="AdvisorAllDistros.Content" xml:space="preserve">
     <value>Voir toutes les distributions</value>
   </data>
+  <data name="AdvisorEdit.Content" xml:space="preserve">
+    <value>Modifier mes réponses</value>
+  </data>
+  <data name="AdvisorAllDistrosResults.Content" xml:space="preserve">
+    <value>Voir toutes les distributions</value>
+  </data>
   <data name="AdvisorBestTitle.Text" xml:space="preserve">
     <value>Notre conseil pour vous</value>
   </data>

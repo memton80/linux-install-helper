@@ -122,8 +122,12 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     [NotifyCanExecuteChangedFor(nameof(RecommendCommand))]
     private bool _canRecommend;
 
+    /// <summary>The suggestion replaces the questionnaire until the user edits the answers.</summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowQuestions))]
     private bool _hasResult;
+
+    public bool ShowQuestions => !HasResult;
 
     [ObservableProperty]
     private bool _isLoading;
@@ -162,6 +166,9 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     }
 
     [RelayCommand]
+    private void EditAnswers() => HasResult = false;
+
+    [RelayCommand]
     private void ShowAllDistros() => _navigation.NavigateTo(PageKeys.Distros);
 
     private async Task LoadAsync()
@@ -182,12 +189,6 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     private void OnAnswerChanged()
     {
         CanRecommend = _distros.Count > 0 && Questions.All(q => q.SelectedIndex >= 0);
-
-        // Once a suggestion is shown, it follows the answers.
-        if (HasResult)
-        {
-            Recommend();
-        }
     }
 
     private AdvisorAnswers? Answers()
