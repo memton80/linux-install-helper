@@ -31,6 +31,7 @@
             </Border>
 
             <InfoBar x:Uid="DoneSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
+            <InfoBar x:Uid="DoneHiddenInWindows" IsClosable="False" Severity="Informational" IsOpen="True" />
 
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Style="{StaticResource CardStackStyle}">

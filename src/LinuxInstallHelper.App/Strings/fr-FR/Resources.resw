@@ -625,6 +625,12 @@ Cette opération est irréversible.</value>
   <data name="DoneSecureBoot.Message" xml:space="preserve">
     <value>Cette distribution ne démarre pas avec le Secure Boot activé : désactivez-le d'abord dans les réglages UEFI/BIOS de l'ordinateur.</value>
   </data>
+  <data name="DoneHiddenInWindows.Title" xml:space="preserve">
+    <value>Windows ne verra plus la clé, c'est normal</value>
+  </data>
+  <data name="DoneHiddenInWindows.Message" xml:space="preserve">
+    <value>La clé contient maintenant un système Linux que Windows ne sait pas lire : elle peut disparaître de l'Explorateur, et la Gestion des disques ne parvient pas toujours à la reformater. Pour la réutiliser comme une clé normale, ouvrez « Restaurer une clé » dans cette application.</value>
+  </data>
   <data name="DoneNextTitle.Text" xml:space="preserve">
     <value>Comment démarrer Linux depuis la clé</value>
   </data>

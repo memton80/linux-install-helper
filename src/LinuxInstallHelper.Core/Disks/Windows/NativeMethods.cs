@@ -67,6 +67,9 @@ internal static class NativeMethods
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool FlushFileBuffers(SafeFileHandle file);
 
+    [DllImport("kernel32.dll")]
+    public static extern uint GetOEMCP();
+
     [DllImport("ntdll.dll")]
     public static extern int RtlNtStatusToDosError(int status);
 

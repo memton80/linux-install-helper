@@ -31,15 +31,23 @@ public sealed class ImageWriteEngine
     public static void WipeTail(IBlockDevice device)
     {
         var length = (int)Math.Min(TailWipeSize, AlignDown(device.Size, device.SectorSize));
+        Zero(device, AlignDown(device.Size - length, device.SectorSize), length);
+    }
+
+    /// <summary>Zeroes the first megabyte of the device, where the MBR and the primary GPT live.</summary>
+    public static void WipeHead(IBlockDevice device) =>
+        Zero(device, 0, (int)Math.Min(TailWipeSize, AlignDown(device.Size, device.SectorSize)));
+
+    private static void Zero(IBlockDevice device, long offset, int length)
+    {
         if (length <= 0)
         {
             return;
         }
 
-        var offset = AlignDown(device.Size - length, device.SectorSize);
         using var buffer = new AlignedBuffer(length, device.SectorSize);
         buffer.Span.Clear();
-        device.Write(offset, buffer.Span);
+        device.Write(offset, buffer.Span[..length]);
     }
 
     /// <summary>Writes the image and returns the SHA-256 of the image bytes.</summary>

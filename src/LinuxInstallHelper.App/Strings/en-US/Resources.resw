@@ -625,6 +625,12 @@ This cannot be undone.</value>
   <data name="DoneSecureBoot.Message" xml:space="preserve">
     <value>This distribution does not boot with Secure Boot enabled: disable it in the UEFI/BIOS settings of the computer first.</value>
   </data>
+  <data name="DoneHiddenInWindows.Title" xml:space="preserve">
+    <value>Windows will no longer see the drive, this is normal</value>
+  </data>
+  <data name="DoneHiddenInWindows.Message" xml:space="preserve">
+    <value>The drive now holds a Linux system that Windows cannot read: it may disappear from File Explorer, and Disk Management cannot always format it again. To use it as a normal drive again, open &quot;Restore a drive&quot; in this application.</value>
+  </data>
   <data name="DoneNextTitle.Text" xml:space="preserve">
     <value>How to start Linux from the drive</value>
   </data>

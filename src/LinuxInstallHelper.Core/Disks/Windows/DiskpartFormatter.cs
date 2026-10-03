@@ -15,11 +15,13 @@ namespace LinuxInstallHelper.Core.Disks.Windows;
 public sealed class DiskpartFormatter : IDiskFormatter
 {
     private readonly IDiskService _disks;
+    private readonly IRawDiskAccess _access;
     private readonly ILogger _logger;
 
-    public DiskpartFormatter(IDiskService disks, ILogger<DiskpartFormatter>? logger = null)
+    public DiskpartFormatter(IDiskService disks, IRawDiskAccess access, ILogger<DiskpartFormatter>? logger = null)
     {
         _disks = disks;
+        _access = access;
         _logger = (ILogger?)logger ?? NullLogger.Instance;
     }
 
@@ -50,9 +52,23 @@ public sealed class DiskpartFormatter : IDiskFormatter
             throw new UsbWriteException(UsbWriteFailure.TargetRejected, $"This drive cannot be erased ({rejection}).");
         }
 
+        // On a drive that holds a Linux image written as is, Windows mounts some of the image's partitions and diskpart's
+        // "clean" fails with "access denied". Lock the drive and erase its partition tables first: diskpart then finds an
+        // empty drive.
+        await Task.Run(
+            () =>
+            {
+                using var device = _access.Open(current!);
+                ImageWriteEngine.WipeHead(device);
+                ImageWriteEngine.WipeTail(device);
+            },
+            cancellationToken).ConfigureAwait(false);
+        _logger.LogInformation("Partition tables of disk {Number} erased", current!.Number);
+
         var script = Path.Combine(Path.GetTempPath(), $"lih-diskpart-{Guid.NewGuid():N}.txt");
         var commands = new StringBuilder()
-            .AppendLine(System.Globalization.CultureInfo.InvariantCulture, $"select disk {current!.Number}")
+            .AppendLine("rescan")
+            .AppendLine(System.Globalization.CultureInfo.InvariantCulture, $"select disk {current.Number}")
             .AppendLine("clean")
             .AppendLine("create partition primary")
             .AppendLine(System.Globalization.CultureInfo.InvariantCulture, $"format fs=exfat quick label=\"{SanitizeLabel(label)}\"")
@@ -70,6 +86,9 @@ public sealed class DiskpartFormatter : IDiskFormatter
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
+                // diskpart writes in the OEM code page (850 on a French Windows), not in UTF-8.
+                StandardOutputEncoding = OemEncoding(),
+                StandardErrorEncoding = OemEncoding(),
             };
 
             using var process = Process.Start(start) ?? throw new UsbWriteException(UsbWriteFailure.DeviceError, "diskpart could not be started.");
@@ -85,6 +104,19 @@ public sealed class DiskpartFormatter : IDiskFormatter
         finally
         {
             File.Delete(script);
+        }
+    }
+
+    private static Encoding OemEncoding()
+    {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        try
+        {
+            return Encoding.GetEncoding((int)NativeMethods.GetOEMCP());
+        }
+        catch (Exception ex) when (ex is ArgumentException or NotSupportedException)
+        {
+            return Encoding.Default;
         }
     }
 }

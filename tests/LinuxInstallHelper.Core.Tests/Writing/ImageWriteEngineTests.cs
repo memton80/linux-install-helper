@@ -96,6 +96,17 @@ public class ImageWriteEngineTests
         Assert.Equal(0xAA, device.Data[^(ImageWriteEngine.TailWipeSize + 1)]);
     }
 
+    [Fact]
+    public void WipeHead_zeroes_the_first_megabyte_only()
+    {
+        var device = new MemoryBlockDevice(4 * 1024 * 1024);
+
+        ImageWriteEngine.WipeHead(device);
+
+        Assert.All(device.Data[..ImageWriteEngine.TailWipeSize], b => Assert.Equal(0, b));
+        Assert.Equal(0xAA, device.Data[ImageWriteEngine.TailWipeSize]);
+    }
+
     [Theory]
     [InlineData(0, 512, 0)]
     [InlineData(1, 512, 512)]
