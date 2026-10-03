@@ -108,6 +108,7 @@ jobs:
         shell: pwsh
         run: |
           Get-ChildItem "artifacts/publish/${{ matrix.rid }}" -Recurse -File | ForEach-Object { "$($_.Name): $([math]::Round($_.Length / 1MB, 1)) MB" }
+          Get-ChildItem "src/LinuxInstallHelper.App/bin" -Recurse -Filter *.pri | ForEach-Object { "Built PRI: $($_.FullName)" }
           New-Item -ItemType Directory -Force -Path artifacts/single | Out-Null
           $exe = "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe"
           Copy-Item "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" $exe

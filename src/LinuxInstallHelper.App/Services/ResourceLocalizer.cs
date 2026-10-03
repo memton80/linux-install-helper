@@ -5,7 +5,7 @@ namespace LinuxInstallHelper.App.Services;
 
 public sealed class ResourceLocalizer : ILocalizer
 {
-    private readonly ResourceLoader _loader = new();
+    private readonly ResourceLoader _loader = AppResources.CreateLoader();
 
     public string Get(string key)
     {

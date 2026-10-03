@@ -49,6 +49,19 @@
     <PackageReference Include="Serilog.Sinks.File" />
   </ItemGroup>
 
+  <!--
+    dotnet publish leaves out the app's own PRI for unpackaged apps (microsoft/WindowsAppSDK#6720): add it, so that the
+    single .exe carries the localized strings.
+  -->
+  <Target Name="AddProjectPriToResolvedFileToPublish" BeforeTargets="ComputeResolvedFilesToPublishList" DependsOnTargets="$(GenerateProjectPriFile)">
+    <ItemGroup>
+      <ResolvedFileToPublish Include="$(ProjectPriFullPath)" Condition="Exists('$(ProjectPriFullPath)') And '@(ResolvedFileToPublish->WithMetadataValue('RelativePath', '$(ProjectPriFileName)'))' == ''">
+        <RelativePath>$(ProjectPriFileName)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
   <ItemGroup>
     <ProjectReference Include="..\LinuxInstallHelper.Core\LinuxInstallHelper.Core.csproj" />
   </ItemGroup>
