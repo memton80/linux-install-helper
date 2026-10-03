@@ -88,7 +88,7 @@ internal sealed class DistroChecker(IImageResolver resolver, IUrlProbe probe)
                 result.Warn("The checksum signature could not be verified.");
             }
 
-            if (result.Resolved.IsNewerThanCatalog)
+            if (result.Resolved.IsNewerThanCatalog && !image.LatestAlias)
             {
                 result.Warn($"Newer image available: {result.Resolved.FileName} (catalog: {image.FileName}). Please update the catalog.");
             }

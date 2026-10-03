@@ -467,8 +467,7 @@
         "size": 3909091328,
         "urls": [
           "https://distro.ibiblio.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso",
-          "https://mirror.kumi.systems/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso",
-          "https://mirrors.dotsrc.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso"
+          "https://mirror.kumi.systems/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso"
         ],
         "checksum": { "url": "https://distro.ibiblio.org/zorinos/18/SHA256SUMS.txt" },
         "resolve": { "type": "checksum-pattern", "pattern": "^Zorin-OS-(?<version>18(\\.[0-9]+)*)-Core-64-bit(-r[0-9]+)?\\.iso$" }
