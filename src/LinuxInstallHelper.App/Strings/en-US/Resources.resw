@@ -828,4 +828,143 @@ This cannot be undone.</value>
   <data name="Duration_Seconds" xml:space="preserve">
     <value>{0} s</value>
   </data>
+  <data name="TourHeader.Text" xml:space="preserve">
+    <value>While you wait, discover Linux</value>
+  </data>
+  <data name="TourSubtitle.Text" xml:space="preserve">
+    <value>A few basics for your first steps, to read while the drive is being prepared.</value>
+  </data>
+  <data name="TourPrevious.Content" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="TourNext.Content" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="TourWindowsLabel.Text" xml:space="preserve">
+    <value>On Windows</value>
+  </data>
+  <data name="TourLinuxLabel.Text" xml:space="preserve">
+    <value>On Linux</value>
+  </data>
+  <data name="Tour_Position" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Tour_1_Title" xml:space="preserve">
+    <value>Try it without changing anything</value>
+  </data>
+  <data name="Tour_1_Body" xml:space="preserve">
+    <value>When you start from the drive, choose "Try" (or "Live"): Linux runs from the drive without changing anything on your PC. Use it to check that Wi-Fi, sound, the screen and the touchpad work before you install anything.</value>
+  </data>
+  <data name="Tour_2_Title" xml:space="preserve">
+    <value>A familiar desktop</value>
+  </data>
+  <data name="Tour_2_Body" xml:space="preserve">
+    <value>You will find a menu to start applications, a taskbar and windows. The look depends on the desktop environment (GNOME, KDE Plasma, Cinnamon…) and almost everything can be customized.</value>
+  </data>
+  <data name="Tour_2_Windows" xml:space="preserve">
+    <value>Start menu and taskbar</value>
+  </data>
+  <data name="Tour_2_Linux" xml:space="preserve">
+    <value>Applications menu (Windows key, called "Super"), dock or taskbar</value>
+  </data>
+  <data name="Tour_3_Title" xml:space="preserve">
+    <value>Installing software</value>
+  </data>
+  <data name="Tour_3_Body" xml:space="preserve">
+    <value>On Linux, you rarely download software from a website. Open the distribution's software center, search for the application and click Install: it is free, checked and updated automatically.</value>
+  </data>
+  <data name="Tour_3_Windows" xml:space="preserve">
+    <value>Download an .exe file and run the installer</value>
+  </data>
+  <data name="Tour_3_Linux" xml:space="preserve">
+    <value>The software center (Software, Discover, Software Manager…): search, then Install</value>
+  </data>
+  <data name="Tour_4_Title" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Tour_4_Body" xml:space="preserve">
+    <value>A single tool updates the system and all your applications at once. Linux never restarts without asking you, and most updates apply without a restart.</value>
+  </data>
+  <data name="Tour_4_Windows" xml:space="preserve">
+    <value>Windows Update, plus each application's own updates</value>
+  </data>
+  <data name="Tour_4_Linux" xml:space="preserve">
+    <value>The update manager, for everything at once</value>
+  </data>
+  <data name="Tour_5_Title" xml:space="preserve">
+    <value>Your files and drives</value>
+  </data>
+  <data name="Tour_5_Body" xml:space="preserve">
+    <value>Your documents are in your home folder, with the same subfolders: Documents, Pictures, Downloads… There are no drive letters: USB drives and other disks show up in the sidebar of the file manager.</value>
+  </data>
+  <data name="Tour_5_Windows" xml:space="preserve">
+    <value>C:\Users\you, drives C:, D:…</value>
+  </data>
+  <data name="Tour_5_Linux" xml:space="preserve">
+    <value>/home/you (the "Home" folder), disks in the file manager</value>
+  </data>
+  <data name="Tour_6_Title" xml:space="preserve">
+    <value>Your usual applications</value>
+  </data>
+  <data name="Tour_6_Body" xml:space="preserve">
+    <value>Almost every use has a free equivalent, and many applications also exist natively on Linux: Chrome, Spotify, Discord, Zoom, Steam… Your Word and Excel files open in LibreOffice.</value>
+  </data>
+  <data name="Tour_6_Windows" xml:space="preserve">
+    <value>Microsoft Office, Edge, Paint, Media Player</value>
+  </data>
+  <data name="Tour_6_Linux" xml:space="preserve">
+    <value>LibreOffice, Firefox (or Chrome), Pinta or GIMP, VLC</value>
+  </data>
+  <data name="Tour_7_Title" xml:space="preserve">
+    <value>Games and Windows software</value>
+  </data>
+  <data name="Tour_7_Body" xml:space="preserve">
+    <value>Steam runs a large share of Windows games thanks to Proton: check protondb.com before buying. Online games with anti-cheat often do not work. Some Windows programs run with Wine or Bottles, but not all: check the ones you really need before leaving Windows.</value>
+  </data>
+  <data name="Tour_7_Windows" xml:space="preserve">
+    <value>Games and .exe programs</value>
+  </data>
+  <data name="Tour_7_Linux" xml:space="preserve">
+    <value>Steam with Proton for games, Bottles or Wine for some programs</value>
+  </data>
+  <data name="Tour_8_Title" xml:space="preserve">
+    <value>The terminal, without fear</value>
+  </data>
+  <data name="Tour_8_Body" xml:space="preserve">
+    <value>The terminal is optional: everything can also be done with the mouse. But many guides give commands to copy, so the basics are worth knowing. Open it with Ctrl+Alt+T on most distributions.</value>
+  </data>
+  <data name="Tour_8_Windows" xml:space="preserve">
+    <value>Command prompt: dir, cd, copy, del</value>
+  </data>
+  <data name="Tour_8_Linux" xml:space="preserve">
+    <value>Terminal: ls, cd, cp, rm</value>
+  </data>
+  <data name="Tour_8_Command" xml:space="preserve">
+    <value>pwd            # where am I?
+ls             # list the files
+cd Documents   # go into a folder
+cd ..          # go up one folder</value>
+  </data>
+  <data name="Tour_9_Title" xml:space="preserve">
+    <value>Administrator rights</value>
+  </data>
+  <data name="Tour_9_Body" xml:space="preserve">
+    <value>To change the system, Linux asks for your password. In the terminal, you write sudo before the command. When you type the password, nothing is shown, not even stars: that is normal, type it and press Enter. Never run a sudo command found on a site you do not trust.</value>
+  </data>
+  <data name="Tour_9_Windows" xml:space="preserve">
+    <value>"Run as administrator"</value>
+  </data>
+  <data name="Tour_9_Linux" xml:space="preserve">
+    <value>Your password in a window, or sudo before a command</value>
+  </data>
+  <data name="Tour_9_Command" xml:space="preserve">
+    <value>sudo apt update &amp;&amp; sudo apt upgrade   # Ubuntu, Mint, Pop!_OS, Debian…
+sudo dnf upgrade                      # Fedora</value>
+  </data>
+  <data name="Tour_10_Title" xml:space="preserve">
+    <value>Getting help</value>
+  </data>
+  <data name="Tour_10_Body" xml:space="preserve">
+    <value>The Linux community is very active and welcoming. Your distribution's wiki and forum are the best places to start, and Ask Ubuntu or the Arch Wiki answer most questions. Searching for "distribution name + your problem" often gives the solution.</value>
+  </data>
 </root>

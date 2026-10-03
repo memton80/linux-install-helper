@@ -52,6 +52,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         _dispatcher = dispatcher;
         _logger = logger;
 
+        Tour = new LinuxTourViewModel(localizer);
         foreach (var stage in Enum.GetValues<CreationStage>())
         {
             Stages.Add(new StageItemViewModel(stage, localizer.Get("Stage_" + stage)));
@@ -61,6 +62,9 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
     public ObservableCollection<StageItemViewModel> Stages { get; } = [];
 
     public ObservableCollection<LogItemViewModel> Logs { get; } = [];
+
+    /// <summary>Basics of Linux, to read while waiting.</summary>
+    public LinuxTourViewModel Tour { get; }
 
     [ObservableProperty]
     private string _subtitle = string.Empty;

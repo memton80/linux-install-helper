@@ -72,6 +72,58 @@
                 </StackPanel>
             </Border>
 
+            <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <Grid Style="{StaticResource TourHeaderGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Style="{StaticResource CompactStackStyle}">
+                            <TextBlock x:Uid="TourHeader" Style="{StaticResource TourHeaderStyle}" />
+                            <TextBlock x:Uid="TourSubtitle" Style="{StaticResource SecondaryTextStyle}" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Tour.Position, Mode=OneWay}" />
+                    </Grid>
+
+                    <Grid Style="{StaticResource TourLessonGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource TourIconBorderStyle}">
+                            <FontIcon Style="{StaticResource TourIconStyle}" Glyph="{x:Bind ViewModel.Tour.Current.Glyph, Mode=OneWay}" />
+                        </Border>
+                        <StackPanel Grid.Column="1" Style="{StaticResource CardStackStyle}">
+                            <TextBlock Style="{StaticResource TourTitleStyle}" Text="{x:Bind ViewModel.Tour.Current.Title, Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Body, Mode=OneWay}" />
+                            <Grid Style="{StaticResource TourComparisonGridStyle}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Tour.Current.Windows), Mode=OneWay}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Uid="TourWindowsLabel" Style="{StaticResource TourLabelStyle}" />
+                                <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Windows, Mode=OneWay}" />
+                                <TextBlock x:Uid="TourLinuxLabel" Grid.Row="1" Style="{StaticResource TourLabelStyle}" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Linux, Mode=OneWay}" />
+                            </Grid>
+                            <Border Style="{StaticResource TourCommandBorderStyle}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Tour.Current.Command), Mode=OneWay}">
+                                <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Command, Mode=OneWay}" />
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="TourPrevious" Command="{x:Bind ViewModel.Tour.PreviousCommand}" />
+                        <Button x:Uid="TourNext" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.Tour.NextCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
             <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True">
                 <StackPanel Style="{StaticResource CardStackStyle}">
                     <ListView x:Name="LogList" Style="{StaticResource LogListViewStyle}" ItemsSource="{x:Bind ViewModel.Logs}">
