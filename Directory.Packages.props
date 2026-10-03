@@ -1,12 +1,6 @@
 <Project>
   <ItemGroup Label="UI">
-    <!-- Windows App SDK 1.8.260921001, referenced by component to leave out the AI/ML runtimes (~40 MB). -->
-    <PackageVersion Include="Microsoft.WindowsAppSDK.Runtime" Version="1.8.260921001" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK.WinUI" Version="1.8.260803003" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK.Foundation" Version="1.8.260803002" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.8.260708001" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK.DWrite" Version="1.8.25122902" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK.Base" Version="1.8.251216001" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.8.260921001" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
   </ItemGroup>
