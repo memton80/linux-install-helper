@@ -44,11 +44,11 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 
 ## Installation
 
-1. Téléchargez `LinuxInstallHelper-<version>-win-x64.zip` (ou `win-arm64`) depuis les
-   [Releases](https://github.com/memton80/linux-install-helper/releases) et vérifiez-le avec `SHA256SUMS.txt`.
-2. Décompressez l'archive où vous voulez (aucune installation, aucun prérequis : .NET et Windows App SDK sont inclus).
-3. Lancez `LinuxInstallHelper.exe` et acceptez la demande d'administrateur (UAC) : écrire directement sur une
-   clé USB l'exige.
+1. Téléchargez `LinuxInstallHelper-<version>-win-x64.exe` (ou `win-arm64` pour les PC ARM) depuis les
+   [Releases](https://github.com/memton80/linux-install-helper/releases). Son SHA-256 figure dans les notes de version.
+2. Lancez-le et acceptez la demande d'administrateur (UAC) : écrire directement sur une clé USB l'exige. Aucune
+   installation ni prérequis : .NET et Windows App SDK sont inclus dans l'exécutable, qui se décompresse dans un
+   dossier temporaire au premier lancement.
 
 Windows 10 1809 ou plus récent, Windows 11 recommandé. L'exécutable n'est pas signé avec un certificat de
 signature de code : Windows SmartScreen peut afficher un avertissement au premier lancement
@@ -127,8 +127,8 @@ Tout est compilé par GitHub Actions sur `windows-latest` :
 
 | Workflow | Déclencheur | Rôle |
 |---|---|---|
-| [`build.yml`](.github/workflows/build.yml) | push, pull request | restore, build Release, tests, publication self-contained x64 et ARM64, archive `.zip`, test de démarrage avec captures d'écran |
-| [`release.yml`](.github/workflows/release.yml) | tag `v*` | build, zip, `SHA256SUMS.txt`, création de la GitHub Release |
+| [`build.yml`](.github/workflows/build.yml) | push, pull request | restore, build Release, tests, publication en un seul `.exe` x64 et ARM64, test de démarrage de l'`.exe` seul avec captures d'écran |
+| [`release.yml`](.github/workflows/release.yml) | tag `v*` ou `V*` | tests, build en un seul `.exe` x64 et ARM64, GitHub Release avec les `.exe` et leur SHA-256 |
 | [`check-links.yml`](.github/workflows/check-links.yml) | chaque lundi, manuel, modification du catalogue | vérifie chaque lien, taille, checksum et signature ; ouvre une issue si un lien casse |
 
 En local (Windows, SDK .NET 8) :
@@ -174,4 +174,4 @@ verifies its SHA-256/SHA-512 and OpenPGP signature against pinned keys, lets you
 drives only (never the system or an internal disk) with a double confirmation, writes the hybrid ISO as-is,
 reads the drive back to check it and ejects it. It can also write a local ISO and restore a drive to a normal
 exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
-unzip and run `LinuxInstallHelper.exe` (administrator rights are required to write to a raw disk).
+and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

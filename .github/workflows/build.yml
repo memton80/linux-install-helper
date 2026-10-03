@@ -103,20 +103,20 @@ jobs:
           -p:Platform=${{ matrix.platform }}
           -o artifacts/publish/${{ matrix.rid }}
 
-      - name: Create zip
+      # The application is a single .exe: copy it alone to a folder, where the smoke test starts it.
+      - name: Single executable
         shell: pwsh
         run: |
-          $zip = "artifacts/LinuxInstallHelper-${{ matrix.rid }}.zip"
-          Compress-Archive -Path "artifacts/publish/${{ matrix.rid }}/*" -DestinationPath $zip -CompressionLevel Optimal
-          Get-ChildItem "artifacts/publish/${{ matrix.rid }}" -Recurse -File | Measure-Object -Property Length -Sum |
-            ForEach-Object { "Published files: $($_.Count), $([math]::Round($_.Sum / 1MB, 1)) MB" }
-          "Zip: $([math]::Round((Get-Item $zip).Length / 1MB, 1)) MB"
-          (Get-FileHash $zip -Algorithm SHA256).Hash
+          Get-ChildItem "artifacts/publish/${{ matrix.rid }}" -Recurse -File | ForEach-Object { "$($_.Name): $([math]::Round($_.Length / 1MB, 1)) MB" }
+          New-Item -ItemType Directory -Force -Path artifacts/single | Out-Null
+          $exe = "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe"
+          Copy-Item "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" $exe
+          (Get-FileHash $exe -Algorithm SHA256).Hash
 
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          path: artifacts/LinuxInstallHelper-${{ matrix.rid }}.zip
+          path: artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe
           archive: false
           if-no-files-found: error
           retention-days: 14
@@ -126,7 +126,7 @@ jobs:
         if: matrix.platform == 'x64'
         timeout-minutes: 8
         shell: pwsh
-        run: ./tools/ci/smoke-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Output artifacts/screenshots
+        run: ./tools/ci/smoke-test.ps1 -Exe "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe" -Output artifacts/screenshots
 
       - name: Application log
         if: always() && matrix.platform == 'x64'

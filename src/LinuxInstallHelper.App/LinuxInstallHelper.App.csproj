@@ -16,10 +16,15 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <DefaultLanguage>en-US</DefaultLanguage>
 
-    <!-- Unpackaged, self-contained: a plain folder (zipped by CI) with an .exe, no installer needed. -->
+    <!-- Unpackaged, self-contained: no installer needed. -->
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
+
+    <!-- Published as a single .exe (Windows App SDK 1.5+): its content is extracted to a temporary folder at first launch. -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <DebugType Condition="'$(Configuration)' == 'Release'">embedded</DebugType>
   </PropertyGroup>
 
   <!-- A self-contained build needs a runtime identifier: derive it from the platform when none is given. -->
