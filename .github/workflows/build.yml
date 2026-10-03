@@ -109,3 +109,26 @@ jobs:
           archive: false
           if-no-files-found: error
           retention-days: 14
+
+      # The x64 build can run on the runner: start it on several pages to catch startup crashes.
+      - name: Smoke test and screenshots
+        if: matrix.platform == 'x64'
+        shell: pwsh
+        run: ./tools/ci/smoke-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Output artifacts/screenshots
+
+      - name: Application log
+        if: always() && matrix.platform == 'x64'
+        shell: pwsh
+        run: |
+          $logs = Join-Path $env:LOCALAPPDATA "LinuxInstallHelper\logs"
+          if (Test-Path $logs) { Get-ChildItem $logs -Filter *.log | ForEach-Object { Get-Content $_.FullName -Tail 200 } }
+          else { "No log folder." }
+
+      - name: Upload screenshots
+        if: always() && matrix.platform == 'x64'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: screenshots
+          path: artifacts/screenshots
+          if-no-files-found: ignore
+          retention-days: 14
