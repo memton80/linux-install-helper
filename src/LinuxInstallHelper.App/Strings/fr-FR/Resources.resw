@@ -53,8 +53,32 @@
   <data name="NavLocalIso.Content" xml:space="preserve">
     <value>ISO locale</value>
   </data>
+  <data name="NavRestore.Content" xml:space="preserve">
+    <value>Restaurer une clé</value>
+  </data>
   <data name="NavAbout.Content" xml:space="preserve">
     <value>À propos</value>
+  </data>
+  <data name="Dialog_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Close_BusyTitle" xml:space="preserve">
+    <value>Une clé USB est en cours de création</value>
+  </data>
+  <data name="Close_BusyMessage" xml:space="preserve">
+    <value>Si vous quittez maintenant, le téléchargement reprendra la prochaine fois que vous créerez cette clé.</value>
+  </data>
+  <data name="Close_BusyWriting" xml:space="preserve">
+    <value>La clé est en cours d'écriture. Si vous quittez maintenant, elle sera inutilisable jusqu'à ce que vous la recréiez ou la restauriez.</value>
+  </data>
+  <data name="Close_BusyPrimary" xml:space="preserve">
+    <value>Quitter quand même</value>
+  </data>
+  <data name="Close_BusyClose" xml:space="preserve">
+    <value>Continuer</value>
   </data>
   <data name="DistrosHeader.Text" xml:space="preserve">
     <value>Choisissez une distribution Linux</value>
@@ -62,22 +86,740 @@
   <data name="DistrosSubtitle.Text" xml:space="preserve">
     <value>L'image ISO est téléchargée depuis la source officielle et vérifiée avant d'être écrite sur votre clé USB.</value>
   </data>
+  <data name="DistrosSearch.Header" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="DistrosSearch.PlaceholderText" xml:space="preserve">
+    <value>Nom, bureau, mot-clé…</value>
+  </data>
+  <data name="DistrosFamily.Header" xml:space="preserve">
+    <value>Famille</value>
+  </data>
+  <data name="DistrosCategory.Header" xml:space="preserve">
+    <value>Usage</value>
+  </data>
+  <data name="DistrosOffline.Title" xml:space="preserve">
+    <value>Catalogue hors ligne</value>
+  </data>
+  <data name="DistrosEmpty.Text" xml:space="preserve">
+    <value>Aucune distribution ne correspond à votre recherche.</value>
+  </data>
+  <data name="Catalog_Status_Remote" xml:space="preserve">
+    <value>Catalogue à jour ({0}).</value>
+  </data>
+  <data name="Catalog_Status_Cache" xml:space="preserve">
+    <value>Le catalogue en ligne est injoignable : utilisation de la dernière copie téléchargée ({0}).</value>
+  </data>
+  <data name="Catalog_Status_Embedded" xml:space="preserve">
+    <value>Le catalogue en ligne est injoignable : utilisation du catalogue inclus dans l'application ({0}).</value>
+  </data>
+  <data name="Filter_AllFamilies" xml:space="preserve">
+    <value>Toutes les familles</value>
+  </data>
+  <data name="Filter_AllCategories" xml:space="preserve">
+    <value>Tous les usages</value>
+  </data>
+  <data name="Family_ubuntu" xml:space="preserve">
+    <value>Famille Ubuntu</value>
+  </data>
+  <data name="Family_debian" xml:space="preserve">
+    <value>Famille Debian</value>
+  </data>
+  <data name="Family_fedora" xml:space="preserve">
+    <value>Fedora / Red Hat</value>
+  </data>
+  <data name="Family_arch" xml:space="preserve">
+    <value>Famille Arch</value>
+  </data>
+  <data name="Family_opensuse" xml:space="preserve">
+    <value>openSUSE</value>
+  </data>
+  <data name="Family_other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="Category_beginner" xml:space="preserve">
+    <value>Débutant</value>
+  </data>
+  <data name="Category_desktop" xml:space="preserve">
+    <value>Bureau</value>
+  </data>
+  <data name="Category_lightweight" xml:space="preserve">
+    <value>Léger</value>
+  </data>
+  <data name="Category_server" xml:space="preserve">
+    <value>Serveur</value>
+  </data>
+  <data name="Category_security" xml:space="preserve">
+    <value>Sécurité</value>
+  </data>
+  <data name="Category_rolling" xml:space="preserve">
+    <value>Mise à jour continue</value>
+  </data>
+  <data name="Category_developer" xml:space="preserve">
+    <value>Développeurs</value>
+  </data>
+  <data name="Distro_NoSecureBoot" xml:space="preserve">
+    <value>Secure Boot à désactiver</value>
+  </data>
   <data name="LocalIsoHeader.Text" xml:space="preserve">
     <value>Utiliser une image ISO locale</value>
   </data>
   <data name="LocalIsoSubtitle.Text" xml:space="preserve">
     <value>Vous avez déjà téléchargé une ISO ? Sélectionnez-la pour l'écrire sur une clé USB.</value>
   </data>
+  <data name="LocalIsoPick.Content" xml:space="preserve">
+    <value>Choisir un fichier ISO…</value>
+  </data>
+  <data name="LocalIso_PickerTitle" xml:space="preserve">
+    <value>Choisir une image ISO</value>
+  </data>
+  <data name="LocalIso_PickerFilter" xml:space="preserve">
+    <value>Images ISO</value>
+  </data>
+  <data name="LocalIso_NotIso_Title" xml:space="preserve">
+    <value>Ce n'est pas une image ISO</value>
+  </data>
+  <data name="LocalIso_NotIso" xml:space="preserve">
+    <value>Ce fichier ne contient pas de système de fichiers ISO 9660. Choisissez un autre fichier.</value>
+  </data>
+  <data name="LocalIso_NotHybrid_Title" xml:space="preserve">
+    <value>Cette image risque de ne pas démarrer depuis une clé USB</value>
+  </data>
+  <data name="LocalIso_NotHybrid" xml:space="preserve">
+    <value>Ce n'est pas une ISO hybride (pas d'enregistrement d'amorçage dans le premier secteur). Les distributions Linux publient des images hybrides ; celle-ci est peut-être prévue uniquement pour les DVD.</value>
+  </data>
+  <data name="LocalIso_Hybrid_Title" xml:space="preserve">
+    <value>Image ISO hybride</value>
+  </data>
+  <data name="LocalIso_Hybrid" xml:space="preserve">
+    <value>Cette image peut être écrite telle quelle sur une clé USB.</value>
+  </data>
+  <data name="LocalIso_Unreadable_Title" xml:space="preserve">
+    <value>Le fichier ne peut pas être lu</value>
+  </data>
+  <data name="LocalIsoHashTitle.Text" xml:space="preserve">
+    <value>Vérifier le fichier (recommandé)</value>
+  </data>
+  <data name="LocalIsoHashHelp.Text" xml:space="preserve">
+    <value>Collez le SHA-256 publié sur le site officiel de la distribution : le fichier sera vérifié avant toute écriture.</value>
+  </data>
+  <data name="LocalIsoExpectedHash.Header" xml:space="preserve">
+    <value>SHA-256 attendu (facultatif)</value>
+  </data>
+  <data name="LocalIsoExpectedHash.PlaceholderText" xml:space="preserve">
+    <value>64 caractères hexadécimaux</value>
+  </data>
+  <data name="LocalIsoHashInvalid.Title" xml:space="preserve">
+    <value>SHA-256 invalide</value>
+  </data>
+  <data name="LocalIsoHashInvalid.Message" xml:space="preserve">
+    <value>Un SHA-256 comporte exactement 64 caractères hexadécimaux (0-9, a-f).</value>
+  </data>
+  <data name="LocalIsoComputeHash.Content" xml:space="preserve">
+    <value>Calculer le SHA-256 maintenant</value>
+  </data>
+  <data name="LocalIsoHashMatches.Title" xml:space="preserve">
+    <value>Le SHA-256 correspond</value>
+  </data>
+  <data name="LocalIsoHashMatches.Message" xml:space="preserve">
+    <value>Le fichier est identique à celui publié par la distribution.</value>
+  </data>
+  <data name="LocalIsoHashDiffers.Title" xml:space="preserve">
+    <value>Le SHA-256 ne correspond pas</value>
+  </data>
+  <data name="LocalIsoHashDiffers.Message" xml:space="preserve">
+    <value>Le fichier est corrompu ou n'est pas celui attendu. Téléchargez-le à nouveau depuis le site officiel.</value>
+  </data>
+  <data name="LocalIsoContinue.Content" xml:space="preserve">
+    <value>Suivant : choisir la clé USB</value>
+  </data>
+  <data name="DriveHeader.Text" xml:space="preserve">
+    <value>Choisissez la clé USB</value>
+  </data>
+  <data name="Drive_ImageSummary" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="DriveListTitle.Text" xml:space="preserve">
+    <value>Clés USB</value>
+  </data>
+  <data name="DriveListHelp.Text" xml:space="preserve">
+    <value>Seules les clés USB amovibles sont affichées. Les disques internes et le disque système ne sont jamais proposés.</value>
+  </data>
+  <data name="DriveRefresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="DriveRefresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="DriveNone.Text" xml:space="preserve">
+    <value>Aucune clé USB détectée. Branchez une clé USB : la liste se met à jour automatiquement.</value>
+  </data>
+  <data name="DriveIgnored.Title" xml:space="preserve">
+    <value>Clés USB inutilisables</value>
+  </data>
+  <data name="DriveError.Title" xml:space="preserve">
+    <value>Impossible de lister les disques</value>
+  </data>
+  <data name="DriveEraseWarning.Title" xml:space="preserve">
+    <value>Tout le contenu de cette clé sera effacé</value>
+  </data>
+  <data name="DriveEraseWarning.Message" xml:space="preserve">
+    <value>La clé entière est remplacée par l'image Linux. Copiez d'abord vos fichiers ailleurs.</value>
+  </data>
+  <data name="Drive_ConfirmCheckbox" xml:space="preserve">
+    <value>Je comprends que toutes les données de {0} ({1}) seront définitivement effacées</value>
+  </data>
+  <data name="Drive_DiskNumber" xml:space="preserve">
+    <value>Disque {0}</value>
+  </data>
+  <data name="DriveStart.Content" xml:space="preserve">
+    <value>Créer la clé USB</value>
+  </data>
+  <data name="Drive_ConfirmTitle" xml:space="preserve">
+    <value>Effacer cette clé USB ?</value>
+  </data>
+  <data name="Drive_ConfirmMessage" xml:space="preserve">
+    <value>{0} ({1}, {2}) va être entièrement effacée, puis {3} y sera écrit.
+
+Cette opération est irréversible.</value>
+  </data>
+  <data name="Drive_ConfirmPrimary" xml:space="preserve">
+    <value>Effacer et créer</value>
+  </data>
+  <data name="Rejection_SystemDisk" xml:space="preserve">
+    <value>disque système</value>
+  </data>
+  <data name="Rejection_BootDisk" xml:space="preserve">
+    <value>disque de démarrage</value>
+  </data>
+  <data name="Rejection_HostsProtectedData" xml:space="preserve">
+    <value>contient Windows, cette application ou l'image</value>
+  </data>
+  <data name="Rejection_Offline" xml:space="preserve">
+    <value>hors ligne</value>
+  </data>
+  <data name="Rejection_ReadOnly" xml:space="preserve">
+    <value>protégée en écriture</value>
+  </data>
+  <data name="Rejection_TooSmall" xml:space="preserve">
+    <value>trop petite</value>
+  </data>
+  <data name="Rejection_TooLarge" xml:space="preserve">
+    <value>plus de 256 Go, probablement un disque dur externe</value>
+  </data>
+  <data name="Rejection_TooSmallForImage" xml:space="preserve">
+    <value>trop petite pour cette image</value>
+  </data>
+  <data name="ProgressHeader.Text" xml:space="preserve">
+    <value>Création de la clé USB</value>
+  </data>
+  <data name="Progress_Subtitle" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="Stage_Resolve" xml:space="preserve">
+    <value>Trouver l'image et le checksum officiels</value>
+  </data>
+  <data name="Stage_CheckLinks" xml:space="preserve">
+    <value>Vérifier les liens de téléchargement</value>
+  </data>
+  <data name="Stage_Download" xml:space="preserve">
+    <value>Télécharger l'image</value>
+  </data>
+  <data name="Stage_Verify" xml:space="preserve">
+    <value>Vérifier l'image</value>
+  </data>
+  <data name="Stage_Write" xml:space="preserve">
+    <value>Écrire la clé USB</value>
+  </data>
+  <data name="Stage_WriteVerifying" xml:space="preserve">
+    <value>Relire la clé pour la vérifier</value>
+  </data>
+  <data name="Stage_Eject" xml:space="preserve">
+    <value>Éjecter la clé</value>
+  </data>
+  <data name="Progress_Bytes" xml:space="preserve">
+    <value>{0} sur {1}</value>
+  </data>
+  <data name="Progress_Remaining" xml:space="preserve">
+    <value>encore {0}</value>
+  </data>
+  <data name="ProgressErrorDetails.Header" xml:space="preserve">
+    <value>Détails techniques</value>
+  </data>
+  <data name="ProgressCancelled.Title" xml:space="preserve">
+    <value>Annulé</value>
+  </data>
+  <data name="ProgressCancelled.Message" xml:space="preserve">
+    <value>Un téléchargement partiel est conservé et reprendra la prochaine fois.</value>
+  </data>
+  <data name="ProgressDriveUnusable.Title" xml:space="preserve">
+    <value>La clé USB est peut-être inutilisable</value>
+  </data>
+  <data name="ProgressDriveUnusable.Message" xml:space="preserve">
+    <value>Elle n'a été que partiellement écrite. Recréez-la, ou utilisez « Restaurer une clé » pour l'utiliser normalement.</value>
+  </data>
+  <data name="ProgressCancel.Content" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ProgressRetry.Content" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="ProgressBack.Content" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="ProgressLog.Header" xml:space="preserve">
+    <value>Journal</value>
+  </data>
+  <data name="ProgressOpenLogs.Content" xml:space="preserve">
+    <value>Ouvrir le dossier des journaux</value>
+  </data>
+  <data name="Progress_CancelWriteTitle" xml:space="preserve">
+    <value>Arrêter l'écriture de la clé ?</value>
+  </data>
+  <data name="Progress_CancelWriteMessage" xml:space="preserve">
+    <value>La clé restera à moitié écrite et ne démarrera pas. Vous pourrez la recréer ou la restaurer plus tard.</value>
+  </data>
+  <data name="Progress_CancelWritePrimary" xml:space="preserve">
+    <value>Arrêter</value>
+  </data>
+  <data name="Progress_CancelWriteClose" xml:space="preserve">
+    <value>Continuer l'écriture</value>
+  </data>
+  <data name="Log_Cancelled" xml:space="preserve">
+    <value>Annulé par l'utilisateur.</value>
+  </data>
+  <data name="Log_Resolving" xml:space="preserve">
+    <value>Recherche de la dernière image officielle de {0}…</value>
+  </data>
+  <data name="Log_Resolved" xml:space="preserve">
+    <value>Image : {0} (version {1}).</value>
+  </data>
+  <data name="Log_ChecksumSignatureVerified" xml:space="preserve">
+    <value>Checksums officiels : signature OpenPGP vérifiée (clé {0}).</value>
+  </data>
+  <data name="Log_ChecksumSignatureUnavailable" xml:space="preserve">
+    <value>La signature OpenPGP des checksums n'a pas pu être vérifiée : seul le checksum sera contrôlé.</value>
+  </data>
+  <data name="Log_ChecksumNotSigned" xml:space="preserve">
+    <value>La distribution ne signe pas ses checksums : le checksum sera contrôlé via HTTPS.</value>
+  </data>
+  <data name="Log_CachedImageFound" xml:space="preserve">
+    <value>Image déjà téléchargée : {0}</value>
+  </data>
+  <data name="Log_CachedImageInvalid" xml:space="preserve">
+    <value>L'image déjà téléchargée est corrompue : elle va être téléchargée à nouveau.</value>
+  </data>
+  <data name="Log_LinkOk" xml:space="preserve">
+    <value>{0} répond ({1}).</value>
+  </data>
+  <data name="Log_LinkFailed" xml:space="preserve">
+    <value>{0} ne répond pas correctement : {1}</value>
+  </data>
+  <data name="Log_Downloading" xml:space="preserve">
+    <value>Téléchargement depuis {0}…</value>
+  </data>
+  <data name="Log_MirrorFallback" xml:space="preserve">
+    <value>Passage au miroir {0}.</value>
+  </data>
+  <data name="Log_DownloadResumed" xml:space="preserve">
+    <value>Le téléchargement interrompu a été repris.</value>
+  </data>
+  <data name="Log_Downloaded" xml:space="preserve">
+    <value>Téléchargement terminé ({0}).</value>
+  </data>
+  <data name="Log_RetryAfterMismatch" xml:space="preserve">
+    <value>Le téléchargement repris est corrompu : nouveau téléchargement depuis le début.</value>
+  </data>
+  <data name="Log_Verifying" xml:space="preserve">
+    <value>Calcul du {0} de l'image…</value>
+  </data>
+  <data name="Log_ImageVerified" xml:space="preserve">
+    <value>Image vérifiée : {0}</value>
+  </data>
+  <data name="Log_ImageSignatureVerified" xml:space="preserve">
+    <value>Signature OpenPGP de l'image vérifiée (clé {0}).</value>
+  </data>
+  <data name="Log_ImageSignatureUnavailable" xml:space="preserve">
+    <value>La signature OpenPGP de l'image n'a pas pu être vérifiée : seul le checksum a été contrôlé.</value>
+  </data>
+  <data name="Log_LocalImage" xml:space="preserve">
+    <value>Image locale : {0}</value>
+  </data>
+  <data name="Log_NotHybrid" xml:space="preserve">
+    <value>Cette image n'est pas une ISO hybride et risque de ne pas démarrer depuis une clé USB.</value>
+  </data>
+  <data name="Log_LocalImageHash" xml:space="preserve">
+    <value>SHA-256 de l'image : {0}</value>
+  </data>
+  <data name="Log_Writing" xml:space="preserve">
+    <value>Écriture sur {0} (disque {1})…</value>
+  </data>
+  <data name="Log_WriteVerifying" xml:space="preserve">
+    <value>Relecture de la clé pour la comparer à l'image…</value>
+  </data>
+  <data name="Log_WriteDone" xml:space="preserve">
+    <value>{0} écrits.</value>
+  </data>
+  <data name="Log_WriteVerified" xml:space="preserve">
+    <value>La clé est identique à l'image.</value>
+  </data>
+  <data name="Log_Ejecting" xml:space="preserve">
+    <value>Éjection de la clé…</value>
+  </data>
+  <data name="Log_Ejected" xml:space="preserve">
+    <value>La clé peut être retirée en toute sécurité.</value>
+  </data>
+  <data name="Log_EjectFailed" xml:space="preserve">
+    <value>La clé n'a pas pu être éjectée : {0}</value>
+  </data>
+  <data name="Log_IsoDeleted" xml:space="preserve">
+    <value>L'image ISO a été supprimée (voir Paramètres).</value>
+  </data>
+  <data name="Error_ChecksumMismatch_Title" xml:space="preserve">
+    <value>L'image n'est pas authentique</value>
+  </data>
+  <data name="Error_ChecksumMismatch" xml:space="preserve">
+    <value>Son checksum ne correspond pas à la valeur officielle : le fichier est corrompu ou a été modifié. Rien n'a été écrit sur la clé USB et le fichier a été supprimé.</value>
+  </data>
+  <data name="Error_BadSignature_Title" xml:space="preserve">
+    <value>Signature invalide</value>
+  </data>
+  <data name="Error_BadSignature" xml:space="preserve">
+    <value>La signature OpenPGP ne correspond pas à la clé officielle de la distribution. Par sécurité, rien n'a été écrit sur la clé USB.</value>
+  </data>
+  <data name="Error_NotListed_Title" xml:space="preserve">
+    <value>Image introuvable</value>
+  </data>
+  <data name="Error_NotListed" xml:space="preserve">
+    <value>L'image n'apparaît pas dans le fichier de checksums officiel. Le catalogue doit peut-être être mis à jour : réessayez plus tard.</value>
+  </data>
+  <data name="Error_ChecksumUnavailable_Title" xml:space="preserve">
+    <value>Checksum indisponible</value>
+  </data>
+  <data name="Error_ChecksumUnavailable" xml:space="preserve">
+    <value>Le checksum officiel n'a pas pu être téléchargé, l'image ne peut donc pas être vérifiée. Vérifiez votre connexion Internet et réessayez.</value>
+  </data>
+  <data name="Error_AllMirrorsFailed_Title" xml:space="preserve">
+    <value>Échec du téléchargement</value>
+  </data>
+  <data name="Error_AllMirrorsFailed" xml:space="preserve">
+    <value>Aucun serveur de téléchargement n'a répondu. Vérifiez votre connexion Internet et réessayez : le téléchargement reprendra là où il s'est arrêté.</value>
+  </data>
+  <data name="Error_InsufficientSpace_Title" xml:space="preserve">
+    <value>Espace disque insuffisant</value>
+  </data>
+  <data name="Error_InsufficientSpace" xml:space="preserve">
+    <value>Il n'y a pas assez d'espace libre pour télécharger l'image. Libérez de l'espace ou choisissez un autre dossier de téléchargement dans les Paramètres.</value>
+  </data>
+  <data name="Error_SizeMismatch_Title" xml:space="preserve">
+    <value>Taille de fichier inattendue</value>
+  </data>
+  <data name="Error_SizeMismatch" xml:space="preserve">
+    <value>Le serveur a envoyé un fichier d'une taille inattendue. Réessayez plus tard.</value>
+  </data>
+  <data name="Error_TargetChanged_Title" xml:space="preserve">
+    <value>La clé USB a changé</value>
+  </data>
+  <data name="Error_TargetChanged" xml:space="preserve">
+    <value>La clé USB a été débranchée ou remplacée depuis sa sélection. Rien n'a été écrit. Sélectionnez à nouveau la clé.</value>
+  </data>
+  <data name="Error_TargetRejected_Title" xml:space="preserve">
+    <value>Cette clé ne peut pas être utilisée</value>
+  </data>
+  <data name="Error_TargetRejected" xml:space="preserve">
+    <value>Par sécurité, cette clé est refusée (disque système, disque interne ou taille inhabituelle). Rien n'a été écrit.</value>
+  </data>
+  <data name="Error_ImageTooLarge_Title" xml:space="preserve">
+    <value>La clé USB est trop petite</value>
+  </data>
+  <data name="Error_ImageTooLarge" xml:space="preserve">
+    <value>L'image ne tient pas sur cette clé USB. Utilisez une clé plus grande.</value>
+  </data>
+  <data name="Error_VolumeBusy_Title" xml:space="preserve">
+    <value>La clé USB est utilisée</value>
+  </data>
+  <data name="Error_VolumeBusy" xml:space="preserve">
+    <value>Un programme ou une fenêtre de l'Explorateur utilise la clé. Fermez-le et réessayez. Rien n'a été écrit.</value>
+  </data>
+  <data name="Error_DeviceError_Title" xml:space="preserve">
+    <value>Erreur d'écriture</value>
+  </data>
+  <data name="Error_DeviceError" xml:space="preserve">
+    <value>Windows a signalé une erreur en accédant à la clé USB. Vérifiez qu'elle est toujours branchée, essayez un autre port USB ou une autre clé.</value>
+  </data>
+  <data name="Error_VerificationFailed_Title" xml:space="preserve">
+    <value>La clé USB est défectueuse</value>
+  </data>
+  <data name="Error_VerificationFailed" xml:space="preserve">
+    <value>Les données relues sur la clé diffèrent de l'image. La clé est peut-être usée ou contrefaite : utilisez-en une autre.</value>
+  </data>
+  <data name="Error_Catalog_Title" xml:space="preserve">
+    <value>Catalogue invalide</value>
+  </data>
+  <data name="Error_Catalog" xml:space="preserve">
+    <value>La liste des distributions n'a pas pu être lue.</value>
+  </data>
+  <data name="Error_AccessDenied_Title" xml:space="preserve">
+    <value>Accès refusé</value>
+  </data>
+  <data name="Error_AccessDenied" xml:space="preserve">
+    <value>Windows a refusé l'accès. Vérifiez que l'application est lancée en tant qu'administrateur.</value>
+  </data>
+  <data name="Error_IO_Title" xml:space="preserve">
+    <value>Erreur de fichier</value>
+  </data>
+  <data name="Error_IO" xml:space="preserve">
+    <value>Un fichier n'a pas pu être lu ou écrit.</value>
+  </data>
+  <data name="Error_Network_Title" xml:space="preserve">
+    <value>Erreur réseau</value>
+  </data>
+  <data name="Error_Network" xml:space="preserve">
+    <value>Le serveur est injoignable. Vérifiez votre connexion Internet et réessayez.</value>
+  </data>
+  <data name="Error_Unexpected_Title" xml:space="preserve">
+    <value>Erreur inattendue</value>
+  </data>
+  <data name="Error_Unexpected" xml:space="preserve">
+    <value>Une erreur s'est produite. Les détails techniques et le journal peuvent aider à signaler le problème.</value>
+  </data>
+  <data name="DoneHeader.Text" xml:space="preserve">
+    <value>Votre clé USB est prête !</value>
+  </data>
+  <data name="Done_Summary" xml:space="preserve">
+    <value>{0} a été écrit sur {1}.</value>
+  </data>
+  <data name="Done_VerifiedWrite" xml:space="preserve">
+    <value>Image et clé vérifiées ({0} : {1})</value>
+  </data>
+  <data name="Done_VerifiedImage" xml:space="preserve">
+    <value>Image vérifiée ({0} : {1})</value>
+  </data>
+  <data name="Done_Signed" xml:space="preserve">
+    <value>Image authentique : signée par la distribution (clé {0}).</value>
+  </data>
+  <data name="Done_NotSigned" xml:space="preserve">
+    <value>Image contrôlée avec le checksum officiel.</value>
+  </data>
+  <data name="Done_LocalImage" xml:space="preserve">
+    <value>Image locale : vérifiez qu'elle provient du site officiel.</value>
+  </data>
+  <data name="Done_Ejected" xml:space="preserve">
+    <value>La clé a été éjectée : vous pouvez la retirer.</value>
+  </data>
+  <data name="Done_NotEjected" xml:space="preserve">
+    <value>Éjectez la clé depuis la zone de notification avant de la retirer.</value>
+  </data>
+  <data name="Done_EjectFailed" xml:space="preserve">
+    <value>La clé n'a pas pu être éjectée ({0}). Éjectez-la depuis la zone de notification avant de la retirer.</value>
+  </data>
+  <data name="DoneSecureBoot.Title" xml:space="preserve">
+    <value>Désactivez le Secure Boot</value>
+  </data>
+  <data name="DoneSecureBoot.Message" xml:space="preserve">
+    <value>Cette distribution ne démarre pas avec le Secure Boot activé : désactivez-le d'abord dans les réglages UEFI/BIOS de l'ordinateur.</value>
+  </data>
+  <data name="DoneNextTitle.Text" xml:space="preserve">
+    <value>Comment démarrer Linux depuis la clé</value>
+  </data>
+  <data name="DoneStep1.Text" xml:space="preserve">
+    <value>Branchez la clé sur l'ordinateur où vous voulez essayer ou installer Linux.</value>
+  </data>
+  <data name="DoneStep2.Text" xml:space="preserve">
+    <value>Redémarrez-le et ouvrez le menu de démarrage, généralement avec F12, F11, F10, F8 ou Échap juste après l'allumage.</value>
+  </data>
+  <data name="DoneStep3.Text" xml:space="preserve">
+    <value>Choisissez la clé USB (l'entrée UEFI s'il y en a deux).</value>
+  </data>
+  <data name="DoneStep4.Text" xml:space="preserve">
+    <value>Essayez Linux, puis suivez l'installateur s'il vous plaît. Sauvegardez vos données avant d'installer.</value>
+  </data>
+  <data name="DoneAnother.Content" xml:space="preserve">
+    <value>Créer une autre clé</value>
+  </data>
+  <data name="DoneShowIso.Content" xml:space="preserve">
+    <value>Afficher le fichier ISO</value>
+  </data>
+  <data name="DoneClose.Content" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="RestoreHeader.Text" xml:space="preserve">
+    <value>Restaurer une clé USB</value>
+  </data>
+  <data name="RestoreSubtitle.Text" xml:space="preserve">
+    <value>Après avoir servi pour Linux, une clé peut apparaître dans Windows comme petite ou illisible. La restaurer l'efface et crée une seule partition exFAT pour l'utiliser à nouveau normalement.</value>
+  </data>
+  <data name="RestoreLabel.Header" xml:space="preserve">
+    <value>Nom de la clé</value>
+  </data>
+  <data name="RestoreEraseWarning.Title" xml:space="preserve">
+    <value>Tout le contenu de cette clé sera effacé</value>
+  </data>
+  <data name="RestoreEraseWarning.Message" xml:space="preserve">
+    <value>Le système Linux ou les fichiers présents sur la clé seront définitivement supprimés.</value>
+  </data>
+  <data name="RestoreSuccess.Title" xml:space="preserve">
+    <value>Clé restaurée</value>
+  </data>
+  <data name="RestoreSuccess.Message" xml:space="preserve">
+    <value>La clé est de nouveau prête à recevoir des fichiers.</value>
+  </data>
+  <data name="RestoreStart.Content" xml:space="preserve">
+    <value>Restaurer la clé</value>
+  </data>
+  <data name="Restore_ConfirmTitle" xml:space="preserve">
+    <value>Effacer cette clé USB ?</value>
+  </data>
+  <data name="Restore_ConfirmMessage" xml:space="preserve">
+    <value>{0} ({1}, {2}) va être entièrement effacée et formatée en exFAT.
+
+Cette opération est irréversible.</value>
+  </data>
+  <data name="Restore_ConfirmPrimary" xml:space="preserve">
+    <value>Effacer et restaurer</value>
+  </data>
   <data name="SettingsHeader.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
   <data name="SettingsSubtitle.Text" xml:space="preserve">
-    <value>Apparence, langue et téléchargements.</value>
+    <value>Apparence, langue, téléchargements et création des clés USB.</value>
+  </data>
+  <data name="SettingsAppearance.Text" xml:space="preserve">
+    <value>Apparence et langue</value>
+  </data>
+  <data name="SettingsTheme.Header" xml:space="preserve">
+    <value>Thème</value>
+  </data>
+  <data name="SettingsThemeSystem.Content" xml:space="preserve">
+    <value>Utiliser le réglage de Windows</value>
+  </data>
+  <data name="SettingsThemeLight.Content" xml:space="preserve">
+    <value>Clair</value>
+  </data>
+  <data name="SettingsThemeDark.Content" xml:space="preserve">
+    <value>Sombre</value>
+  </data>
+  <data name="SettingsLanguage.Header" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="SettingsLanguageSystem.Content" xml:space="preserve">
+    <value>Langue de Windows</value>
+  </data>
+  <data name="SettingsRestart.Title" xml:space="preserve">
+    <value>Redémarrage nécessaire</value>
+  </data>
+  <data name="SettingsRestart.Message" xml:space="preserve">
+    <value>La nouvelle langue sera utilisée après le redémarrage de l'application.</value>
+  </data>
+  <data name="SettingsRestartNow.Content" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="SettingsDownloads.Text" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
+  <data name="SettingsFolder.Text" xml:space="preserve">
+    <value>Dossier de téléchargement des images ISO</value>
+  </data>
+  <data name="SettingsChangeFolder.Content" xml:space="preserve">
+    <value>Modifier…</value>
+  </data>
+  <data name="SettingsResetFolder.Content" xml:space="preserve">
+    <value>Utiliser le dossier par défaut</value>
+  </data>
+  <data name="SettingsOpenFolder.Content" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Settings_PickFolderTitle" xml:space="preserve">
+    <value>Choisir le dossier de téléchargement</value>
+  </data>
+  <data name="SettingsKeepIso.Header" xml:space="preserve">
+    <value>Conserver l'image ISO après la création de la clé (pour en créer une autre sans retélécharger)</value>
+  </data>
+  <data name="SettingsKeepIso.OnContent" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="SettingsKeepIso.OffContent" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="SettingsVerify.Header" xml:space="preserve">
+    <value>Relire la clé après l'écriture pour la vérifier (recommandé)</value>
+  </data>
+  <data name="SettingsVerify.OnContent" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="SettingsVerify.OffContent" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="SettingsEject.Header" xml:space="preserve">
+    <value>Éjecter la clé quand elle est prête</value>
+  </data>
+  <data name="SettingsEject.OnContent" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="SettingsEject.OffContent" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="SettingsCreation.Text" xml:space="preserve">
+    <value>Création des clés USB</value>
+  </data>
+  <data name="SettingsDiagnostics.Text" xml:space="preserve">
+    <value>Diagnostic</value>
+  </data>
+  <data name="SettingsLogsHelp.Text" xml:space="preserve">
+    <value>Les journaux sont conservés 14 jours dans %LOCALAPPDATA%\LinuxInstallHelper\logs. Joignez-les quand vous signalez un problème.</value>
+  </data>
+  <data name="SettingsOpenLogs.Content" xml:space="preserve">
+    <value>Ouvrir le dossier des journaux</value>
   </data>
   <data name="AboutHeader.Text" xml:space="preserve">
-    <value>À propos</value>
+    <value>Linux Install Helper</value>
   </data>
-  <data name="AboutSubtitle.Text" xml:space="preserve">
-    <value>Linux Install Helper est un logiciel libre et open source (licence MIT).</value>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Créez une clé USB bootable d'une distribution Linux en quelques clics : l'image officielle est téléchargée, vérifiée, puis écrite sur la clé.</value>
+  </data>
+  <data name="AboutLicense.Text" xml:space="preserve">
+    <value>Logiciel libre et open source, licence MIT.</value>
+  </data>
+  <data name="AboutRepository.Content" xml:space="preserve">
+    <value>Code source et signalement de bugs sur GitHub</value>
+  </data>
+  <data name="AboutSafety.Text" xml:space="preserve">
+    <value>Sécurité</value>
+  </data>
+  <data name="AboutSafetyText.Text" xml:space="preserve">
+    <value>Les images proviennent uniquement des sites et miroirs officiels des distributions. Leur checksum (et leur signature OpenPGP quand elle est publiée) est vérifié avant toute écriture. Seules les clés USB amovibles sont proposées, et la clé est revérifiée juste avant d'être effacée.</value>
+  </data>
+  <data name="AboutComponents.Text" xml:space="preserve">
+    <value>Composants open source</value>
+  </data>
+  <data name="AboutTrademarks.Text" xml:space="preserve">
+    <value>Linux est une marque déposée de Linus Torvalds. Les noms des distributions sont des marques de leurs propriétaires respectifs. Cette application n'est affiliée à aucune distribution.</value>
+  </data>
+  <data name="Unit_Bytes" xml:space="preserve">
+    <value>octets</value>
+  </data>
+  <data name="Unit_KB" xml:space="preserve">
+    <value>Ko</value>
+  </data>
+  <data name="Unit_MB" xml:space="preserve">
+    <value>Mo</value>
+  </data>
+  <data name="Unit_GB" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="Unit_PerSecond" xml:space="preserve">
+    <value>{0}/s</value>
+  </data>
+  <data name="Duration_Hours" xml:space="preserve">
+    <value>{0} h {1:00} min</value>
+  </data>
+  <data name="Duration_Minutes" xml:space="preserve">
+    <value>{0} min {1:00} s</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0} s</value>
   </data>
 </root>

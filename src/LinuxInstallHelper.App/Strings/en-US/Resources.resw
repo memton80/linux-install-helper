@@ -53,8 +53,32 @@
   <data name="NavLocalIso.Content" xml:space="preserve">
     <value>Local ISO</value>
   </data>
+  <data name="NavRestore.Content" xml:space="preserve">
+    <value>Restore a drive</value>
+  </data>
   <data name="NavAbout.Content" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="Dialog_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Close_BusyTitle" xml:space="preserve">
+    <value>A USB drive is being created</value>
+  </data>
+  <data name="Close_BusyMessage" xml:space="preserve">
+    <value>If you quit now, the download will resume the next time you create this drive.</value>
+  </data>
+  <data name="Close_BusyWriting" xml:space="preserve">
+    <value>The drive is being written. If you quit now it will be unusable until you create it again or restore it.</value>
+  </data>
+  <data name="Close_BusyPrimary" xml:space="preserve">
+    <value>Quit anyway</value>
+  </data>
+  <data name="Close_BusyClose" xml:space="preserve">
+    <value>Keep going</value>
   </data>
   <data name="DistrosHeader.Text" xml:space="preserve">
     <value>Choose a Linux distribution</value>
@@ -62,22 +86,740 @@
   <data name="DistrosSubtitle.Text" xml:space="preserve">
     <value>The ISO image is downloaded from the official source and verified before it is written to your USB drive.</value>
   </data>
+  <data name="DistrosSearch.Header" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="DistrosSearch.PlaceholderText" xml:space="preserve">
+    <value>Name, desktop, keyword…</value>
+  </data>
+  <data name="DistrosFamily.Header" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="DistrosCategory.Header" xml:space="preserve">
+    <value>Use</value>
+  </data>
+  <data name="DistrosOffline.Title" xml:space="preserve">
+    <value>Offline catalog</value>
+  </data>
+  <data name="DistrosEmpty.Text" xml:space="preserve">
+    <value>No distribution matches your search.</value>
+  </data>
+  <data name="Catalog_Status_Remote" xml:space="preserve">
+    <value>Up-to-date catalog ({0}).</value>
+  </data>
+  <data name="Catalog_Status_Cache" xml:space="preserve">
+    <value>The online catalog could not be reached: using the last downloaded copy ({0}).</value>
+  </data>
+  <data name="Catalog_Status_Embedded" xml:space="preserve">
+    <value>The online catalog could not be reached: using the catalog included in the application ({0}).</value>
+  </data>
+  <data name="Filter_AllFamilies" xml:space="preserve">
+    <value>All families</value>
+  </data>
+  <data name="Filter_AllCategories" xml:space="preserve">
+    <value>All uses</value>
+  </data>
+  <data name="Family_ubuntu" xml:space="preserve">
+    <value>Ubuntu family</value>
+  </data>
+  <data name="Family_debian" xml:space="preserve">
+    <value>Debian family</value>
+  </data>
+  <data name="Family_fedora" xml:space="preserve">
+    <value>Fedora / Red Hat</value>
+  </data>
+  <data name="Family_arch" xml:space="preserve">
+    <value>Arch family</value>
+  </data>
+  <data name="Family_opensuse" xml:space="preserve">
+    <value>openSUSE</value>
+  </data>
+  <data name="Family_other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Category_beginner" xml:space="preserve">
+    <value>Beginner friendly</value>
+  </data>
+  <data name="Category_desktop" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="Category_lightweight" xml:space="preserve">
+    <value>Lightweight</value>
+  </data>
+  <data name="Category_server" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="Category_security" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="Category_rolling" xml:space="preserve">
+    <value>Rolling release</value>
+  </data>
+  <data name="Category_developer" xml:space="preserve">
+    <value>Developers</value>
+  </data>
+  <data name="Distro_NoSecureBoot" xml:space="preserve">
+    <value>Secure Boot must be disabled</value>
+  </data>
   <data name="LocalIsoHeader.Text" xml:space="preserve">
     <value>Use a local ISO image</value>
   </data>
   <data name="LocalIsoSubtitle.Text" xml:space="preserve">
     <value>Already downloaded an ISO? Select it to write it to a USB drive.</value>
   </data>
+  <data name="LocalIsoPick.Content" xml:space="preserve">
+    <value>Choose an ISO file…</value>
+  </data>
+  <data name="LocalIso_PickerTitle" xml:space="preserve">
+    <value>Choose an ISO image</value>
+  </data>
+  <data name="LocalIso_PickerFilter" xml:space="preserve">
+    <value>ISO images</value>
+  </data>
+  <data name="LocalIso_NotIso_Title" xml:space="preserve">
+    <value>Not an ISO image</value>
+  </data>
+  <data name="LocalIso_NotIso" xml:space="preserve">
+    <value>This file does not contain an ISO 9660 file system. Choose another file.</value>
+  </data>
+  <data name="LocalIso_NotHybrid_Title" xml:space="preserve">
+    <value>This image may not boot from USB</value>
+  </data>
+  <data name="LocalIso_NotHybrid" xml:space="preserve">
+    <value>It is not a hybrid ISO (no boot record in its first sector). Linux distributions publish hybrid images; this one may be meant for DVDs only.</value>
+  </data>
+  <data name="LocalIso_Hybrid_Title" xml:space="preserve">
+    <value>Hybrid ISO image</value>
+  </data>
+  <data name="LocalIso_Hybrid" xml:space="preserve">
+    <value>This image can be written as-is to a USB drive.</value>
+  </data>
+  <data name="LocalIso_Unreadable_Title" xml:space="preserve">
+    <value>The file cannot be read</value>
+  </data>
+  <data name="LocalIsoHashTitle.Text" xml:space="preserve">
+    <value>Check the file (recommended)</value>
+  </data>
+  <data name="LocalIsoHashHelp.Text" xml:space="preserve">
+    <value>Paste the SHA-256 published on the official website of the distribution: the file will be checked before anything is written.</value>
+  </data>
+  <data name="LocalIsoExpectedHash.Header" xml:space="preserve">
+    <value>Expected SHA-256 (optional)</value>
+  </data>
+  <data name="LocalIsoExpectedHash.PlaceholderText" xml:space="preserve">
+    <value>64 hexadecimal characters</value>
+  </data>
+  <data name="LocalIsoHashInvalid.Title" xml:space="preserve">
+    <value>Invalid SHA-256</value>
+  </data>
+  <data name="LocalIsoHashInvalid.Message" xml:space="preserve">
+    <value>A SHA-256 is made of exactly 64 hexadecimal characters (0-9, a-f).</value>
+  </data>
+  <data name="LocalIsoComputeHash.Content" xml:space="preserve">
+    <value>Compute the SHA-256 now</value>
+  </data>
+  <data name="LocalIsoHashMatches.Title" xml:space="preserve">
+    <value>The SHA-256 matches</value>
+  </data>
+  <data name="LocalIsoHashMatches.Message" xml:space="preserve">
+    <value>The file is identical to the one published by the distribution.</value>
+  </data>
+  <data name="LocalIsoHashDiffers.Title" xml:space="preserve">
+    <value>The SHA-256 does not match</value>
+  </data>
+  <data name="LocalIsoHashDiffers.Message" xml:space="preserve">
+    <value>The file is corrupted or is not the expected one. Download it again from the official website.</value>
+  </data>
+  <data name="LocalIsoContinue.Content" xml:space="preserve">
+    <value>Next: choose the USB drive</value>
+  </data>
+  <data name="DriveHeader.Text" xml:space="preserve">
+    <value>Choose the USB drive</value>
+  </data>
+  <data name="Drive_ImageSummary" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="DriveListTitle.Text" xml:space="preserve">
+    <value>USB drives</value>
+  </data>
+  <data name="DriveListHelp.Text" xml:space="preserve">
+    <value>Only removable USB drives are shown. Internal disks and the system disk are never offered.</value>
+  </data>
+  <data name="DriveRefresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="DriveRefresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="DriveNone.Text" xml:space="preserve">
+    <value>No USB drive detected. Plug in a USB drive: the list updates automatically.</value>
+  </data>
+  <data name="DriveIgnored.Title" xml:space="preserve">
+    <value>USB drives that cannot be used</value>
+  </data>
+  <data name="DriveError.Title" xml:space="preserve">
+    <value>The drives cannot be listed</value>
+  </data>
+  <data name="DriveEraseWarning.Title" xml:space="preserve">
+    <value>Everything on this drive will be erased</value>
+  </data>
+  <data name="DriveEraseWarning.Message" xml:space="preserve">
+    <value>The whole drive is overwritten by the Linux image. Copy your files elsewhere first.</value>
+  </data>
+  <data name="Drive_ConfirmCheckbox" xml:space="preserve">
+    <value>I understand that all the data on {0} ({1}) will be permanently erased</value>
+  </data>
+  <data name="Drive_DiskNumber" xml:space="preserve">
+    <value>Disk {0}</value>
+  </data>
+  <data name="DriveStart.Content" xml:space="preserve">
+    <value>Create the USB drive</value>
+  </data>
+  <data name="Drive_ConfirmTitle" xml:space="preserve">
+    <value>Erase this USB drive?</value>
+  </data>
+  <data name="Drive_ConfirmMessage" xml:space="preserve">
+    <value>{0} ({1}, {2}) will be completely erased, then {3} will be written to it.
+
+This cannot be undone.</value>
+  </data>
+  <data name="Drive_ConfirmPrimary" xml:space="preserve">
+    <value>Erase and create</value>
+  </data>
+  <data name="Rejection_SystemDisk" xml:space="preserve">
+    <value>system disk</value>
+  </data>
+  <data name="Rejection_BootDisk" xml:space="preserve">
+    <value>boot disk</value>
+  </data>
+  <data name="Rejection_HostsProtectedData" xml:space="preserve">
+    <value>holds Windows, this application or the image</value>
+  </data>
+  <data name="Rejection_Offline" xml:space="preserve">
+    <value>offline</value>
+  </data>
+  <data name="Rejection_ReadOnly" xml:space="preserve">
+    <value>write protected</value>
+  </data>
+  <data name="Rejection_TooSmall" xml:space="preserve">
+    <value>too small</value>
+  </data>
+  <data name="Rejection_TooLarge" xml:space="preserve">
+    <value>larger than 256 GB, probably an external hard disk</value>
+  </data>
+  <data name="Rejection_TooSmallForImage" xml:space="preserve">
+    <value>too small for this image</value>
+  </data>
+  <data name="ProgressHeader.Text" xml:space="preserve">
+    <value>Creating the USB drive</value>
+  </data>
+  <data name="Progress_Subtitle" xml:space="preserve">
+    <value>{0} → {1}</value>
+  </data>
+  <data name="Stage_Resolve" xml:space="preserve">
+    <value>Find the official image and checksum</value>
+  </data>
+  <data name="Stage_CheckLinks" xml:space="preserve">
+    <value>Check the download links</value>
+  </data>
+  <data name="Stage_Download" xml:space="preserve">
+    <value>Download the image</value>
+  </data>
+  <data name="Stage_Verify" xml:space="preserve">
+    <value>Verify the image</value>
+  </data>
+  <data name="Stage_Write" xml:space="preserve">
+    <value>Write the USB drive</value>
+  </data>
+  <data name="Stage_WriteVerifying" xml:space="preserve">
+    <value>Read the drive back to check it</value>
+  </data>
+  <data name="Stage_Eject" xml:space="preserve">
+    <value>Eject the drive</value>
+  </data>
+  <data name="Progress_Bytes" xml:space="preserve">
+    <value>{0} of {1}</value>
+  </data>
+  <data name="Progress_Remaining" xml:space="preserve">
+    <value>{0} left</value>
+  </data>
+  <data name="ProgressErrorDetails.Header" xml:space="preserve">
+    <value>Technical details</value>
+  </data>
+  <data name="ProgressCancelled.Title" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="ProgressCancelled.Message" xml:space="preserve">
+    <value>A partial download is kept and will resume next time.</value>
+  </data>
+  <data name="ProgressDriveUnusable.Title" xml:space="preserve">
+    <value>The USB drive may be unusable</value>
+  </data>
+  <data name="ProgressDriveUnusable.Message" xml:space="preserve">
+    <value>It was only partly written. Create it again, or use "Restore a drive" to use it normally.</value>
+  </data>
+  <data name="ProgressCancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ProgressRetry.Content" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="ProgressBack.Content" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="ProgressLog.Header" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="ProgressOpenLogs.Content" xml:space="preserve">
+    <value>Open the log folder</value>
+  </data>
+  <data name="Progress_CancelWriteTitle" xml:space="preserve">
+    <value>Stop writing the drive?</value>
+  </data>
+  <data name="Progress_CancelWriteMessage" xml:space="preserve">
+    <value>The drive will be left half written and will not boot. You can create it again or restore it later.</value>
+  </data>
+  <data name="Progress_CancelWritePrimary" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Progress_CancelWriteClose" xml:space="preserve">
+    <value>Keep writing</value>
+  </data>
+  <data name="Log_Cancelled" xml:space="preserve">
+    <value>Cancelled by the user.</value>
+  </data>
+  <data name="Log_Resolving" xml:space="preserve">
+    <value>Looking for the latest official image of {0}…</value>
+  </data>
+  <data name="Log_Resolved" xml:space="preserve">
+    <value>Image: {0} (version {1}).</value>
+  </data>
+  <data name="Log_ChecksumSignatureVerified" xml:space="preserve">
+    <value>Official checksums: OpenPGP signature verified (key {0}).</value>
+  </data>
+  <data name="Log_ChecksumSignatureUnavailable" xml:space="preserve">
+    <value>The OpenPGP signature of the checksums could not be checked: only the checksum will be verified.</value>
+  </data>
+  <data name="Log_ChecksumNotSigned" xml:space="preserve">
+    <value>The distribution does not sign its checksums: the checksum will be verified over HTTPS.</value>
+  </data>
+  <data name="Log_CachedImageFound" xml:space="preserve">
+    <value>Image already downloaded: {0}</value>
+  </data>
+  <data name="Log_CachedImageInvalid" xml:space="preserve">
+    <value>The downloaded image is corrupted: it will be downloaded again.</value>
+  </data>
+  <data name="Log_LinkOk" xml:space="preserve">
+    <value>{0} answers ({1}).</value>
+  </data>
+  <data name="Log_LinkFailed" xml:space="preserve">
+    <value>{0} does not answer correctly: {1}</value>
+  </data>
+  <data name="Log_Downloading" xml:space="preserve">
+    <value>Downloading from {0}…</value>
+  </data>
+  <data name="Log_MirrorFallback" xml:space="preserve">
+    <value>Switching to the mirror {0}.</value>
+  </data>
+  <data name="Log_DownloadResumed" xml:space="preserve">
+    <value>The interrupted download was resumed.</value>
+  </data>
+  <data name="Log_Downloaded" xml:space="preserve">
+    <value>Download finished ({0}).</value>
+  </data>
+  <data name="Log_RetryAfterMismatch" xml:space="preserve">
+    <value>The resumed download is corrupted: downloading it again from the beginning.</value>
+  </data>
+  <data name="Log_Verifying" xml:space="preserve">
+    <value>Computing the {0} of the image…</value>
+  </data>
+  <data name="Log_ImageVerified" xml:space="preserve">
+    <value>Image verified: {0}</value>
+  </data>
+  <data name="Log_ImageSignatureVerified" xml:space="preserve">
+    <value>OpenPGP signature of the image verified (key {0}).</value>
+  </data>
+  <data name="Log_ImageSignatureUnavailable" xml:space="preserve">
+    <value>The OpenPGP signature of the image could not be checked: only the checksum was verified.</value>
+  </data>
+  <data name="Log_LocalImage" xml:space="preserve">
+    <value>Local image: {0}</value>
+  </data>
+  <data name="Log_NotHybrid" xml:space="preserve">
+    <value>This image is not a hybrid ISO and may not boot from USB.</value>
+  </data>
+  <data name="Log_LocalImageHash" xml:space="preserve">
+    <value>SHA-256 of the image: {0}</value>
+  </data>
+  <data name="Log_Writing" xml:space="preserve">
+    <value>Writing to {0} (disk {1})…</value>
+  </data>
+  <data name="Log_WriteVerifying" xml:space="preserve">
+    <value>Reading the drive back to compare it with the image…</value>
+  </data>
+  <data name="Log_WriteDone" xml:space="preserve">
+    <value>{0} written.</value>
+  </data>
+  <data name="Log_WriteVerified" xml:space="preserve">
+    <value>The drive is identical to the image.</value>
+  </data>
+  <data name="Log_Ejecting" xml:space="preserve">
+    <value>Ejecting the drive…</value>
+  </data>
+  <data name="Log_Ejected" xml:space="preserve">
+    <value>The drive can be removed safely.</value>
+  </data>
+  <data name="Log_EjectFailed" xml:space="preserve">
+    <value>The drive could not be ejected: {0}</value>
+  </data>
+  <data name="Log_IsoDeleted" xml:space="preserve">
+    <value>The ISO image was deleted (see Settings).</value>
+  </data>
+  <data name="Error_ChecksumMismatch_Title" xml:space="preserve">
+    <value>The image is not authentic</value>
+  </data>
+  <data name="Error_ChecksumMismatch" xml:space="preserve">
+    <value>Its checksum does not match the official one: the file is corrupted or was modified. Nothing was written to the USB drive and the file was deleted.</value>
+  </data>
+  <data name="Error_BadSignature_Title" xml:space="preserve">
+    <value>Invalid signature</value>
+  </data>
+  <data name="Error_BadSignature" xml:space="preserve">
+    <value>The OpenPGP signature does not match the distribution's official key. For your safety, nothing was written to the USB drive.</value>
+  </data>
+  <data name="Error_NotListed_Title" xml:space="preserve">
+    <value>Image not found</value>
+  </data>
+  <data name="Error_NotListed" xml:space="preserve">
+    <value>The image is not listed in the official checksum file. The catalog may need an update: try again later.</value>
+  </data>
+  <data name="Error_ChecksumUnavailable_Title" xml:space="preserve">
+    <value>Checksum unavailable</value>
+  </data>
+  <data name="Error_ChecksumUnavailable" xml:space="preserve">
+    <value>The official checksum could not be downloaded, so the image cannot be verified. Check your Internet connection and try again.</value>
+  </data>
+  <data name="Error_AllMirrorsFailed_Title" xml:space="preserve">
+    <value>Download failed</value>
+  </data>
+  <data name="Error_AllMirrorsFailed" xml:space="preserve">
+    <value>No download server answered. Check your Internet connection and try again: the download will resume where it stopped.</value>
+  </data>
+  <data name="Error_InsufficientSpace_Title" xml:space="preserve">
+    <value>Not enough disk space</value>
+  </data>
+  <data name="Error_InsufficientSpace" xml:space="preserve">
+    <value>There is not enough free space to download the image. Free some space or choose another download folder in Settings.</value>
+  </data>
+  <data name="Error_SizeMismatch_Title" xml:space="preserve">
+    <value>Unexpected file size</value>
+  </data>
+  <data name="Error_SizeMismatch" xml:space="preserve">
+    <value>The server sent a file of an unexpected size. Try again later.</value>
+  </data>
+  <data name="Error_TargetChanged_Title" xml:space="preserve">
+    <value>The USB drive changed</value>
+  </data>
+  <data name="Error_TargetChanged" xml:space="preserve">
+    <value>The USB drive was unplugged or replaced since you selected it. Nothing was written. Select the drive again.</value>
+  </data>
+  <data name="Error_TargetRejected_Title" xml:space="preserve">
+    <value>This drive cannot be used</value>
+  </data>
+  <data name="Error_TargetRejected" xml:space="preserve">
+    <value>For safety, this drive is refused (system disk, internal disk or unusual size). Nothing was written.</value>
+  </data>
+  <data name="Error_ImageTooLarge_Title" xml:space="preserve">
+    <value>The USB drive is too small</value>
+  </data>
+  <data name="Error_ImageTooLarge" xml:space="preserve">
+    <value>The image does not fit on this USB drive. Use a larger drive.</value>
+  </data>
+  <data name="Error_VolumeBusy_Title" xml:space="preserve">
+    <value>The USB drive is in use</value>
+  </data>
+  <data name="Error_VolumeBusy" xml:space="preserve">
+    <value>A program or an Explorer window is using the drive. Close it and try again. Nothing was written.</value>
+  </data>
+  <data name="Error_DeviceError_Title" xml:space="preserve">
+    <value>Write error</value>
+  </data>
+  <data name="Error_DeviceError" xml:space="preserve">
+    <value>Windows reported an error while accessing the USB drive. Check that it is still plugged in, try another USB port or another drive.</value>
+  </data>
+  <data name="Error_VerificationFailed_Title" xml:space="preserve">
+    <value>The USB drive is faulty</value>
+  </data>
+  <data name="Error_VerificationFailed" xml:space="preserve">
+    <value>What was read back from the drive differs from the image. The drive may be worn out or counterfeit: use another one.</value>
+  </data>
+  <data name="Error_Catalog_Title" xml:space="preserve">
+    <value>Invalid catalog</value>
+  </data>
+  <data name="Error_Catalog" xml:space="preserve">
+    <value>The list of distributions could not be read.</value>
+  </data>
+  <data name="Error_AccessDenied_Title" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Error_AccessDenied" xml:space="preserve">
+    <value>Windows denied access. Make sure the application runs as administrator.</value>
+  </data>
+  <data name="Error_IO_Title" xml:space="preserve">
+    <value>File error</value>
+  </data>
+  <data name="Error_IO" xml:space="preserve">
+    <value>A file could not be read or written.</value>
+  </data>
+  <data name="Error_Network_Title" xml:space="preserve">
+    <value>Network error</value>
+  </data>
+  <data name="Error_Network" xml:space="preserve">
+    <value>The server could not be reached. Check your Internet connection and try again.</value>
+  </data>
+  <data name="Error_Unexpected_Title" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="Error_Unexpected" xml:space="preserve">
+    <value>Something went wrong. The technical details and the log can help to report the problem.</value>
+  </data>
+  <data name="DoneHeader.Text" xml:space="preserve">
+    <value>Your USB drive is ready!</value>
+  </data>
+  <data name="Done_Summary" xml:space="preserve">
+    <value>{0} was written to {1}.</value>
+  </data>
+  <data name="Done_VerifiedWrite" xml:space="preserve">
+    <value>Image and drive verified ({0}: {1})</value>
+  </data>
+  <data name="Done_VerifiedImage" xml:space="preserve">
+    <value>Image verified ({0}: {1})</value>
+  </data>
+  <data name="Done_Signed" xml:space="preserve">
+    <value>Authentic image: signed by the distribution (key {0}).</value>
+  </data>
+  <data name="Done_NotSigned" xml:space="preserve">
+    <value>Image checked against the official checksum.</value>
+  </data>
+  <data name="Done_LocalImage" xml:space="preserve">
+    <value>Local image: check that it comes from the official website.</value>
+  </data>
+  <data name="Done_Ejected" xml:space="preserve">
+    <value>The drive was ejected: you can remove it.</value>
+  </data>
+  <data name="Done_NotEjected" xml:space="preserve">
+    <value>Eject the drive from the notification area before removing it.</value>
+  </data>
+  <data name="Done_EjectFailed" xml:space="preserve">
+    <value>The drive could not be ejected ({0}). Eject it from the notification area before removing it.</value>
+  </data>
+  <data name="DoneSecureBoot.Title" xml:space="preserve">
+    <value>Disable Secure Boot</value>
+  </data>
+  <data name="DoneSecureBoot.Message" xml:space="preserve">
+    <value>This distribution does not boot with Secure Boot enabled: disable it in the UEFI/BIOS settings of the computer first.</value>
+  </data>
+  <data name="DoneNextTitle.Text" xml:space="preserve">
+    <value>How to start Linux from the drive</value>
+  </data>
+  <data name="DoneStep1.Text" xml:space="preserve">
+    <value>Plug the drive into the computer where you want to try or install Linux.</value>
+  </data>
+  <data name="DoneStep2.Text" xml:space="preserve">
+    <value>Restart it and open the boot menu, usually with F12, F11, F10, F8 or Esc right after powering on.</value>
+  </data>
+  <data name="DoneStep3.Text" xml:space="preserve">
+    <value>Choose the USB drive (the UEFI entry if there are two).</value>
+  </data>
+  <data name="DoneStep4.Text" xml:space="preserve">
+    <value>Try Linux, then follow the installer if you like it. Back up your data before installing.</value>
+  </data>
+  <data name="DoneAnother.Content" xml:space="preserve">
+    <value>Create another drive</value>
+  </data>
+  <data name="DoneShowIso.Content" xml:space="preserve">
+    <value>Show the ISO file</value>
+  </data>
+  <data name="DoneClose.Content" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="RestoreHeader.Text" xml:space="preserve">
+    <value>Restore a USB drive</value>
+  </data>
+  <data name="RestoreSubtitle.Text" xml:space="preserve">
+    <value>After using a drive for Linux, Windows may show it as small or unreadable. Restoring it erases it and creates a single exFAT partition so you can use it normally again.</value>
+  </data>
+  <data name="RestoreLabel.Header" xml:space="preserve">
+    <value>Drive name</value>
+  </data>
+  <data name="RestoreEraseWarning.Title" xml:space="preserve">
+    <value>Everything on this drive will be erased</value>
+  </data>
+  <data name="RestoreEraseWarning.Message" xml:space="preserve">
+    <value>The Linux system or files on the drive will be permanently deleted.</value>
+  </data>
+  <data name="RestoreSuccess.Title" xml:space="preserve">
+    <value>Drive restored</value>
+  </data>
+  <data name="RestoreSuccess.Message" xml:space="preserve">
+    <value>The drive is ready to store files again.</value>
+  </data>
+  <data name="RestoreStart.Content" xml:space="preserve">
+    <value>Restore the drive</value>
+  </data>
+  <data name="Restore_ConfirmTitle" xml:space="preserve">
+    <value>Erase this USB drive?</value>
+  </data>
+  <data name="Restore_ConfirmMessage" xml:space="preserve">
+    <value>{0} ({1}, {2}) will be completely erased and formatted in exFAT.
+
+This cannot be undone.</value>
+  </data>
+  <data name="Restore_ConfirmPrimary" xml:space="preserve">
+    <value>Erase and restore</value>
+  </data>
   <data name="SettingsHeader.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="SettingsSubtitle.Text" xml:space="preserve">
-    <value>Appearance, language and downloads.</value>
+    <value>Appearance, language, downloads and USB drive creation.</value>
+  </data>
+  <data name="SettingsAppearance.Text" xml:space="preserve">
+    <value>Appearance and language</value>
+  </data>
+  <data name="SettingsTheme.Header" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="SettingsThemeSystem.Content" xml:space="preserve">
+    <value>Use the Windows setting</value>
+  </data>
+  <data name="SettingsThemeLight.Content" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="SettingsThemeDark.Content" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="SettingsLanguage.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SettingsLanguageSystem.Content" xml:space="preserve">
+    <value>Windows language</value>
+  </data>
+  <data name="SettingsRestart.Title" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="SettingsRestart.Message" xml:space="preserve">
+    <value>The new language will be used after restarting the application.</value>
+  </data>
+  <data name="SettingsRestartNow.Content" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="SettingsDownloads.Text" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="SettingsFolder.Text" xml:space="preserve">
+    <value>Download folder for ISO images</value>
+  </data>
+  <data name="SettingsChangeFolder.Content" xml:space="preserve">
+    <value>Change…</value>
+  </data>
+  <data name="SettingsResetFolder.Content" xml:space="preserve">
+    <value>Use the default folder</value>
+  </data>
+  <data name="SettingsOpenFolder.Content" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Settings_PickFolderTitle" xml:space="preserve">
+    <value>Choose the download folder</value>
+  </data>
+  <data name="SettingsKeepIso.Header" xml:space="preserve">
+    <value>Keep the ISO image after creating the drive (to create another one without downloading again)</value>
+  </data>
+  <data name="SettingsKeepIso.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="SettingsKeepIso.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsVerify.Header" xml:space="preserve">
+    <value>Read the drive back after writing to check it (recommended)</value>
+  </data>
+  <data name="SettingsVerify.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="SettingsVerify.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsEject.Header" xml:space="preserve">
+    <value>Eject the drive when it is ready</value>
+  </data>
+  <data name="SettingsEject.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="SettingsEject.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsCreation.Text" xml:space="preserve">
+    <value>USB drive creation</value>
+  </data>
+  <data name="SettingsDiagnostics.Text" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="SettingsLogsHelp.Text" xml:space="preserve">
+    <value>Logs are kept for 14 days in %LOCALAPPDATA%\LinuxInstallHelper\logs. Attach them when you report a problem.</value>
+  </data>
+  <data name="SettingsOpenLogs.Content" xml:space="preserve">
+    <value>Open the log folder</value>
   </data>
   <data name="AboutHeader.Text" xml:space="preserve">
-    <value>About</value>
+    <value>Linux Install Helper</value>
   </data>
-  <data name="AboutSubtitle.Text" xml:space="preserve">
-    <value>Linux Install Helper is free and open source software (MIT license).</value>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="AboutDescription.Text" xml:space="preserve">
+    <value>Create a bootable USB drive of a Linux distribution in a few clicks: the official image is downloaded, verified, then written to the drive.</value>
+  </data>
+  <data name="AboutLicense.Text" xml:space="preserve">
+    <value>Free and open source software, MIT license.</value>
+  </data>
+  <data name="AboutRepository.Content" xml:space="preserve">
+    <value>Source code and bug reports on GitHub</value>
+  </data>
+  <data name="AboutSafety.Text" xml:space="preserve">
+    <value>Safety</value>
+  </data>
+  <data name="AboutSafetyText.Text" xml:space="preserve">
+    <value>Images come only from the official websites and mirrors of the distributions. Their checksum (and OpenPGP signature when published) is verified before anything is written. Only removable USB drives are offered, and the drive is checked again right before it is erased.</value>
+  </data>
+  <data name="AboutComponents.Text" xml:space="preserve">
+    <value>Open source components</value>
+  </data>
+  <data name="AboutTrademarks.Text" xml:space="preserve">
+    <value>Linux is a registered trademark of Linus Torvalds. Distribution names are trademarks of their respective owners. This application is not affiliated with any distribution.</value>
+  </data>
+  <data name="Unit_Bytes" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="Unit_KB" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="Unit_MB" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="Unit_GB" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="Unit_PerSecond" xml:space="preserve">
+    <value>{0}/s</value>
+  </data>
+  <data name="Duration_Hours" xml:space="preserve">
+    <value>{0} h {1:00} min</value>
+  </data>
+  <data name="Duration_Minutes" xml:space="preserve">
+    <value>{0} min {1:00} s</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0} s</value>
   </data>
 </root>
