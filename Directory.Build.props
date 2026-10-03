@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <Version Condition="'$(Version)' == ''">0.1.0</Version>
+    <Product>Linux Install Helper</Product>
+    <Company>Linux Install Helper contributors</Company>
+    <Authors>memton80 and contributors</Authors>
+    <Copyright>Copyright (c) 2026 memton80 and Linux Install Helper contributors</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>
