@@ -97,6 +97,12 @@ public sealed class DistroImage
     /// <summary>Size in bytes when the catalog was last updated.</summary>
     public required long Size { get; init; }
 
+    /// <summary>
+    /// True when <see cref="FileName"/> always points to the latest build (openSUSE Tumbleweed "Current"):
+    /// its size and hash change with every build, so <see cref="Size"/> is only indicative.
+    /// </summary>
+    public bool LatestAlias { get; init; }
+
     public required IReadOnlyList<string> Urls { get; init; }
 
     public string? Sha256 { get; init; }

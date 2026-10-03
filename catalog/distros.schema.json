@@ -125,6 +125,11 @@
           "type": "integer",
           "minimum": 1048576
         },
+        "latestAlias": {
+          "description": "true when fileName always points to the latest build (Tumbleweed 'Current'): its size and hash change with every build.",
+          "type": "boolean",
+          "default": false
+        },
         "urls": {
           "description": "Official download URLs, best first. The application falls back to the next one on failure.",
           "type": "array",

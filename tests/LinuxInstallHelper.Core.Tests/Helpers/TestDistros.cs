@@ -40,6 +40,7 @@ public static class TestDistros
     {
         FileName = fileName ?? source.FileName,
         Size = source.Size,
+        LatestAlias = source.LatestAlias,
         Urls = urls ?? source.Urls,
         Sha256 = sha256 ?? source.Sha256,
         Checksum = clearChecksum ? null : checksum ?? source.Checksum,

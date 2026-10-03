@@ -180,4 +180,19 @@ public class ImageResolverTests
         Assert.Equal("https://geo.mirror.pkgbuild.com/iso/latest/archlinux-2027.01.01-x86_64.iso.sig", resolved.ImageSignatureUrl!.ToString());
         Assert.Equal(arch.Image.Signature!.Fingerprints, resolved.ImageSignatureFingerprints);
     }
+
+    [Fact]
+    public async Task Latest_alias_has_no_expected_size()
+    {
+        var tumbleweed = TestDistros.Get("opensuse-tumbleweed");
+        var hash = new string('d', 64);
+        var unsigned = TestDistros.WithImage(tumbleweed, TestDistros.Copy(tumbleweed.Image, clearSignature: true));
+        var handler = new StubHttpHandler().Add(tumbleweed.Image.Checksum!.Url, $"{hash}  {tumbleweed.Image.FileName}\n");
+
+        var resolved = await Resolver(handler).ResolveAsync(unsigned);
+
+        Assert.True(tumbleweed.Image.LatestAlias);
+        Assert.Null(resolved.Size);
+        Assert.Equal(hash, resolved.Sha256);
+    }
 }

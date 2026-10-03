@@ -103,7 +103,9 @@ internal sealed class DistroChecker(IImageResolver resolver, IUrlProbe probe)
         }
 
         var urls = result.Resolved?.Urls ?? image.Urls.Select(u => new Uri(u)).ToList();
-        long? expected = result.Resolved?.Size ?? (result.Resolved is null || !result.Resolved.IsNewerThanCatalog ? image.Size : null);
+        long? expected = result.Resolved is not null
+            ? result.Resolved.Size
+            : image.LatestAlias ? null : image.Size;
 
         foreach (var url in urls)
         {
@@ -120,6 +122,10 @@ internal sealed class DistroChecker(IImageResolver resolver, IUrlProbe probe)
             else if (expected is not null && probed.ContentLength != expected)
             {
                 problem = string.Create(CultureInfo.InvariantCulture, $"size mismatch: server {probed.ContentLength}, catalog {expected}");
+            }
+            else if (expected is null && Math.Abs(probed.ContentLength.Value - image.Size) > image.Size / 4)
+            {
+                result.Warn(string.Create(CultureInfo.InvariantCulture, $"{url} is {probed.ContentLength} bytes, far from the catalog size {image.Size}."));
             }
 
             result.ServerSize ??= probed.IsReachable ? probed.ContentLength : null;

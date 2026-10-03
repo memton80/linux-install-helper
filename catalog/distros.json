@@ -117,7 +117,7 @@
       "requirements": { "ramMb": 4096, "diskGb": 20 },
       "image": {
         "fileName": "debian-live-13.7.0-amd64-gnome.iso",
-        "size": 3800000000,
+        "size": 3804708864,
         "urls": [
           "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso",
           "https://mirrors.kernel.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.7.0-amd64-gnome.iso"
@@ -150,7 +150,7 @@
       "requirements": { "ramMb": 1024, "diskGb": 10 },
       "image": {
         "fileName": "debian-13.7.0-amd64-netinst.iso",
-        "size": 790000000,
+        "size": 792723456,
         "urls": [
           "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso",
           "https://mirrors.kernel.org/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso"
@@ -183,7 +183,7 @@
       "requirements": { "ramMb": 2048, "diskGb": 20 },
       "image": {
         "fileName": "linuxmint-22.3-cinnamon-64bit.iso",
-        "size": 3100000000,
+        "size": 3091660800,
         "urls": [
           "https://pub.linuxmint.io/stable/22.3/linuxmint-22.3-cinnamon-64bit.iso",
           "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/linuxmint-22.3-cinnamon-64bit.iso"
@@ -215,7 +215,7 @@
       "requirements": { "ramMb": 2048, "diskGb": 20 },
       "image": {
         "fileName": "linuxmint-22.3-xfce-64bit.iso",
-        "size": 3000000000,
+        "size": 3033710592,
         "urls": [
           "https://pub.linuxmint.io/stable/22.3/linuxmint-22.3-xfce-64bit.iso",
           "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/linuxmint-22.3-xfce-64bit.iso"
@@ -247,7 +247,7 @@
       "requirements": { "ramMb": 4096, "diskGb": 20 },
       "image": {
         "fileName": "Fedora-Workstation-Live-44-1.7.x86_64.iso",
-        "size": 2860000000,
+        "size": 2851612672,
         "urls": [
           "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/Fedora-Workstation-Live-44-1.7.x86_64.iso",
           "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/Fedora-Workstation-Live-44-1.7.x86_64.iso"
@@ -278,7 +278,7 @@
       "requirements": { "ramMb": 1024, "diskGb": 5 },
       "image": {
         "fileName": "archlinux-2026.10.01-x86_64.iso",
-        "size": 1500000000,
+        "size": 1640497152,
         "urls": [
           "https://geo.mirror.pkgbuild.com/iso/latest/archlinux-2026.10.01-x86_64.iso",
           "https://mirrors.kernel.org/archlinux/iso/latest/archlinux-2026.10.01-x86_64.iso",
@@ -313,7 +313,7 @@
       "requirements": { "ramMb": 4096, "diskGb": 30 },
       "image": {
         "fileName": "manjaro-kde-26.1.0-260812-linux71.iso",
-        "size": 4300000000,
+        "size": 5534201856,
         "urls": [
           "https://download.manjaro.org/kde/26.1.0/manjaro-kde-26.1.0-260812-linux71.iso"
         ],
@@ -343,15 +343,16 @@
       "requirements": { "ramMb": 4096, "diskGb": 40 },
       "image": {
         "fileName": "Leap-16.0-offline-installer-x86_64.install.iso",
-        "size": 4500000000,
+        "size": 4509876224,
+        "latestAlias": true,
         "urls": [
-          "https://download.opensuse.org/distribution/leap/16.0/installer/iso/Leap-16.0-offline-installer-x86_64.install.iso"
+          "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso"
         ],
-        "checksum": { "url": "https://download.opensuse.org/distribution/leap/16.0/installer/iso/Leap-16.0-offline-installer-x86_64.install.iso.sha256" },
+        "checksum": { "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha256" },
         "signature": {
           "kind": "detached",
           "target": "checksum",
-          "url": "https://download.opensuse.org/distribution/leap/16.0/installer/iso/Leap-16.0-offline-installer-x86_64.install.iso.sha256.asc",
+          "url": "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-16.0-offline-installer-x86_64.install.iso.sha256.asc",
           "fingerprints": ["AD485664E901B867051AB15F35A2F86E29B700A4", "22C07BA534178CD02EFE22AAB88B2FD43DBDC284"]
         }
       }
@@ -373,7 +374,8 @@
       "requirements": { "ramMb": 4096, "diskGb": 40 },
       "image": {
         "fileName": "openSUSE-Tumbleweed-DVD-x86_64-Current.iso",
-        "size": 4700000000,
+        "size": 4678746112,
+        "latestAlias": true,
         "urls": [
           "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-DVD-x86_64-Current.iso"
         ],
@@ -404,25 +406,18 @@
       "requirements": { "ramMb": 4096, "diskGb": 16 },
       "image": {
         "fileName": "pop-os_24.04_amd64_generic_28.iso",
-        "size": 3200000000,
+        "size": 3526164480,
         "urls": [
           "https://iso.pop-os.org/24.04/amd64/generic/28/pop-os_24.04_amd64_generic_28.iso"
         ],
-        "resolve": {
-          "type": "json",
-          "url": "https://api.pop-os.org/builds/24.04/generic",
-          "urlField": "url",
-          "sha256Field": "sha_sum",
-          "sizeField": "size",
-          "versionField": "build"
-        }
+        "resolve": { "type": "json", "url": "https://api.pop-os.org/builds/24.04/generic", "urlField": "url", "sha256Field": "sha_sum", "sizeField": "size", "versionField": "build" }
       }
     },
     {
       "id": "kali",
       "name": "Kali Linux",
       "edition": "Installer",
-      "version": "2026.3",
+      "version": "2026.2",
       "family": "debian",
       "categories": ["security"],
       "desktop": "Xfce",
@@ -435,11 +430,11 @@
       "architecture": "x86_64",
       "requirements": { "ramMb": 2048, "diskGb": 20 },
       "image": {
-        "fileName": "kali-linux-2026.3-installer-amd64.iso",
-        "size": 4500000000,
+        "fileName": "kali-linux-2026.2-installer-amd64.iso",
+        "size": 4802531328,
         "urls": [
-          "https://cdimage.kali.org/current/kali-linux-2026.3-installer-amd64.iso",
-          "https://kali.download/base-images/current/kali-linux-2026.3-installer-amd64.iso"
+          "https://cdimage.kali.org/current/kali-linux-2026.2-installer-amd64.iso",
+          "https://kali.download/base-images/current/kali-linux-2026.2-installer-amd64.iso"
         ],
         "checksum": { "url": "https://cdimage.kali.org/current/SHA256SUMS" },
         "signature": {
@@ -471,11 +466,11 @@
         "fileName": "Zorin-OS-18.1-Core-64-bit.iso",
         "size": 3909091328,
         "urls": [
-          "https://mirrors.dotsrc.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso",
+          "https://distro.ibiblio.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso",
           "https://mirror.kumi.systems/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso",
-          "https://distro.ibiblio.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso"
+          "https://mirrors.dotsrc.org/zorinos/18/Zorin-OS-18.1-Core-64-bit.iso"
         ],
-        "checksum": { "url": "https://mirrors.dotsrc.org/zorinos/18/SHA256SUMS.txt" },
+        "checksum": { "url": "https://distro.ibiblio.org/zorinos/18/SHA256SUMS.txt" },
         "resolve": { "type": "checksum-pattern", "pattern": "^Zorin-OS-(?<version>18(\\.[0-9]+)*)-Core-64-bit(-r[0-9]+)?\\.iso$" }
       }
     }

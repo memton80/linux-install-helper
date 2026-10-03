@@ -106,7 +106,7 @@ public sealed partial class ImageResolver : IImageResolver
             Distro = distro,
             FileName = fileName,
             Version = version,
-            Size = fileName == image.FileName ? image.Size : null,
+            Size = fileName == image.FileName && !image.LatestAlias ? image.Size : null,
             Urls = BuildUrls(image, fileName),
             Sha256 = sha256,
             ChecksumSignature = signatureStatus,
