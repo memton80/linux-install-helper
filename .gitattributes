@@ -1,0 +1,5 @@
+# Normalize text files, but keep test fixtures byte-for-byte: signatures cover the exact bytes.
+* text=auto
+tests/**/Fixtures/** -text
+catalog/keys/*.asc -text
+*.sh text eol=lf
