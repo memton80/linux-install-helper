@@ -113,6 +113,7 @@ jobs:
       # The x64 build can run on the runner: start it on several pages to catch startup crashes.
       - name: Smoke test and screenshots
         if: matrix.platform == 'x64'
+        timeout-minutes: 8
         shell: pwsh
         run: ./tools/ci/smoke-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Output artifacts/screenshots
 

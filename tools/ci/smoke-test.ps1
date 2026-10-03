@@ -13,8 +13,14 @@ param(
 
 $ErrorActionPreference = "Stop"
 New-Item -ItemType Directory -Force -Path $Output | Out-Null
+$Exe = (Resolve-Path $Exe).Path
+
+# The manifest asks for administrator rights; on the CI runner start the app without the UAC prompt.
+$env:__COMPAT_LAYER = "RunAsInvoker"
 
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName UIAutomationClient
+Add-Type -AssemblyName UIAutomationTypes
 Add-Type @"
 using System;
 using System.Runtime.InteropServices;
@@ -45,19 +51,37 @@ function Save-WindowScreenshot([System.Diagnostics.Process] $process, [string] $
     $bitmap.Dispose()
 }
 
+# Waits until an element whose accessible name contains $text is shown in the window.
+function Wait-ForText([System.Diagnostics.Process] $process, [string] $text, [int] $seconds = 30) {
+    $deadline = (Get-Date).AddSeconds($seconds)
+    $root = [System.Windows.Automation.AutomationElement]::FromHandle($process.MainWindowHandle)
+    do {
+        $elements = $root.FindAll([System.Windows.Automation.TreeScope]::Descendants, [System.Windows.Automation.Condition]::TrueCondition)
+        foreach ($element in $elements) {
+            if ($element.Current.Name -like "*$text*") { return }
+        }
+        Start-Sleep -Seconds 1
+    } while ((Get-Date) -lt $deadline)
+    throw "'$text' was not displayed within $seconds seconds."
+}
+
 $runs = @(
-    @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR" },
-    @{ Page = "Distros";  Theme = "dark";  Lang = "en-US" },
+    @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
+    @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
-    @{ Page = "Settings"; Theme = "dark";  Lang = "fr-FR" },
-    @{ Page = "About";    Theme = "light"; Lang = "en-US" }
+    @{ Page = "Settings"; Theme = "dark";  Lang = "fr-FR"; Expect = "Paramètres" },
+    @{ Page = "About";    Theme = "light"; Lang = "en-US"; Expect = "Open source components" }
 )
 
 foreach ($run in $runs) {
     $name = "$($run.Page)-$($run.Theme)-$($run.Lang)".ToLowerInvariant()
     Write-Host "Starting $name"
-    $process = Start-Process -FilePath $Exe -ArgumentList "--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang -PassThru
+    $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
+    $info.UseShellExecute = $false
+    $info.WorkingDirectory = Split-Path $Exe
+    foreach ($argument in @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)) { $info.ArgumentList.Add($argument) }
+    $process = [System.Diagnostics.Process]::Start($info)
     $deadline = (Get-Date).AddSeconds(30)
     do {
         Start-Sleep -Seconds 1
@@ -65,8 +89,9 @@ foreach ($run in $runs) {
         if ($process.HasExited) { throw "The application exited during startup (code $($process.ExitCode))." }
     } while ($process.MainWindowHandle -eq [IntPtr]::Zero -and (Get-Date) -lt $deadline)
 
-    # Let the catalog load and the page settle.
-    Start-Sleep -Seconds 8
+    # The page must show its content (the catalog for the distributions page).
+    if ($run.Expect) { Wait-ForText $process $run.Expect }
+    Start-Sleep -Seconds 4
     $process.Refresh()
     if ($process.HasExited) { throw "The application crashed on $name (code $($process.ExitCode))." }
 
