@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Linux Install Helper</value>
+  </data>
+  <data name="AppTitle.Text" xml:space="preserve">
+    <value>Linux Install Helper</value>
+  </data>
+  <data name="NavDistros.Content" xml:space="preserve">
+    <value>Distributions</value>
+  </data>
+  <data name="NavLocalIso.Content" xml:space="preserve">
+    <value>ISO locale</value>
+  </data>
+  <data name="NavAbout.Content" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="DistrosHeader.Text" xml:space="preserve">
+    <value>Choisissez une distribution Linux</value>
+  </data>
+  <data name="DistrosSubtitle.Text" xml:space="preserve">
+    <value>L'image ISO est téléchargée depuis la source officielle et vérifiée avant d'être écrite sur votre clé USB.</value>
+  </data>
+  <data name="LocalIsoHeader.Text" xml:space="preserve">
+    <value>Utiliser une image ISO locale</value>
+  </data>
+  <data name="LocalIsoSubtitle.Text" xml:space="preserve">
+    <value>Vous avez déjà téléchargé une ISO ? Sélectionnez-la pour l'écrire sur une clé USB.</value>
+  </data>
+  <data name="SettingsHeader.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="SettingsSubtitle.Text" xml:space="preserve">
+    <value>Apparence, langue et téléchargements.</value>
+  </data>
+  <data name="AboutHeader.Text" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="AboutSubtitle.Text" xml:space="preserve">
+    <value>Linux Install Helper est un logiciel libre et open source (licence MIT).</value>
+  </data>
+</root>
