@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The single .exe of the releases. It carries the published application as a zip (AppPayload), extracts it once
+    to %LOCALAPPDATA%\LinuxInstallHelper\app\<id> and starts it. Built by the CI after the application, with
+    -p:AppPayload=<zip> -p:AppPayloadId=<id>.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>LinuxInstallHelper.Launcher</RootNamespace>
+    <AssemblyName>LinuxInstallHelper.Launcher</AssemblyName>
+    <ApplicationIcon>..\LinuxInstallHelper.App\Assets\AppIcon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="$(AppPayload)" LogicalName="app.zip" Condition="'$(AppPayload)' != ''" />
+    <AssemblyMetadata Include="PayloadId" Value="$(AppPayloadId)" />
+  </ItemGroup>
+
+</Project>

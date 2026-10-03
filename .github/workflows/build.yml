@@ -103,16 +103,10 @@ jobs:
           -p:Platform=${{ matrix.platform }}
           -o artifacts/publish/${{ matrix.rid }}
 
-      # The application is a single .exe: copy it alone to a folder, where the smoke test starts it.
+      # The release is a single .exe: the launcher, which carries the published folder as a zip.
       - name: Single executable
         shell: pwsh
-        run: |
-          Get-ChildItem "artifacts/publish/${{ matrix.rid }}" -Recurse -File | ForEach-Object { "$($_.Name): $([math]::Round($_.Length / 1MB, 1)) MB" }
-          Get-ChildItem "src/LinuxInstallHelper.App/bin" -Recurse -Filter *.pri | ForEach-Object { "Built PRI: $($_.FullName)" }
-          New-Item -ItemType Directory -Force -Path artifacts/single | Out-Null
-          $exe = "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe"
-          Copy-Item "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" $exe
-          (Get-FileHash $exe -Algorithm SHA256).Hash
+        run: ./tools/ci/build-launcher.ps1 -Publish "artifacts/publish/${{ matrix.rid }}" -Rid ${{ matrix.rid }} -Output "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe"
 
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -127,7 +121,9 @@ jobs:
         if: matrix.platform == 'x64'
         timeout-minutes: 8
         shell: pwsh
-        run: ./tools/ci/smoke-test.ps1 -Exe "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe" -Output artifacts/screenshots
+        run: |
+          ./tools/ci/smoke-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Output artifacts/screenshots
+          ./tools/ci/smoke-test.ps1 -Exe "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe" -Output artifacts/screenshots -Launcher
 
       - name: Application log
         if: always() && matrix.platform == 'x64'

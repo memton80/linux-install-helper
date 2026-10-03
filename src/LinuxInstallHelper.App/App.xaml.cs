@@ -42,14 +42,6 @@ public partial class App : Application
         var settings = new SettingsStore(paths);
         ApplyLanguage(_startup.Language ?? settings.Current.Language);
 
-        // A single-file build extracts its PRI to a temporary folder, where XAML would not look for it.
-        var resources = AppResources.CreateManager();
-        Log.Information("Resources: {Path}", AppResources.ExtractedPriPath ?? "next to the executable");
-        if (resources is not null)
-        {
-            ResourceManagerRequested += (_, e) => e.CustomResourceManager = resources;
-        }
-
         // Must run after the language is chosen: resources are loaded by InitializeComponent.
         InitializeComponent();
         UnhandledException += OnUnhandledException;

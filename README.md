@@ -47,8 +47,8 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 1. Téléchargez `LinuxInstallHelper-<version>-win-x64.exe` (ou `win-arm64` pour les PC ARM) depuis les
    [Releases](https://github.com/memton80/linux-install-helper/releases). Son SHA-256 figure dans les notes de version.
 2. Lancez-le et acceptez la demande d'administrateur (UAC) : écrire directement sur une clé USB l'exige. Aucune
-   installation ni prérequis : .NET et Windows App SDK sont inclus dans l'exécutable, qui se décompresse dans un
-   dossier temporaire au premier lancement.
+   installation ni prérequis : .NET et Windows App SDK sont inclus dans l'exécutable, qui décompresse l'application
+   dans `%LOCALAPPDATA%\LinuxInstallHelper\app` au premier lancement (et à chaque nouvelle version).
 
 Windows 10 1809 ou plus récent, Windows 11 recommandé. L'exécutable n'est pas signé avec un certificat de
 signature de code : Windows SmartScreen peut afficher un avertissement au premier lancement

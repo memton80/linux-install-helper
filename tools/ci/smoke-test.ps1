@@ -5,10 +5,13 @@
     Path of LinuxInstallHelper.exe.
 .PARAMETER Output
     Folder for the screenshots.
+.PARAMETER Launcher
+    $Exe is the single .exe of a release: it must extract the application and start it (checked on one page).
 #>
 param(
     [Parameter(Mandatory)] [string] $Exe,
-    [string] $Output = "screenshots"
+    [string] $Output = "screenshots",
+    [switch] $Launcher
 )
 
 $ErrorActionPreference = "Stop"
@@ -76,14 +79,34 @@ $runs = @(
     @{ Page = "About";    Theme = "light"; Lang = "en-US"; Expect = "Open source components" }
 )
 
+if ($Launcher) { $runs = @($runs[0]) }
+
 foreach ($run in $runs) {
-    $name = "$($run.Page)-$($run.Theme)-$($run.Lang)".ToLowerInvariant()
+    $name = "$(if ($Launcher) { 'launcher-' })$($run.Page)-$($run.Theme)-$($run.Lang)".ToLowerInvariant()
     Write-Host "Starting $name"
     $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
     $info.UseShellExecute = $false
     $info.WorkingDirectory = Split-Path $Exe
     foreach ($argument in @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)) { $info.ArgumentList.Add($argument) }
     $process = [System.Diagnostics.Process]::Start($info)
+    $started = $process
+
+    if ($Launcher) {
+        # The launcher extracts the application to %LOCALAPPDATA%\LinuxInstallHelper\app and starts it.
+        $extracted = Join-Path $env:LOCALAPPDATA "LinuxInstallHelper\app"
+        $deadline = (Get-Date).AddSeconds(120)
+        $app = $null
+        do {
+            Start-Sleep -Seconds 1
+            $app = Get-Process -Name LinuxInstallHelper -ErrorAction SilentlyContinue |
+                Where-Object { $_.Path -like "$extracted\*" } | Select-Object -First 1
+            if (-not $app -and $process.HasExited) { throw "The launcher exited without starting the application (code $($process.ExitCode))." }
+        } while (-not $app -and (Get-Date) -lt $deadline)
+        if (-not $app) { throw "The launcher did not start the application within 120 seconds." }
+        Write-Host "The launcher started $($app.Path)"
+        $process = $app
+    }
+
     $deadline = (Get-Date).AddSeconds(30)
     do {
         Start-Sleep -Seconds 1
@@ -99,6 +122,7 @@ foreach ($run in $runs) {
 
     Save-WindowScreenshot $process (Join-Path $Output "$name.png")
     Stop-Process -Id $process.Id -Force
+    if ($started.Id -ne $process.Id) { Stop-Process -Id $started.Id -Force -ErrorAction SilentlyContinue }
     Start-Sleep -Seconds 2
 }
 

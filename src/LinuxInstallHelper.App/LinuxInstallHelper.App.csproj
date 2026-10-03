@@ -16,15 +16,13 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <DefaultLanguage>en-US</DefaultLanguage>
 
-    <!-- Unpackaged, self-contained: no installer needed. -->
+    <!--
+      Unpackaged, self-contained: a plain folder with an .exe, no installer needed. Releases ship it inside a single
+      .exe (LinuxInstallHelper.Launcher): Windows App SDK's own single-file mode breaks WinUI's resources.
+    -->
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
-
-    <!-- Published as a single .exe (Windows App SDK 1.5+): its content is extracted to a temporary folder at first launch. -->
-    <PublishSingleFile>true</PublishSingleFile>
-    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <DebugType Condition="'$(Configuration)' == 'Release'">embedded</DebugType>
   </PropertyGroup>
 
   <!-- A self-contained build needs a runtime identifier: derive it from the platform when none is given. -->
@@ -48,19 +46,6 @@
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog.Sinks.File" />
   </ItemGroup>
-
-  <!--
-    dotnet publish leaves out the app's own PRI for unpackaged apps (microsoft/WindowsAppSDK#6720): add it, so that the
-    single .exe carries the localized strings.
-  -->
-  <Target Name="AddProjectPriToResolvedFileToPublish" BeforeTargets="ComputeResolvedFilesToPublishList" DependsOnTargets="$(GenerateProjectPriFile)">
-    <ItemGroup>
-      <ResolvedFileToPublish Include="$(ProjectPriFullPath)" Condition="Exists('$(ProjectPriFullPath)') And '@(ResolvedFileToPublish->WithMetadataValue('RelativePath', '$(ProjectPriFileName)'))' == ''">
-        <RelativePath>$(ProjectPriFileName)</RelativePath>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </ResolvedFileToPublish>
-    </ItemGroup>
-  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\LinuxInstallHelper.Core\LinuxInstallHelper.Core.csproj" />
