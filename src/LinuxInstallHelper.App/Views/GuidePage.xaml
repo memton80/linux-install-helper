@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.GuidePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:views="using:LinuxInstallHelper.App.Views"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="GuideHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock x:Uid="GuideSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+            </StackPanel>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <Grid Style="{StaticResource TourHeaderGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Style="{StaticResource CompactStackStyle}">
+                            <TextBlock x:Uid="GuideChecklistTitle" Style="{StaticResource TourHeaderStyle}" />
+                            <TextBlock x:Uid="GuideChecklistSubtitle" Style="{StaticResource SecondaryTextStyle}" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Checklist}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ChecklistItemViewModel">
+                                <CheckBox Style="{StaticResource ChecklistCheckBoxStyle}" IsChecked="{x:Bind IsDone, Mode=TwoWay}">
+                                    <StackPanel Style="{StaticResource CompactStackStyle}">
+                                        <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
+                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Body}" />
+                                    </StackPanel>
+                                </CheckBox>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="GuideLessonsTitle" Style="{StaticResource SectionTitleStyle}" />
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Lessons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LinuxLesson">
+                        <Border Style="{StaticResource CardBorderStyle}">
+                            <views:LinuxLessonView Lesson="{x:Bind}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

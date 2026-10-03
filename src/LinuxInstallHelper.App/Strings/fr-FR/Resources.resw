@@ -973,4 +973,94 @@ sudo dnf upgrade                      # Fedora</value>
   <data name="Tour_10_Body" xml:space="preserve">
     <value>La communauté Linux est très active et accueillante. Le wiki et le forum de votre distribution sont les meilleurs points de départ ; en français, doc.ubuntu-fr.org couvre la plupart des questions. Chercher « nom de la distribution + votre problème » donne souvent la solution.</value>
   </data>
+  <data name="NavGuide.Content" xml:space="preserve">
+    <value>Guide Linux</value>
+  </data>
+  <data name="GuideHeader.Text" xml:space="preserve">
+    <value>Guide Linux</value>
+  </data>
+  <data name="GuideSubtitle.Text" xml:space="preserve">
+    <value>Ce qu'il faut préparer avant de quitter Windows, puis les bases pour bien démarrer sous Linux.</value>
+  </data>
+  <data name="GuideChecklistTitle.Text" xml:space="preserve">
+    <value>Avant de quitter Windows</value>
+  </data>
+  <data name="GuideChecklistSubtitle.Text" xml:space="preserve">
+    <value>Cochez chaque étape une fois faite : vos coches sont enregistrées.</value>
+  </data>
+  <data name="Guide_ChecklistProgress" xml:space="preserve">
+    <value>{0} sur {1} faites</value>
+  </data>
+  <data name="GuideLessonsTitle.Text" xml:space="preserve">
+    <value>Les bases de Linux</value>
+  </data>
+  <data name="DoneGuide.Content" xml:space="preserve">
+    <value>Guide Linux</value>
+  </data>
+  <data name="Tour_Play" xml:space="preserve">
+    <value>Lecture auto</value>
+  </data>
+  <data name="Tour_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Check_backup_Title" xml:space="preserve">
+    <value>Sauvegardez vos fichiers</value>
+  </data>
+  <data name="Check_backup_Body" xml:space="preserve">
+    <value>Copiez Documents, Images, Bureau, Musique, Vidéos et Téléchargements sur un disque externe ou dans le cloud. Installer Linux peut effacer tout le disque : sans sauvegarde, vos fichiers seraient perdus.</value>
+  </data>
+  <data name="Check_passwords_Title" xml:space="preserve">
+    <value>Récupérez vos mots de passe</value>
+  </data>
+  <data name="Check_passwords_Body" xml:space="preserve">
+    <value>Exportez les mots de passe enregistrés dans votre navigateur, ou synchronisez-les avec votre compte (Firefox, Chrome) ou un gestionnaire comme Bitwarden ou KeePassXC. Vérifiez que la double authentification de vos comptes passe par votre téléphone, pas par ce PC.</value>
+  </data>
+  <data name="Check_licenses_Title" xml:space="preserve">
+    <value>Notez vos clés de licence</value>
+  </data>
+  <data name="Check_licenses_Body" xml:space="preserve">
+    <value>Relevez les clés des logiciels payants (Office, logiciels photo ou pro…) et des jeux achetés hors des plateformes comme Steam. La licence Windows est généralement liée au PC ou à votre compte Microsoft, si vous la réinstallez un jour.</value>
+  </data>
+  <data name="Check_software_Title" xml:space="preserve">
+    <value>Vérifiez vos logiciels indispensables</value>
+  </data>
+  <data name="Check_software_Body" xml:space="preserve">
+    <value>Pour chaque logiciel dont vous ne pouvez pas vous passer, vérifiez qu'il existe sous Linux ou qu'il a un bon équivalent, par exemple sur alternativeto.net. Certains logiciels professionnels n'existent que sous Windows.</value>
+  </data>
+  <data name="Check_games_Title" xml:space="preserve">
+    <value>Vérifiez vos jeux</value>
+  </data>
+  <data name="Check_games_Body" xml:space="preserve">
+    <value>Cherchez vos jeux sur protondb.com pour savoir s'ils fonctionnent sous Linux. Les jeux en ligne avec un anti-triche (certains jeux de tir ou compétitifs) ne fonctionnent souvent pas.</value>
+  </data>
+  <data name="Check_mail_Title" xml:space="preserve">
+    <value>Exportez e-mails, favoris et contacts</value>
+  </data>
+  <data name="Check_mail_Body" xml:space="preserve">
+    <value>Si vous utilisez un logiciel de messagerie comme Outlook, exportez vos e-mails et vos contacts, ou vérifiez qu'ils sont bien sur le serveur (Gmail, Outlook.com…). Exportez aussi les favoris de votre navigateur s'ils ne sont pas synchronisés.</value>
+  </data>
+  <data name="Check_bitlocker_Title" xml:space="preserve">
+    <value>Mettez de côté la clé BitLocker</value>
+  </data>
+  <data name="Check_bitlocker_Body" xml:space="preserve">
+    <value>Si votre disque est chiffré par BitLocker, notez sa clé de récupération (sur account.microsoft.com/devices/recoverykey). Windows peut la demander après une modification du démarrage, surtout si vous gardez Windows à côté de Linux.</value>
+  </data>
+  <data name="Check_hardware_Title" xml:space="preserve">
+    <value>Testez votre matériel en mode Live</value>
+  </data>
+  <data name="Check_hardware_Body" xml:space="preserve">
+    <value>Démarrez sur la clé sans installer et vérifiez le Wi-Fi, le son, l'écran, la webcam, le Bluetooth et votre imprimante. Si quelque chose ne marche pas, cherchez une solution avant d'installer, ou essayez une autre distribution.</value>
+  </data>
+  <data name="Check_dualboot_Title" xml:space="preserve">
+    <value>Si vous gardez Windows, préparez le double démarrage</value>
+  </data>
+  <data name="Check_dualboot_Body" xml:space="preserve">
+    <value>Libérez de la place sur le disque (au moins 30 à 50 Go pour Linux) et désactivez le démarrage rapide de Windows (Options d'alimentation), qui peut bloquer l'accès à vos fichiers Windows depuis Linux.</value>
+  </data>
+  <data name="Check_power_Title" xml:space="preserve">
+    <value>Branchez le PC sur secteur</value>
+  </data>
+  <data name="Check_power_Body" xml:space="preserve">
+    <value>Pendant l'installation, gardez un portable branché sur secteur et connectez-vous à Internet pour récupérer les mises à jour et les pilotes.</value>
+  </data>
 </root>

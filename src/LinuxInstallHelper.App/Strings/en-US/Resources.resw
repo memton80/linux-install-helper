@@ -973,4 +973,94 @@ sudo dnf upgrade                      # Fedora</value>
   <data name="Tour_10_Body" xml:space="preserve">
     <value>The Linux community is very active and welcoming. Your distribution's wiki and forum are the best places to start, and Ask Ubuntu or the Arch Wiki answer most questions. Searching for "distribution name + your problem" often gives the solution.</value>
   </data>
+  <data name="NavGuide.Content" xml:space="preserve">
+    <value>Linux guide</value>
+  </data>
+  <data name="GuideHeader.Text" xml:space="preserve">
+    <value>Linux guide</value>
+  </data>
+  <data name="GuideSubtitle.Text" xml:space="preserve">
+    <value>What to prepare before leaving Windows, then the basics to get started on Linux.</value>
+  </data>
+  <data name="GuideChecklistTitle.Text" xml:space="preserve">
+    <value>Before leaving Windows</value>
+  </data>
+  <data name="GuideChecklistSubtitle.Text" xml:space="preserve">
+    <value>Tick each step once it is done: your ticks are saved.</value>
+  </data>
+  <data name="Guide_ChecklistProgress" xml:space="preserve">
+    <value>{0} of {1} done</value>
+  </data>
+  <data name="GuideLessonsTitle.Text" xml:space="preserve">
+    <value>Linux basics</value>
+  </data>
+  <data name="DoneGuide.Content" xml:space="preserve">
+    <value>Linux guide</value>
+  </data>
+  <data name="Tour_Play" xml:space="preserve">
+    <value>Auto play</value>
+  </data>
+  <data name="Tour_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Check_backup_Title" xml:space="preserve">
+    <value>Back up your files</value>
+  </data>
+  <data name="Check_backup_Body" xml:space="preserve">
+    <value>Copy Documents, Pictures, Desktop, Music, Videos and Downloads to an external drive or to the cloud. Installing Linux can erase the whole disk: without a backup, your files would be lost.</value>
+  </data>
+  <data name="Check_passwords_Title" xml:space="preserve">
+    <value>Keep your passwords</value>
+  </data>
+  <data name="Check_passwords_Body" xml:space="preserve">
+    <value>Export the passwords saved in your browser, or sync them with your account (Firefox, Chrome) or a manager such as Bitwarden or KeePassXC. Check that the two-factor authentication of your accounts uses your phone, not this PC.</value>
+  </data>
+  <data name="Check_licenses_Title" xml:space="preserve">
+    <value>Write down your license keys</value>
+  </data>
+  <data name="Check_licenses_Body" xml:space="preserve">
+    <value>Note the keys of paid software (Office, photo or professional software…) and of games bought outside platforms such as Steam. The Windows license is usually tied to the PC or to your Microsoft account, should you reinstall it one day.</value>
+  </data>
+  <data name="Check_software_Title" xml:space="preserve">
+    <value>Check your essential software</value>
+  </data>
+  <data name="Check_software_Body" xml:space="preserve">
+    <value>For each program you cannot do without, check that it exists on Linux or has a good equivalent, for instance on alternativeto.net. Some professional software only exists on Windows.</value>
+  </data>
+  <data name="Check_games_Title" xml:space="preserve">
+    <value>Check your games</value>
+  </data>
+  <data name="Check_games_Body" xml:space="preserve">
+    <value>Look up your games on protondb.com to know whether they run on Linux. Online games with anti-cheat (some shooters and competitive games) often do not work.</value>
+  </data>
+  <data name="Check_mail_Title" xml:space="preserve">
+    <value>Export emails, bookmarks and contacts</value>
+  </data>
+  <data name="Check_mail_Body" xml:space="preserve">
+    <value>If you use an email program such as Outlook, export your emails and contacts, or check that they are kept on the server (Gmail, Outlook.com…). Also export your browser bookmarks if they are not synced.</value>
+  </data>
+  <data name="Check_bitlocker_Title" xml:space="preserve">
+    <value>Keep the BitLocker key aside</value>
+  </data>
+  <data name="Check_bitlocker_Body" xml:space="preserve">
+    <value>If your disk is encrypted with BitLocker, write down its recovery key (on account.microsoft.com/devices/recoverykey). Windows may ask for it after a change to the boot setup, especially if you keep Windows next to Linux.</value>
+  </data>
+  <data name="Check_hardware_Title" xml:space="preserve">
+    <value>Test your hardware in live mode</value>
+  </data>
+  <data name="Check_hardware_Body" xml:space="preserve">
+    <value>Start from the drive without installing and check Wi-Fi, sound, the screen, the webcam, Bluetooth and your printer. If something does not work, look for a fix before installing, or try another distribution.</value>
+  </data>
+  <data name="Check_dualboot_Title" xml:space="preserve">
+    <value>If you keep Windows, prepare dual boot</value>
+  </data>
+  <data name="Check_dualboot_Body" xml:space="preserve">
+    <value>Free some disk space (at least 30 to 50 GB for Linux) and turn off Windows fast startup (Power Options), which can block access to your Windows files from Linux.</value>
+  </data>
+  <data name="Check_power_Title" xml:space="preserve">
+    <value>Plug the PC in</value>
+  </data>
+  <data name="Check_power_Body" xml:space="preserve">
+    <value>During the installation, keep a laptop plugged in and connect to the Internet to get updates and drivers.</value>
+  </data>
 </root>

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
     xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    xmlns:views="using:LinuxInstallHelper.App.Views"
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
@@ -86,40 +87,17 @@
                         <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Tour.Position, Mode=OneWay}" />
                     </Grid>
 
-                    <Grid Style="{StaticResource TourLessonGridStyle}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Border Style="{StaticResource TourIconBorderStyle}">
-                            <FontIcon Style="{StaticResource TourIconStyle}" Glyph="{x:Bind ViewModel.Tour.Current.Glyph, Mode=OneWay}" />
-                        </Border>
-                        <StackPanel Grid.Column="1" Style="{StaticResource CardStackStyle}">
-                            <TextBlock Style="{StaticResource TourTitleStyle}" Text="{x:Bind ViewModel.Tour.Current.Title, Mode=OneWay}" />
-                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Body, Mode=OneWay}" />
-                            <Grid Style="{StaticResource TourComparisonGridStyle}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Tour.Current.Windows), Mode=OneWay}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock x:Uid="TourWindowsLabel" Style="{StaticResource TourLabelStyle}" />
-                                <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Windows, Mode=OneWay}" />
-                                <TextBlock x:Uid="TourLinuxLabel" Grid.Row="1" Style="{StaticResource TourLabelStyle}" />
-                                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Linux, Mode=OneWay}" />
-                            </Grid>
-                            <Border Style="{StaticResource TourCommandBorderStyle}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Tour.Current.Command), Mode=OneWay}">
-                                <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Tour.Current.Command, Mode=OneWay}" />
-                            </Border>
-                        </StackPanel>
-                    </Grid>
+                    <views:LinuxLessonView Lesson="{x:Bind ViewModel.Tour.Current, Mode=OneWay}" />
 
                     <StackPanel Style="{StaticResource ButtonRowStyle}">
                         <Button x:Uid="TourPrevious" Command="{x:Bind ViewModel.Tour.PreviousCommand}" />
                         <Button x:Uid="TourNext" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.Tour.NextCommand}" />
+                        <Button Command="{x:Bind ViewModel.Tour.TogglePlayCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}">
+                            <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="{x:Bind ViewModel.Tour.PlayGlyph, Mode=OneWay}" />
+                                <TextBlock Text="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Border>

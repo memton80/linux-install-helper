@@ -143,6 +143,7 @@ public partial class App : Application
         services.AddTransient<ProgressViewModel>();
         services.AddTransient<DoneViewModel>();
         services.AddTransient<RestoreViewModel>();
+        services.AddTransient<GuideViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<AboutViewModel>();
 

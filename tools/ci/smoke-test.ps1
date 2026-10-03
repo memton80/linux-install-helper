@@ -70,6 +70,7 @@ $runs = @(
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
+    @{ Page = "Guide";    Theme = "dark";  Lang = "fr-FR"; Expect = "Avant de quitter Windows" },
     @{ Page = "Settings"; Theme = "dark";  Lang = "fr-FR"; Expect = "Paramètres" },
     @{ Page = "About";    Theme = "light"; Lang = "en-US"; Expect = "Open source components" }
 )

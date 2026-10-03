@@ -32,6 +32,12 @@ public sealed record UserSettings
     /// <summary>Safely remove the drive when it is ready.</summary>
     public bool EjectWhenDone { get; init; } = true;
 
+    /// <summary>
+    /// Items of the "before leaving Windows" checklist already done, as comma-separated keys (a string keeps the record's
+    /// value equality).
+    /// </summary>
+    public string? ChecklistDone { get; init; }
+
     public static IReadOnlyList<string> SupportedLanguages { get; } = ["en-US", "fr-FR"];
 }
 

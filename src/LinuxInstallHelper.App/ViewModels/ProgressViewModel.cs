@@ -52,7 +52,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         _dispatcher = dispatcher;
         _logger = logger;
 
-        Tour = new LinuxTourViewModel(localizer);
+        Tour = new LinuxTourViewModel(localizer, dispatcher);
         foreach (var stage in Enum.GetValues<CreationStage>())
         {
             Stages.Add(new StageItemViewModel(stage, localizer.Get("Stage_" + stage)));
@@ -114,12 +114,11 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         }
 
         Subtitle = _localizer.Format("Progress_Subtitle", _wizard.SourceName, _wizard.Target.FriendlyName);
+        Tour.Play();
         _ = RunAsync();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() => Tour.Pause();
 
     [RelayCommand]
     private Task RetryAsync() => RunAsync();

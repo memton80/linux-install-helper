@@ -13,6 +13,7 @@ public sealed class NavigationService : INavigationService
         [PageKeys.Distros] = typeof(DistrosPage),
         [PageKeys.LocalIso] = typeof(LocalIsoPage),
         [PageKeys.Restore] = typeof(RestorePage),
+        [PageKeys.Guide] = typeof(GuidePage),
         [PageKeys.Drive] = typeof(DrivePage),
         [PageKeys.Progress] = typeof(ProgressPage),
         [PageKeys.Done] = typeof(DonePage),

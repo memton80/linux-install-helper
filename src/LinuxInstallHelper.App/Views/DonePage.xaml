@@ -61,6 +61,7 @@
 
             <StackPanel Style="{StaticResource ButtonRowStyle}">
                 <Button x:Uid="DoneAnother" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.CreateAnotherCommand}" />
+                <Button x:Uid="DoneGuide" Command="{x:Bind ViewModel.OpenGuideCommand}" />
                 <Button x:Uid="DoneShowIso" Command="{x:Bind ViewModel.ShowIsoCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasIso), Mode=OneWay}" />
                 <Button x:Uid="DoneClose" Command="{x:Bind ViewModel.CloseCommand}" />
             </StackPanel>

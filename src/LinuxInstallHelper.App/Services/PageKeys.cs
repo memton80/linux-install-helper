@@ -6,6 +6,7 @@ public static class PageKeys
     public const string Distros = "Distros";
     public const string LocalIso = "LocalIso";
     public const string Restore = "Restore";
+    public const string Guide = "Guide";
     public const string Drive = "Drive";
     public const string Progress = "Progress";
     public const string Done = "Done";

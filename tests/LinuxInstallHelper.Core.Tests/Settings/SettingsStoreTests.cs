@@ -29,13 +29,14 @@ public sealed class SettingsStoreTests : IDisposable
         UserSettings? changed = null;
         store.Changed += (_, s) => changed = s;
 
-        store.Save(new UserSettings { Theme = AppTheme.Dark, Language = "fr-FR", EjectWhenDone = false, DownloadFolder = @"D:\ISO" });
+        store.Save(new UserSettings { Theme = AppTheme.Dark, Language = "fr-FR", EjectWhenDone = false, DownloadFolder = @"D:\ISO", ChecklistDone = "backup,passwords" });
 
         var reloaded = new SettingsStore(paths).Current;
         Assert.Equal(AppTheme.Dark, reloaded.Theme);
         Assert.Equal("fr-FR", reloaded.Language);
         Assert.False(reloaded.EjectWhenDone);
         Assert.Equal(@"D:\ISO", reloaded.DownloadFolder);
+        Assert.Equal("backup,passwords", reloaded.ChecklistDone);
         Assert.Equal(reloaded, changed);
     }
 

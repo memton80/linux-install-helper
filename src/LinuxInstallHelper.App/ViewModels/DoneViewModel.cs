@@ -76,6 +76,9 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     }
 
     [RelayCommand]
+    private void OpenGuide() => _navigation.NavigateTo(PageKeys.Guide);
+
+    [RelayCommand]
     private void CreateAnother()
     {
         var local = _wizard.IsLocalIso;
