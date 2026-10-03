@@ -128,7 +128,7 @@ Tout est compilé par GitHub Actions sur `windows-latest` :
 | Workflow | Déclencheur | Rôle |
 |---|---|---|
 | [`build.yml`](.github/workflows/build.yml) | push, pull request | restore, build Release, tests, publication en un seul `.exe` x64 et ARM64, test de démarrage de l'`.exe` seul avec captures d'écran |
-| [`release.yml`](.github/workflows/release.yml) | tag `v*` ou `V*` | tests, build en un seul `.exe` x64 et ARM64, GitHub Release avec les `.exe` et leur SHA-256 |
+| [`release.yml`](.github/workflows/release.yml) | tag `v*` ou `V*`, ou lancement manuel avec le nom du tag | tests, build en un seul `.exe` x64 et ARM64, GitHub Release avec les `.exe` et leur SHA-256 |
 | [`check-links.yml`](.github/workflows/check-links.yml) | chaque lundi, manuel, modification du catalogue | vérifie chaque lien, taille, checksum et signature ; ouvre une issue si un lien casse |
 
 En local (Windows, SDK .NET 8) :

@@ -3,12 +3,18 @@ name: Release
 on:
   push:
     tags: ['v*', 'V*']
+  # Releases the chosen commit under a tag that the workflow creates, or moves when it already exists.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag of the release, for instance V1.0.0'
+        required: true
 
 permissions:
   contents: read
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ inputs.tag || github.ref_name }}
   cancel-in-progress: false
 
 env:
@@ -49,7 +55,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          $version = "${{ github.ref_name }}".TrimStart('v', 'V')
+          $version = "${{ inputs.tag || github.ref_name }}".TrimStart('v', 'V')
           "value=$version" >> $env:GITHUB_OUTPUT
 
       - name: Test
@@ -86,6 +92,18 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tag the released commit
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          git tag -f "$TAG" "$GITHUB_SHA"
+          git push -f origin "refs/tags/$TAG"
+
       - name: Download artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -110,7 +128,7 @@ jobs:
       - name: Create or update the release
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ inputs.tag || github.ref_name }}
           REPO: ${{ github.repository }}
         run: |
           if gh release view "$TAG" --repo "$REPO" > /dev/null 2>&1; then
