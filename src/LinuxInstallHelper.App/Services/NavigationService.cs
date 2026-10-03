@@ -12,6 +12,10 @@ public sealed class NavigationService : INavigationService
     {
         [PageKeys.Distros] = typeof(DistrosPage),
         [PageKeys.LocalIso] = typeof(LocalIsoPage),
+        [PageKeys.Restore] = typeof(RestorePage),
+        [PageKeys.Drive] = typeof(DrivePage),
+        [PageKeys.Progress] = typeof(ProgressPage),
+        [PageKeys.Done] = typeof(DonePage),
         [PageKeys.Settings] = typeof(SettingsPage),
         [PageKeys.About] = typeof(AboutPage),
     };
@@ -20,9 +24,11 @@ public sealed class NavigationService : INavigationService
 
     public event EventHandler<string>? Navigated;
 
-    public bool CanGoBack => _frame?.CanGoBack ?? false;
+    public bool CanGoBack => !IsLocked && (_frame?.CanGoBack ?? false);
 
     public string? CurrentPageKey { get; private set; }
+
+    public bool IsLocked { get; set; }
 
     public void Initialize(Frame frame)
     {
@@ -33,7 +39,7 @@ public sealed class NavigationService : INavigationService
 
     public bool NavigateTo(string pageKey, object? parameter = null, bool clearHistory = false)
     {
-        if (_frame is null || !Pages.TryGetValue(pageKey, out var pageType))
+        if (_frame is null || IsLocked || !Pages.TryGetValue(pageKey, out var pageType))
         {
             return false;
         }
@@ -47,6 +53,7 @@ public sealed class NavigationService : INavigationService
         if (navigated && clearHistory)
         {
             _frame.BackStack.Clear();
+            Navigated?.Invoke(this, pageKey);
         }
 
         return navigated;
@@ -54,7 +61,7 @@ public sealed class NavigationService : INavigationService
 
     public bool GoBack()
     {
-        if (_frame is { CanGoBack: true })
+        if (!IsLocked && _frame is { CanGoBack: true })
         {
             _frame.GoBack();
             return true;

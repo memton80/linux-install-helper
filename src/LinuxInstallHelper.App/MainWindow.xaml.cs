@@ -13,10 +13,19 @@ public sealed partial class MainWindow : Window
     private const int DefaultHeight = 820;
 
     private readonly INavigationService _navigation;
+    private readonly ILocalizer _localizer;
+    private readonly AppBusyState _busy;
+    private readonly IDialogService _dialogs;
+    private readonly WizardState _wizard;
+    private bool _closeConfirmed;
 
-    public MainWindow(INavigationService navigation, ILocalizer localizer)
+    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard)
     {
         _navigation = navigation;
+        _localizer = localizer;
+        _busy = busy;
+        _dialogs = dialogs;
+        _wizard = wizard;
         InitializeComponent();
 
         Title = localizer.Get("AppDisplayName");
@@ -24,25 +33,42 @@ public sealed partial class MainWindow : Window
         SetTitleBar(AppTitleBar);
         AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
+        AppWindow.Closing += OnClosing;
         ResizeAndCenter(DefaultWidth, DefaultHeight);
 
         _navigation.Navigated += OnNavigated;
         _navigation.Initialize(ContentFrame);
-        _navigation.NavigateTo(PageKeys.Distros);
     }
 
-    /// <summary>Root element, used to apply the requested theme.</summary>
+    /// <summary>Root element, used to apply the requested theme and to host dialogs.</summary>
     public FrameworkElement RootElement => RootGrid;
+
+    /// <summary>Shows the first page.</summary>
+    public void Start(string pageKey)
+    {
+        if (!_navigation.NavigateTo(pageKey))
+        {
+            _navigation.NavigateTo(PageKeys.Distros);
+        }
+    }
 
     private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
-        if (args.IsSettingsInvoked)
+        var key = args.IsSettingsInvoked ? PageKeys.Settings : args.InvokedItemContainer?.Tag as string;
+        if (key is null)
         {
-            _navigation.NavigateTo(PageKeys.Settings);
+            return;
         }
-        else if (args.InvokedItemContainer?.Tag is string key)
+
+        if (key is PageKeys.Distros or PageKeys.LocalIso)
         {
-            _navigation.NavigateTo(key);
+            // Starting over from the menu: forget the previous choices.
+            _wizard.Reset();
+        }
+
+        if (!_navigation.NavigateTo(key) && _navigation.CurrentPageKey is { } current)
+        {
+            SyncSelection(current);
         }
     }
 
@@ -52,18 +78,45 @@ public sealed partial class MainWindow : Window
     private void OnNavigated(object? sender, string pageKey)
     {
         NavView.IsBackEnabled = _navigation.CanGoBack;
+        SyncSelection(pageKey);
+    }
 
+    private void SyncSelection(string pageKey)
+    {
         if (pageKey == PageKeys.Settings)
         {
             NavView.SelectedItem = NavView.SettingsItem;
             return;
         }
 
-        var menuKey = PageKeys.MenuKeyFor(pageKey);
+        var menuKey = PageKeys.MenuKeyFor(pageKey, _wizard.IsLocalIso);
         NavView.SelectedItem = NavView.MenuItems
             .Concat(NavView.FooterMenuItems)
             .OfType<NavigationViewItem>()
             .FirstOrDefault(item => item.Tag as string == menuKey);
+    }
+
+    private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
+    {
+        if (_closeConfirmed || !_busy.IsBusy)
+        {
+            return;
+        }
+
+        args.Cancel = true;
+        var confirmed = await _dialogs.ConfirmAsync(
+            _localizer.Get("Close_BusyTitle"),
+            _localizer.Get(_busy.IsWriting ? "Close_BusyWriting" : "Close_BusyMessage"),
+            _localizer.Get("Close_BusyPrimary"),
+            _localizer.Get("Close_BusyClose"),
+            destructive: true);
+
+        if (confirmed)
+        {
+            _busy.CurrentOperation?.Cancel();
+            _closeConfirmed = true;
+            Close();
+        }
     }
 
     private void ResizeAndCenter(int width, int height)

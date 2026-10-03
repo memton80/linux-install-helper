@@ -5,16 +5,121 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource PageRootStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel>
+
+        <StackPanel Style="{StaticResource PageHeaderStackStyle}">
             <TextBlock x:Uid="DistrosHeader" Style="{StaticResource PageTitleStyle}" />
             <TextBlock x:Uid="DistrosSubtitle" Style="{StaticResource PageSubtitleStyle}" />
         </StackPanel>
+
+        <Grid Grid.Row="1" Style="{StaticResource FilterBarGridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <AutoSuggestBox
+                x:Uid="DistrosSearch"
+                VerticalAlignment="Bottom"
+                QueryIcon="Find"
+                Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox
+                x:Uid="DistrosFamily"
+                Grid.Column="1"
+                Style="{StaticResource FilterComboBoxStyle}"
+                ItemsSource="{x:Bind ViewModel.Families}"
+                SelectedIndex="{x:Bind ViewModel.FamilyIndex, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FilterOption">
+                        <TextBlock Text="{x:Bind Label}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox
+                x:Uid="DistrosCategory"
+                Grid.Column="2"
+                Style="{StaticResource FilterComboBoxStyle}"
+                ItemsSource="{x:Bind ViewModel.Categories}"
+                SelectedIndex="{x:Bind ViewModel.CategoryIndex, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FilterOption">
+                        <TextBlock Text="{x:Bind Label}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <InfoBar
+            x:Uid="DistrosOffline"
+            Grid.Row="2"
+            IsClosable="True"
+            Severity="Informational"
+            IsOpen="{x:Bind ViewModel.IsOffline, Mode=OneWay}"
+            Message="{x:Bind ViewModel.CatalogStatus, Mode=OneWay}" />
+
+        <ProgressRing
+            Grid.Row="3"
+            IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+            Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsLoading), Mode=OneWay}" />
+
+        <StackPanel
+            Grid.Row="3"
+            Style="{StaticResource EmptyStateStackStyle}"
+            Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsEmpty), Mode=OneWay}">
+            <FontIcon Glyph="&#xE721;" Style="{StaticResource EmptyStateIconStyle}" />
+            <TextBlock x:Uid="DistrosEmpty" Style="{StaticResource EmptyStateTextStyle}" />
+        </StackPanel>
+
+        <GridView
+            x:Name="DistrosGrid"
+            Grid.Row="3"
+            IsItemClickEnabled="True"
+            SelectionMode="None"
+            ItemClick="OnDistroClick"
+            ItemContainerStyle="{StaticResource DistroGridViewItemStyle}"
+            ItemsSource="{x:Bind ViewModel.Distros}">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="vm:DistroItemViewModel">
+                    <Grid Style="{StaticResource DistroCardGridStyle}" AutomationProperties.Name="{x:Bind AutomationName}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Style="{StaticResource DistroCardHeaderGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource BadgeBorderStyle}" Background="{x:Bind BadgeBrush}">
+                                <TextBlock Style="{StaticResource BadgeTextStyle}" Text="{x:Bind Monogram}" />
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource DistroNameStyle}" Text="{x:Bind Name}" />
+                                <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind Subtitle}" />
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Grid.Row="1" Style="{StaticResource DistroDescriptionStyle}" Text="{x:Bind Description}" />
+                        <StackPanel Grid.Row="2" Style="{StaticResource CompactStackStyle}">
+                            <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind Details}" />
+                            <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(ShowSecureBootWarning)}">
+                                <FontIcon Glyph="&#xE7BA;" Style="{StaticResource WarningIconStyle}" />
+                                <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind SecureBootWarning}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

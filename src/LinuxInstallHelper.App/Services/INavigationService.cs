@@ -12,6 +12,9 @@ public interface INavigationService
 
     string? CurrentPageKey { get; }
 
+    /// <summary>When true (a USB drive is being created), navigation is refused.</summary>
+    bool IsLocked { get; set; }
+
     void Initialize(Frame frame);
 
     bool NavigateTo(string pageKey, object? parameter = null, bool clearHistory = false);

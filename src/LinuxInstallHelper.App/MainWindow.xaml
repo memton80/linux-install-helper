@@ -44,6 +44,11 @@
                         <FontIcon Glyph="&#xE8E5;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="NavRestore" Tag="Restore">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE90F;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem x:Uid="NavAbout" Tag="About">

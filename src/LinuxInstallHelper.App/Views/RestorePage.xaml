@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.RestorePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="RestoreHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock x:Uid="RestoreSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+            </StackPanel>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <Grid Style="{StaticResource SettingRowGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="DriveListTitle" VerticalAlignment="Center" Style="{StaticResource SectionTitleStyle}" />
+                        <Button x:Uid="DriveRefresh" Grid.Column="1" Command="{x:Bind ViewModel.RefreshCommand}">
+                            <SymbolIcon Symbol="Refresh" />
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Style="{StaticResource EmptyStateStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasNoDrives), Mode=OneWay}">
+                        <FontIcon Glyph="&#xE88E;" Style="{StaticResource EmptyStateIconStyle}" />
+                        <TextBlock x:Uid="DriveNone" Style="{StaticResource EmptyStateTextStyle}" />
+                    </StackPanel>
+
+                    <ListView
+                        Style="{StaticResource DriveListViewStyle}"
+                        ItemsSource="{x:Bind ViewModel.Drives}"
+                        SelectedItem="{x:Bind ViewModel.SelectedDrive, Mode=OneWay}"
+                        SelectionChanged="OnDriveSelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DriveItemViewModel">
+                                <Grid Style="{StaticResource DriveItemGridStyle}" AutomationProperties.Name="{x:Bind AutomationName}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE88E;" Style="{StaticResource DriveIconStyle}" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Style="{StaticResource DistroNameStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Details}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasSelection), Mode=OneWay}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBox x:Uid="RestoreLabel" MaxLength="11" Text="{x:Bind ViewModel.Label, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <InfoBar x:Uid="RestoreEraseWarning" IsClosable="False" IsOpen="True" Severity="Warning" />
+                    <CheckBox Content="{x:Bind ViewModel.ConfirmText, Mode=OneWay}" IsChecked="{x:Bind ViewModel.IsConfirmed, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <InfoBar x:Uid="RestoreSuccess" IsClosable="True" Severity="Success" IsOpen="{x:Bind ViewModel.Succeeded, Mode=OneWay}" />
+            <InfoBar
+                IsClosable="True"
+                Severity="Error"
+                IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+                Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
+                Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" />
+
+            <StackPanel Style="{StaticResource ButtonRowStyle}">
+                <Button x:Uid="RestoreStart" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RestoreCommand}" />
+                <ProgressRing IsActive="{x:Bind ViewModel.IsWorking, Mode=OneWay}" Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsWorking), Mode=OneWay}" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

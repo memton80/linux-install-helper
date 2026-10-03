@@ -5,16 +5,70 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource PageRootStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock x:Uid="SettingsHeader" Style="{StaticResource PageTitleStyle}" />
-            <TextBlock x:Uid="SettingsSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="SettingsHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock x:Uid="SettingsSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+            </StackPanel>
+
+            <TextBlock x:Uid="SettingsAppearance" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <RadioButtons x:Uid="SettingsTheme" SelectedIndex="{x:Bind ViewModel.ThemeIndex, Mode=TwoWay}">
+                        <RadioButton x:Uid="SettingsThemeSystem" />
+                        <RadioButton x:Uid="SettingsThemeLight" />
+                        <RadioButton x:Uid="SettingsThemeDark" />
+                    </RadioButtons>
+                    <ComboBox x:Uid="SettingsLanguage" Style="{StaticResource FilterComboBoxStyle}" SelectedIndex="{x:Bind ViewModel.LanguageIndex, Mode=TwoWay}">
+                        <ComboBoxItem x:Uid="SettingsLanguageSystem" />
+                        <ComboBoxItem Content="English" />
+                        <ComboBoxItem Content="Français" />
+                    </ComboBox>
+                    <InfoBar x:Uid="SettingsRestart" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.RestartRequired, Mode=OneWay}">
+                        <InfoBar.ActionButton>
+                            <Button x:Uid="SettingsRestartNow" Command="{x:Bind ViewModel.RestartCommand}" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="SettingsDownloads" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <StackPanel Style="{StaticResource CompactStackStyle}">
+                        <TextBlock x:Uid="SettingsFolder" Style="{StaticResource BodyWrapTextStyle}" />
+                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.DownloadFolder, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="SettingsChangeFolder" Command="{x:Bind ViewModel.ChangeFolderCommand}" />
+                        <Button x:Uid="SettingsResetFolder" Command="{x:Bind ViewModel.ResetFolderCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsCustomFolder), Mode=OneWay}" />
+                        <Button x:Uid="SettingsOpenFolder" Command="{x:Bind ViewModel.OpenFolderCommand}" />
+                    </StackPanel>
+                    <ToggleSwitch x:Uid="SettingsKeepIso" IsOn="{x:Bind ViewModel.KeepIso, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="SettingsCreation" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <ToggleSwitch x:Uid="SettingsVerify" IsOn="{x:Bind ViewModel.VerifyAfterWrite, Mode=TwoWay}" />
+                    <ToggleSwitch x:Uid="SettingsEject" IsOn="{x:Bind ViewModel.EjectWhenDone, Mode=TwoWay}" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="SettingsDiagnostics" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock x:Uid="SettingsLogsHelp" Style="{StaticResource SecondaryTextStyle}" />
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="SettingsOpenLogs" Command="{x:Bind ViewModel.OpenLogsCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </Page>

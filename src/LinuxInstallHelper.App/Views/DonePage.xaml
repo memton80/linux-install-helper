@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.DonePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <FontIcon Glyph="&#xE930;" Style="{StaticResource HeroIconStyle}" />
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="DoneHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Summary, Mode=OneWay}" />
+            </StackPanel>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                        <FontIcon Glyph="&#xE8FB;" Style="{StaticResource StageIconStyle}" />
+                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Signature, Mode=OneWay}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Verification, Mode=OneWay}" />
+                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                        <FontIcon Glyph="&#xE88E;" Style="{StaticResource StageIconStyle}" />
+                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.EjectStatus, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <InfoBar x:Uid="DoneSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock x:Uid="DoneNextTitle" Style="{StaticResource SectionTitleStyle}" />
+                    <Grid Style="{StaticResource ComponentRowGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                        <TextBlock x:Uid="DoneStep1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                        <TextBlock x:Uid="DoneStep2" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                        <TextBlock x:Uid="DoneStep3" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                        <TextBlock x:Uid="DoneStep4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Style="{StaticResource ButtonRowStyle}">
+                <Button x:Uid="DoneAnother" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.CreateAnotherCommand}" />
+                <Button x:Uid="DoneShowIso" Command="{x:Bind ViewModel.ShowIsoCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasIso), Mode=OneWay}" />
+                <Button x:Uid="DoneClose" Command="{x:Bind ViewModel.CloseCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
