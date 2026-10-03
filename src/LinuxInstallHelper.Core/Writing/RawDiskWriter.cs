@@ -67,7 +67,15 @@ public sealed class RawDiskWriter : IUsbWriter
             throw new UsbWriteException(UsbWriteFailure.TargetChanged, "The size reported by the drive changed. Nothing was written.");
         }
 
-        ImageWriteEngine.WipeTail(device);
+        // Cosmetic (removes an old backup GPT): a refused write here must not hide whether the image itself can be written.
+        try
+        {
+            ImageWriteEngine.WipeTail(device);
+        }
+        catch (UsbWriteException ex) when (ex.Failure == UsbWriteFailure.DeviceError)
+        {
+            _logger.LogWarning(ex, "Could not wipe the end of disk {Number}, writing the image anyway", disk.Number);
+        }
 
         string sha256;
         using (var image = new FileStream(request.ImagePath, FileMode.Open, FileAccess.Read, FileShare.Read, 1, FileOptions.SequentialScan))

@@ -142,7 +142,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
 
                 // A write that "succeeds" with 0 bytes, or is denied, hits a volume that Windows mounted in the meantime
                 // (for instance the RAW volume it creates over a drive without a partition table).
-                var reason = ok ? "0 bytes written" : Describe(error);
+                var reason = ok ? $"0 bytes written, last error: {Describe(error)}" : Describe(error);
                 if (ok || error == NativeMethods.ErrorAccessDenied)
                 {
                     if (attempt >= WriteAttempts)
