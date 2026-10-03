@@ -35,7 +35,8 @@ public sealed class WindowsDiskService : IDiskService
 
         var letters = new Dictionary<int, List<string>>();
         var volumePaths = new Dictionary<int, List<string>>();
-        foreach (var partition in Query(scope, "SELECT DiskNumber, DriveLetter, AccessPaths FROM MSFT_Partition"))
+        using var partitions = new DisposableList(Query(scope, "SELECT DiskNumber, DriveLetter, AccessPaths FROM MSFT_Partition"));
+        foreach (var partition in partitions.Items)
         {
             var disk = ToInt(partition["DiskNumber"]);
             var letter = ToLetter(partition["DriveLetter"]);
@@ -54,7 +55,8 @@ public sealed class WindowsDiskService : IDiskService
         }
 
         var labels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var volume in Query(scope, "SELECT DriveLetter, FileSystemLabel FROM MSFT_Volume"))
+        using var volumes = new DisposableList(Query(scope, "SELECT DriveLetter, FileSystemLabel FROM MSFT_Volume"));
+        foreach (var volume in volumes.Items)
         {
             var letter = ToLetter(volume["DriveLetter"]);
             if (letter is not null && volume["FileSystemLabel"] is string label && label.Length > 0)
@@ -65,7 +67,8 @@ public sealed class WindowsDiskService : IDiskService
 
         var pnpIds = GetPnpDeviceIds();
         var disks = new List<DiskInfo>();
-        foreach (var disk in Query(scope, "SELECT Number, FriendlyName, SerialNumber, UniqueId, Size, BusType, IsSystem, IsBoot, IsOffline, IsReadOnly FROM MSFT_Disk"))
+        using var physicalDisks = new DisposableList(Query(scope, "SELECT Number, FriendlyName, SerialNumber, UniqueId, Size, BusType, IsSystem, IsBoot, IsOffline, IsReadOnly FROM MSFT_Disk"));
+        foreach (var disk in physicalDisks.Items)
         {
             if (disk["Number"] is null)
             {
@@ -235,6 +238,20 @@ public sealed class WindowsDiskService : IDiskService
     {
         using var searcher = new ManagementObjectSearcher(scope, new ObjectQuery(wql));
         return searcher.Get().Cast<ManagementObject>().ToList();
+    }
+
+    /// <summary>Disposes WMI objects (the drive list is refreshed every few seconds).</summary>
+    private sealed class DisposableList(List<ManagementObject> items) : IDisposable
+    {
+        public List<ManagementObject> Items { get; } = items;
+
+        public void Dispose()
+        {
+            foreach (var item in Items)
+            {
+                item.Dispose();
+            }
+        }
     }
 
     private static int ToInt(object? value) => Convert.ToInt32(value ?? 0, System.Globalization.CultureInfo.InvariantCulture);
