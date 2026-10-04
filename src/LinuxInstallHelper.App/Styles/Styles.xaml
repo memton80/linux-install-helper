@@ -290,7 +290,7 @@
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
     </Style>
 
-    <!-- Linux tour (progress page) -->
+    <!-- Linux tour (progress and guide pages) -->
     <Style x:Key="TourHeaderGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />
     </Style>
@@ -306,6 +306,49 @@
     <Style x:Key="TourLessonGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="16" />
         <Setter Property="MinHeight" Value="160" />
+    </Style>
+
+    <!-- Same color as the numbered marks drawn on the pictures (tools/tour-images/styles/base.css). -->
+    <SolidColorBrush x:Key="TourMarkBrush" Color="#E6007A" />
+
+    <Style x:Key="TourImageBorderStyle" TargetType="Border">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+    </Style>
+
+    <Style x:Key="TourImageStyle" TargetType="Image">
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="MaxHeight" Value="300" />
+    </Style>
+
+    <Style x:Key="TourStepsPanelStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+    </Style>
+
+    <Style x:Key="TourStepGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="10" />
+    </Style>
+
+    <Style x:Key="TourStepBadgeStyle" TargetType="Border">
+        <Setter Property="Width" Value="22" />
+        <Setter Property="Height" Value="22" />
+        <Setter Property="CornerRadius" Value="11" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Background" Value="{StaticResource TourMarkBrush}" />
+    </Style>
+
+    <Style x:Key="TourStepNumberStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TourStepTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="TourIconBorderStyle" TargetType="Border">
@@ -338,6 +381,16 @@
         <Setter Property="Padding" Value="8,0,0,0" />
         <Setter Property="Margin" Value="0,4,0,4" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="GuideLessonsHeaderGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+
+    <Style x:Key="GuideLessonsTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="GuideLessonsPanelStyle" TargetType="StackPanel">

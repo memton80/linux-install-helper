@@ -81,8 +81,8 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Style="{StaticResource CompactStackStyle}">
-                            <TextBlock x:Uid="TourHeader" Style="{StaticResource TourHeaderStyle}" />
-                            <TextBlock x:Uid="TourSubtitle" Style="{StaticResource SecondaryTextStyle}" />
+                            <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind ViewModel.Tour.Header, Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Tour.Subtitle, Mode=OneWay}" />
                         </StackPanel>
                         <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Tour.Position, Mode=OneWay}" />
                     </Grid>

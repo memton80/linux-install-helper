@@ -1,4 +1,6 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace LinuxInstallHelper.App.Helpers;
 
@@ -16,4 +18,13 @@ public static class Ui
     public static bool Not(bool value) => !value;
 
     public static bool Both(bool first, bool second) => first && second;
+
+    /// <summary>A picture from a file, or nothing.</summary>
+    public static ImageSource? Picture(string? path) => string.IsNullOrEmpty(path) ? null : new BitmapImage(new Uri(path));
+
+    /// <summary>
+    /// Width of the picture column of a lesson: five parts for six of text, so that both shrink with the window, or the
+    /// width of the icon when there is no picture.
+    /// </summary>
+    public static GridLength PictureColumn(bool hasPicture) => hasPicture ? new GridLength(5, GridUnitType.Star) : GridLength.Auto;
 }

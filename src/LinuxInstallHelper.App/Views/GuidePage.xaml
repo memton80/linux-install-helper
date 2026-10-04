@@ -44,8 +44,26 @@
                 </StackPanel>
             </Border>
 
-            <TextBlock x:Uid="GuideLessonsTitle" Style="{StaticResource SectionTitleStyle}" />
-            <ItemsControl ItemsSource="{x:Bind ViewModel.Lessons}">
+            <Grid Style="{StaticResource GuideLessonsHeaderGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Uid="GuideLessonsTitle" Style="{StaticResource GuideLessonsTitleStyle}" />
+                <ComboBox
+                    x:Uid="GuideTourDistro"
+                    Grid.Column="1"
+                    Style="{StaticResource FilterComboBoxStyle}"
+                    ItemsSource="{x:Bind ViewModel.TourOptions}"
+                    SelectedIndex="{x:Bind ViewModel.TourIndex, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="vm:FilterOption">
+                            <TextBlock Text="{x:Bind Label}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />

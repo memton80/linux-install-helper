@@ -6,19 +6,50 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource TourLessonGridStyle}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="{x:Bind helpers:Ui.PictureColumn(Lesson.HasImage), Mode=OneWay}" />
+            <ColumnDefinition Width="6*" />
         </Grid.ColumnDefinitions>
-        <Border Style="{StaticResource TourIconBorderStyle}">
+
+        <!-- The picture, with numbered marks matching the steps; an icon when the lesson has none. -->
+        <Border Style="{StaticResource TourImageBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(Lesson.HasImage), Mode=OneWay}">
+            <Image
+                Style="{StaticResource TourImageStyle}"
+                Source="{x:Bind helpers:Ui.Picture(Lesson.Image), Mode=OneWay}"
+                AutomationProperties.Name="{x:Bind Lesson.Title, Mode=OneWay}" />
+        </Border>
+        <Border Style="{StaticResource TourIconBorderStyle}" Visibility="{x:Bind helpers:Ui.Collapsed(Lesson.HasImage), Mode=OneWay}">
             <FontIcon Style="{StaticResource TourIconStyle}" Glyph="{x:Bind Lesson.Glyph, Mode=OneWay}" />
         </Border>
+
         <StackPanel Grid.Column="1" Style="{StaticResource CardStackStyle}">
             <TextBlock Style="{StaticResource TourTitleStyle}" Text="{x:Bind Lesson.Title, Mode=OneWay}" />
             <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Lesson.Body, Mode=OneWay}" />
+            <ItemsControl ItemsSource="{x:Bind Lesson.Steps, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Style="{StaticResource TourStepsPanelStyle}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LessonStep">
+                        <Grid Style="{StaticResource TourStepGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource TourStepBadgeStyle}">
+                                <TextBlock Style="{StaticResource TourStepNumberStyle}" Text="{x:Bind Number}" />
+                            </Border>
+                            <TextBlock Grid.Column="1" Style="{StaticResource TourStepTextStyle}" Text="{x:Bind Text}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <Grid Style="{StaticResource TourComparisonGridStyle}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Lesson.Windows), Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

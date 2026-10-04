@@ -9,6 +9,7 @@ using LinuxInstallHelper.Core.Download;
 using LinuxInstallHelper.Core.Http;
 using LinuxInstallHelper.Core.Images;
 using LinuxInstallHelper.Core.Settings;
+using LinuxInstallHelper.Core.Tour;
 using LinuxInstallHelper.Core.Verification;
 using LinuxInstallHelper.Core.Workflow;
 using LinuxInstallHelper.Core.Writing;
@@ -121,6 +122,7 @@ public partial class App : Application
             null,
             sp.GetRequiredService<ILogger<RawDiskWriter>>()));
         services.AddSingleton<ICreationPipeline, CreationPipeline>();
+        services.AddSingleton(_ => TourBook.LoadEmbedded());
 
         // UI services
         services.AddSingleton<ILocalizer, ResourceLocalizer>();

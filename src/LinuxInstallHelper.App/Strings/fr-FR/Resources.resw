@@ -837,12 +837,6 @@ Cette opération est irréversible.</value>
   <data name="Duration_Seconds" xml:space="preserve">
     <value>{0} s</value>
   </data>
-  <data name="TourHeader.Text" xml:space="preserve">
-    <value>En attendant, découvrez Linux</value>
-  </data>
-  <data name="TourSubtitle.Text" xml:space="preserve">
-    <value>Quelques bases pour vos premiers pas, à lire pendant que la clé se prépare.</value>
-  </data>
   <data name="TourPrevious.Content" xml:space="preserve">
     <value>Précédent</value>
   </data>
@@ -857,124 +851,6 @@ Cette opération est irréversible.</value>
   </data>
   <data name="Tour_Position" xml:space="preserve">
     <value>{0} / {1}</value>
-  </data>
-  <data name="Tour_1_Title" xml:space="preserve">
-    <value>Essayez sans rien changer</value>
-  </data>
-  <data name="Tour_1_Body" xml:space="preserve">
-    <value>En démarrant sur la clé, choisissez « Essayer » (ou « Live ») : Linux fonctionne depuis la clé, sans rien modifier sur votre PC. Profitez-en pour vérifier que le Wi-Fi, le son, l'écran et le pavé tactile fonctionnent avant d'installer quoi que ce soit.</value>
-  </data>
-  <data name="Tour_2_Title" xml:space="preserve">
-    <value>Un bureau familier</value>
-  </data>
-  <data name="Tour_2_Body" xml:space="preserve">
-    <value>Vous retrouverez un menu pour lancer les applications, une barre des tâches et des fenêtres. L'apparence dépend de l'environnement de bureau (GNOME, KDE Plasma, Cinnamon…) et presque tout se personnalise.</value>
-  </data>
-  <data name="Tour_2_Windows" xml:space="preserve">
-    <value>Menu Démarrer et barre des tâches</value>
-  </data>
-  <data name="Tour_2_Linux" xml:space="preserve">
-    <value>Menu des applications (touche Windows, appelée « Super »), dock ou barre des tâches</value>
-  </data>
-  <data name="Tour_3_Title" xml:space="preserve">
-    <value>Installer des logiciels</value>
-  </data>
-  <data name="Tour_3_Body" xml:space="preserve">
-    <value>Sous Linux, on télécharge rarement un logiciel sur un site web. Ouvrez la logithèque de la distribution, cherchez l'application et cliquez sur Installer : c'est gratuit, vérifié et mis à jour automatiquement.</value>
-  </data>
-  <data name="Tour_3_Windows" xml:space="preserve">
-    <value>Télécharger un fichier .exe et lancer l'installateur</value>
-  </data>
-  <data name="Tour_3_Linux" xml:space="preserve">
-    <value>La logithèque (Logiciels, Discover, Gestionnaire de logiciels…) : chercher, puis Installer</value>
-  </data>
-  <data name="Tour_4_Title" xml:space="preserve">
-    <value>Les mises à jour</value>
-  </data>
-  <data name="Tour_4_Body" xml:space="preserve">
-    <value>Un seul outil met à jour le système et toutes vos applications en même temps. Linux ne redémarre jamais sans vous le demander, et la plupart des mises à jour s'appliquent sans redémarrage.</value>
-  </data>
-  <data name="Tour_4_Windows" xml:space="preserve">
-    <value>Windows Update, plus la mise à jour de chaque logiciel</value>
-  </data>
-  <data name="Tour_4_Linux" xml:space="preserve">
-    <value>Le gestionnaire de mises à jour, pour tout à la fois</value>
-  </data>
-  <data name="Tour_5_Title" xml:space="preserve">
-    <value>Vos fichiers et vos disques</value>
-  </data>
-  <data name="Tour_5_Body" xml:space="preserve">
-    <value>Vos documents sont dans votre dossier personnel, avec les mêmes sous-dossiers : Documents, Images, Téléchargements… Il n'y a pas de lettres de lecteur : les clés USB et les autres disques apparaissent dans la barre latérale du gestionnaire de fichiers.</value>
-  </data>
-  <data name="Tour_5_Windows" xml:space="preserve">
-    <value>C:\Users\vous, lecteurs C:, D:…</value>
-  </data>
-  <data name="Tour_5_Linux" xml:space="preserve">
-    <value>/home/vous (le « Dossier personnel »), disques dans le gestionnaire de fichiers</value>
-  </data>
-  <data name="Tour_6_Title" xml:space="preserve">
-    <value>Vos applications habituelles</value>
-  </data>
-  <data name="Tour_6_Body" xml:space="preserve">
-    <value>Presque chaque usage a un équivalent gratuit, et beaucoup d'applications existent aussi directement sous Linux : Chrome, Spotify, Discord, Zoom, Steam… Vos fichiers Word et Excel s'ouvrent dans LibreOffice.</value>
-  </data>
-  <data name="Tour_6_Windows" xml:space="preserve">
-    <value>Microsoft Office, Edge, Paint, Lecteur multimédia</value>
-  </data>
-  <data name="Tour_6_Linux" xml:space="preserve">
-    <value>LibreOffice, Firefox (ou Chrome), Pinta ou GIMP, VLC</value>
-  </data>
-  <data name="Tour_7_Title" xml:space="preserve">
-    <value>Jeux et logiciels Windows</value>
-  </data>
-  <data name="Tour_7_Body" xml:space="preserve">
-    <value>Steam fait tourner une grande partie des jeux Windows grâce à Proton : consultez protondb.com avant d'acheter. Les jeux en ligne avec un anti-triche ne fonctionnent souvent pas. Certains logiciels Windows marchent avec Wine ou Bottles, mais pas tous : vérifiez ceux dont vous avez vraiment besoin avant de quitter Windows.</value>
-  </data>
-  <data name="Tour_7_Windows" xml:space="preserve">
-    <value>Jeux et programmes .exe</value>
-  </data>
-  <data name="Tour_7_Linux" xml:space="preserve">
-    <value>Steam avec Proton pour les jeux, Bottles ou Wine pour certains programmes</value>
-  </data>
-  <data name="Tour_8_Title" xml:space="preserve">
-    <value>Le terminal, sans peur</value>
-  </data>
-  <data name="Tour_8_Body" xml:space="preserve">
-    <value>Le terminal n'est pas obligatoire : tout se fait aussi à la souris. Mais beaucoup de guides donnent des commandes à copier, alors autant connaître les bases. Ouvrez-le avec Ctrl+Alt+T sur la plupart des distributions.</value>
-  </data>
-  <data name="Tour_8_Windows" xml:space="preserve">
-    <value>Invite de commandes : dir, cd, copy, del</value>
-  </data>
-  <data name="Tour_8_Linux" xml:space="preserve">
-    <value>Terminal : ls, cd, cp, rm</value>
-  </data>
-  <data name="Tour_8_Command" xml:space="preserve">
-    <value>pwd            # où suis-je ?
-ls             # liste les fichiers
-cd Documents   # entre dans un dossier
-cd ..          # remonte d'un dossier</value>
-  </data>
-  <data name="Tour_9_Title" xml:space="preserve">
-    <value>Les droits d'administrateur</value>
-  </data>
-  <data name="Tour_9_Body" xml:space="preserve">
-    <value>Pour modifier le système, Linux demande votre mot de passe. Dans le terminal, on écrit sudo devant la commande. Quand vous tapez le mot de passe, rien ne s'affiche, pas même des étoiles : c'est normal, tapez-le puis appuyez sur Entrée. Ne lancez jamais une commande sudo trouvée sur un site dont vous n'êtes pas sûr.</value>
-  </data>
-  <data name="Tour_9_Windows" xml:space="preserve">
-    <value>« Exécuter en tant qu'administrateur »</value>
-  </data>
-  <data name="Tour_9_Linux" xml:space="preserve">
-    <value>Votre mot de passe dans une fenêtre, ou sudo devant une commande</value>
-  </data>
-  <data name="Tour_9_Command" xml:space="preserve">
-    <value>sudo apt update &amp;&amp; sudo apt upgrade   # Ubuntu, Mint, Pop!_OS, Debian…
-sudo dnf upgrade                      # Fedora</value>
-  </data>
-  <data name="Tour_10_Title" xml:space="preserve">
-    <value>Trouver de l'aide</value>
-  </data>
-  <data name="Tour_10_Body" xml:space="preserve">
-    <value>La communauté Linux est très active et accueillante. Le wiki et le forum de votre distribution sont les meilleurs points de départ ; en français, doc.ubuntu-fr.org couvre la plupart des questions. Chercher « nom de la distribution + votre problème » donne souvent la solution.</value>
   </data>
   <data name="NavGuide.Content" xml:space="preserve">
     <value>Guide Linux</value>
@@ -994,11 +870,29 @@ sudo dnf upgrade                      # Fedora</value>
   <data name="Guide_ChecklistProgress" xml:space="preserve">
     <value>{0} sur {1} faites</value>
   </data>
-  <data name="GuideLessonsTitle.Text" xml:space="preserve">
-    <value>Les bases de Linux</value>
-  </data>
   <data name="DoneGuide.Content" xml:space="preserve">
     <value>Guide Linux</value>
+  </data>
+  <data name="Tour_Header" xml:space="preserve">
+    <value>En attendant, découvrez Linux</value>
+  </data>
+  <data name="Tour_HeaderFor" xml:space="preserve">
+    <value>En attendant, découvrez {0}</value>
+  </data>
+  <data name="Tour_Subtitle" xml:space="preserve">
+    <value>Quelques bases pour vos premiers pas, à lire pendant que la clé se prépare.</value>
+  </data>
+  <data name="Tour_SubtitleFor" xml:space="preserve">
+    <value>Du démarrage sur la clé à vos premiers pas : ce que vous verrez à l'écran, étape par étape.</value>
+  </data>
+  <data name="GuideTourDistro.Header" xml:space="preserve">
+    <value>Pour</value>
+  </data>
+  <data name="Guide_TourGeneric" xml:space="preserve">
+    <value>Linux en général</value>
+  </data>
+  <data name="GuideLessonsTitle.Text" xml:space="preserve">
+    <value>Premiers pas sous Linux</value>
   </data>
   <data name="Tour_Play" xml:space="preserve">
     <value>Lecture auto</value>

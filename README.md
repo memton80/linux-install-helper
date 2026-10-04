@@ -33,6 +33,10 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 - **Écriture fiable** avec progression, relecture de la clé pour la comparer à l'image, journal détaillé et
   éjection propre.
 - **ISO locale** : utilisez une image déjà téléchargée, avec contrôle facultatif de son SHA-256.
+- **Tutoriel illustré pour chaque distribution** pendant la création de la clé : démarrer sur la clé, son menu de
+  démarrage avec les entrées exactes, l'essai et l'installation, le bureau, la logithèque, les mises à jour, le
+  terminal et l'aide, avec des illustrations annotées (repères numérotés ①②③) en français et en anglais. On le
+  retrouve dans la page « Guide Linux ».
 - **Restaurer une clé** : après usage, la clé est effacée et reformatée en exFAT pour redevenir une clé normale.
 - Interface **Windows 11** (WinUI 3, Mica, thème clair/sombre automatique, couleur d'accentuation), en
   **français et en anglais**.
@@ -146,7 +150,9 @@ src/LinuxInstallHelper.App          Interface WinUI 3 (MVVM, CommunityToolkit.Mv
 src/LinuxInstallHelper.Core         Catalogue, téléchargement, vérification, disques, écriture, orchestration
 tests/LinuxInstallHelper.Core.Tests Tests xUnit
 tools/LinuxInstallHelper.LinkChecker Vérificateur de liens du catalogue (utilisé par la CI)
+tools/tour-images                   Générateur des illustrations du tutoriel (scènes HTML rendues par Chromium)
 catalog/                            distros.json, schéma JSON, clés OpenPGP épinglées
+tour/                               Leçons du tutoriel par distribution (tours.json) et leurs illustrations
 ```
 
 ## Contribuer
@@ -160,7 +166,9 @@ Linux Install Helper est distribué sous [licence MIT](LICENSE).
 
 Composants tiers : Windows App SDK (MIT), .NET (MIT), CommunityToolkit.Mvvm (MIT),
 Microsoft.Extensions (MIT), BouncyCastle.Cryptography (MIT), NJsonSchema (MIT), Newtonsoft.Json (MIT),
-Serilog (Apache-2.0), System.Management (MIT).
+Serilog (Apache-2.0), System.Management (MIT). Les illustrations du tutoriel sont des dessins réalisés pour ce
+projet, avec les icônes [Lucide](https://lucide.dev) (ISC) et des polices libres (SIL Open Font License, Ubuntu Font
+Licence) : voir [tools/tour-images](tools/tour-images/README.md).
 
 Linux est une marque déposée de Linus Torvalds. Les noms des distributions sont des marques de leurs
 propriétaires respectifs ; ce projet n'est affilié à aucune distribution. Les images ISO sont téléchargées
@@ -172,6 +180,7 @@ Linux Install Helper is a native Windows 11 application (WinUI 3, .NET 8) that c
 drive: pick a distribution, and the app downloads the official ISO (with resume and mirror fallback),
 verifies its SHA-256/SHA-512 and OpenPGP signature against pinned keys, lets you choose among removable USB
 drives only (never the system or an internal disk) with a double confirmation, writes the hybrid ISO as-is,
-reads the drive back to check it and ejects it. It can also write a local ISO and restore a drive to a normal
-exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+reads the drive back to check it and ejects it. While the drive is written, an illustrated tour of the chosen
+distribution explains its boot menu, how to try and install it, its desktop, software center and updates. It can also
+write a local ISO and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

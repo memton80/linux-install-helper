@@ -1,65 +1,84 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
+using LinuxInstallHelper.Core.Tour;
 
 namespace LinuxInstallHelper.App.ViewModels;
 
-/// <summary>One lesson of the Linux tour. <see cref="Windows"/>, <see cref="Linux"/> and <see cref="Command"/> may be empty.</summary>
-public sealed record LinuxLesson(string Glyph, string Title, string Body, string Windows, string Linux, string Command);
+/// <summary>A numbered step of a lesson: the same number is drawn on its picture.</summary>
+public sealed record LessonStep(string Number, string Text);
 
 /// <summary>
-/// Short lessons on everyday Linux for Windows users. While the drive is being created they advance on their own
-/// (<see cref="Play"/>); the Linux guide page lists them all.
+/// One lesson of the Linux tour, in the current language. <see cref="Image"/>, the path of its picture, may be null;
+/// <see cref="Windows"/>, <see cref="Linux"/> and <see cref="Command"/> may be empty.
+/// </summary>
+public sealed record LinuxLesson(
+    string Glyph,
+    string Title,
+    string Body,
+    string? Image,
+    IReadOnlyList<LessonStep> Steps,
+    string Windows,
+    string Linux,
+    string Command)
+{
+    /// <summary>The pictures of the tour, copied next to the application from <c>tour/images</c>.</summary>
+    public static readonly string PictureFolder = Path.Combine(AppContext.BaseDirectory, "Assets", "Tour");
+
+    public bool HasImage => Image is not null;
+
+    /// <summary>Builds the lesson; a lesson whose picture is missing shows its icon instead.</summary>
+    /// <param name="language">Two-letter language code.</param>
+    public static LinuxLesson From(TourLesson lesson, string language) => new(
+        lesson.Glyph,
+        lesson.Title.Get(language),
+        lesson.Body.Get(language),
+        lesson.ImageFile(language) is { } file && File.Exists(Path.Combine(PictureFolder, file)) ? Path.Combine(PictureFolder, file) : null,
+        lesson.Steps.Select((step, i) => new LessonStep((i + 1).ToString(CultureInfo.CurrentCulture), step.Get(language))).ToList(),
+        lesson.Windows?.Get(language) ?? string.Empty,
+        lesson.Linux?.Get(language) ?? string.Empty,
+        lesson.Command?.Get(language) ?? string.Empty);
+}
+
+/// <summary>
+/// Short lessons for the distribution being written, from starting on the drive to everyday use. While the drive is
+/// being created they advance on their own (<see cref="Play"/>); the Linux guide page lists them all.
 /// </summary>
 public sealed partial class LinuxTourViewModel : ObservableObject, IDisposable
 {
-    public static readonly TimeSpan AutoAdvanceInterval = TimeSpan.FromSeconds(20);
-
-    // Texts are Tour_{n}_Title and Tour_{n}_Body, plus Tour_{n}_Windows and Tour_{n}_Linux for a comparison
-    // and Tour_{n}_Command for an example to type.
-    private static readonly (string Glyph, bool Comparison, bool Command)[] Specs =
-    [
-        ("\uE768", false, false), // Try it from the drive
-        ("\uE7F4", true, false),  // The desktop
-        ("\uE719", true, false),  // Installing software
-        ("\uE895", true, false),  // Updates
-        ("\uE8B7", true, false),  // Files and drives
-        ("\uE71D", true, false),  // Equivalent applications
-        ("\uE7FC", true, false),  // Games and Windows software
-        ("\uE756", true, true),   // The terminal
-        ("\uE7EF", true, true),   // Administrator rights
-        ("\uE897", false, false), // Getting help
-    ];
+    public static readonly TimeSpan AutoAdvanceInterval = TimeSpan.FromSeconds(30);
 
     private readonly ILocalizer _localizer;
+    private readonly TourBook _book;
     private readonly IUiDispatcher? _dispatcher;
     private Timer? _timer;
     private int _index;
+    private IReadOnlyList<LinuxLesson> _lessons;
     private LinuxLesson _current;
     private string _position = string.Empty;
+    private string _header;
+    private string _subtitle;
     private bool _isPlaying;
 
     /// <param name="dispatcher">Needed only to advance automatically.</param>
-    public LinuxTourViewModel(ILocalizer localizer, IUiDispatcher? dispatcher = null)
+    public LinuxTourViewModel(ILocalizer localizer, TourBook book, IUiDispatcher? dispatcher = null)
     {
         _localizer = localizer;
+        _book = book;
         _dispatcher = dispatcher;
-        Lessons = Specs.Select((spec, i) =>
-        {
-            var key = $"Tour_{i + 1}_";
-            return new LinuxLesson(
-                spec.Glyph,
-                localizer.Get(key + "Title"),
-                localizer.Get(key + "Body"),
-                spec.Comparison ? localizer.Get(key + "Windows") : string.Empty,
-                spec.Comparison ? localizer.Get(key + "Linux") : string.Empty,
-                spec.Command ? localizer.Get(key + "Command") : string.Empty);
-        }).ToList();
-        _current = Lessons[0];
+        _lessons = LessonsFor(book, null);
+        _current = _lessons[0];
+        _header = localizer.Get("Tour_Header");
+        _subtitle = localizer.Get("Tour_Subtitle");
         Show(0);
     }
 
-    public IReadOnlyList<LinuxLesson> Lessons { get; }
+    public IReadOnlyList<LinuxLesson> Lessons
+    {
+        get => _lessons;
+        private set => SetProperty(ref _lessons, value);
+    }
 
     public LinuxLesson Current
     {
@@ -72,6 +91,19 @@ public sealed partial class LinuxTourViewModel : ObservableObject, IDisposable
     {
         get => _position;
         private set => SetProperty(ref _position, value);
+    }
+
+    /// <summary>"While you wait, discover Ubuntu".</summary>
+    public string Header
+    {
+        get => _header;
+        private set => SetProperty(ref _header, value);
+    }
+
+    public string Subtitle
+    {
+        get => _subtitle;
+        private set => SetProperty(ref _subtitle, value);
     }
 
     /// <summary>The lessons advance on their own every <see cref="AutoAdvanceInterval"/>.</summary>
@@ -90,7 +122,26 @@ public sealed partial class LinuxTourViewModel : ObservableObject, IDisposable
 
     public string PlayLabel => _localizer.Get(IsPlaying ? "Tour_Pause" : "Tour_Play");
 
-    public string PlayGlyph => IsPlaying ? "\uE769" : "\uE768";
+    public string PlayGlyph => IsPlaying ? "" : "";
+
+    /// <summary>The lessons of a distribution in the current language: its own tour, or the generic one.</summary>
+    public static IReadOnlyList<LinuxLesson> LessonsFor(TourBook book, string? distroId)
+    {
+        var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        return book.For(distroId).Select(lesson => LinuxLesson.From(lesson, language)).ToList();
+    }
+
+    /// <summary>Starts the tour of a distribution (null for a local image) from its first lesson.</summary>
+    /// <param name="name">Name of the distribution, shown in the header.</param>
+    public void Use(string? distroId, string? name)
+    {
+        var own = _book.Has(distroId) && !string.IsNullOrWhiteSpace(name);
+        Header = own ? _localizer.Format("Tour_HeaderFor", name) : _localizer.Get("Tour_Header");
+        Subtitle = _localizer.Get(own ? "Tour_SubtitleFor" : "Tour_Subtitle");
+        Lessons = LessonsFor(_book, distroId);
+        Show(0);
+        RestartTimer();
+    }
 
     public void Play()
     {

@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
 using LinuxInstallHelper.Core;
 using LinuxInstallHelper.Core.Settings;
+using LinuxInstallHelper.Core.Tour;
 using LinuxInstallHelper.Core.Workflow;
 using LinuxInstallHelper.Core.Writing;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         AppPaths paths,
         AppBusyState busy,
         IUiDispatcher dispatcher,
+        TourBook tours,
         ILogger<ProgressViewModel> logger)
     {
         _pipeline = pipeline;
@@ -52,7 +54,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         _dispatcher = dispatcher;
         _logger = logger;
 
-        Tour = new LinuxTourViewModel(localizer, dispatcher);
+        Tour = new LinuxTourViewModel(localizer, tours, dispatcher);
         foreach (var stage in Enum.GetValues<CreationStage>())
         {
             Stages.Add(new StageItemViewModel(stage, localizer.Get("Stage_" + stage)));
@@ -63,7 +65,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
 
     public ObservableCollection<LogItemViewModel> Logs { get; } = [];
 
-    /// <summary>Basics of Linux, to read while waiting.</summary>
+    /// <summary>First steps with the distribution being written, to read while waiting.</summary>
     public LinuxTourViewModel Tour { get; }
 
     [ObservableProperty]
@@ -114,6 +116,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         }
 
         Subtitle = _localizer.Format("Progress_Subtitle", _wizard.SourceName, _wizard.Target.FriendlyName);
+        Tour.Use(_wizard.Distro?.Id, _wizard.Distro?.Name);
         Tour.Play();
         _ = RunAsync();
     }
