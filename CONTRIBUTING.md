@@ -20,6 +20,8 @@ Thanks for helping! Bug reports, catalog updates, translations and code are all 
 | `tests/LinuxInstallHelper.Core.Tests` | xUnit tests (run on Linux and Windows). |
 | `tools/LinuxInstallHelper.LinkChecker` | Console tool used by the `check-links` workflow. |
 | `catalog/` | `distros.json`, its JSON schema, the pinned OpenPGP keys. See [catalog/README.md](catalog/README.md). |
+| `tour/` | The lessons shown while a drive is created, per distribution, and their pictures. See [tour/README.md](tour/README.md). |
+| `tools/tour-images` | Draws the tour pictures from HTML scenes (Node.js, Playwright). See its [README](tools/tour-images/README.md). |
 
 ## Building
 
@@ -51,13 +53,16 @@ Developer options: `LinuxInstallHelper.exe --page Settings --theme dark --lang f
 ## Adding or updating a distribution
 
 See [catalog/README.md](catalog/README.md#adding-a-distribution). In short: edit `catalog/distros.json`,
-bump `updated`, add the signing key to `catalog/keys/` if needed, run the tests and the link checker.
+bump `updated`, add the signing key to `catalog/keys/` if needed, write its tour in `tour/tours.json` (see
+[tour/README.md](tour/README.md)), run the tests and the link checker.
 
 ## Translations
 
 Strings live in `src/LinuxInstallHelper.App/Strings/<language>/Resources.resw` (English and French today).
 To add a language, copy `en-US/Resources.resw` to a new folder named after the language tag, translate the
-values, and add the tag to `UserSettings.SupportedLanguages` and to the language list of the settings page.
+values, and add the tag to `UserSettings.SupportedLanguages` and to the language list of the settings page. The
+distribution descriptions (`catalog/distros.json`) and the tour lessons (`tour/tours.json`) carry their English and
+French texts themselves.
 
 ## Reporting a security issue
 

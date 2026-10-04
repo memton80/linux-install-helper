@@ -1,0 +1,104 @@
+/* Canvas, numbered marks and icons shared by every scene. */
+:root {
+  /* Same color as TourMarkBrush in src/LinuxInstallHelper.App/Styles/Styles.xaml. */
+  --mark: #e6007a;
+  --mark-glow: rgb(230 0 122 / 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 480px;
+  height: 300px;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Numbered marks: placed around the element that contains them. */
+:has(> .mark) {
+  position: relative;
+}
+
+.mark {
+  position: absolute;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--mark);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.45);
+  color: #fff;
+  font: 700 12px/1 "Inter", sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.mark.r { left: calc(100% + 4px); top: 50%; translate: 0 -50%; }
+.mark.l { right: calc(100% + 4px); top: 50%; translate: 0 -50%; }
+.mark.t { bottom: calc(100% + 3px); left: 50%; translate: -50% 0; }
+.mark.b { top: calc(100% + 3px); left: 50%; translate: -50% 0; }
+.mark.tr { top: -9px; right: -9px; }
+.mark.tl { top: -9px; left: -9px; }
+.mark.br { bottom: -9px; right: -9px; }
+.mark.bl { bottom: -9px; left: -9px; }
+.mark.c { top: 50%; left: 50%; translate: -50% -50%; }
+.mark.ir { right: 4px; top: 50%; translate: 0 -50%; }
+
+/* A ring around the element the mark points to. */
+.ring {
+  outline: 2px solid var(--mark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--mark-glow);
+}
+
+.ic {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ic.s { width: 10px; height: 10px; }
+.ic.m { width: 18px; height: 18px; }
+.ic.l { width: 26px; height: 26px; }
+.ic.xl { width: 40px; height: 40px; stroke-width: 1.6; }
+
+/* Placeholder lines standing for text that does not matter. */
+.line {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+.line.w20 { width: 20%; }
+.line.w30 { width: 30%; }
+.line.w40 { width: 40%; }
+.line.w50 { width: 50%; }
+.line.w60 { width: 60%; }
+.line.w70 { width: 70%; }
+.line.w80 { width: 80%; }
+.line.w90 { width: 90%; }

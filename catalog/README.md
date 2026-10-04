@@ -90,9 +90,10 @@ lets the application find the new file without waiting for a catalog update:
 1. Use only official sources: the distribution's website, its download server or the official mirrors it lists.
 2. Add an entry to `distros.json` (copy a similar one), bump `updated`.
 3. If the distribution signs its checksums or ISO, add the fingerprint(s) and the public key in `keys/`.
-4. Run the tests and the link checker locally:
+4. Write its tour, the lessons shown while the drive is created: see [`tour/README.md`](../tour/README.md).
+5. Run the tests and the link checker locally:
    ```sh
    dotnet test tests/LinuxInstallHelper.Core.Tests
    dotnet run --project tools/LinuxInstallHelper.LinkChecker -- --only my-distro-id
    ```
-5. Open a pull request: the `check-links` workflow verifies every URL, the size, the checksum file and the signature.
+6. Open a pull request: the `check-links` workflow verifies every URL, the size, the checksum file and the signature.

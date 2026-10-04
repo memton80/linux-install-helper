@@ -52,6 +52,9 @@ BundleArtifacts/
 *.msixbundle
 *.pfx
 
+# Tour pictures generator (tools/tour-images)
+node_modules/
+
 # Misc
 *.log
 *.tmp

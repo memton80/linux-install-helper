@@ -1,0 +1,368 @@
+/* Application and installer windows, in the toolkit look of each distribution. */
+
+/* Toolkit themes */
+.t-adw { --font: "Inter"; --accent: #3584e4; --primary: #3584e4; --bg: #fafafb; --hb: #ebebed; --side: #f2f2f4; --fg: #1e1e20; --line: #d9d9dc; }
+.t-yaru { --font: "Ubuntu"; --accent: #e95420; --primary: #0e8420; --bg: #fafafa; --hb: #ebebeb; --side: #f2f2f2; --fg: #2b2b2b; --line: #d8d8d8; }
+.t-breeze { --font: "Noto Sans"; --accent: #3daee9; --primary: #3daee9; --bg: #eff0f1; --hb: #dee0e2; --side: #f7f7f7; --fg: #232629; --line: #c5c8cc; }
+.t-mint { --font: "Ubuntu"; --accent: #5e9c3a; --primary: #5e9c3a; --bg: #f7f7f7; --hb: #e8e8e8; --side: #efefef; --fg: #303030; --line: #d4d4d4; }
+.t-cosmic { --font: "Open Sans"; --accent: #63d0df; --primary: #63d0df; --bg: #272727; --hb: #1d1d1d; --side: #202020; --fg: #e6e6e6; --line: #3c3c3c; }
+.t-pop { --font: "Open Sans"; --accent: #48b9c7; --primary: #48b9c7; --bg: #333; --hb: #2b2b2b; --side: #2e2e2e; --fg: #f0f0f0; --line: #484848; }
+.t-zorin { --font: "Inter"; --accent: #15a6f0; --primary: #15a6f0; --bg: #f6f8fa; --hb: #e9edf1; --side: #fff; --fg: #1d2a38; --line: #d4dbe2; }
+.t-manjaro { --font: "Noto Sans"; --accent: #35bf5c; --primary: #2a9d4b; --bg: #eff0f1; --hb: #dee0e2; --side: #f7f7f7; --fg: #232629; --line: #c5c8cc; }
+.t-agama { --font: "Red Hat Display"; --accent: #30ba78; --primary: #30ba78; --bg: #fff; --hb: #0c322c; --side: #f3f5f4; --fg: #1f2a2a; --line: #d2d8d6; }
+.t-yast { --font: "Noto Sans"; --accent: #73ba25; --primary: #73ba25; --bg: #fff; --hb: #173f4f; --side: #173f4f; --fg: #1f2a30; --line: #cfd6d9; }
+.t-di { --font: "Noto Sans"; --accent: #d70a53; --primary: #d70a53; --bg: #f4f4f4; --hb: #2a1e3c; --side: #fff; --fg: #222; --line: #bdbdbd; }
+.t-kali { --font: "Noto Sans"; --accent: #367bf0; --primary: #367bf0; --bg: #f4f4f4; --hb: #0b0f19; --side: #fff; --fg: #222; --line: #bdbdbd; }
+
+.appwin {
+  position: absolute;
+  top: 18px;
+  left: 26px;
+  width: 428px;
+  height: 264px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 8px 26px rgb(0 0 0 / 0.5);
+  color: var(--fg);
+  font: 400 10px/1.35 var(--font), sans-serif;
+}
+
+.appwin.full {
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 300px;
+  border-radius: 0;
+}
+
+.appwin.dialog {
+  top: 70px;
+  left: 50px;
+  width: 380px;
+  height: 150px;
+}
+
+.hb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 10px 10px 0 0;
+  background: var(--hb);
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.full .hb {
+  border-radius: 0;
+}
+
+.hb .title {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.hb .end {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.hb .end i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fg) 25%, transparent);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 14px 16px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 112px;
+  padding: 10px 8px;
+  border-right: 1px solid var(--line);
+  border-bottom-left-radius: 10px;
+  background: var(--side);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+}
+
+.nav.on {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: color-mix(in srgb, var(--accent) 70%, var(--fg));
+  font-weight: 700;
+}
+
+.badge {
+  margin-left: auto;
+  padding: 0 5px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+h1.heading {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+h2.heading {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.muted {
+  color: color-mix(in srgb, var(--fg) 60%, transparent);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 11px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--fg) 9%, transparent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn.outline {
+  border: 1px solid var(--line);
+  background: transparent;
+}
+
+.btn.big {
+  height: 28px;
+  padding: 0 16px;
+  font-size: 11px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.buttons .push {
+  margin-left: auto;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 70%, white);
+  font-weight: 500;
+}
+
+.entry.focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.entry .cursor {
+  width: 1px;
+  height: 11px;
+  margin-left: -4px;
+  background: var(--fg);
+}
+
+/* View switcher (GNOME Software, Pamac) */
+.switcher {
+  display: flex;
+  gap: 2px;
+  margin: 0 auto;
+}
+
+.switcher span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.switcher .on {
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+
+/* An application page: icon, name, Install button */
+.app-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-head .name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.app-head .name b {
+  font-size: 14px;
+}
+
+.app-head .name .line {
+  width: 110px;
+}
+
+.gimp {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8b7e6b, #4d463c);
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+}
+
+.gimp.small {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+}
+
+.shots {
+  display: flex;
+  gap: 8px;
+  height: 84px;
+}
+
+.shots span {
+  flex: 1;
+  border-radius: 6px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--fg) 10%, transparent), color-mix(in srgb, var(--fg) 4%, transparent));
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Lists, checkboxes and radio buttons */
+.list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 60%, white);
+}
+
+.list .row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.list .row:last-child {
+  border-bottom: 0;
+}
+
+.row .line {
+  flex: none;
+}
+
+.row .end {
+  margin-left: auto;
+}
+
+.check,
+.radio {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid color-mix(in srgb, var(--fg) 45%, transparent);
+  border-radius: 3px;
+  color: #fff;
+}
+
+.radio {
+  border-radius: 50%;
+}
+
+.check.on {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.radio.on {
+  border: 4px solid var(--accent);
+}
+
+.check .ic {
+  width: 9px;
+  height: 9px;
+  stroke-width: 3.5;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.option.on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.option .text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.option b {
+  font-size: 11px;
+}

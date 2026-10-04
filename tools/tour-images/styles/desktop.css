@@ -1,0 +1,563 @@
+/* Desktops: wallpapers, panels, docks, application icons and windows seen from far away. */
+
+.desk {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+}
+
+.wall {
+  position: absolute;
+  inset: 0;
+}
+
+/* Wallpapers: abstract shapes in the colors of each distribution. */
+.ubuntu .wall {
+  background:
+    radial-gradient(ellipse 260px 180px at 78% 75%, #e95420cc, transparent 70%),
+    radial-gradient(ellipse 300px 200px at 20% 20%, #77216fcc, transparent 70%),
+    linear-gradient(135deg, #2c001e, #5e2750 55%, #e95420);
+}
+
+.debian .wall {
+  background:
+    radial-gradient(circle at 75% 35%, #3b6fb6 0 60px, transparent 61px),
+    radial-gradient(circle at 25% 80%, #d70a53aa 0 90px, transparent 91px),
+    linear-gradient(160deg, #1d2b4f, #0c1226);
+}
+
+.fedora .wall {
+  background:
+    radial-gradient(ellipse 280px 160px at 70% 80%, #51a2dacc, transparent 70%),
+    radial-gradient(ellipse 240px 160px at 15% 15%, #294172, transparent 70%),
+    linear-gradient(160deg, #0b1f3a, #163b6b);
+}
+
+.opensuse .wall {
+  background:
+    radial-gradient(circle at 85% 85%, #73ba2588 0 100px, transparent 101px),
+    linear-gradient(160deg, #0c2029, #173f4f);
+}
+
+.lubuntu .wall {
+  background:
+    radial-gradient(ellipse 300px 160px at 70% 70%, #0068c8, transparent 70%),
+    linear-gradient(160deg, #0b2440, #123a66);
+}
+
+.mint .wall {
+  background:
+    radial-gradient(ellipse 260px 160px at 72% 30%, #86be43aa, transparent 70%),
+    radial-gradient(ellipse 260px 200px at 20% 85%, #2f6d3a, transparent 70%),
+    linear-gradient(160deg, #1c2a1f, #2b3d2c);
+}
+
+.manjaro .wall {
+  background:
+    radial-gradient(circle at 80% 30%, #35bf5c55 0 90px, transparent 91px),
+    radial-gradient(circle at 20% 75%, #16a08555 0 110px, transparent 111px),
+    linear-gradient(160deg, #0f1f1d, #1b302d);
+}
+
+.pop .wall {
+  background:
+    radial-gradient(ellipse 260px 150px at 25% 85%, #faa41acc, transparent 70%),
+    radial-gradient(ellipse 260px 180px at 80% 25%, #48b9c7aa, transparent 70%),
+    linear-gradient(160deg, #1e2a33, #333c4a);
+}
+
+.kali .wall {
+  background:
+    radial-gradient(ellipse 260px 180px at 70% 55%, #367bf088, transparent 70%),
+    linear-gradient(160deg, #0b0f19, #121a2b);
+}
+
+.zorin .wall {
+  background:
+    radial-gradient(ellipse 320px 160px at 30% 90%, #15a6f0cc, transparent 70%),
+    radial-gradient(ellipse 280px 180px at 85% 15%, #0b5fa5, transparent 70%),
+    linear-gradient(160deg, #06213f, #0d3b66);
+}
+
+/* Application icons */
+.app {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+}
+
+.app.round {
+  border-radius: 50%;
+}
+
+.app.small {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.app.small .ic {
+  width: 11px;
+  height: 11px;
+}
+
+.a-web { background: linear-gradient(135deg, #ff9500, #e2245f 60%, #7542e5); }
+.a-files { background: linear-gradient(#5fa8f5, #2f6fd1); }
+.a-terminal { background: linear-gradient(#4a4a4a, #222); }
+.a-office { background: linear-gradient(#3e8ef7, #1b5fc5); }
+.a-mail { background: linear-gradient(#5cb6ff, #1f7ad6); }
+.a-music { background: linear-gradient(#ffcc4d, #f29100); }
+.a-photos { background: linear-gradient(#ff7a9a, #d6336c); }
+.a-settings { background: linear-gradient(#9aa4b1, #5b6573); }
+.a-help { background: linear-gradient(#a785e8, #6a42c2); }
+.a-store-ubuntu { background: linear-gradient(#ff7a45, #e95420); }
+.a-store { background: linear-gradient(#7ac0ff, #3584e4); }
+.a-install { background: linear-gradient(#f4f4f4, #c9c9c9); color: #333; }
+.a-install-red { background: linear-gradient(#ff4d7f, #d70a53); }
+.a-install-blue { background: linear-gradient(#6fb3ff, #3c6eb4); }
+.a-text { background: linear-gradient(#f0f0f0, #c8c8c8); color: #444; }
+
+/* Running indicator */
+.app.running {
+  position: relative;
+}
+
+.app.running::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  translate: -50% 0;
+  background: #fff;
+}
+
+.ubuntu-dock .app.running::after {
+  bottom: auto;
+  left: -5px;
+  top: 50%;
+  translate: 0 -50%;
+  background: #e95420;
+}
+
+/* Tray and clocks */
+.tray {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tray .ic {
+  width: 11px;
+  height: 11px;
+}
+
+.clock {
+  font-weight: 600;
+}
+
+/* Windows seen from far away */
+.win {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fafafa;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.45);
+  color: #3d3d3d;
+}
+
+.win .bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  background: #ebebeb;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.win .bar .dots {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.win .bar .dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c4c4c4;
+}
+
+.win .body {
+  display: flex;
+  height: calc(100% - 22px);
+}
+
+.win .side {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 30%;
+  padding: 10px 8px;
+  background: #f0f0f0;
+}
+
+.win .main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-content: start;
+  gap: 10px;
+  flex: 1;
+  padding: 12px;
+}
+
+.win .main .tile {
+  display: grid;
+  place-items: center;
+  height: 30px;
+  color: #5fa8f5;
+}
+
+/* Desktop icons */
+.icons {
+  position: absolute;
+  top: 26px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.desk-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 64px;
+  font: 500 9px/1.2 "Noto Sans", sans-serif;
+  text-align: center;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.8);
+}
+
+.desk-icon .app {
+  width: 30px;
+  height: 30px;
+}
+
+/* Ubuntu: GNOME with the Ubuntu dock */
+.gnome-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 17px;
+  padding: 0 8px;
+  background: #000;
+  font: 600 9px/1 "Ubuntu", sans-serif;
+}
+
+.gnome-top.adwaita {
+  font-family: "Inter", sans-serif;
+}
+
+.workspaces {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  border-radius: 8px;
+}
+
+.workspaces i {
+  width: 5px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.55);
+}
+
+.workspaces i.on {
+  width: 14px;
+  background: #fff;
+}
+
+.ubuntu-dock {
+  position: absolute;
+  top: 17px;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 36px;
+  padding: 8px 0;
+  background: rgb(20 20 20 / 0.75);
+}
+
+.ubuntu-dock .apps-button {
+  margin-top: auto;
+}
+
+.apps-button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: #fff;
+}
+
+/* GNOME overview (Debian, Fedora) */
+.overview {
+  position: absolute;
+  inset: 17px 0 0;
+  background: rgb(0 0 0 / 0.55);
+}
+
+.search {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 170px;
+  height: 20px;
+  padding: 0 8px;
+  translate: -50% 0;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.16);
+  color: rgb(255 255 255 / 0.75);
+}
+
+.workspace {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  width: 300px;
+  height: 172px;
+  translate: -50% 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.5);
+}
+
+.workspace .wall {
+  border-radius: 10px;
+}
+
+.workspace .win {
+  border-radius: 6px;
+}
+
+.dash {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  translate: -50% 0;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.14);
+}
+
+.dash-apps {
+  display: flex;
+  gap: 8px;
+}
+
+.dash .sep {
+  width: 1px;
+  height: 20px;
+  background: rgb(255 255 255 / 0.3);
+}
+
+/* Bottom panels: LXQt, Cinnamon, Xfce, Zorin OS */
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 6px;
+  font: 600 9px/1 "Noto Sans", sans-serif;
+}
+
+.panel.bottom { bottom: 0; }
+.panel.top { top: 0; height: 20px; }
+
+.panel .menu-button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.panel .tasks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel .task {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 8px 0 4px;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.12);
+}
+
+.panel .task .line {
+  width: 40px;
+  background: #fff;
+  opacity: 0.6;
+}
+
+.panel .tray {
+  margin-left: auto;
+}
+
+.lxqt-panel { background: #2b2e33; }
+.lxqt-panel .menu-button { background: #0068c8; }
+
+.cinnamon-panel { background: rgb(36 36 36 / 0.95); border-top: 1px solid #444; }
+.cinnamon-panel .menu-button { color: #86be43; }
+
+.xfce-panel { background: #3a3a3a; }
+.xfce-panel .menu-button { color: #86be43; }
+
+.zorin-panel { background: rgb(18 30 46 / 0.92); }
+.zorin-panel .menu-button { background: #15a6f0; border-radius: 6px; }
+
+.kali-panel { background: #1b1e26; gap: 8px; }
+.kali-panel .menu-button { background: #367bf0; }
+
+.kali-panel .ws {
+  display: flex;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.kali-panel .ws i {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.15);
+}
+
+.kali-panel .ws i.on {
+  background: #367bf0;
+}
+
+.shield {
+  color: #86be43;
+}
+
+/* KDE Plasma (Manjaro): a floating panel */
+.plasma-panel {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: rgb(26 32 32 / 0.9);
+  font: 600 9px/1.1 "Noto Sans", sans-serif;
+}
+
+.plasma-panel .menu-button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #35bf5c;
+  color: #0f1514;
+}
+
+.plasma-panel .tasks {
+  display: flex;
+  gap: 8px;
+}
+
+.plasma-panel .tray {
+  margin-left: auto;
+  gap: 8px;
+}
+
+.plasma-panel .clock {
+  text-align: center;
+}
+
+/* COSMIC (Pop!_OS): top panel and floating dock */
+.cosmic-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 6px;
+  background: rgb(27 27 27 / 0.95);
+  font: 600 9px/1 "Open Sans", sans-serif;
+}
+
+.cosmic-top .pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 16px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.cosmic-top .center {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.cosmic-top .tray {
+  margin-left: auto;
+  gap: 4px;
+}
+
+.cosmic-top .tray .pill {
+  padding: 0 5px;
+}
+
+.cosmic-dock {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  gap: 8px;
+  padding: 6px 8px;
+  translate: -50% 0;
+  border-radius: 12px;
+  background: rgb(27 27 27 / 0.9);
+}

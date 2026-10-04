@@ -1,0 +1,157 @@
+/* Fonts of the drawn screens (SIL Open Font License, Ubuntu Font Licence), from @fontsource. */
+
+@font-face {
+  font-family: "Ubuntu";
+  font-weight: 300;
+  src: url("../node_modules/@fontsource/ubuntu/files/ubuntu-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/ubuntu/files/ubuntu-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-weight: 500;
+  src: url("../node_modules/@fontsource/ubuntu/files/ubuntu-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/ubuntu/files/ubuntu-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ubuntu Mono";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/ubuntu-mono/files/ubuntu-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Ubuntu Mono";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/ubuntu-mono/files/ubuntu-mono-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 500;
+  src: url("../node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 600;
+  src: url("../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 500;
+  src: url("../node_modules/@fontsource/noto-sans/files/noto-sans-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 600;
+  src: url("../node_modules/@fontsource/noto-sans/files/noto-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/noto-sans/files/noto-sans-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans Mono";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/noto-sans-mono/files/noto-sans-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans Mono";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/noto-sans-mono/files/noto-sans-mono-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/open-sans/files/open-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 600;
+  src: url("../node_modules/@fontsource/open-sans/files/open-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/open-sans/files/open-sans-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Red Hat Display";
+  font-weight: 500;
+  src: url("../node_modules/@fontsource/red-hat-display/files/red-hat-display-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Red Hat Display";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/red-hat-display/files/red-hat-display-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Code Pro";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/source-code-pro/files/source-code-pro-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Code Pro";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/source-code-pro/files/source-code-pro-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cascadia Mono";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/cascadia-mono/files/cascadia-mono-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cascadia Mono";
+  font-weight: 700;
+  src: url("../node_modules/@fontsource/cascadia-mono/files/cascadia-mono-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Unifont";
+  font-weight: 400;
+  src: url("../node_modules/@fontsource/unifont/files/unifont-latin-400-normal.woff2") format("woff2");
+}

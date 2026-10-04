@@ -1,0 +1,290 @@
+/* Details of each application window. */
+
+.search-field {
+  width: 200px;
+}
+
+/* Zorin OS welcome window */
+.languages {
+  flex: 0 0 150px;
+}
+
+.languages .row {
+  min-height: 21px;
+}
+
+.languages .row.selected {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.choices {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+}
+
+.choice .btn:not(.primary) {
+  color: var(--fg);
+}
+
+/* Centered pages (Pop!_OS installer, Manjaro Hello) */
+.pane.centered {
+  align-items: center;
+  text-align: center;
+}
+
+.pane.centered .option {
+  width: 100%;
+  text-align: left;
+}
+
+.pane.centered .buttons {
+  width: 100%;
+}
+
+.pane.centered .lines {
+  width: 70%;
+  align-items: center;
+}
+
+.t-pop .pane.centered > .ic {
+  color: var(--accent);
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.groups {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+}
+
+.group .btn {
+  justify-content: center;
+  height: 16px;
+}
+
+.group .line {
+  width: 50%;
+}
+
+/* Agama */
+.t-agama .hb {
+  height: 34px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.t-agama .install {
+  margin-left: auto;
+}
+
+.t-agama .sidebar {
+  width: 128px;
+  gap: 4px;
+  border-bottom-left-radius: 0;
+}
+
+.t-agama .nav .mark {
+  left: auto;
+  right: -14px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--accent);
+}
+
+.card .text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  color: var(--fg);
+}
+
+/* YaST */
+.steps {
+  width: 150px;
+  gap: 4px;
+  padding: 18px 10px;
+  border-bottom-left-radius: 0;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.step {
+  padding: 5px 8px;
+  border-radius: 4px;
+}
+
+.step.done {
+  color: #fff;
+}
+
+.step.on {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.roles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+/* Debian and Kali installers */
+.banner {
+  height: 40px;
+  background:
+    radial-gradient(circle at 85% 50%, rgb(215 10 83 / 0.7) 0 26px, transparent 27px),
+    linear-gradient(90deg, #2a1e3c, #4a2d5c);
+}
+
+.t-kali .banner {
+  background:
+    radial-gradient(ellipse 120px 30px at 80% 60%, rgb(54 123 240 / 0.8), transparent 70%),
+    linear-gradient(90deg, #05070b, #10172a);
+}
+
+.list.tasks .row {
+  min-height: 19px;
+  padding: 2px 10px;
+}
+
+/* Ubuntu App Center */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 44px;
+  padding: 10px 0;
+  border-right: 1px solid var(--line);
+  border-bottom-left-radius: 10px;
+  background: var(--side);
+}
+
+.rail span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.rail .on {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+
+/* GNOME Software updates */
+.buttons.top {
+  margin-top: 0;
+}
+
+/* Linux Mint Update Manager, above the panel */
+.mint-updates {
+  top: 12px;
+  height: 240px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 4px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.mint-updates .list .row {
+  min-height: 26px;
+}
+
+.mint-updates ~ .panel .tray {
+  margin-left: auto;
+}
+
+/* Software Updater dialog */
+.updater {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.dialog .app-head .name {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Pamac */
+.row .name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 200px;
+}
+
+.gimp.other {
+  background: linear-gradient(135deg, #e0a050, #b0603a);
+}
+
+/* COSMIC Store */
+.t-cosmic .sidebar {
+  width: 132px;
+}

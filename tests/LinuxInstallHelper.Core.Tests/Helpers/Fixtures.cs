@@ -10,6 +10,18 @@ public static class Fixtures
 
     public static string Text(string name) => File.ReadAllText(PathOf(name));
 
+    /// <summary>A path in the repository, for the files too large to copy next to the tests (the tour images).</summary>
+    public static string Repository(params string[] parts)
+    {
+        var folder = new DirectoryInfo(AppContext.BaseDirectory);
+        while (folder is not null && !File.Exists(Path.Combine(folder.FullName, "LinuxInstallHelper.sln")))
+        {
+            folder = folder.Parent;
+        }
+
+        return Path.Combine([folder?.FullName ?? throw new DirectoryNotFoundException("The repository was not found."), .. parts]);
+    }
+
     public static string Fingerprint(string name) =>
         File.ReadAllLines(PathOf("fingerprints.txt"))
             .Select(l => l.Split('='))

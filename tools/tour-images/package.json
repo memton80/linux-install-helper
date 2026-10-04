@@ -1,0 +1,24 @@
+{
+  "name": "linux-install-helper-tour-images",
+  "private": true,
+  "description": "Draws the pictures of the Linux tour (tour/images) from HTML scenes. See README.md.",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/cascadia-mono": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/noto-sans": "5.3.0",
+    "@fontsource/noto-sans-mono": "5.3.0",
+    "@fontsource/open-sans": "5.3.0",
+    "@fontsource/red-hat-display": "5.3.0",
+    "@fontsource/source-code-pro": "5.3.0",
+    "@fontsource/ubuntu": "5.3.0",
+    "@fontsource/ubuntu-mono": "5.3.0",
+    "@fontsource/unifont": "5.3.0",
+    "lucide-static": "1.52.0",
+    "playwright": "1.56.1",
+    "sharp": "0.34.4"
+  }
+}

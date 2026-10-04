@@ -24,6 +24,11 @@
     <EmbeddedResource Include="..\..\catalog\keys\*.asc" LogicalName="catalog/keys/%(Filename)%(Extension)" />
   </ItemGroup>
 
+  <!-- The lessons shown while a drive is created; their pictures are copied by the application. -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\tour\tours.json" LogicalName="tour/tours.json" />
+  </ItemGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="LinuxInstallHelper.Core.Tests" />
   </ItemGroup>

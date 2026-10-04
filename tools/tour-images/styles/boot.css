@@ -1,0 +1,300 @@
+/* Boot menus: GRUB in text mode, themed GRUB menus, systemd-boot and the computer's own boot menu. */
+
+/* GRUB, text mode (Ubuntu, Fedora, Linux Mint, Zorin OS, Pop!_OS) */
+.grub {
+  height: 100%;
+  padding: 22px 18px 0;
+  background: #000;
+  color: #a8a8a8;
+  font: 12px/16px "Unifont", monospace;
+}
+
+.grub-title {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.grub-box {
+  height: 132px;
+  padding: 4px 2px;
+  border: 2px double #a8a8a8;
+}
+
+.grub-box li {
+  padding: 1px 6px;
+  white-space: pre;
+}
+
+.grub-box li.sel {
+  background: #a8a8a8;
+  color: #000;
+}
+
+.grub-box li > span {
+  display: inline-block;
+}
+
+.grub-help {
+  margin: 14px 8px 0;
+  white-space: pre;
+}
+
+/* systemd-boot (Arch Linux) */
+.sdboot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  background: #000;
+  color: #c8c8c8;
+  font: 12px/18px "Unifont", monospace;
+}
+
+.sdboot ul {
+  align-self: center;
+  width: 420px;
+}
+
+.sdboot li {
+  padding: 0 8px;
+  text-align: center;
+}
+
+.sdboot li.sel {
+  background: #c8c8c8;
+  color: #000;
+}
+
+.sdboot li > span {
+  display: inline-block;
+}
+
+.sdboot .timer {
+  position: absolute;
+  bottom: 18px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Themed GRUB menus */
+.themed {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 28px 40px;
+  color: #fff;
+  font: 13px/1 "Noto Sans", sans-serif;
+}
+
+.themed .banner {
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.themed ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.themed li {
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.themed li > span {
+  display: inline-block;
+}
+
+.themed li.sub {
+  margin-left: 26px;
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.themed li.option {
+  font-size: 11px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.themed .hint {
+  margin-top: auto;
+  font-size: 10px;
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* Debian live (trixie artwork) */
+.debian-live {
+  background:
+    radial-gradient(circle at 85% 20%, rgb(255 255 255 / 0.12) 0 70px, transparent 71px),
+    radial-gradient(circle at 92% 85%, rgb(215 10 83 / 0.45) 0 90px, transparent 91px),
+    linear-gradient(135deg, #2a1e3c, #120c1d);
+}
+
+.debian-live li.sel {
+  background: #d70a53;
+}
+
+/* Debian installer (netinst) and Kali installer */
+.d-i {
+  background: linear-gradient(160deg, #1b2a3a, #0a121a);
+}
+
+.d-i .banner {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.25);
+}
+
+.d-i li.sel {
+  background: #d70a53;
+}
+
+.kali-installer {
+  background:
+    radial-gradient(ellipse at 80% 70%, rgb(54 123 240 / 0.35) 0 120px, transparent 160px),
+    linear-gradient(160deg, #10141c, #05070b);
+}
+
+.kali-installer li.sel {
+  background: #367bf0;
+}
+
+/* Manjaro */
+.manjaro {
+  background: linear-gradient(160deg, #1d2b2a, #0f1514);
+}
+
+.manjaro li.sel {
+  background: #35bf5c;
+  color: #0f1514;
+}
+
+.manjaro li.option {
+  padding: 3px 12px;
+}
+
+/* openSUSE (installer, Agama, installed system) */
+.opensuse {
+  background:
+    radial-gradient(circle at 90% 100%, rgb(115 186 37 / 0.35) 0 110px, transparent 111px),
+    linear-gradient(160deg, #173f4f, #0c2029);
+}
+
+.opensuse li.sel {
+  background: #73ba25;
+  color: #0c2029;
+}
+
+/* The computer's own boot menu */
+.firmware {
+  height: 100%;
+  padding: 26px 34px;
+  background: #0a2a6b;
+  color: #d8e2f5;
+  font: 12px/1 "Noto Sans Mono", monospace;
+}
+
+.firmware .box {
+  padding: 14px 16px 16px;
+  border: 1px solid #8aa2d0;
+  background: #0d3685;
+}
+
+.firmware .box h1 {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.firmware li {
+  padding: 6px 10px;
+}
+
+.firmware li > span {
+  display: inline-block;
+}
+
+.firmware li.sel {
+  background: #d8e2f5;
+  color: #0a2a6b;
+}
+
+.firmware .keys {
+  margin-top: 16px;
+  font-size: 10px;
+  line-height: 15px;
+  color: rgb(216 226 245 / 0.85);
+}
+
+/* UEFI setup, Secure Boot */
+.setup {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #c8ccd4;
+  color: #1a2030;
+  font: 11px/1 "Noto Sans Mono", monospace;
+}
+
+.setup .tabs {
+  display: flex;
+  gap: 2px;
+  padding: 8px 12px 0;
+  background: #1f3a78;
+}
+
+.setup .tabs > span {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #d8e2f5;
+}
+
+.setup .tabs .on {
+  background: #c8ccd4;
+  color: #1f3a78;
+  font-weight: 700;
+}
+
+.setup .panel {
+  display: flex;
+  flex: 1;
+}
+
+.setup .options {
+  flex: 1;
+  padding: 16px 14px;
+}
+
+.setup .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+}
+
+.setup .row.sel {
+  background: #fff;
+}
+
+.setup .row .value {
+  display: inline-block;
+  color: #1f3a78;
+  font-weight: 700;
+}
+
+.setup .help {
+  width: 130px;
+  padding: 16px 12px;
+  border-left: 1px solid #9aa2b2;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.setup .footer {
+  padding: 8px 14px;
+  background: #1f3a78;
+  color: #d8e2f5;
+  font-size: 10px;
+}

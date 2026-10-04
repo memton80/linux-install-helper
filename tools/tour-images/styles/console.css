@@ -1,0 +1,182 @@
+/* Terminals, text consoles and text installers. */
+
+.term {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  width: 444px;
+  height: 268px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #1e1e1e;
+  box-shadow: 0 8px 26px rgb(0 0 0 / 0.55);
+  color: #d4d4d4;
+}
+
+.term .hb {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 10px 10px 0 0;
+  background: #2d2d2d;
+  font: 700 10px/1 "Inter", sans-serif;
+}
+
+.term .hb .title {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.term .hb .end {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.term .hb .end i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #555;
+}
+
+.screen,
+.term pre {
+  padding: 8px 10px;
+  font: 10.5px/15px "Ubuntu Mono", monospace;
+  white-space: pre-wrap;
+}
+
+.term pre > span,
+.screen pre > span {
+  display: inline-block;
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 6px;
+  height: 11px;
+  vertical-align: -2px;
+  background: #d4d4d4;
+}
+
+/* Prompt colors (class names never clash with the side of a mark: r, l, t, b…) */
+.c-user { color: #8ae234; font-weight: 700; }
+.c-path { color: #729fcf; font-weight: 700; }
+.c-root { color: #ef2929; font-weight: 700; }
+.c-kali { color: #367bf0; font-weight: 700; }
+.c-dim { color: #9a9a9a; }
+
+/* Konsole (Arch, Manjaro), openSUSE, Kali */
+.konsole { background: #232627; }
+.konsole .hb { background: #2a2e32; font-family: "Noto Sans", sans-serif; }
+.konsole pre { font-family: "Noto Sans Mono", monospace; font-size: 9.5px; }
+
+.suse pre { font-family: "Source Code Pro", monospace; font-size: 9.5px; }
+
+.kali-term { background: #1b1e26; }
+.kali-term .hb { background: #13151b; }
+.kali-term pre { font-family: "Noto Sans Mono", monospace; font-size: 9.5px; }
+
+/* Windows Terminal */
+.wt {
+  background: #0c0c0c;
+}
+
+.wt .hb {
+  gap: 2px;
+  padding: 0 4px 0 6px;
+  background: #1f1f1f;
+}
+
+.wt .tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  margin-top: 6px;
+  padding: 0 10px;
+  border-radius: 6px 6px 0 0;
+  background: #0c0c0c;
+  font-weight: 500;
+}
+
+.wt pre {
+  font-family: "Cascadia Mono", monospace;
+  font-size: 9px;
+  line-height: 13px;
+}
+
+/* Full screen text consoles (Arch Linux, archinstall) */
+.console {
+  height: 100%;
+  background: #000;
+  color: #c8c8c8;
+}
+
+.console pre {
+  padding: 12px 14px;
+  font: 10px/15px "Unifont", monospace;
+  white-space: pre-wrap;
+}
+
+.console pre > span {
+  display: inline-block;
+}
+
+.ai-sel {
+  background: #3f8fd1;
+  color: #fff;
+}
+
+/* Subiquity (Ubuntu Server installer) */
+.subiquity {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #300a24;
+  color: #fff;
+  font: 11px/16px "Ubuntu Mono", monospace;
+}
+
+.subiquity .header {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: #e95420;
+  font-weight: 700;
+}
+
+.subiquity .body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 26px;
+}
+
+.subiquity .field {
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.subiquity .focus {
+  background: #e95420;
+}
+
+.subiquity .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-bottom: 22px;
+}
+
+.subiquity .buttons > span {
+  display: inline-block;
+  min-width: 90px;
+  text-align: center;
+}

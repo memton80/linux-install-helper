@@ -1,0 +1,2449 @@
+{
+  "lessons": {
+    "generic-try": {
+      "glyph": "\uE768",
+      "title": {
+        "en": "Try it without changing anything",
+        "fr": "Essayez sans rien changer"
+      },
+      "body": {
+        "en": "When you start from the drive, choose \"Try\" (or \"Live\"): Linux runs from the drive without changing anything on your PC. Use it to check that Wi-Fi, sound, the screen and the touchpad work before you install anything.",
+        "fr": "En démarrant sur la clé, choisissez « Essayer » (ou « Live ») : Linux fonctionne depuis la clé, sans rien modifier sur votre PC. Profitez-en pour vérifier que le Wi-Fi, le son, l'écran et le pavé tactile fonctionnent avant d'installer quoi que ce soit."
+      }
+    },
+    "generic-desktop": {
+      "glyph": "\uE7F4",
+      "title": {
+        "en": "A familiar desktop",
+        "fr": "Un bureau familier"
+      },
+      "body": {
+        "en": "You will find a menu to start applications, a taskbar and windows. The look depends on the desktop environment (GNOME, KDE Plasma, Cinnamon…) and almost everything can be customized.",
+        "fr": "Vous retrouverez un menu pour lancer les applications, une barre des tâches et des fenêtres. L'apparence dépend de l'environnement de bureau (GNOME, KDE Plasma, Cinnamon…) et presque tout se personnalise."
+      },
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "Applications menu (Windows key, called \"Super\"), dock or taskbar",
+        "fr": "Menu des applications (touche Windows, appelée « Super »), dock ou barre des tâches"
+      }
+    },
+    "generic-software": {
+      "glyph": "\uE719",
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "On Linux, you rarely download software from a website. Open the distribution's software center, search for the application and click Install: it is free, checked and updated automatically.",
+        "fr": "Sous Linux, on télécharge rarement un logiciel sur un site web. Ouvrez la logithèque de la distribution, cherchez l'application et cliquez sur Installer : c'est gratuit, vérifié et mis à jour automatiquement."
+      },
+      "windows": {
+        "en": "Download an .exe file and run the installer",
+        "fr": "Télécharger un fichier .exe et lancer l'installateur"
+      },
+      "linux": {
+        "en": "The software center (Software, Discover, Software Manager…): search, then Install",
+        "fr": "La logithèque (Logiciels, Discover, Gestionnaire de logiciels…) : chercher, puis Installer"
+      }
+    },
+    "generic-updates": {
+      "glyph": "\uE895",
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "A single tool updates the system and all your applications at once. Linux never restarts without asking you, and most updates apply without a restart.",
+        "fr": "Un seul outil met à jour le système et toutes vos applications en même temps. Linux ne redémarre jamais sans vous le demander, et la plupart des mises à jour s'appliquent sans redémarrage."
+      },
+      "windows": {
+        "en": "Windows Update, plus each application's own updates",
+        "fr": "Windows Update, plus la mise à jour de chaque logiciel"
+      },
+      "linux": {
+        "en": "The update manager, for everything at once",
+        "fr": "Le gestionnaire de mises à jour, pour tout à la fois"
+      }
+    },
+    "generic-files": {
+      "glyph": "\uE8B7",
+      "title": {
+        "en": "Your files and drives",
+        "fr": "Vos fichiers et vos disques"
+      },
+      "body": {
+        "en": "Your documents are in your home folder, with the same subfolders: Documents, Pictures, Downloads… There are no drive letters: USB drives and other disks show up in the sidebar of the file manager.",
+        "fr": "Vos documents sont dans votre dossier personnel, avec les mêmes sous-dossiers : Documents, Images, Téléchargements… Il n'y a pas de lettres de lecteur : les clés USB et les autres disques apparaissent dans la barre latérale du gestionnaire de fichiers."
+      },
+      "windows": {
+        "en": "C:\\Users\\you, drives C:, D:…",
+        "fr": "C:\\Users\\vous, lecteurs C:, D:…"
+      },
+      "linux": {
+        "en": "/home/you (the \"Home\" folder), disks in the file manager",
+        "fr": "/home/vous (le « Dossier personnel »), disques dans le gestionnaire de fichiers"
+      }
+    },
+    "generic-apps": {
+      "glyph": "\uE71D",
+      "title": {
+        "en": "Your usual applications",
+        "fr": "Vos applications habituelles"
+      },
+      "body": {
+        "en": "Almost every use has a free equivalent, and many applications also exist natively on Linux: Chrome, Spotify, Discord, Zoom, Steam… Your Word and Excel files open in LibreOffice.",
+        "fr": "Presque chaque usage a un équivalent gratuit, et beaucoup d'applications existent aussi directement sous Linux : Chrome, Spotify, Discord, Zoom, Steam… Vos fichiers Word et Excel s'ouvrent dans LibreOffice."
+      },
+      "windows": {
+        "en": "Microsoft Office, Edge, Paint, Media Player",
+        "fr": "Microsoft Office, Edge, Paint, Lecteur multimédia"
+      },
+      "linux": {
+        "en": "LibreOffice, Firefox (or Chrome), Pinta or GIMP, VLC",
+        "fr": "LibreOffice, Firefox (ou Chrome), Pinta ou GIMP, VLC"
+      }
+    },
+    "generic-games": {
+      "glyph": "\uE7FC",
+      "title": {
+        "en": "Games and Windows software",
+        "fr": "Jeux et logiciels Windows"
+      },
+      "body": {
+        "en": "Steam runs a large share of Windows games thanks to Proton: check protondb.com before buying. Online games with anti-cheat often do not work. Some Windows programs run with Wine or Bottles, but not all: check the ones you really need before leaving Windows.",
+        "fr": "Steam fait tourner une grande partie des jeux Windows grâce à Proton : consultez protondb.com avant d'acheter. Les jeux en ligne avec un anti-triche ne fonctionnent souvent pas. Certains logiciels Windows marchent avec Wine ou Bottles, mais pas tous : vérifiez ceux dont vous avez vraiment besoin avant de quitter Windows."
+      },
+      "windows": {
+        "en": "Games and .exe programs",
+        "fr": "Jeux et programmes .exe"
+      },
+      "linux": {
+        "en": "Steam with Proton for games, Bottles or Wine for some programs",
+        "fr": "Steam avec Proton pour les jeux, Bottles ou Wine pour certains programmes"
+      }
+    },
+    "generic-terminal": {
+      "glyph": "\uE756",
+      "title": {
+        "en": "The terminal, without fear",
+        "fr": "Le terminal, sans peur"
+      },
+      "body": {
+        "en": "The terminal is optional: everything can also be done with the mouse. But many guides give commands to copy, so the basics are worth knowing. Open it with Ctrl+Alt+T on most distributions.",
+        "fr": "Le terminal n'est pas obligatoire : tout se fait aussi à la souris. Mais beaucoup de guides donnent des commandes à copier, alors autant connaître les bases. Ouvrez-le avec Ctrl+Alt+T sur la plupart des distributions."
+      },
+      "windows": {
+        "en": "Command prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "pwd            # where am I?\nls             # list the files\ncd Documents   # go into a folder\ncd ..          # go up one folder",
+        "fr": "pwd            # où suis-je ?\nls             # liste les fichiers\ncd Documents   # entre dans un dossier\ncd ..          # remonte d'un dossier"
+      }
+    },
+    "generic-sudo": {
+      "glyph": "\uE7EF",
+      "title": {
+        "en": "Administrator rights",
+        "fr": "Les droits d'administrateur"
+      },
+      "body": {
+        "en": "To change the system, Linux asks for your password. In the terminal, you write sudo before the command. When you type the password, nothing is shown, not even stars: that is normal, type it and press Enter. Never run a sudo command found on a site you do not trust.",
+        "fr": "Pour modifier le système, Linux demande votre mot de passe. Dans le terminal, on écrit sudo devant la commande. Quand vous tapez le mot de passe, rien ne s'affiche, pas même des étoiles : c'est normal, tapez-le puis appuyez sur Entrée. Ne lancez jamais une commande sudo trouvée sur un site dont vous n'êtes pas sûr."
+      },
+      "windows": {
+        "en": "\"Run as administrator\"",
+        "fr": "« Exécuter en tant qu'administrateur »"
+      },
+      "linux": {
+        "en": "Your password in a window, or sudo before a command",
+        "fr": "Votre mot de passe dans une fenêtre, ou sudo devant une commande"
+      },
+      "command": {
+        "en": "sudo apt update && sudo apt upgrade   # Ubuntu, Mint, Pop!_OS, Debian…\nsudo dnf upgrade                      # Fedora",
+        "fr": "sudo apt update && sudo apt upgrade   # Ubuntu, Mint, Pop!_OS, Debian…\nsudo dnf upgrade                      # Fedora"
+      }
+    },
+    "generic-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Linux community is very active and welcoming. Your distribution's wiki and forum are the best places to start, and Ask Ubuntu or the Arch Wiki answer most questions. Searching for \"distribution name + your problem\" often gives the solution.",
+        "fr": "La communauté Linux est très active et accueillante. Le wiki et le forum de votre distribution sont les meilleurs points de départ ; en français, doc.ubuntu-fr.org couvre la plupart des questions. Chercher « nom de la distribution + votre problème » donne souvent la solution."
+      }
+    },
+    "usb-boot": {
+      "glyph": "\uE88E",
+      "image": "firmware-boot-menu",
+      "title": {
+        "en": "Start from the USB drive",
+        "fr": "Démarrer sur la clé USB"
+      },
+      "body": {
+        "en": "Plug the drive into the computer while it is off, then switch it on while pressing the boot menu key several times. It depends on the maker: F12 (Dell, Lenovo, Acer), F9 (HP), F8 or Esc (Asus), F11 (MSI)… It is often shown briefly on the screen.",
+        "fr": "Branchez la clé sur l'ordinateur éteint, puis allumez-le en appuyant plusieurs fois sur la touche du menu de démarrage. Elle dépend du fabricant : F12 (Dell, Lenovo, Acer), F9 (HP), F8 ou Échap (Asus), F11 (MSI)… Elle s'affiche souvent brièvement à l'écran."
+      },
+      "steps": [
+        {
+          "en": "Pick the USB drive with the arrow keys and press Enter. If it is listed twice, take the line that starts with \"UEFI\".",
+          "fr": "Choisissez la clé USB avec les flèches puis appuyez sur Entrée. Si elle apparaît deux fois, prenez la ligne qui commence par « UEFI »."
+        },
+        {
+          "en": "\"Windows Boot Manager\" starts Windows again: not this one.",
+          "fr": "« Windows Boot Manager » redémarre Windows : ce n'est pas celle-ci."
+        }
+      ]
+    },
+    "secureboot-off": {
+      "glyph": "\uE72E",
+      "image": "uefi-secureboot",
+      "title": {
+        "en": "First, turn off Secure Boot",
+        "fr": "D'abord, désactivez le Secure Boot"
+      },
+      "body": {
+        "en": "This distribution does not start while Secure Boot is on. Open the UEFI settings: press F2 or Del right after switching on, or from Windows go to Settings > System > Recovery > Advanced startup, then Troubleshoot > Advanced options > UEFI Firmware Settings. If Windows uses BitLocker, write down its recovery key first: Windows may ask for it at the next start.",
+        "fr": "Cette distribution ne démarre pas tant que le Secure Boot est activé. Ouvrez les réglages UEFI : F2 ou Suppr juste après l'allumage, ou depuis Windows : Paramètres > Système > Récupération > Démarrage avancé, puis Dépannage > Options avancées > Paramètres du microprogramme UEFI. Si Windows utilise BitLocker, notez d'abord sa clé de récupération : Windows peut la demander au démarrage suivant."
+      },
+      "steps": [
+        {
+          "en": "Open the Security tab (Boot or Authentication on some computers).",
+          "fr": "Ouvrez l'onglet Security (Boot ou Authentication sur certains ordinateurs)."
+        },
+        {
+          "en": "Set \"Secure Boot\" to Disabled, then save with F10 and restart.",
+          "fr": "Passez « Secure Boot » sur Disabled, puis enregistrez avec F10 et redémarrez."
+        }
+      ]
+    },
+    "terminal-apt": {
+      "glyph": "\uE756",
+      "image": "terminal-apt",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "The terminal is optional: everything can be done with the mouse. But guides often give commands to copy, so the basics help. Open it with Ctrl+Alt+T. To change the system, you write sudo before the command.",
+        "fr": "Le terminal est facultatif : tout se fait aussi à la souris. Mais les guides donnent souvent des commandes à copier, alors autant connaître les bases. Ouvrez-le avec Ctrl+Alt+T. Pour modifier le système, on écrit sudo devant la commande."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with Y, then Enter.",
+          "fr": "Confirmez avec O (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo apt update && sudo apt upgrade   # update everything\nsudo apt install gimp                 # install an application",
+        "fr": "sudo apt update && sudo apt upgrade   # tout mettre à jour\nsudo apt install gimp                 # installer une application"
+      }
+    },
+    "terminal-apt-gnome": {
+      "glyph": "\uE756",
+      "image": "terminal-apt",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "The terminal is optional, but guides often give commands to copy. Press the Windows key and type \"Terminal\" (it may be called Console). To change the system, you write sudo before the command.",
+        "fr": "Le terminal est facultatif, mais les guides donnent souvent des commandes à copier. Appuyez sur la touche Windows et tapez « Terminal » (il s'appelle parfois Console). Pour modifier le système, on écrit sudo devant la commande."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with Y, then Enter.",
+          "fr": "Confirmez avec O (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo apt update && sudo apt upgrade   # update everything\nsudo apt install gimp                 # install an application",
+        "fr": "sudo apt update && sudo apt upgrade   # tout mettre à jour\nsudo apt install gimp                 # installer une application"
+      }
+    },
+    "ubuntu-boot": {
+      "glyph": "\uE7E8",
+      "image": "ubuntu-boot",
+      "title": {
+        "en": "Ubuntu's boot menu",
+        "fr": "Le menu de démarrage d'Ubuntu"
+      },
+      "body": {
+        "en": "A few seconds later, a black menu appears. You choose with the arrow keys and confirm with Enter: the mouse does not work here.",
+        "fr": "Quelques secondes plus tard, un menu noir s'affiche. On y choisit avec les flèches et on valide avec Entrée : la souris ne fonctionne pas ici."
+      },
+      "steps": [
+        {
+          "en": "\"Try or Install Ubuntu\" is already selected: press Enter. Without a key press, it starts by itself after a few seconds.",
+          "fr": "« Try or Install Ubuntu » est déjà sélectionnée : appuyez sur Entrée. Sans rien toucher, elle démarre seule au bout de quelques secondes."
+        },
+        {
+          "en": "Black or frozen screen afterwards? Restart and pick \"Ubuntu (safe graphics)\".",
+          "fr": "Écran noir ou figé ensuite ? Redémarrez et choisissez « Ubuntu (safe graphics) »."
+        }
+      ]
+    },
+    "ubuntu-start": {
+      "glyph": "\uE768",
+      "image": "ubuntu-start",
+      "localizedImage": true,
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "The installer opens and asks for the language, accessibility, keyboard and network. Then it asks what you want to do. When you try Ubuntu, nothing changes on your PC: check that Wi-Fi, sound, screen and touchpad work.",
+        "fr": "L'installateur s'ouvre et demande la langue, l'accessibilité, le clavier et le réseau. Il vous demande ensuite ce que vous voulez faire. En mode essai, rien n'est modifié sur votre PC : vérifiez que le Wi-Fi, le son, l'écran et le pavé tactile fonctionnent."
+      },
+      "steps": [
+        {
+          "en": "Select \"Try Ubuntu\".",
+          "fr": "Sélectionnez « Essayer Ubuntu »."
+        },
+        {
+          "en": "Click Close: the desktop appears. To install later, open \"Install Ubuntu\" from the dock on the left.",
+          "fr": "Cliquez sur Fermer : le bureau s'affiche. Pour installer plus tard, ouvrez « Installer Ubuntu » depuis le dock, à gauche."
+        }
+      ]
+    },
+    "ubuntu-desktop": {
+      "glyph": "\uE7F4",
+      "image": "ubuntu-desktop",
+      "title": {
+        "en": "The Ubuntu desktop",
+        "fr": "Le bureau d'Ubuntu"
+      },
+      "body": {
+        "en": "Ubuntu uses GNOME, with a dock on the left instead of a taskbar. The Windows key (called \"Super\") shows the open windows and a search box: type the name of an application, then press Enter.",
+        "fr": "Ubuntu utilise GNOME, avec un dock à gauche à la place de la barre des tâches. La touche Windows (appelée « Super ») affiche les fenêtres ouvertes et une recherche : tapez le nom d'une application puis Entrée."
+      },
+      "steps": [
+        {
+          "en": "The dock: your favorite applications and the open ones.",
+          "fr": "Le dock : vos applications favorites et celles qui sont ouvertes."
+        },
+        {
+          "en": "\"Show Apps\", at the bottom of the dock: all your applications.",
+          "fr": "« Afficher les applications », en bas du dock : toutes vos applications."
+        },
+        {
+          "en": "Top right: Wi-Fi, sound, battery and the button to shut down.",
+          "fr": "En haut à droite : Wi-Fi, son, batterie et le bouton pour éteindre."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "\"Show Apps\" button and the dock",
+        "fr": "Bouton « Afficher les applications » et dock"
+      }
+    },
+    "ubuntu-software": {
+      "glyph": "\uE719",
+      "image": "ubuntu-software",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open the App Center from the dock. Everything there is free, checked and updated automatically: VLC, Spotify, Discord, Steam…",
+        "fr": "Ouvrez le Centre d'applications depuis le dock. Tout y est gratuit, vérifié et mis à jour automatiquement : VLC, Spotify, Discord, Steam…"
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "ubuntu-updates": {
+      "glyph": "\uE895",
+      "image": "ubuntu-updates",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "When updates are ready, the Software Updater opens by itself: it updates Ubuntu and your applications in one go. Applications from the App Center also update on their own in the background.",
+        "fr": "Quand des mises à jour sont prêtes, le gestionnaire de mises à jour s'ouvre tout seul : il met à jour Ubuntu et vos applications en une fois. Celles du Centre d'applications se mettent aussi à jour seules, en arrière-plan."
+      },
+      "steps": [
+        {
+          "en": "Click \"Install Now\" and type your password.",
+          "fr": "Cliquez sur « Installer maintenant » et tapez votre mot de passe."
+        },
+        {
+          "en": "Restart only when it asks you to.",
+          "fr": "Redémarrez seulement s'il vous le demande."
+        }
+      ],
+      "windows": {
+        "en": "Windows Update, plus updating each application",
+        "fr": "Windows Update, plus la mise à jour de chaque logiciel"
+      },
+      "linux": {
+        "en": "The Software Updater, for everything at once",
+        "fr": "Le gestionnaire de mises à jour, pour tout à la fois"
+      }
+    },
+    "ubuntu-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "Ask Ubuntu (askubuntu.com), Ubuntu Discourse (discourse.ubuntu.com) and the official help (help.ubuntu.com) answer most questions. Searching for \"Ubuntu + your problem\" often gives the solution.",
+        "fr": "En français, doc.ubuntu-fr.org et son forum (forum.ubuntu-fr.org) répondent à presque tout. En anglais : askubuntu.com et discourse.ubuntu.com. Chercher « Ubuntu + votre problème » donne souvent la solution."
+      }
+    },
+    "ubuntu-server-boot": {
+      "glyph": "\uE7E8",
+      "image": "ubuntu-server-boot",
+      "title": {
+        "en": "The boot menu",
+        "fr": "Le menu de démarrage"
+      },
+      "body": {
+        "en": "A black menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu noir s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "\"Try or Install Ubuntu Server\" is already selected: press Enter.",
+          "fr": "« Try or Install Ubuntu Server » est déjà sélectionnée : appuyez sur Entrée."
+        }
+      ]
+    },
+    "ubuntu-server-installer": {
+      "glyph": "\uE765",
+      "image": "ubuntu-server-installer",
+      "title": {
+        "en": "An installer driven by the keyboard",
+        "fr": "Un installateur au clavier"
+      },
+      "body": {
+        "en": "No mouse here: the Subiquity installer works with the keyboard and may stay in English. At the storage step, \"Use an entire disk\" erases the whole disk you choose.",
+        "fr": "Pas de souris ici : l'installateur Subiquity se pilote au clavier et peut rester en anglais. À l'étape du stockage, « Use an entire disk » efface tout le disque choisi."
+      },
+      "steps": [
+        {
+          "en": "Move with the arrow keys or Tab, tick with Space: tick \"Install OpenSSH server\" to manage the server from Windows.",
+          "fr": "Déplacez-vous avec les flèches ou Tab, cochez avec Espace : cochez « Install OpenSSH server » pour piloter le serveur depuis Windows."
+        },
+        {
+          "en": "Enter on \"Done\" goes to the next screen.",
+          "fr": "Entrée sur « Done » passe à l'écran suivant."
+        }
+      ]
+    },
+    "ubuntu-server-login": {
+      "glyph": "\uE756",
+      "title": {
+        "en": "After the installation",
+        "fr": "Après l'installation"
+      },
+      "body": {
+        "en": "Choose \"Reboot Now\", remove the drive when asked, then log in with the user name and password you chose. There is no desktop: that is normal for a server. Security updates install themselves automatically.",
+        "fr": "Choisissez « Reboot Now », retirez la clé quand c'est demandé, puis connectez-vous avec le nom d'utilisateur et le mot de passe choisis. Il n'y a pas de bureau : c'est normal pour un serveur. Les mises à jour de sécurité s'installent toutes seules."
+      },
+      "command": {
+        "en": "ip -br a                              # the server's IP address\nsudo apt update && sudo apt upgrade   # update everything",
+        "fr": "ip -br a                              # adresse IP du serveur\nsudo apt update && sudo apt upgrade   # tout mettre à jour"
+      }
+    },
+    "server-ssh": {
+      "glyph": "\uE703",
+      "image": "ssh-powershell",
+      "title": {
+        "en": "Manage the server from Windows",
+        "fr": "Piloter le serveur depuis Windows"
+      },
+      "body": {
+        "en": "Windows 10 and 11 include an SSH client. Open PowerShell or Windows Terminal and connect with the server's IP address: you then type the server's commands from your PC.",
+        "fr": "Windows 10 et 11 incluent un client SSH. Ouvrez PowerShell ou le Terminal Windows et connectez-vous avec l'adresse IP du serveur : vous tapez alors les commandes du serveur depuis votre PC."
+      },
+      "steps": [
+        {
+          "en": "Type ssh, your user name, @ and the address of the server.",
+          "fr": "Tapez ssh, votre nom d'utilisateur, @ et l'adresse du serveur."
+        },
+        {
+          "en": "The first time, type yes to accept the server's key.",
+          "fr": "La première fois, tapez yes pour accepter la clé du serveur."
+        },
+        {
+          "en": "Your password (nothing is shown), then Enter: you are on the server.",
+          "fr": "Votre mot de passe (rien ne s'affiche), puis Entrée : vous êtes sur le serveur."
+        }
+      ],
+      "command": {
+        "en": "ssh you@192.168.1.50",
+        "fr": "ssh vous@192.168.1.50"
+      }
+    },
+    "ubuntu-server-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The official documentation (documentation.ubuntu.com/server) explains each service step by step: web server, file sharing, Docker… Ask Ubuntu (askubuntu.com) answers most questions.",
+        "fr": "La documentation officielle (documentation.ubuntu.com/server) explique chaque service pas à pas : serveur web, partage de fichiers, Docker… En français, doc.ubuntu-fr.org a aussi une section serveur."
+      }
+    },
+    "lubuntu-boot": {
+      "glyph": "\uE7E8",
+      "image": "lubuntu-boot",
+      "title": {
+        "en": "Lubuntu's boot menu",
+        "fr": "Le menu de démarrage de Lubuntu"
+      },
+      "body": {
+        "en": "A black menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu noir s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "\"Try or Install Lubuntu\" is already selected: press Enter. Without a key press, it starts by itself after a few seconds.",
+          "fr": "« Try or Install Lubuntu » est déjà sélectionnée : appuyez sur Entrée. Sans rien toucher, elle démarre seule au bout de quelques secondes."
+        },
+        {
+          "en": "Black or frozen screen afterwards? Restart and pick \"Lubuntu (safe graphics)\".",
+          "fr": "Écran noir ou figé ensuite ? Redémarrez et choisissez « Lubuntu (safe graphics) »."
+        }
+      ]
+    },
+    "lubuntu-start": {
+      "glyph": "\uE768",
+      "image": "lubuntu-start",
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "Lubuntu starts straight on a trial desktop: nothing changes on your PC until you install. Check that Wi-Fi, sound and screen work.",
+        "fr": "Lubuntu démarre directement sur un bureau d'essai : rien n'est modifié sur votre PC tant que vous n'installez pas. Vérifiez que le Wi-Fi, le son et l'écran fonctionnent."
+      },
+      "steps": [
+        {
+          "en": "To install, double-click \"Install Lubuntu\" on the desktop: the installer lets you choose French or English.",
+          "fr": "Pour installer, double-cliquez sur « Install Lubuntu » sur le bureau : l'installateur vous laisse choisir le français."
+        }
+      ]
+    },
+    "lubuntu-desktop": {
+      "glyph": "\uE7F4",
+      "image": "lubuntu-desktop",
+      "title": {
+        "en": "The Lubuntu desktop",
+        "fr": "Le bureau de Lubuntu"
+      },
+      "body": {
+        "en": "Lubuntu uses LXQt, a light desktop laid out like Windows: a menu at the bottom left and a taskbar.",
+        "fr": "Lubuntu utilise LXQt, un bureau léger organisé comme Windows : un menu en bas à gauche et une barre des tâches."
+      },
+      "steps": [
+        {
+          "en": "The menu: applications, settings and the button to shut down.",
+          "fr": "Le menu : applications, paramètres et le bouton pour éteindre."
+        },
+        {
+          "en": "The taskbar: the open windows.",
+          "fr": "La barre des tâches : les fenêtres ouvertes."
+        },
+        {
+          "en": "Network, sound and the time.",
+          "fr": "Réseau, son et l'heure."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The same, at the same places",
+        "fr": "Les mêmes, aux mêmes endroits"
+      }
+    },
+    "lubuntu-software": {
+      "glyph": "\uE719",
+      "image": "discover",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open Discover from the menu (System Tools). Everything there is free and checked: VLC, GIMP, LibreOffice…",
+        "fr": "Ouvrez Discover depuis le menu (Outils système). Tout y est gratuit et vérifié : VLC, GIMP, LibreOffice…"
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "lubuntu-updates": {
+      "glyph": "\uE895",
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "When updates are ready, a notification offers to install them; you can also open \"Lubuntu Update\" from the menu. It updates the system and all your applications at once.",
+        "fr": "Quand des mises à jour sont prêtes, une notification propose de les installer ; vous pouvez aussi ouvrir « Lubuntu Update » depuis le menu. Il met à jour le système et toutes vos applications à la fois."
+      },
+      "windows": {
+        "en": "Windows Update, plus updating each application",
+        "fr": "Windows Update, plus la mise à jour de chaque logiciel"
+      },
+      "linux": {
+        "en": "Lubuntu Update, for everything at once",
+        "fr": "Lubuntu Update, pour tout à la fois"
+      }
+    },
+    "lubuntu-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Lubuntu manual (manual.lubuntu.me) and forum (discourse.lubuntu.me) are the first places to look. Lubuntu is Ubuntu: Ask Ubuntu (askubuntu.com) answers most questions too.",
+        "fr": "Le manuel (manual.lubuntu.me) et le forum (discourse.lubuntu.me) de Lubuntu sont les premiers endroits où chercher. Lubuntu, c'est Ubuntu : doc.ubuntu-fr.org et forum.ubuntu-fr.org répondent aussi à presque tout."
+      }
+    },
+    "debian-live-boot": {
+      "glyph": "\uE7E8",
+      "image": "debian-live-boot",
+      "title": {
+        "en": "Debian's boot menu",
+        "fr": "Le menu de démarrage de Debian"
+      },
+      "body": {
+        "en": "A menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "\"Live system (amd64)\": try Debian, then install it from the desktop.",
+          "fr": "« Live system (amd64) » : essayez Debian, puis installez-la depuis le bureau."
+        },
+        {
+          "en": "\"Start installer\" opens the classic installer straight away, without trying.",
+          "fr": "« Start installer » lance directement l'installateur classique, sans essai."
+        }
+      ]
+    },
+    "debian-live-start": {
+      "glyph": "\uE768",
+      "image": "debian-live-start",
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "Debian starts on a trial desktop, in English: nothing changes on your PC. The installer lets you choose French or English. If a password is asked during the trial, it is \"live\".",
+        "fr": "Debian démarre sur un bureau d'essai, en anglais : rien n'est modifié sur votre PC. L'installateur vous laissera choisir le français. Si un mot de passe est demandé pendant l'essai, c'est « live »."
+      },
+      "steps": [
+        {
+          "en": "To install, press the Windows key and open \"Install Debian\" in the dock.",
+          "fr": "Pour installer, appuyez sur la touche Windows et ouvrez « Install Debian » dans le dock."
+        }
+      ]
+    },
+    "debian-desktop": {
+      "glyph": "\uE7F4",
+      "image": "debian-desktop",
+      "title": {
+        "en": "The GNOME desktop",
+        "fr": "Le bureau GNOME"
+      },
+      "body": {
+        "en": "Debian uses GNOME as it is: the screen stays clear, without a visible dock. Press the Windows key (called \"Super\") and type the name of an application to open it.",
+        "fr": "Debian utilise GNOME tel quel : l'écran reste dégagé, sans dock visible. Appuyez sur la touche Windows (appelée « Super ») et tapez le nom d'une application pour l'ouvrir."
+      },
+      "steps": [
+        {
+          "en": "Activities: the overview, also opened with the Windows key.",
+          "fr": "Activités : la vue d'ensemble, qui s'ouvre aussi avec la touche Windows."
+        },
+        {
+          "en": "The dock, shown in the overview: favorites and open applications.",
+          "fr": "Le dock, affiché dans la vue d'ensemble : favoris et applications ouvertes."
+        },
+        {
+          "en": "The grid: all your applications.",
+          "fr": "La grille : toutes vos applications."
+        },
+        {
+          "en": "Network, sound, battery and the button to shut down.",
+          "fr": "Réseau, son, batterie et le bouton pour éteindre."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The overview (Windows key), with the dock and the search",
+        "fr": "La vue d'ensemble (touche Windows), avec le dock et la recherche"
+      }
+    },
+    "debian-software": {
+      "glyph": "\uE719",
+      "image": "gnome-software",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open \"Software\" from the overview. To also get Steam, Spotify or Discord, add Flathub by following flatpak.org/setup/Debian.",
+        "fr": "Ouvrez « Logiciels » depuis la vue d'ensemble. Pour avoir aussi Steam, Spotify ou Discord, ajoutez Flathub en suivant flatpak.org/setup/Debian."
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "debian-updates": {
+      "glyph": "\uE895",
+      "image": "gnome-software-updates",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "\"Software\" tells you when updates are ready. Debian stable mostly receives fixes: nothing changes without warning, and a new version comes out about every two years.",
+        "fr": "« Logiciels » vous prévient quand des mises à jour sont prêtes. Debian stable reçoit surtout des correctifs : rien ne change sans prévenir, et une nouvelle version sort environ tous les deux ans."
+      },
+      "steps": [
+        {
+          "en": "Open the Updates tab.",
+          "fr": "Ouvrez l'onglet « Mises à jour »."
+        },
+        {
+          "en": "Click \"Restart & Update\": they are installed during the restart.",
+          "fr": "Cliquez sur « Redémarrer et mettre à jour » : elles s'installent pendant le redémarrage."
+        }
+      ]
+    },
+    "debian-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Debian wiki (wiki.debian.org), the forums (forums.debian.net) and the Debian Administrator's Handbook (debian-handbook.info) answer most questions.",
+        "fr": "En français, debian-facile.org (forum et documentation) est très accueillant pour débuter. Le wiki (wiki.debian.org/fr) et le Cahier de l'administrateur Debian (debian-handbook.info) vont plus loin."
+      }
+    },
+    "debian-netinst-boot": {
+      "glyph": "\uE7E8",
+      "image": "debian-netinst-boot",
+      "title": {
+        "en": "The installer menu",
+        "fr": "Le menu de l'installateur"
+      },
+      "body": {
+        "en": "This image installs Debian, without a trial mode. Its menu appears a few seconds after starting.",
+        "fr": "Cette image installe Debian, sans mode d'essai. Son menu s'affiche quelques secondes après le démarrage."
+      },
+      "steps": [
+        {
+          "en": "\"Graphical install\": the installer with the mouse, in the language you choose.",
+          "fr": "« Graphical install » : l'installateur à la souris, dans la langue de votre choix."
+        }
+      ]
+    },
+    "debian-netinst-network": {
+      "glyph": "\uE839",
+      "title": {
+        "en": "Plug in a network cable",
+        "fr": "Branchez un câble réseau"
+      },
+      "body": {
+        "en": "netinst downloads most of the system during the installation: an Ethernet cable is the simplest. Wi-Fi works too on most computers, the installer includes the needed firmware.",
+        "fr": "netinst télécharge l'essentiel du système pendant l'installation : un câble Ethernet est le plus simple. Le Wi-Fi marche aussi sur la plupart des ordinateurs, l'installateur inclut les micrologiciels nécessaires."
+      }
+    },
+    "debian-netinst-root": {
+      "glyph": "\uE7EF",
+      "title": {
+        "en": "The root password",
+        "fr": "Le mot de passe root"
+      },
+      "body": {
+        "en": "The installer asks for a password for root, the administrator. Leave it empty: your own account then gets sudo, as on Ubuntu. If you set one, sudo is not set up and you use su to become root.",
+        "fr": "L'installateur demande un mot de passe pour root, l'administrateur. Laissez-le vide : votre compte pourra alors utiliser sudo, comme sur Ubuntu. Si vous en mettez un, sudo n'est pas configuré et on utilise su pour devenir root."
+      }
+    },
+    "debian-netinst-software": {
+      "glyph": "\uE71D",
+      "image": "debian-tasksel",
+      "localizedImage": true,
+      "title": {
+        "en": "Choose a desktop, or none",
+        "fr": "Choisir un bureau (ou aucun)"
+      },
+      "body": {
+        "en": "At the \"Software selection\" step, tick what to install with Space or the mouse. For a server, untick the desktop.",
+        "fr": "À l'étape « Sélection des logiciels », cochez ce qu'il faut installer avec Espace ou la souris. Pour un serveur, décochez le bureau."
+      },
+      "steps": [
+        {
+          "en": "One desktop environment is enough: GNOME, KDE Plasma, Xfce…",
+          "fr": "Un seul environnement de bureau suffit : GNOME, KDE Plasma, Xfce…"
+        },
+        {
+          "en": "\"SSH server\" lets you manage the computer from another one.",
+          "fr": "« serveur SSH » permet de piloter la machine depuis une autre."
+        },
+        {
+          "en": "Continue.",
+          "fr": "Continuer."
+        }
+      ]
+    },
+    "debian-netinst-after": {
+      "glyph": "\uE756",
+      "title": {
+        "en": "After the installation",
+        "fr": "Après l'installation"
+      },
+      "body": {
+        "en": "With a desktop, you find it after logging in. Without one, a console asks for your user name and password: these commands are used every day.",
+        "fr": "Avec un bureau, vous le retrouvez après vous être connecté. Sans bureau, une console demande votre nom d'utilisateur et votre mot de passe : ces commandes servent tous les jours."
+      },
+      "command": {
+        "en": "sudo apt update && sudo apt upgrade   # update everything\nsudo apt install name                 # install a package\nip -br a                              # IP address",
+        "fr": "sudo apt update && sudo apt upgrade   # tout mettre à jour\nsudo apt install nom                  # installer un paquet\nip -br a                              # adresse IP"
+      }
+    },
+    "mint-boot-cinnamon": {
+      "glyph": "\uE7E8",
+      "image": "mint-boot-cinnamon",
+      "title": {
+        "en": "Linux Mint's boot menu",
+        "fr": "Le menu de démarrage de Linux Mint"
+      },
+      "body": {
+        "en": "A menu appears a few seconds later. Choose with the arrow keys and confirm with Enter: the mouse does not work here.",
+        "fr": "Un menu s'affiche quelques secondes plus tard. On y choisit avec les flèches et on valide avec Entrée : la souris ne fonctionne pas ici."
+      },
+      "steps": [
+        {
+          "en": "The first line, \"Start Linux Mint … Cinnamon 64-bit\", is already selected: press Enter.",
+          "fr": "La première ligne, « Start Linux Mint … Cinnamon 64-bit », est déjà sélectionnée : appuyez sur Entrée."
+        },
+        {
+          "en": "Black or frozen screen afterwards? Restart and pick \"compatibility mode\".",
+          "fr": "Écran noir ou figé ensuite ? Redémarrez et choisissez « compatibility mode »."
+        }
+      ]
+    },
+    "mint-boot-xfce": {
+      "glyph": "\uE7E8",
+      "image": "mint-boot-xfce",
+      "title": {
+        "en": "Linux Mint's boot menu",
+        "fr": "Le menu de démarrage de Linux Mint"
+      },
+      "body": {
+        "en": "A menu appears a few seconds later. Choose with the arrow keys and confirm with Enter: the mouse does not work here.",
+        "fr": "Un menu s'affiche quelques secondes plus tard. On y choisit avec les flèches et on valide avec Entrée : la souris ne fonctionne pas ici."
+      },
+      "steps": [
+        {
+          "en": "The first line, \"Start Linux Mint … Xfce 64-bit\", is already selected: press Enter.",
+          "fr": "La première ligne, « Start Linux Mint … Xfce 64-bit », est déjà sélectionnée : appuyez sur Entrée."
+        },
+        {
+          "en": "Black or frozen screen afterwards? Restart and pick \"compatibility mode\".",
+          "fr": "Écran noir ou figé ensuite ? Redémarrez et choisissez « compatibility mode »."
+        }
+      ]
+    },
+    "mint-start": {
+      "glyph": "\uE768",
+      "image": "mint-start",
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "Linux Mint starts straight on a trial desktop, in English: nothing changes on your PC. Check that Wi-Fi, sound and screen work; the installer lets you choose French or English.",
+        "fr": "Linux Mint démarre directement sur un bureau d'essai, en anglais : rien n'est modifié sur votre PC. Vérifiez que le Wi-Fi, le son et l'écran fonctionnent ; l'installateur vous laissera choisir le français."
+      },
+      "steps": [
+        {
+          "en": "To install, double-click \"Install Linux Mint\" on the desktop.",
+          "fr": "Pour installer, double-cliquez sur « Install Linux Mint » sur le bureau."
+        }
+      ]
+    },
+    "mint-desktop-cinnamon": {
+      "glyph": "\uE7F4",
+      "image": "mint-desktop-cinnamon",
+      "title": {
+        "en": "The Cinnamon desktop",
+        "fr": "Le bureau Cinnamon"
+      },
+      "body": {
+        "en": "Cinnamon looks like Windows: the menu at the bottom left, a taskbar, the clock at the bottom right. The welcome screen shown at startup guides your first steps.",
+        "fr": "Cinnamon ressemble à Windows : le menu en bas à gauche, une barre des tâches, l'horloge en bas à droite. L'écran de bienvenue affiché au démarrage guide vos premiers pas."
+      },
+      "steps": [
+        {
+          "en": "The menu: applications, search, and the buttons to lock or shut down.",
+          "fr": "Le menu : applications, recherche, et les boutons pour verrouiller ou éteindre."
+        },
+        {
+          "en": "The taskbar: pinned applications and open windows.",
+          "fr": "La barre des tâches : applications épinglées et fenêtres ouvertes."
+        },
+        {
+          "en": "Network, sound, updates (the shield) and the time.",
+          "fr": "Réseau, son, mises à jour (le bouclier) et l'heure."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The same, at the same places",
+        "fr": "Les mêmes, aux mêmes endroits"
+      }
+    },
+    "mint-desktop-xfce": {
+      "glyph": "\uE7F4",
+      "image": "mint-desktop-xfce",
+      "title": {
+        "en": "The Xfce desktop",
+        "fr": "Le bureau Xfce"
+      },
+      "body": {
+        "en": "Xfce is light and fast, and laid out like Windows: the menu at the bottom left, a taskbar, the clock at the bottom right. The welcome screen shown at startup guides your first steps.",
+        "fr": "Xfce est léger et rapide, et organisé comme Windows : le menu en bas à gauche, une barre des tâches, l'horloge en bas à droite. L'écran de bienvenue affiché au démarrage guide vos premiers pas."
+      },
+      "steps": [
+        {
+          "en": "The menu: applications, search, and the buttons to lock or shut down.",
+          "fr": "Le menu : applications, recherche, et les boutons pour verrouiller ou éteindre."
+        },
+        {
+          "en": "The taskbar: pinned applications and open windows.",
+          "fr": "La barre des tâches : applications épinglées et fenêtres ouvertes."
+        },
+        {
+          "en": "Network, sound, updates (the shield) and the time.",
+          "fr": "Réseau, son, mises à jour (le bouclier) et l'heure."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The same, at the same places",
+        "fr": "Les mêmes, aux mêmes endroits"
+      }
+    },
+    "mint-software": {
+      "glyph": "\uE719",
+      "image": "mint-software",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open the Software Manager from the menu. It offers thousands of free applications, including Steam, Spotify, Discord and Zoom.",
+        "fr": "Ouvrez la Logithèque depuis le menu. Elle propose des milliers d'applications gratuites, dont Steam, Spotify, Discord et Zoom."
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "mint-updates": {
+      "glyph": "\uE895",
+      "image": "mint-updates",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates and snapshots",
+        "fr": "Mises à jour et instantanés"
+      },
+      "body": {
+        "en": "The Update Manager updates the system and your applications at once. Also turn on system snapshots (Timeshift), offered by the welcome screen: they take you back if an update causes trouble.",
+        "fr": "Le gestionnaire de mises à jour met à jour le système et vos applications à la fois. Activez aussi les instantanés système (Timeshift), proposés par l'écran de bienvenue : ils permettent de revenir en arrière si une mise à jour pose problème."
+      },
+      "steps": [
+        {
+          "en": "The shield at the bottom right shows that updates are ready: click it.",
+          "fr": "Le bouclier en bas à droite signale des mises à jour : cliquez dessus."
+        },
+        {
+          "en": "Click \"Install Updates\" and type your password.",
+          "fr": "Cliquez sur « Installer les mises à jour » et tapez votre mot de passe."
+        }
+      ]
+    },
+    "mint-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Linux Mint forums (forums.linuxmint.com) and official guides (linuxmint.com/documentation.php) are the first places to look. Mint is based on Ubuntu: Ask Ubuntu answers many questions too.",
+        "fr": "Les forums de Linux Mint (forums.linuxmint.com, avec une section en français) et ses guides officiels (linuxmint.com/documentation.php) sont les premiers endroits où chercher. Mint est basée sur Ubuntu : doc.ubuntu-fr.org répond aussi à beaucoup de questions."
+      }
+    },
+    "fedora-boot": {
+      "glyph": "\uE7E8",
+      "image": "fedora-boot",
+      "title": {
+        "en": "Fedora's boot menu",
+        "fr": "Le menu de démarrage de Fedora"
+      },
+      "body": {
+        "en": "A black menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu noir s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "The first line, \"Start Fedora-Workstation-Live\": press Enter. The second one checks the drive first.",
+          "fr": "La première ligne, « Start Fedora-Workstation-Live » : appuyez sur Entrée. La deuxième vérifie d'abord la clé."
+        },
+        {
+          "en": "Black screen afterwards? \"Troubleshooting\" offers a basic graphics mode.",
+          "fr": "Écran noir ensuite ? « Troubleshooting » propose un mode graphique de base."
+        }
+      ]
+    },
+    "fedora-start": {
+      "glyph": "\uE768",
+      "image": "fedora-start",
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "Fedora starts on a trial desktop, in English: nothing changes on your PC. If the installer opens by itself, close it to try first; the installer lets you choose French or English.",
+        "fr": "Fedora démarre sur un bureau d'essai, en anglais : rien n'est modifié sur votre PC. Si l'installateur s'ouvre tout seul, fermez-le pour essayer d'abord ; il vous laissera choisir le français."
+      },
+      "steps": [
+        {
+          "en": "To install, press the Windows key and open the Fedora installer from the dock.",
+          "fr": "Pour installer, appuyez sur la touche Windows et ouvrez l'installateur de Fedora depuis le dock."
+        }
+      ]
+    },
+    "fedora-desktop": {
+      "glyph": "\uE7F4",
+      "image": "fedora-desktop",
+      "title": {
+        "en": "The GNOME desktop",
+        "fr": "Le bureau GNOME"
+      },
+      "body": {
+        "en": "Fedora uses GNOME as it is: the screen stays clear, without a visible dock. Press the Windows key (called \"Super\") and type the name of an application to open it.",
+        "fr": "Fedora utilise GNOME tel quel : l'écran reste dégagé, sans dock visible. Appuyez sur la touche Windows (appelée « Super ») et tapez le nom d'une application pour l'ouvrir."
+      },
+      "steps": [
+        {
+          "en": "Activities: the overview, also opened with the Windows key.",
+          "fr": "Activités : la vue d'ensemble, qui s'ouvre aussi avec la touche Windows."
+        },
+        {
+          "en": "The dock, shown in the overview: favorites and open applications.",
+          "fr": "Le dock, affiché dans la vue d'ensemble : favoris et applications ouvertes."
+        },
+        {
+          "en": "The grid: all your applications.",
+          "fr": "La grille : toutes vos applications."
+        },
+        {
+          "en": "Network, sound, battery and the button to shut down.",
+          "fr": "Réseau, son, batterie et le bouton pour éteindre."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The overview (Windows key), with the dock and the search",
+        "fr": "La vue d'ensemble (touche Windows), avec le dock et la recherche"
+      }
+    },
+    "fedora-software": {
+      "glyph": "\uE719",
+      "image": "gnome-software",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open \"Software\" from the overview. At the first start, the setup assistant offers to enable third-party repositories: accept to get Chrome, Steam or the NVIDIA drivers.",
+        "fr": "Ouvrez « Logiciels » depuis la vue d'ensemble. Au premier démarrage, l'assistant propose d'activer les dépôts tiers : acceptez pour obtenir Chrome, Steam ou les pilotes NVIDIA."
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "fedora-updates": {
+      "glyph": "\uE895",
+      "image": "gnome-software-updates",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "\"Software\" downloads updates and installs them while restarting, which is safer. A new Fedora version comes out every six months: \"Software\" offers to download it.",
+        "fr": "« Logiciels » télécharge les mises à jour et les installe au redémarrage, ce qui est plus sûr. Une nouvelle version de Fedora sort tous les six mois : « Logiciels » vous propose de la télécharger."
+      },
+      "steps": [
+        {
+          "en": "Open the Updates tab.",
+          "fr": "Ouvrez l'onglet « Mises à jour »."
+        },
+        {
+          "en": "Click \"Restart & Update\".",
+          "fr": "Cliquez sur « Redémarrer et mettre à jour »."
+        }
+      ]
+    },
+    "terminal-dnf": {
+      "glyph": "\uE756",
+      "image": "terminal-dnf",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "The terminal is optional, but guides often give commands to copy. Press the Windows key and type \"Terminal\". Fedora installs packages with dnf; sudo gives administrator rights.",
+        "fr": "Le terminal est facultatif, mais les guides donnent souvent des commandes à copier. Appuyez sur la touche Windows et tapez « Terminal ». Fedora installe les paquets avec dnf ; sudo donne les droits d'administrateur."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with y, then Enter.",
+          "fr": "Confirmez avec o (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo dnf upgrade          # update everything\nsudo dnf install gimp     # install an application",
+        "fr": "sudo dnf upgrade          # tout mettre à jour\nsudo dnf install gimp     # installer une application"
+      }
+    },
+    "fedora-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "Fedora Discussion (discussion.fedoraproject.org) and the documentation (docs.fedoraproject.org) answer most questions. Searching for \"Fedora + your problem\" often gives the solution.",
+        "fr": "En français, la communauté Fedora-fr a un forum (forums.fedora-fr.org) et une documentation (doc.fedora-fr.org). En anglais : discussion.fedoraproject.org et docs.fedoraproject.org."
+      }
+    },
+    "arch-boot": {
+      "glyph": "\uE7E8",
+      "image": "arch-boot",
+      "title": {
+        "en": "The boot menu",
+        "fr": "Le menu de démarrage"
+      },
+      "body": {
+        "en": "A short black menu appears. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un court menu noir s'affiche. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "\"Arch Linux install medium (x86_64, UEFI)\" is selected: press Enter.",
+          "fr": "« Arch Linux install medium (x86_64, UEFI) » est sélectionnée : appuyez sur Entrée."
+        }
+      ]
+    },
+    "arch-console": {
+      "glyph": "\uE765",
+      "image": "arch-console",
+      "title": {
+        "en": "Keyboard and Internet",
+        "fr": "Clavier et Internet"
+      },
+      "body": {
+        "en": "Arch starts on an English console, logged in as root. The keyboard is QWERTY: on an AZERTY keyboard, the A key is where Q is. Ethernet works by itself; Wi-Fi is set up with iwctl.",
+        "fr": "Arch démarre sur une console en anglais, connecté en root. Le clavier est en QWERTY : sur un clavier français, tapez « loqdkeys fr » (le a est sur la touche Q) pour passer en AZERTY. Le câble Ethernet marche tout seul ; le Wi-Fi se règle avec iwctl."
+      },
+      "steps": [
+        {
+          "en": "loadkeys sets the keyboard layout (for example loadkeys fr for French AZERTY).",
+          "fr": "loadkeys fr : clavier français."
+        },
+        {
+          "en": "iwctl connects to Wi-Fi: give the password, then the network name.",
+          "fr": "iwctl connecte au Wi-Fi : donnez le mot de passe puis le nom du réseau."
+        },
+        {
+          "en": "ping checks the connection.",
+          "fr": "ping vérifie la connexion."
+        }
+      ],
+      "command": {
+        "en": "loadkeys fr\niwctl --passphrase \"password\" station wlan0 connect \"MyWifi\"\nping -c 3 archlinux.org",
+        "fr": "loadkeys fr\niwctl --passphrase \"motdepasse\" station wlan0 connect \"MonWifi\"\nping -c 3 archlinux.org"
+      }
+    },
+    "arch-archinstall": {
+      "glyph": "\uE71D",
+      "image": "arch-archinstall",
+      "title": {
+        "en": "Install with archinstall",
+        "fr": "Installer avec archinstall"
+      },
+      "body": {
+        "en": "Type archinstall and press Enter: this official guided installer shows a text menu where you set each item before installing. In Locales, also set the keyboard layout.",
+        "fr": "Tapez archinstall puis Entrée : cet installateur guidé officiel affiche un menu texte où l'on règle chaque point avant d'installer. Dans Locales, mettez aussi le clavier sur fr."
+      },
+      "steps": [
+        {
+          "en": "Disk configuration: the disk to use (it will be erased).",
+          "fr": "Disk configuration : le disque à utiliser (il sera effacé)."
+        },
+        {
+          "en": "Authentication: root password and your user account, with sudo.",
+          "fr": "Authentication : mot de passe root et votre compte utilisateur, avec sudo."
+        },
+        {
+          "en": "Profile, then Desktop: choose a desktop, KDE Plasma or GNOME for example.",
+          "fr": "Profile puis Desktop : choisissez un bureau, KDE Plasma ou GNOME par exemple."
+        },
+        {
+          "en": "Network configuration: choose NetworkManager, or you will have no network in the desktop.",
+          "fr": "Network configuration : choisissez NetworkManager, sinon pas de réseau dans le bureau."
+        },
+        {
+          "en": "Install starts the installation.",
+          "fr": "Install lance l'installation."
+        }
+      ]
+    },
+    "arch-pacman": {
+      "glyph": "\uE756",
+      "image": "terminal-pacman",
+      "localizedImage": true,
+      "title": {
+        "en": "pacman, the package manager",
+        "fr": "pacman, le gestionnaire de paquets"
+      },
+      "body": {
+        "en": "Everything is installed and updated with pacman. Arch changes all the time: update often, and read the news on archlinux.org before a big update.",
+        "fr": "Tout s'installe et se met à jour avec pacman. Arch évolue en continu : mettez à jour souvent, et lisez les actualités d'archlinux.org avant une grosse mise à jour."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with y, then Enter.",
+          "fr": "Confirmez avec o (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo pacman -Syu        # update everything\nsudo pacman -S gimp     # install an application\npacman -Ss word         # search for a package",
+        "fr": "sudo pacman -Syu        # tout mettre à jour\nsudo pacman -S gimp     # installer une application\npacman -Ss mot          # chercher un paquet"
+      }
+    },
+    "arch-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Arch Wiki (wiki.archlinux.org) is the reference for Arch and for Linux in general: start with its Installation guide. The forums are at bbs.archlinux.org.",
+        "fr": "Le wiki d'Arch (wiki.archlinux.org) est la référence, pour Arch et pour Linux en général : commencez par son guide d'installation. En français : wiki.archlinux.fr et forums.archlinux.fr."
+      }
+    },
+    "manjaro-boot": {
+      "glyph": "\uE7E8",
+      "image": "manjaro-boot",
+      "title": {
+        "en": "Manjaro's boot menu",
+        "fr": "Le menu de démarrage de Manjaro"
+      },
+      "body": {
+        "en": "A menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "The keytable and lang lines set the keyboard and the language: press Enter on them to choose yours.",
+          "fr": "Les lignes keytable et lang règlent le clavier et la langue : appuyez sur Entrée dessus pour choisir fr et fr_FR."
+        },
+        {
+          "en": "\"Boot with open source drivers\"; \"proprietary drivers\" suits a recent NVIDIA graphics card.",
+          "fr": "« Boot with open source drivers » ; « proprietary drivers » convient à une carte graphique NVIDIA récente."
+        }
+      ]
+    },
+    "manjaro-start": {
+      "glyph": "\uE768",
+      "image": "manjaro-hello",
+      "localizedImage": true,
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "The trial desktop opens with the Manjaro Hello window: take your time, nothing changes on your PC.",
+        "fr": "Le bureau d'essai s'ouvre avec la fenêtre Manjaro Hello : prenez votre temps, rien n'est modifié sur votre PC."
+      },
+      "steps": [
+        {
+          "en": "To install, click \"Launch installer\".",
+          "fr": "Pour installer, cliquez sur « Lancer l'installateur »."
+        }
+      ]
+    },
+    "manjaro-desktop": {
+      "glyph": "\uE7F4",
+      "image": "manjaro-desktop",
+      "title": {
+        "en": "The KDE Plasma desktop",
+        "fr": "Le bureau KDE Plasma"
+      },
+      "body": {
+        "en": "Manjaro uses KDE Plasma: a taskbar at the bottom and a menu on the left, as on Windows. Almost everything can be customized with a right click.",
+        "fr": "Manjaro utilise KDE Plasma : une barre des tâches en bas et un menu à gauche, comme sous Windows. Presque tout se personnalise d'un clic droit."
+      },
+      "steps": [
+        {
+          "en": "The application launcher: applications, search, shut down.",
+          "fr": "Le lanceur d'applications : applications, recherche, extinction."
+        },
+        {
+          "en": "The taskbar: pinned applications and open windows.",
+          "fr": "La barre des tâches : applications épinglées et fenêtres ouvertes."
+        },
+        {
+          "en": "Network, sound, updates and the time.",
+          "fr": "Réseau, son, mises à jour et l'heure."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The same, at the same places",
+        "fr": "Les mêmes, aux mêmes endroits"
+      }
+    },
+    "manjaro-software": {
+      "glyph": "\uE719",
+      "image": "pamac",
+      "localizedImage": true,
+      "title": {
+        "en": "Software and updates",
+        "fr": "Logiciels et mises à jour"
+      },
+      "body": {
+        "en": "\"Add/Remove Software\" (Pamac) installs applications and updates everything. Manjaro holds updates back for a few weeks to test them before they reach you.",
+        "fr": "« Ajouter/Supprimer des logiciels » (Pamac) installe les applications et met tout à jour. Manjaro retient les mises à jour quelques semaines pour les tester avant qu'elles arrivent chez vous."
+      },
+      "steps": [
+        {
+          "en": "Search for the application.",
+          "fr": "Cherchez l'application."
+        },
+        {
+          "en": "Click Install, then Apply.",
+          "fr": "Cliquez sur Installer, puis Appliquer."
+        },
+        {
+          "en": "Updates: everything up to date in one click.",
+          "fr": "Mises à jour : tout mettre à jour en un clic."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "manjaro-terminal": {
+      "glyph": "\uE756",
+      "image": "terminal-pacman",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "Ctrl+Alt+T opens Konsole. Manjaro uses pacman, like Arch; pamac also works in the terminal.",
+        "fr": "Ctrl+Alt+T ouvre Konsole. Manjaro utilise pacman, comme Arch ; pamac fonctionne aussi dans le terminal."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with y, then Enter.",
+          "fr": "Confirmez avec o (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo pacman -Syu        # update everything\npamac install gimp      # install an application",
+        "fr": "sudo pacman -Syu        # tout mettre à jour\npamac install gimp      # installer une application"
+      }
+    },
+    "manjaro-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The Manjaro forum (forum.manjaro.org) and wiki (wiki.manjaro.org) are the first places to look; the Arch Wiki (wiki.archlinux.org) covers the rest.",
+        "fr": "Le forum (forum.manjaro.org) et le wiki (wiki.manjaro.org) de Manjaro sont les premiers endroits où chercher ; le wiki d'Arch (wiki.archlinux.org, ou wiki.archlinux.fr en français) couvre le reste."
+      }
+    },
+    "leap-boot": {
+      "glyph": "\uE7E8",
+      "image": "leap-boot",
+      "title": {
+        "en": "The installer menu",
+        "fr": "Le menu de l'installateur"
+      },
+      "body": {
+        "en": "This image installs openSUSE Leap, without a trial mode. Its menu appears a few seconds after starting.",
+        "fr": "Cette image installe openSUSE Leap, sans mode d'essai. Son menu s'affiche quelques secondes après le démarrage."
+      },
+      "steps": [
+        {
+          "en": "\"Install Leap 16.0\": press Enter.",
+          "fr": "« Install Leap 16.0 » : appuyez sur Entrée."
+        },
+        {
+          "en": "Black screen afterwards? Restart and pick \"Failsafe\".",
+          "fr": "Écran noir ensuite ? Redémarrez et choisissez « Failsafe »."
+        }
+      ]
+    },
+    "leap-agama": {
+      "glyph": "\uE71D",
+      "image": "agama",
+      "localizedImage": true,
+      "title": {
+        "en": "The Agama installer",
+        "fr": "L'installateur Agama"
+      },
+      "body": {
+        "en": "Agama shows a summary of the installation. Check each section, fix what it points out, then install.",
+        "fr": "Agama affiche un résumé de l'installation. Vérifiez chaque section, corrigez ce qu'il signale, puis installez."
+      },
+      "steps": [
+        {
+          "en": "Storage: the disk to install on (it may be erased).",
+          "fr": "Stockage : le disque où installer (il peut être effacé)."
+        },
+        {
+          "en": "Software: choose the desktop, GNOME or KDE Plasma for example.",
+          "fr": "Logiciels : choisissez le bureau, GNOME ou KDE Plasma par exemple."
+        },
+        {
+          "en": "Users: create your account.",
+          "fr": "Utilisateurs : créez votre compte."
+        },
+        {
+          "en": "Install, at the top right.",
+          "fr": "Installer, en haut à droite."
+        }
+      ]
+    },
+    "tw-boot": {
+      "glyph": "\uE7E8",
+      "image": "tw-boot",
+      "title": {
+        "en": "The installer menu",
+        "fr": "Le menu de l'installateur"
+      },
+      "body": {
+        "en": "This image installs openSUSE Tumbleweed, without a trial mode. Its menu appears a few seconds after starting.",
+        "fr": "Cette image installe openSUSE Tumbleweed, sans mode d'essai. Son menu s'affiche quelques secondes après le démarrage."
+      },
+      "steps": [
+        {
+          "en": "\"Installation\" is selected: press Enter.",
+          "fr": "« Installation » est sélectionnée : appuyez sur Entrée."
+        },
+        {
+          "en": "\"Boot from Hard Disk\" starts the system already installed.",
+          "fr": "« Boot from Hard Disk » démarre le système déjà installé."
+        }
+      ]
+    },
+    "tw-installer": {
+      "glyph": "\uE71D",
+      "image": "yast-role",
+      "localizedImage": true,
+      "title": {
+        "en": "The YaST installer",
+        "fr": "L'installateur YaST"
+      },
+      "body": {
+        "en": "YaST asks its questions screen by screen: language and keyboard, online repositories (accept them), system role, disk, time zone and user.",
+        "fr": "YaST pose ses questions écran par écran : langue et clavier, dépôts en ligne (acceptez-les), rôle système, disque, fuseau horaire et utilisateur."
+      },
+      "steps": [
+        {
+          "en": "The system role is your desktop: KDE Plasma, GNOME…",
+          "fr": "Le rôle système, c'est votre bureau : KDE Plasma, GNOME…"
+        },
+        {
+          "en": "Next.",
+          "fr": "Suivant."
+        }
+      ]
+    },
+    "opensuse-software": {
+      "glyph": "\uE719",
+      "image": "discover",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Use the software center of your desktop: Discover with KDE Plasma, Software with GNOME. Myrlyn shows every package in detail, for advanced use.",
+        "fr": "Utilisez la logithèque de votre bureau : Discover avec KDE Plasma, Logiciels avec GNOME. Myrlyn montre chaque paquet en détail, pour un usage avancé."
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "leap-terminal": {
+      "glyph": "\uE756",
+      "image": "terminal-zypper",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and zypper",
+        "fr": "Le terminal et zypper"
+      },
+      "body": {
+        "en": "openSUSE installs packages with zypper, and sudo gives administrator rights. Leap receives tested fixes, and a new version comes out every year.",
+        "fr": "openSUSE installe les paquets avec zypper, et sudo donne les droits d'administrateur. Leap reçoit des correctifs testés, et une nouvelle version sort chaque année."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with y, then Enter.",
+          "fr": "Confirmez avec o (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo zypper refresh && sudo zypper update   # update everything\nsudo zypper install gimp                    # install an application",
+        "fr": "sudo zypper refresh && sudo zypper update   # tout mettre à jour\nsudo zypper install gimp                    # installer une application"
+      }
+    },
+    "tw-updates": {
+      "glyph": "\uE895",
+      "image": "terminal-zypper",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates: zypper dup",
+        "fr": "Les mises à jour : zypper dup"
+      },
+      "body": {
+        "en": "Tumbleweed gets new versions all the time, after automated tests. Update in the terminal with zypper dup (not zypper update): it handles the changes between versions.",
+        "fr": "Tumbleweed reçoit les nouveautés en continu, après des tests automatiques. Mettez à jour dans le terminal avec zypper dup (et non zypper update) : il gère les changements de version."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with y, then Enter.",
+          "fr": "Confirmez avec o (pour « oui »), puis Entrée."
+        }
+      ],
+      "command": {
+        "en": "sudo zypper refresh && sudo zypper dup   # update Tumbleweed\nsudo zypper install gimp                 # install an application",
+        "fr": "sudo zypper refresh && sudo zypper dup   # mettre à jour Tumbleweed\nsudo zypper install gimp                 # installer une application"
+      }
+    },
+    "opensuse-snapshots": {
+      "glyph": "\uE81C",
+      "image": "opensuse-snapshots",
+      "title": {
+        "en": "Go back with snapshots",
+        "fr": "Revenir en arrière avec les instantanés"
+      },
+      "body": {
+        "en": "openSUSE saves a snapshot of the system before each update (Snapper). If the PC no longer starts properly, go back to the previous state from the boot menu.",
+        "fr": "openSUSE enregistre un instantané du système avant chaque mise à jour (Snapper). Si le PC ne démarre plus correctement, revenez à l'état précédent depuis le menu de démarrage."
+      },
+      "steps": [
+        {
+          "en": "When starting, choose \"Start bootloader from a read-only snapshot\".",
+          "fr": "Au démarrage, choisissez « Start bootloader from a read-only snapshot »."
+        },
+        {
+          "en": "Pick the snapshot taken before the problem. Once started, sudo snapper rollback makes it permanent.",
+          "fr": "Prenez l'instantané d'avant le problème. Une fois démarré, sudo snapper rollback le rend définitif."
+        }
+      ]
+    },
+    "opensuse-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The openSUSE forums (forums.opensuse.org), documentation (doc.opensuse.org) and wiki (en.opensuse.org) answer most questions.",
+        "fr": "En français, la communauté Alionet (alionet.org) aide volontiers. En anglais : forums.opensuse.org, doc.opensuse.org et le wiki en.opensuse.org."
+      }
+    },
+    "pop-boot": {
+      "glyph": "\uE7E8",
+      "image": "pop-boot",
+      "title": {
+        "en": "The boot menu",
+        "fr": "Le menu de démarrage"
+      },
+      "body": {
+        "en": "A short menu appears a few seconds later, with a single line.",
+        "fr": "Un court menu s'affiche quelques secondes plus tard, avec une seule ligne."
+      },
+      "steps": [
+        {
+          "en": "\"Try or Install Pop!_OS\": press Enter, or wait a few seconds.",
+          "fr": "« Try or Install Pop!_OS » : appuyez sur Entrée, ou attendez quelques secondes."
+        }
+      ]
+    },
+    "pop-start": {
+      "glyph": "\uE768",
+      "image": "pop-start",
+      "localizedImage": true,
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "The installer asks for the language and the keyboard, then offers to install or to try. Demo mode changes nothing on your PC: check that Wi-Fi, sound and screen work.",
+        "fr": "L'installateur demande la langue et le clavier, puis propose d'installer ou d'essayer. Le mode de démonstration ne modifie rien sur votre PC : vérifiez que le Wi-Fi, le son et l'écran fonctionnent."
+      },
+      "steps": [
+        {
+          "en": "\"Try Demo Mode\": the COSMIC desktop, without installing.",
+          "fr": "« Essayer le mode de démonstration » : le bureau COSMIC, sans rien installer."
+        },
+        {
+          "en": "\"Clean Install\" then Next when you are ready: it erases the whole disk.",
+          "fr": "« Clean Install » puis Suivant quand vous êtes prêt : cela efface tout le disque."
+        }
+      ]
+    },
+    "pop-desktop": {
+      "glyph": "\uE7F4",
+      "image": "pop-desktop",
+      "title": {
+        "en": "The COSMIC desktop",
+        "fr": "Le bureau COSMIC"
+      },
+      "body": {
+        "en": "COSMIC, the System76 desktop, has a panel at the top and a dock at the bottom. The Windows key (\"Super\") opens the launcher: type the name of an application.",
+        "fr": "COSMIC, le bureau de System76, a une barre en haut et un dock en bas. La touche Windows (« Super ») ouvre le lanceur : tapez le nom d'une application."
+      },
+      "steps": [
+        {
+          "en": "Applications: all your applications.",
+          "fr": "Applications : toutes vos applications."
+        },
+        {
+          "en": "The dock: favorites and open applications.",
+          "fr": "Le dock : favoris et applications ouvertes."
+        },
+        {
+          "en": "Tiling arranges windows side by side automatically.",
+          "fr": "La mosaïque range automatiquement les fenêtres côte à côte."
+        },
+        {
+          "en": "Network, sound, battery and the button to shut down.",
+          "fr": "Réseau, son, batterie et le bouton pour éteindre."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "Applications button, launcher (Windows key) and dock",
+        "fr": "Bouton Applications, lanceur (touche Windows) et dock"
+      }
+    },
+    "pop-software": {
+      "glyph": "\uE719",
+      "image": "cosmic-store",
+      "localizedImage": true,
+      "title": {
+        "en": "Software and updates",
+        "fr": "Logiciels et mises à jour"
+      },
+      "body": {
+        "en": "The COSMIC Store installs applications, Steam and Spotify included, and updates them.",
+        "fr": "Le COSMIC Store installe les applications, Steam et Spotify compris, et les met à jour."
+      },
+      "steps": [
+        {
+          "en": "Search for the application.",
+          "fr": "Cherchez l'application."
+        },
+        {
+          "en": "Click Install.",
+          "fr": "Cliquez sur Installer."
+        },
+        {
+          "en": "Updates: everything up to date in one click.",
+          "fr": "Mises à jour : tout mettre à jour en un clic."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "pop-terminal": {
+      "glyph": "\uE756",
+      "image": "terminal-apt",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "Super+T opens the COSMIC terminal. Pop!_OS is based on Ubuntu: apt and most Ubuntu guides work as they are.",
+        "fr": "Super+T ouvre le terminal COSMIC. Pop!_OS est basé sur Ubuntu : apt et la plupart des guides pour Ubuntu fonctionnent tels quels."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with Y, then Enter.",
+          "fr": "Confirmez avec O (pour « oui »), puis Entrée."
+        }
+      ],
+      "windows": {
+        "en": "Command Prompt: dir, cd, copy, del",
+        "fr": "Invite de commandes : dir, cd, copy, del"
+      },
+      "linux": {
+        "en": "Terminal: ls, cd, cp, rm",
+        "fr": "Terminal : ls, cd, cp, rm"
+      },
+      "command": {
+        "en": "sudo apt update && sudo apt upgrade   # update everything\nsudo apt install gimp                 # install an application",
+        "fr": "sudo apt update && sudo apt upgrade   # tout mettre à jour\nsudo apt install gimp                 # installer une application"
+      }
+    },
+    "pop-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The System76 support site (support.system76.com) has guides for Pop!_OS; the community chat is at chat.pop-os.org. Ask Ubuntu answers what comes from Ubuntu.",
+        "fr": "Le site d'aide de System76 (support.system76.com) propose des guides pour Pop!_OS ; la communauté discute sur chat.pop-os.org. Pour ce qui vient d'Ubuntu, doc.ubuntu-fr.org répond à presque tout."
+      }
+    },
+    "kali-boot": {
+      "glyph": "\uE7E8",
+      "image": "kali-boot",
+      "title": {
+        "en": "The installer menu",
+        "fr": "Le menu de l'installateur"
+      },
+      "body": {
+        "en": "This image installs Kali on the chosen disk: it is not a trial system. To try Kali first, a virtual machine is often easier.",
+        "fr": "Cette image installe Kali sur le disque choisi : ce n'est pas un système d'essai. Pour un premier essai, une machine virtuelle est souvent plus pratique."
+      },
+      "steps": [
+        {
+          "en": "\"Graphical install\": the installer with the mouse.",
+          "fr": "« Graphical install » : l'installateur à la souris."
+        }
+      ]
+    },
+    "kali-installer": {
+      "glyph": "\uE71D",
+      "image": "kali-tasksel",
+      "localizedImage": true,
+      "title": {
+        "en": "Choose the desktop and the tools",
+        "fr": "Choisir le bureau et les outils"
+      },
+      "body": {
+        "en": "The installer is the Debian one. At the \"Software selection\" step, the defaults are a good start.",
+        "fr": "L'installateur est celui de Debian. À l'étape « Sélection des logiciels », les choix par défaut sont un bon départ."
+      },
+      "steps": [
+        {
+          "en": "The desktop: Xfce by default.",
+          "fr": "Le bureau : Xfce par défaut."
+        },
+        {
+          "en": "The tools: \"default\" is enough to begin, \"large\" adds many more.",
+          "fr": "Les outils : « default » suffit pour commencer, « large » en ajoute beaucoup."
+        },
+        {
+          "en": "Continue.",
+          "fr": "Continuer."
+        }
+      ]
+    },
+    "kali-desktop": {
+      "glyph": "\uE7F4",
+      "image": "kali-desktop",
+      "title": {
+        "en": "The Kali desktop",
+        "fr": "Le bureau de Kali"
+      },
+      "body": {
+        "en": "Kali uses Xfce, with the panel at the top. The menu sorts the tools by category: information gathering, vulnerability analysis…",
+        "fr": "Kali utilise Xfce, avec la barre en haut. Le menu range les outils par catégorie : collecte d'informations, analyse de vulnérabilités…"
+      },
+      "steps": [
+        {
+          "en": "The menu, with the tools by category.",
+          "fr": "Le menu, avec les outils par catégorie."
+        },
+        {
+          "en": "Shortcuts: terminal, files, browser.",
+          "fr": "Raccourcis : terminal, fichiers, navigateur."
+        },
+        {
+          "en": "Network, sound and the time.",
+          "fr": "Réseau, son et l'heure."
+        }
+      ]
+    },
+    "kali-terminal": {
+      "glyph": "\uE756",
+      "image": "terminal-kali",
+      "localizedImage": true,
+      "title": {
+        "en": "The terminal and sudo",
+        "fr": "Le terminal et sudo"
+      },
+      "body": {
+        "en": "Kali is mostly used from the terminal (Ctrl+Alt+T). Update with full-upgrade, as Kali recommends.",
+        "fr": "Kali s'utilise surtout au terminal (Ctrl+Alt+T). Mettez à jour avec full-upgrade, comme le recommande Kali."
+      },
+      "steps": [
+        {
+          "en": "Type the command, then press Enter.",
+          "fr": "Tapez la commande, puis Entrée."
+        },
+        {
+          "en": "Type your password: nothing is shown, not even stars, that is normal. Then press Enter.",
+          "fr": "Tapez votre mot de passe : rien ne s'affiche, pas même des étoiles, c'est normal. Puis Entrée."
+        },
+        {
+          "en": "Confirm with Y, then Enter.",
+          "fr": "Confirmez avec O (pour « oui »), puis Entrée."
+        }
+      ],
+      "command": {
+        "en": "sudo apt update && sudo apt full-upgrade   # update everything\nsudo apt install kali-tools-wireless      # install a group of tools",
+        "fr": "sudo apt update && sudo apt full-upgrade   # tout mettre à jour\nsudo apt install kali-tools-wireless      # installer un groupe d'outils"
+      }
+    },
+    "kali-legal": {
+      "glyph": "\uE7BA",
+      "title": {
+        "en": "Stay within the law",
+        "fr": "Restez dans la légalité"
+      },
+      "body": {
+        "en": "Only use these tools on your own devices or with written permission: testing someone else's system without permission is illegal. To learn, practice on machines made for it, such as your own virtual machines.",
+        "fr": "N'utilisez ces outils que sur vos propres appareils ou avec une autorisation écrite : tester le système de quelqu'un d'autre sans permission est illégal. Pour apprendre, entraînez-vous sur des machines prévues pour, comme vos propres machines virtuelles."
+      }
+    },
+    "kali-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The official documentation (kali.org/docs) and forums (forums.kali.org) are the first places to look. The free book Kali Linux Revealed (kali.training) explains the system in depth.",
+        "fr": "La documentation officielle (kali.org/docs) et les forums (forums.kali.org) sont les premiers endroits où chercher. Le livre gratuit Kali Linux Revealed (kali.training) explique le système en profondeur."
+      }
+    },
+    "zorin-boot": {
+      "glyph": "\uE7E8",
+      "image": "zorin-boot",
+      "title": {
+        "en": "Zorin OS's boot menu",
+        "fr": "Le menu de démarrage de Zorin OS"
+      },
+      "body": {
+        "en": "A black menu appears a few seconds later. Choose with the arrow keys and confirm with Enter.",
+        "fr": "Un menu noir s'affiche quelques secondes plus tard. On choisit avec les flèches et on valide avec Entrée."
+      },
+      "steps": [
+        {
+          "en": "\"Try or Install Zorin OS\" is already selected: press Enter.",
+          "fr": "« Try or Install Zorin OS » est déjà sélectionnée : appuyez sur Entrée."
+        },
+        {
+          "en": "Recent NVIDIA graphics card? Pick \"modern NVIDIA drivers\".",
+          "fr": "Carte graphique NVIDIA récente ? Choisissez « modern NVIDIA drivers »."
+        }
+      ]
+    },
+    "zorin-start": {
+      "glyph": "\uE768",
+      "image": "zorin-start",
+      "localizedImage": true,
+      "title": {
+        "en": "Try before you install",
+        "fr": "Essayer avant d'installer"
+      },
+      "body": {
+        "en": "A welcome window asks for the language, then offers to try or to install. When you try, nothing changes on your PC: check that Wi-Fi, sound and screen work.",
+        "fr": "Une fenêtre de bienvenue demande la langue, puis propose d'essayer ou d'installer. En mode essai, rien n'est modifié sur votre PC : vérifiez que le Wi-Fi, le son et l'écran fonctionnent."
+      },
+      "steps": [
+        {
+          "en": "Choose your language in the list.",
+          "fr": "Choisissez Français dans la liste."
+        },
+        {
+          "en": "\"Try Zorin OS\" to discover it without installing.",
+          "fr": "« Essayer Zorin OS » pour le découvrir sans rien installer."
+        }
+      ]
+    },
+    "zorin-desktop": {
+      "glyph": "\uE7F4",
+      "image": "zorin-desktop",
+      "title": {
+        "en": "The Zorin OS desktop",
+        "fr": "Le bureau de Zorin OS"
+      },
+      "body": {
+        "en": "Zorin OS uses the Windows layout: the menu at the bottom left, a taskbar, the clock on the right. Zorin Appearance switches to another layout (like Windows, like macOS…) in one click.",
+        "fr": "Zorin OS reprend la disposition de Windows : le menu en bas à gauche, une barre des tâches, l'horloge à droite. Zorin Appearance change de disposition (façon Windows, façon macOS…) en un clic."
+      },
+      "steps": [
+        {
+          "en": "The Zorin menu: applications, search, shut down.",
+          "fr": "Le menu Zorin : applications, recherche, extinction."
+        },
+        {
+          "en": "The taskbar: pinned applications and open windows.",
+          "fr": "La barre des tâches : applications épinglées et fenêtres ouvertes."
+        },
+        {
+          "en": "Network, sound, battery and the time.",
+          "fr": "Réseau, son, batterie et l'heure."
+        }
+      ],
+      "windows": {
+        "en": "Start menu and taskbar",
+        "fr": "Menu Démarrer et barre des tâches"
+      },
+      "linux": {
+        "en": "The same, at the same places",
+        "fr": "Les mêmes, aux mêmes endroits"
+      }
+    },
+    "zorin-software": {
+      "glyph": "\uE719",
+      "image": "gnome-software",
+      "localizedImage": true,
+      "title": {
+        "en": "Installing software",
+        "fr": "Installer des logiciels"
+      },
+      "body": {
+        "en": "Open \"Software\" from the Zorin menu: Zorin's applications, Flathub and Snap in one place, Steam and Spotify included.",
+        "fr": "Ouvrez « Logiciels » depuis le menu Zorin : les applications de Zorin, de Flathub et de Snap au même endroit, Steam et Spotify compris."
+      },
+      "steps": [
+        {
+          "en": "Type the name of the application in the search box.",
+          "fr": "Tapez le nom de l'application dans la recherche."
+        },
+        {
+          "en": "Open it and click Install: your password is asked.",
+          "fr": "Ouvrez-la et cliquez sur Installer : votre mot de passe vous est demandé."
+        }
+      ],
+      "windows": {
+        "en": "Download an .exe file from a website and run it",
+        "fr": "Télécharger un .exe sur un site et le lancer"
+      },
+      "linux": {
+        "en": "The software center: search, then Install",
+        "fr": "La logithèque : chercher, puis Installer"
+      }
+    },
+    "zorin-updates": {
+      "glyph": "\uE895",
+      "image": "ubuntu-updates",
+      "localizedImage": true,
+      "title": {
+        "en": "Updates",
+        "fr": "Les mises à jour"
+      },
+      "body": {
+        "en": "When updates are ready, the Software Updater opens by itself: it updates the system and your applications in one go.",
+        "fr": "Quand des mises à jour sont prêtes, le gestionnaire de mises à jour s'ouvre tout seul : il met à jour le système et vos applications en une fois."
+      },
+      "steps": [
+        {
+          "en": "Click \"Install Now\" and type your password.",
+          "fr": "Cliquez sur « Installer maintenant » et tapez votre mot de passe."
+        },
+        {
+          "en": "Restart only when it asks you to.",
+          "fr": "Redémarrez seulement s'il vous le demande."
+        }
+      ]
+    },
+    "zorin-windows-apps": {
+      "glyph": "\uE7FC",
+      "title": {
+        "en": "Your Windows programs",
+        "fr": "Vos programmes Windows"
+      },
+      "body": {
+        "en": "Double-click an .exe file: Zorin OS offers to install Windows App Support (Wine), and suggests a Linux alternative when it knows one. It works with many programs, not all: check the ones you really need.",
+        "fr": "Double-cliquez sur un fichier .exe : Zorin OS propose d'installer la prise en charge des applications Windows (Wine) et suggère une alternative Linux quand il en connaît une. Cela marche avec beaucoup de programmes, pas tous : vérifiez ceux dont vous avez vraiment besoin."
+      },
+      "windows": {
+        "en": "Games and .exe programs",
+        "fr": "Jeux et programmes .exe"
+      },
+      "linux": {
+        "en": "Windows App Support, Steam with Proton for games",
+        "fr": "Prise en charge des applications Windows, Steam avec Proton pour les jeux"
+      }
+    },
+    "zorin-help": {
+      "glyph": "\uE897",
+      "title": {
+        "en": "Getting help",
+        "fr": "Trouver de l'aide"
+      },
+      "body": {
+        "en": "The official guides (help.zorin.com) and the forum (forum.zorin.com) are the first places to look. Zorin OS is based on Ubuntu: Ask Ubuntu answers many questions too.",
+        "fr": "Les guides officiels (help.zorin.com) et le forum (forum.zorin.com) sont les premiers endroits où chercher. Zorin OS est basé sur Ubuntu : doc.ubuntu-fr.org répond aussi à beaucoup de questions."
+      }
+    }
+  },
+  "tours": {
+    "generic": [
+      "usb-boot",
+      "generic-try",
+      "generic-desktop",
+      "generic-software",
+      "generic-updates",
+      "generic-files",
+      "generic-apps",
+      "generic-games",
+      "generic-terminal",
+      "generic-sudo",
+      "generic-help"
+    ],
+    "ubuntu-desktop": [
+      "usb-boot",
+      "ubuntu-boot",
+      "ubuntu-start",
+      "ubuntu-desktop",
+      "ubuntu-software",
+      "ubuntu-updates",
+      "terminal-apt",
+      "generic-apps",
+      "generic-games",
+      "ubuntu-help"
+    ],
+    "ubuntu-server": [
+      "usb-boot",
+      "ubuntu-server-boot",
+      "ubuntu-server-installer",
+      "ubuntu-server-login",
+      "server-ssh",
+      "ubuntu-server-help"
+    ],
+    "lubuntu": [
+      "usb-boot",
+      "lubuntu-boot",
+      "lubuntu-start",
+      "lubuntu-desktop",
+      "lubuntu-software",
+      "lubuntu-updates",
+      "terminal-apt",
+      "generic-apps",
+      "generic-games",
+      "lubuntu-help"
+    ],
+    "debian-live": [
+      "usb-boot",
+      "debian-live-boot",
+      "debian-live-start",
+      "debian-desktop",
+      "debian-software",
+      "debian-updates",
+      "terminal-apt-gnome",
+      "generic-apps",
+      "generic-games",
+      "debian-help"
+    ],
+    "debian-netinst": [
+      "usb-boot",
+      "debian-netinst-boot",
+      "debian-netinst-network",
+      "debian-netinst-root",
+      "debian-netinst-software",
+      "debian-netinst-after",
+      "server-ssh",
+      "debian-help"
+    ],
+    "linuxmint-cinnamon": [
+      "usb-boot",
+      "mint-boot-cinnamon",
+      "mint-start",
+      "mint-desktop-cinnamon",
+      "mint-software",
+      "mint-updates",
+      "terminal-apt",
+      "generic-apps",
+      "generic-games",
+      "mint-help"
+    ],
+    "linuxmint-xfce": [
+      "usb-boot",
+      "mint-boot-xfce",
+      "mint-start",
+      "mint-desktop-xfce",
+      "mint-software",
+      "mint-updates",
+      "terminal-apt",
+      "generic-apps",
+      "generic-games",
+      "mint-help"
+    ],
+    "fedora-workstation": [
+      "usb-boot",
+      "fedora-boot",
+      "fedora-start",
+      "fedora-desktop",
+      "fedora-software",
+      "fedora-updates",
+      "terminal-dnf",
+      "generic-apps",
+      "generic-games",
+      "fedora-help"
+    ],
+    "archlinux": [
+      "secureboot-off",
+      "usb-boot",
+      "arch-boot",
+      "arch-console",
+      "arch-archinstall",
+      "arch-pacman",
+      "arch-help"
+    ],
+    "manjaro-kde": [
+      "secureboot-off",
+      "usb-boot",
+      "manjaro-boot",
+      "manjaro-start",
+      "manjaro-desktop",
+      "manjaro-software",
+      "manjaro-terminal",
+      "generic-apps",
+      "generic-games",
+      "manjaro-help"
+    ],
+    "opensuse-leap": [
+      "usb-boot",
+      "leap-boot",
+      "leap-agama",
+      "opensuse-software",
+      "leap-terminal",
+      "opensuse-snapshots",
+      "generic-apps",
+      "generic-games",
+      "opensuse-help"
+    ],
+    "opensuse-tumbleweed": [
+      "usb-boot",
+      "tw-boot",
+      "tw-installer",
+      "opensuse-software",
+      "tw-updates",
+      "opensuse-snapshots",
+      "generic-apps",
+      "generic-games",
+      "opensuse-help"
+    ],
+    "popos": [
+      "secureboot-off",
+      "usb-boot",
+      "pop-boot",
+      "pop-start",
+      "pop-desktop",
+      "pop-software",
+      "pop-terminal",
+      "generic-apps",
+      "generic-games",
+      "pop-help"
+    ],
+    "kali": [
+      "usb-boot",
+      "kali-boot",
+      "kali-installer",
+      "kali-desktop",
+      "kali-terminal",
+      "kali-legal",
+      "kali-help"
+    ],
+    "zorin-core": [
+      "usb-boot",
+      "zorin-boot",
+      "zorin-start",
+      "zorin-desktop",
+      "zorin-software",
+      "zorin-updates",
+      "zorin-windows-apps",
+      "terminal-apt",
+      "generic-apps",
+      "zorin-help"
+    ]
+  }
+}
