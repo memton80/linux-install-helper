@@ -30,6 +30,7 @@
                 </StackPanel>
             </Border>
 
+            <InfoBar x:Uid="DoneBackupReminder" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowBackupReminder, Mode=OneWay}" />
             <InfoBar x:Uid="DoneSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
             <InfoBar x:Uid="DoneHiddenInWindows" IsClosable="False" Severity="Informational" IsOpen="True" />
 

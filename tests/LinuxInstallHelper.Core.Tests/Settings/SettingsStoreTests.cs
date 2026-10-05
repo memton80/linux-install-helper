@@ -41,6 +41,16 @@ public sealed class SettingsStoreTests : IDisposable
     }
 
     [Fact]
+    public void A_checklist_item_is_marked_done_once()
+    {
+        Assert.Equal("backup", new UserSettings().WithChecklistItemDone("backup").ChecklistDone);
+        Assert.Equal("passwords,backup", new UserSettings { ChecklistDone = "passwords" }.WithChecklistItemDone("backup").ChecklistDone);
+
+        var done = new UserSettings { ChecklistDone = "backup,passwords" };
+        Assert.Same(done, done.WithChecklistItemDone("backup"));
+    }
+
+    [Fact]
     public void Unsupported_values_are_dropped()
     {
         var paths = new AppPaths(_temp.Path);

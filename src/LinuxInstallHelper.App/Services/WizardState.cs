@@ -19,6 +19,9 @@ public sealed class WizardState
 
     public CreationResult? LastResult { get; set; }
 
+    /// <summary>The user has personal files and answered that they are not backed up yet.</summary>
+    public bool BackupPending { get; set; }
+
     public bool IsLocalIso => LocalIsoPath is not null;
 
     public CreationSource? Source =>
@@ -43,6 +46,7 @@ public sealed class WizardState
         LocalIsoSize = 0;
         Target = null;
         LastResult = null;
+        BackupPending = false;
     }
 
     public void SelectLocalIso(string path, long size, string? expectedSha256)
@@ -53,6 +57,7 @@ public sealed class WizardState
         LocalExpectedSha256 = string.IsNullOrWhiteSpace(expectedSha256) ? null : expectedSha256.Trim();
         Target = null;
         LastResult = null;
+        BackupPending = false;
     }
 
     public void Reset()
@@ -63,5 +68,6 @@ public sealed class WizardState
         LocalIsoSize = 0;
         Target = null;
         LastResult = null;
+        BackupPending = false;
     }
 }

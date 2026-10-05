@@ -20,6 +20,7 @@ public sealed class NavigationService : INavigationService
         [PageKeys.Guide] = typeof(GuidePage),
         [PageKeys.Drive] = typeof(DrivePage),
         [PageKeys.Progress] = typeof(ProgressPage),
+        [PageKeys.Backup] = typeof(BackupPage),
         [PageKeys.Done] = typeof(DonePage),
         [PageKeys.Settings] = typeof(SettingsPage),
         [PageKeys.About] = typeof(AboutPage),

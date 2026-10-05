@@ -37,6 +37,9 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     private bool _showSecureBootWarning;
 
     [ObservableProperty]
+    private bool _showBackupReminder;
+
+    [ObservableProperty]
     private bool _hasIso;
 
     private string? _isoPath;
@@ -67,6 +70,7 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
             : result.EjectError is null ? _localizer.Get("Done_NotEjected") : _localizer.Format("Done_EjectFailed", result.EjectError);
 
         ShowSecureBootWarning = _wizard.Distro is { SecureBoot: false };
+        ShowBackupReminder = _wizard.BackupPending;
         _isoPath = result.ImagePath;
         HasIso = File.Exists(result.ImagePath);
     }

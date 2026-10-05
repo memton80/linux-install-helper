@@ -11,6 +11,7 @@ public static class PageKeys
     public const string Guide = "Guide";
     public const string Drive = "Drive";
     public const string Progress = "Progress";
+    public const string Backup = "Backup";
     public const string Done = "Done";
     public const string Settings = "Settings";
     public const string About = "About";
@@ -19,7 +20,7 @@ public static class PageKeys
     public static string MenuKeyFor(string pageKey, bool fromLocalIso) => pageKey switch
     {
         DistroDetails => Distros,
-        Drive or Progress or Done => fromLocalIso ? LocalIso : Distros,
+        Drive or Progress or Backup or Done => fromLocalIso ? LocalIso : Distros,
         _ => pageKey,
     };
 }

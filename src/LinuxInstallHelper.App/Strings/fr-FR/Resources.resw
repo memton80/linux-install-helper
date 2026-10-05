@@ -1338,4 +1338,55 @@ Cette opération est irréversible.</value>
   <data name="Word_download_Meaning" xml:space="preserve">
     <value>Le fichier de la distribution (une « image ISO ») que l'application récupère sur le site officiel, puis copie sur la clé USB. Sa taille indique la place qu'il prendra sur la clé.</value>
   </data>
+  <data name="BackupHeader.Text" xml:space="preserve">
+    <value>Avez-vous sauvegardé vos données ?</value>
+  </data>
+  <data name="BackupSubtitle.Text" xml:space="preserve">
+    <value>Vous avez des documents dans vos dossiers personnels. Avez-vous bien fait une sauvegarde de vos données sur une clé USB ou un disque externe ?</value>
+  </data>
+  <data name="BackupFoldersTitle.Text" xml:space="preserve">
+    <value>Dossiers qui contiennent des fichiers</value>
+  </data>
+  <data name="BackupOpenFolder.Content" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Backup_OpenFolderName" xml:space="preserve">
+    <value>Ouvrir le dossier {0}</value>
+  </data>
+  <data name="BackupWarning.Title" xml:space="preserve">
+    <value>Installer Linux peut effacer vos fichiers</value>
+  </data>
+  <data name="BackupWarning.Message" xml:space="preserve">
+    <value>L'installation peut effacer tout le disque de l'ordinateur : sans sauvegarde, ces fichiers seraient perdus pour de bon. Copiez-les sur une autre clé USB ou un disque externe : la clé Linux que vous venez de créer ne peut pas servir de sauvegarde.</value>
+  </data>
+  <data name="BackupConfirm.Content" xml:space="preserve">
+    <value>Oui, mes données sont sauvegardées</value>
+  </data>
+  <data name="BackupLater.Content" xml:space="preserve">
+    <value>Pas encore, je le ferai avant d'installer</value>
+  </data>
+  <data name="Folder_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Folder_Pictures" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Folder_Desktop" xml:space="preserve">
+    <value>Bureau</value>
+  </data>
+  <data name="Folder_Music" xml:space="preserve">
+    <value>Musique</value>
+  </data>
+  <data name="Folder_Videos" xml:space="preserve">
+    <value>Vidéos</value>
+  </data>
+  <data name="Folder_Downloads" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
+  <data name="DoneBackupReminder.Title" xml:space="preserve">
+    <value>Sauvegardez vos fichiers avant d'installer Linux</value>
+  </data>
+  <data name="DoneBackupReminder.Message" xml:space="preserve">
+    <value>Copiez vos documents, images et autres fichiers personnels sur une autre clé USB ou un disque externe : l'installation peut effacer le disque de l'ordinateur.</value>
+  </data>
 </root>

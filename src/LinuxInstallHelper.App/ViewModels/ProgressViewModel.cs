@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
 using LinuxInstallHelper.Core;
+using LinuxInstallHelper.Core.Backup;
 using LinuxInstallHelper.Core.Settings;
 using LinuxInstallHelper.Core.Tour;
 using LinuxInstallHelper.Core.Workflow;
@@ -175,8 +176,18 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         {
             var result = await Task.Run(() => _pipeline.RunAsync(job, progress, Log, cancellation.Token));
             _wizard.LastResult = result;
+            var personalFolders = await FindPersonalFoldersAsync(result);
             Unlock();
-            _navigation.NavigateTo(PageKeys.Done);
+
+            // Ask about a backup first when the user has personal files: installing Linux may erase them.
+            if (personalFolders.Count > 0)
+            {
+                _navigation.NavigateTo(PageKeys.Backup, personalFolders);
+            }
+            else
+            {
+                _navigation.NavigateTo(PageKeys.Done);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -218,6 +229,20 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
             _busy.IsBusy = false;
             _navigation.IsLocked = false;
             IsRunning = false;
+        }
+    }
+
+    private async Task<IReadOnlyList<PersonalFolder>> FindPersonalFoldersAsync(CreationResult result)
+    {
+        try
+        {
+            return await Task.Run(() => PersonalFolders.WithFiles(PersonalFolders.ForCurrentUser(), [result.ImagePath]));
+        }
+        catch (Exception ex)
+        {
+            // The drive is ready: never turn a success into an error for this reminder.
+            _logger.LogWarning(ex, "Could not look for personal files");
+            return [];
         }
     }
 
