@@ -34,6 +34,9 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   avant l'effacement.
 - **Écriture fiable** avec progression, relecture de la clé pour la comparer à l'image, journal détaillé et
   éjection propre.
+- **Rappel de sauvegarde** : une fois la clé prête, si vos dossiers personnels (Documents, Images, Bureau, Musique,
+  Vidéos, Téléchargements) contiennent des fichiers, l'application vous demande si vous les avez sauvegardés sur une
+  clé USB ou un disque externe avant d'installer Linux.
 - **ISO locale** : utilisez une image déjà téléchargée, avec contrôle facultatif de son SHA-256.
 - **Tutoriel illustré pour chaque distribution** pendant la création de la clé : démarrer sur la clé, son menu de
   démarrage avec les entrées exactes, l'essai et l'installation, le bureau, la logithèque, les mises à jour, le
@@ -123,6 +126,7 @@ exemple Ventoy téléchargé au premier usage, peut être ajouté sans toucher a
   dossier de téléchargement, ni l'ISO, est en ligne, inscriptible et entre 1 Go et 256 Go (au-delà, c'est
   probablement un disque dur externe).
 - Création : case à cocher nommant la clé, puis boîte de dialogue de confirmation dont le bouton par défaut est « Annuler ».
+  Chaque confirmation ne lance qu'une seule écriture : revenir en arrière après la création ne la relance jamais.
 - Juste avant l'écriture, la clé est comparée à celle confirmée (numéro, identifiant, numéro de série, taille).
   Si elle a été débranchée ou remplacée, rien n'est écrit.
 - Rien n'est écrit tant que l'image n'est pas vérifiée ; une image invalide est supprimée.
@@ -183,6 +187,7 @@ drive: pick a distribution, and the app downloads the official ISO (with resume 
 verifies its SHA-256/SHA-512 and OpenPGP signature against pinned keys, lets you choose among removable USB
 drives only (never the system or an internal disk) with a double confirmation, writes the hybrid ISO as-is,
 reads the drive back to check it and ejects it. While the drive is written, an illustrated tour of the chosen
-distribution explains its boot menu, how to try and install it, its desktop, software center and updates. It can also
-write a local ISO and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+distribution explains its boot menu, how to try and install it, its desktop, software center and updates. If your
+personal folders hold files, it then asks whether you have backed them up to a USB drive or an external disk before
+installing Linux. It can also write a local ISO and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

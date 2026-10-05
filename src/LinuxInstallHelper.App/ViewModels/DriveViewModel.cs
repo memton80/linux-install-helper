@@ -154,7 +154,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
             return;
         }
 
-        _wizard.Target = drive.Disk;
+        _wizard.ConfirmCreation(drive.Disk);
         _navigation.NavigateTo(PageKeys.Progress);
     }
 

@@ -146,6 +146,7 @@ public partial class App : Application
         services.AddTransient<LocalIsoViewModel>();
         services.AddTransient<DriveViewModel>();
         services.AddTransient<ProgressViewModel>();
+        services.AddTransient<BackupViewModel>();
         services.AddTransient<DoneViewModel>();
         services.AddTransient<RestoreViewModel>();
         services.AddTransient<GuideViewModel>();

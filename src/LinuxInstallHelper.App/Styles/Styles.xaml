@@ -461,6 +461,30 @@
         <Setter Property="Width" Value="20" />
     </Style>
 
+    <!-- Backup -->
+    <Style x:Key="BackupHeroIconStyle" TargetType="FontIcon" BasedOn="{StaticResource HeroIconStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCautionBrush}" />
+    </Style>
+
+    <Style x:Key="FolderRowGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+        <Setter Property="Padding" Value="0,6,0,6" />
+    </Style>
+
+    <Style x:Key="FolderIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
+    <Style x:Key="FolderTextStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="2" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="FolderNameStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
     <!-- About -->
     <Style x:Key="AppIconLargeStyle" TargetType="Image">
         <Setter Property="Width" Value="64" />

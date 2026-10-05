@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
 using LinuxInstallHelper.Core;
+using LinuxInstallHelper.Core.Backup;
 using LinuxInstallHelper.Core.Settings;
 using LinuxInstallHelper.Core.Tour;
 using LinuxInstallHelper.Core.Workflow;
@@ -115,6 +116,13 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
             return;
         }
 
+        // Only right after the confirmation on the drive page: showing this page again never writes the drive again.
+        if (!_wizard.TakeCreationConfirmation())
+        {
+            _navigation.NavigateTo(_wizard.LastResult is null ? PageKeys.Distros : PageKeys.Done, clearHistory: true);
+            return;
+        }
+
         Subtitle = _localizer.Format("Progress_Subtitle", _wizard.SourceName, _wizard.Target.FriendlyName);
         Tour.Use(_wizard.Distro?.Id, _wizard.Distro?.Name);
         Tour.Play();
@@ -175,8 +183,19 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         {
             var result = await Task.Run(() => _pipeline.RunAsync(job, progress, Log, cancellation.Token));
             _wizard.LastResult = result;
+            _wizard.BackupPending = false;
+            var personalFolders = await FindPersonalFoldersAsync(result);
             Unlock();
-            _navigation.NavigateTo(PageKeys.Done);
+
+            // Ask about a backup first when the user has personal files: installing Linux may erase them.
+            if (personalFolders.Count > 0)
+            {
+                _navigation.NavigateTo(PageKeys.Backup, personalFolders);
+            }
+            else
+            {
+                _navigation.NavigateTo(PageKeys.Done);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -218,6 +237,20 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
             _busy.IsBusy = false;
             _navigation.IsLocked = false;
             IsRunning = false;
+        }
+    }
+
+    private async Task<IReadOnlyList<PersonalFolder>> FindPersonalFoldersAsync(CreationResult result)
+    {
+        try
+        {
+            return await Task.Run(() => PersonalFolders.WithFiles(PersonalFolders.ForCurrentUser(), [result.ImagePath]));
+        }
+        catch (Exception ex)
+        {
+            // The drive is ready: never turn a success into an error for this reminder.
+            _logger.LogWarning(ex, "Could not look for personal files");
+            return [];
         }
     }
 

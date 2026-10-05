@@ -20,10 +20,14 @@ public sealed class NavigationService : INavigationService
         [PageKeys.Guide] = typeof(GuidePage),
         [PageKeys.Drive] = typeof(DrivePage),
         [PageKeys.Progress] = typeof(ProgressPage),
+        [PageKeys.Backup] = typeof(BackupPage),
         [PageKeys.Done] = typeof(DonePage),
         [PageKeys.Settings] = typeof(SettingsPage),
         [PageKeys.About] = typeof(AboutPage),
     };
+
+    // Left out of the history: going back to the progress page would start writing the drive again.
+    private static readonly HashSet<Type> NotKeptInHistory = [typeof(ProgressPage)];
 
     private readonly ILogger _logger;
     private Frame? _frame;
@@ -97,6 +101,11 @@ public sealed class NavigationService : INavigationService
     private void OnFrameNavigated(object sender, NavigationEventArgs e)
     {
         CurrentPageKey = Pages.FirstOrDefault(p => p.Value == e.SourcePageType).Key;
+
+        if (_frame is { BackStack: { Count: > 0 } history } && NotKeptInHistory.Contains(history[history.Count - 1].SourcePageType))
+        {
+            history.RemoveAt(history.Count - 1);
+        }
 
         if (e.Content is FrameworkElement { DataContext: INavigationAware current })
         {

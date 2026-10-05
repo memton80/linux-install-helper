@@ -39,6 +39,13 @@ public sealed record UserSettings
     public string? ChecklistDone { get; init; }
 
     public static IReadOnlyList<string> SupportedLanguages { get; } = ["en-US", "fr-FR"];
+
+    /// <summary>Returns these settings with the checklist item <paramref name="key"/> marked as done.</summary>
+    public UserSettings WithChecklistItemDone(string key)
+    {
+        var done = (ChecklistDone ?? string.Empty).Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        return done.Contains(key, StringComparer.Ordinal) ? this : this with { ChecklistDone = string.Join(',', [.. done, key]) };
+    }
 }
 
 public interface ISettingsStore
