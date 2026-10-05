@@ -134,6 +134,7 @@ public partial class App : Application
         services.AddSingleton<AppBusyState>();
         services.AddSingleton<WizardState>();
         services.AddSingleton<DisplayFormatter>();
+        services.AddSingleton<Glossary>();
         services.AddSingleton<ErrorDescriber>();
         services.AddSingleton<DriveScanner>();
         services.AddSingleton<MainWindow>();
@@ -141,6 +142,7 @@ public partial class App : Application
         // View models (the distributions list keeps its state while navigating)
         services.AddSingleton<AdvisorViewModel>();
         services.AddSingleton<DistrosViewModel>();
+        services.AddTransient<DistroDetailsViewModel>();
         services.AddTransient<LocalIsoViewModel>();
         services.AddTransient<DriveViewModel>();
         services.AddTransient<ProgressViewModel>();

@@ -23,6 +23,8 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 - **Catalogue de 15 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
   Manjaro, Zorin OS…) avec recherche et filtres par famille et par usage (bureau, léger, serveur…).
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
+  Chaque distribution a sa page de présentation (en bref, configuration conseillée, site officiel) avant la
+  création de la clé, et un bouton « ? » explique simplement les mots techniques, comme dans le questionnaire.
 - **Téléchargement automatique** depuis les sources officielles : progression, vitesse, temps restant,
   reprise après coupure, annulation, miroir de secours. Les liens sont testés avant le téléchargement.
 - **Vérification avant écriture** : SHA-256 (ou SHA-512) officiel, signature OpenPGP des checksums ou de

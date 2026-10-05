@@ -14,6 +14,7 @@ public sealed class NavigationService : INavigationService
     {
         [PageKeys.Advisor] = typeof(AdvisorPage),
         [PageKeys.Distros] = typeof(DistrosPage),
+        [PageKeys.DistroDetails] = typeof(DistroDetailsPage),
         [PageKeys.LocalIso] = typeof(LocalIsoPage),
         [PageKeys.Restore] = typeof(RestorePage),
         [PageKeys.Guide] = typeof(GuidePage),

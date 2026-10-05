@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.DistroDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    xmlns:views="using:LinuxInstallHelper.App.Views"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <Grid Style="{StaticResource DistroCardHeaderGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource BadgeBorderStyle}" Background="{x:Bind ViewModel.Item.BadgeBrush, Mode=OneWay}">
+                    <TextBlock Style="{StaticResource BadgeTextStyle}" Text="{x:Bind ViewModel.Item.Monogram, Mode=OneWay}" />
+                </Border>
+                <StackPanel Grid.Column="1" Style="{StaticResource AdvisorNameStackStyle}">
+                    <TextBlock Style="{StaticResource PageTitleStyle}" Text="{x:Bind ViewModel.Item.Name, Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Item.Subtitle, Mode=OneWay}" />
+                </StackPanel>
+                <views:WordsButton Grid.Column="2" Words="{x:Bind ViewModel.Words, Mode=OneWay}" Label="{x:Bind ViewModel.WordsLabel}" />
+            </Grid>
+
+            <InfoBar x:Uid="DistroDetailsSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
+
+            <TextBlock x:Uid="DistroDetailsAbout" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Explanation, Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Description, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Description), Mode=OneWay}" />
+                    <HyperlinkButton Command="{x:Bind ViewModel.OpenWebsiteCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.Website, Mode=OneWay}">
+                        <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                            <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE774;" />
+                            <TextBlock Text="{x:Bind ViewModel.WebsiteLabel, Mode=OneWay}" />
+                        </StackPanel>
+                    </HyperlinkButton>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="DistroDetailsFacts" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <ItemsControl ItemsSource="{x:Bind ViewModel.Facts, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Style="{StaticResource WordsListStyle}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DistroFact">
+                            <Grid Style="{StaticResource DistroFactGridStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource DistroFactLabelStyle}" Text="{x:Bind Label}" />
+                                <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Value}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
+
+            <StackPanel Style="{StaticResource ButtonRowStyle}">
+                <Button Style="{StaticResource AccentButtonStyle}" Content="{x:Bind ViewModel.CreateLabel, Mode=OneWay}" Command="{x:Bind ViewModel.CreateCommand}" />
+                <Button x:Uid="DistroDetailsBack" Command="{x:Bind ViewModel.BackCommand}" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

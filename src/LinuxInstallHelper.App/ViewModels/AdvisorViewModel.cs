@@ -7,22 +7,18 @@ using LinuxInstallHelper.Core.Catalog;
 
 namespace LinuxInstallHelper.App.ViewModels;
 
-/// <summary>A difficult word of a question, explained in plain words.</summary>
-public sealed record AdvisorWord(string Word, string Meaning);
-
 /// <summary>A question of the questionnaire: its answers are picked by index.</summary>
 public sealed class AdvisorQuestionViewModel : ObservableObject
 {
     private readonly Action _changed;
     private int _selectedIndex;
 
-    public AdvisorQuestionViewModel(string title, string hint, IReadOnlyList<string> options, IReadOnlyList<AdvisorWord> words, string wordsTitle, string wordsLabel, int selectedIndex, Action changed)
+    public AdvisorQuestionViewModel(string title, string hint, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
     {
         Title = title;
         Hint = hint;
         Options = options;
         Words = words;
-        WordsTitle = wordsTitle;
         WordsLabel = wordsLabel;
         _selectedIndex = selectedIndex;
         _changed = changed;
@@ -36,11 +32,7 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
     public IReadOnlyList<string> Options { get; }
 
     /// <summary>The words of the question that a beginner may not know, shown behind its "?" button.</summary>
-    public IReadOnlyList<AdvisorWord> Words { get; }
-
-    public bool HasWords => Words.Count > 0;
-
-    public string WordsTitle { get; }
+    public IReadOnlyList<ExplainedWord> Words { get; }
 
     /// <summary>Tooltip and accessible name of the "?" button.</summary>
     public string WordsLabel { get; }
@@ -62,12 +54,14 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
 /// <summary>A suggested distribution, explained in plain words.</summary>
 public sealed class AdvisorResultViewModel
 {
-    public AdvisorResultViewModel(DistroItemViewModel item, string explanation, IReadOnlyList<string> reasons, string requirements, string chooseLabel, Action choose)
+    public AdvisorResultViewModel(DistroItemViewModel item, string explanation, IReadOnlyList<string> reasons, string requirements, IReadOnlyList<ExplainedWord> words, string wordsLabel, string chooseLabel, Action choose)
     {
         Item = item;
         Explanation = explanation;
         Reasons = reasons;
         Requirements = requirements;
+        Words = words;
+        WordsLabel = wordsLabel;
         ChooseLabel = chooseLabel;
         ChooseCommand = new RelayCommand(choose);
     }
@@ -79,6 +73,11 @@ public sealed class AdvisorResultViewModel
     public IReadOnlyList<string> Reasons { get; }
 
     public string Requirements { get; }
+
+    /// <summary>The words of the suggestion that a beginner may not know, shown behind its "?" button.</summary>
+    public IReadOnlyList<ExplainedWord> Words { get; }
+
+    public string WordsLabel { get; }
 
     public string ChooseLabel { get; }
 
@@ -92,21 +91,34 @@ public sealed class AdvisorResultViewModel
 public sealed partial class AdvisorViewModel : ObservableObject, INavigationAware
 {
     private const int QuestionCount = 6;
-    private const int MaxWordsPerQuestion = 4;
+
+    // The words of the glossary explained behind the "?" button of each question.
+    private static readonly string[][] QuestionWords =
+    [
+        ["linux", "distribution", "terminal"],
+        ["memory", "gb", "memory-where"],
+        ["office", "programming", "advanced"],
+        ["desktop", "taskbar", "clean"],
+        ["update", "bug", "update-unsure"],
+        ["bios", "secureboot", "bios-unsure"],
+    ];
+
     private readonly ICatalogService _catalog;
     private readonly ILocalizer _localizer;
     private readonly INavigationService _navigation;
     private readonly WizardState _wizard;
     private readonly DisplayFormatter _formatter;
+    private readonly Glossary _glossary;
     private IReadOnlyList<Distro> _distros = [];
 
-    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter)
+    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary)
     {
         _catalog = catalog;
         _localizer = localizer;
         _navigation = navigation;
         _wizard = wizard;
         _formatter = formatter;
+        _glossary = glossary;
 
         // The memory of this PC preselects the second answer: the drive is usually made for the same computer.
         var memory = GC.GetGCMemoryInfo().TotalAvailableMemoryBytes;
@@ -121,19 +133,13 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
                 .Select(o => Optional($"Advisor_Q{i}_A{o}"))
                 .OfType<string>()
                 .ToList();
-            var words = Enumerable.Range(1, MaxWordsPerQuestion)
-                .Select(w => (Word: Optional($"Advisor_Q{i}_Word{w}"), Meaning: Optional($"Advisor_Q{i}_Word{w}_Meaning")))
-                .Where(w => w.Word is not null && w.Meaning is not null)
-                .Select(w => new AdvisorWord(w.Word!, w.Meaning!))
-                .ToList();
             var hint = i == 2 ? memoryHint : Optional($"Advisor_Q{i}_Hint") ?? string.Empty;
             var selected = i == 2 && memory > 0 ? (modest ? 1 : 0) : -1;
             Questions.Add(new AdvisorQuestionViewModel(
                 localizer.Format("Advisor_QuestionTitle", i, localizer.Get($"Advisor_Q{i}")),
                 hint,
                 options,
-                words,
-                localizer.Get("Advisor_WordsTitle"),
+                glossary.Get(QuestionWords[i - 1]),
                 localizer.Format("Advisor_WordsButton", i),
                 selected,
                 OnAnswerChanged));
@@ -257,6 +263,8 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
             explanation,
             reasons,
             requirements,
+            _glossary.ForDistro(distro, mentionsSecureBoot: suggestion.Reasons.Contains(AdvisorReason.SecureBoot), mentionsDownload: false),
+            _localizer.Get("Advisor_ResultWordsButton"),
             _localizer.Format(best ? "Advisor_CreateBest" : "Advisor_Choose", distro.Name),
             () =>
             {

@@ -15,17 +15,15 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     private readonly ICatalogService _catalog;
     private readonly ILocalizer _localizer;
     private readonly INavigationService _navigation;
-    private readonly WizardState _wizard;
     private readonly DisplayFormatter _formatter;
     private IReadOnlyList<Distro> _all = [];
     private bool _loaded;
 
-    public DistrosViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter)
+    public DistrosViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, DisplayFormatter formatter)
     {
         _catalog = catalog;
         _localizer = localizer;
         _navigation = navigation;
-        _wizard = wizard;
         _formatter = formatter;
 
         Families =
@@ -79,11 +77,8 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     {
     }
 
-    public void Select(DistroItemViewModel item)
-    {
-        _wizard.SelectDistro(item.Distro);
-        _navigation.NavigateTo(PageKeys.Drive);
-    }
+    /// <summary>Opens the page that presents the distribution, from which the drive is created.</summary>
+    public void Select(DistroItemViewModel item) => _navigation.NavigateTo(PageKeys.DistroDetails, item.Distro);
 
     [RelayCommand]
     private async Task LoadAsync()

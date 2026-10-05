@@ -72,6 +72,7 @@ $runs = @(
     @{ Page = "Advisor";  Theme = "light"; Lang = "fr-FR"; Expect = "Avez-vous déjà utilisé Linux" },
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
+    @{ Page = "DistroDetails"; Theme = "light"; Lang = "fr-FR"; Expect = "Site officiel" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Guide";    Theme = "dark";  Lang = "fr-FR"; Expect = "Avant de quitter Windows" },
