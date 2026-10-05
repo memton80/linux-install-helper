@@ -116,6 +116,13 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
             return;
         }
 
+        // Only right after the confirmation on the drive page: showing this page again never writes the drive again.
+        if (!_wizard.TakeCreationConfirmation())
+        {
+            _navigation.NavigateTo(_wizard.LastResult is null ? PageKeys.Distros : PageKeys.Done, clearHistory: true);
+            return;
+        }
+
         Subtitle = _localizer.Format("Progress_Subtitle", _wizard.SourceName, _wizard.Target.FriendlyName);
         Tour.Use(_wizard.Distro?.Id, _wizard.Distro?.Name);
         Tour.Play();
@@ -176,6 +183,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         {
             var result = await Task.Run(() => _pipeline.RunAsync(job, progress, Log, cancellation.Token));
             _wizard.LastResult = result;
+            _wizard.BackupPending = false;
             var personalFolders = await FindPersonalFoldersAsync(result);
             Unlock();
 

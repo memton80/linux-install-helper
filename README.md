@@ -126,6 +126,7 @@ exemple Ventoy téléchargé au premier usage, peut être ajouté sans toucher a
   dossier de téléchargement, ni l'ISO, est en ligne, inscriptible et entre 1 Go et 256 Go (au-delà, c'est
   probablement un disque dur externe).
 - Création : case à cocher nommant la clé, puis boîte de dialogue de confirmation dont le bouton par défaut est « Annuler ».
+  Chaque confirmation ne lance qu'une seule écriture : revenir en arrière après la création ne la relance jamais.
 - Juste avant l'écriture, la clé est comparée à celle confirmée (numéro, identifiant, numéro de série, taille).
   Si elle a été débranchée ou remplacée, rien n'est écrit.
 - Rien n'est écrit tant que l'image n'est pas vérifiée ; une image invalide est supprimée.

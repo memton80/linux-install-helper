@@ -7,6 +7,8 @@ namespace LinuxInstallHelper.App.Services;
 /// <summary>Choices made along the steps: image source, target drive, result.</summary>
 public sealed class WizardState
 {
+    private bool _creationConfirmed;
+
     public Distro? Distro { get; private set; }
 
     public string? LocalIsoPath { get; private set; }
@@ -15,7 +17,7 @@ public sealed class WizardState
 
     public string? LocalExpectedSha256 { get; private set; }
 
-    public DiskInfo? Target { get; set; }
+    public DiskInfo? Target { get; private set; }
 
     public CreationResult? LastResult { get; set; }
 
@@ -47,6 +49,24 @@ public sealed class WizardState
         Target = null;
         LastResult = null;
         BackupPending = false;
+        _creationConfirmed = false;
+    }
+
+    /// <summary>The user has confirmed <paramref name="target"/> on the drive page: one creation may start.</summary>
+    public void ConfirmCreation(DiskInfo target)
+    {
+        Target = target;
+        _creationConfirmed = true;
+    }
+
+    /// <summary>
+    /// True once per confirmation: the progress page writes only right after it, never when it is shown again.
+    /// </summary>
+    public bool TakeCreationConfirmation()
+    {
+        var confirmed = _creationConfirmed;
+        _creationConfirmed = false;
+        return confirmed;
     }
 
     public void SelectLocalIso(string path, long size, string? expectedSha256)
@@ -58,6 +78,7 @@ public sealed class WizardState
         Target = null;
         LastResult = null;
         BackupPending = false;
+        _creationConfirmed = false;
     }
 
     public void Reset()
@@ -69,5 +90,6 @@ public sealed class WizardState
         Target = null;
         LastResult = null;
         BackupPending = false;
+        _creationConfirmed = false;
     }
 }
