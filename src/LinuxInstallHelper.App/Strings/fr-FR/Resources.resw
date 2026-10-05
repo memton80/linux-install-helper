@@ -972,6 +972,12 @@ Cette opération est irréversible.</value>
   <data name="Advisor_QuestionTitle" xml:space="preserve">
     <value>{0}. {1}</value>
   </data>
+  <data name="Advisor_WordsTitle" xml:space="preserve">
+    <value>Les mots expliqués simplement</value>
+  </data>
+  <data name="Advisor_WordsButton" xml:space="preserve">
+    <value>Expliquer les mots de la question {0}</value>
+  </data>
   <data name="Advisor_Q1" xml:space="preserve">
     <value>Avez-vous déjà utilisé Linux ?</value>
   </data>
@@ -984,6 +990,24 @@ Cette opération est irréversible.</value>
   <data name="Advisor_Q1_A3" xml:space="preserve">
     <value>Oui, je suis à l'aise, terminal compris</value>
   </data>
+  <data name="Advisor_Q1_Word1" xml:space="preserve">
+    <value>Linux</value>
+  </data>
+  <data name="Advisor_Q1_Word1_Meaning" xml:space="preserve">
+    <value>Un système pour faire fonctionner l'ordinateur, comme Windows. Il est gratuit, et on peut l'installer à la place de Windows ou à côté.</value>
+  </data>
+  <data name="Advisor_Q1_Word2" xml:space="preserve">
+    <value>Distribution</value>
+  </data>
+  <data name="Advisor_Q1_Word2_Meaning" xml:space="preserve">
+    <value>Une version de Linux prête à installer, avec ses logiciels et son style d'écran. Ubuntu, Linux Mint et Fedora sont des distributions.</value>
+  </data>
+  <data name="Advisor_Q1_Word3" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="Advisor_Q1_Word3_Meaning" xml:space="preserve">
+    <value>Une fenêtre où l'on tape des commandes au clavier au lieu de cliquer. Avec les distributions pour débutants, on peut presque toujours s'en passer.</value>
+  </data>
   <data name="Advisor_Q2" xml:space="preserve">
     <value>Sur quel ordinateur allez-vous l'utiliser ?</value>
   </data>
@@ -992,6 +1016,24 @@ Cette opération est irréversible.</value>
   </data>
   <data name="Advisor_Q2_A2" xml:space="preserve">
     <value>Un vieux PC ou un PC peu puissant (moins de 4 Go de mémoire)</value>
+  </data>
+  <data name="Advisor_Q2_Word1" xml:space="preserve">
+    <value>Mémoire (RAM)</value>
+  </data>
+  <data name="Advisor_Q2_Word1_Meaning" xml:space="preserve">
+    <value>La mémoire de travail de l'ordinateur : plus il en a, plus il peut ouvrir de programmes en même temps sans ralentir. À ne pas confondre avec le disque, où sont rangés vos fichiers.</value>
+  </data>
+  <data name="Advisor_Q2_Word2" xml:space="preserve">
+    <value>Go (gigaoctet)</value>
+  </data>
+  <data name="Advisor_Q2_Word2_Meaning" xml:space="preserve">
+    <value>L'unité qui mesure la mémoire et la place sur le disque. Un PC récent a en général 8 Go de mémoire ou plus.</value>
+  </data>
+  <data name="Advisor_Q2_Word3" xml:space="preserve">
+    <value>Où voir la mémoire d'un PC ?</value>
+  </data>
+  <data name="Advisor_Q2_Word3_Meaning" xml:space="preserve">
+    <value>Sous Windows, ouvrez Paramètres, puis Système, puis Informations système : elle est indiquée à la ligne « Mémoire RAM installée ».</value>
   </data>
   <data name="Advisor_MemoryHint" xml:space="preserve">
     <value>Pour info, ce PC a {0} Go de mémoire.</value>
@@ -1008,6 +1050,24 @@ Cette opération est irréversible.</value>
   <data name="Advisor_Q3_A3" xml:space="preserve">
     <value>Programmer ou faire de l'informatique avancée</value>
   </data>
+  <data name="Advisor_Q3_Word1" xml:space="preserve">
+    <value>Bureautique</value>
+  </data>
+  <data name="Advisor_Q3_Word1_Meaning" xml:space="preserve">
+    <value>Écrire des lettres, faire des tableaux ou des présentations, avec des logiciels comme Word ou Excel. Sous Linux, LibreOffice fait la même chose gratuitement.</value>
+  </data>
+  <data name="Advisor_Q3_Word2" xml:space="preserve">
+    <value>Programmer</value>
+  </data>
+  <data name="Advisor_Q3_Word2_Meaning" xml:space="preserve">
+    <value>Écrire soi-même des logiciels ou des sites web, dans un langage informatique comme Python ou JavaScript.</value>
+  </data>
+  <data name="Advisor_Q3_Word3" xml:space="preserve">
+    <value>Informatique avancée</value>
+  </data>
+  <data name="Advisor_Q3_Word3_Meaning" xml:space="preserve">
+    <value>Des usages techniques : héberger un site web chez soi, tester des logiciels, régler Linux en profondeur… Si ces mots ne vous parlent pas, choisissez une autre réponse.</value>
+  </data>
   <data name="Advisor_Q4" xml:space="preserve">
     <value>Quel style d'écran préférez-vous ?</value>
   </data>
@@ -1019,6 +1079,24 @@ Cette opération est irréversible.</value>
   </data>
   <data name="Advisor_Q4_A3" xml:space="preserve">
     <value>Peu importe</value>
+  </data>
+  <data name="Advisor_Q4_Word1" xml:space="preserve">
+    <value>Style d'écran (le « bureau »)</value>
+  </data>
+  <data name="Advisor_Q4_Word1_Meaning" xml:space="preserve">
+    <value>Ce que vous voyez quand l'ordinateur est allumé : le fond d'écran, les fenêtres et les menus pour ouvrir vos applications. Sous Linux, il en existe plusieurs styles.</value>
+  </data>
+  <data name="Advisor_Q4_Word2" xml:space="preserve">
+    <value>Barre des tâches</value>
+  </data>
+  <data name="Advisor_Q4_Word2_Meaning" xml:space="preserve">
+    <value>La bande en bas de l'écran de Windows, avec le bouton Démarrer, les applications ouvertes et l'heure.</value>
+  </data>
+  <data name="Advisor_Q4_Word3" xml:space="preserve">
+    <value>Épuré</value>
+  </data>
+  <data name="Advisor_Q4_Word3_Meaning" xml:space="preserve">
+    <value>Simple, avec peu de choses à l'écran pour ne pas être distrait. On retrouve ses applications dans une vue d'ensemble, un peu comme sur un Mac.</value>
   </data>
   <data name="Advisor_Q5" xml:space="preserve">
     <value>Pour les mises à jour, que préférez-vous ?</value>
@@ -1032,6 +1110,24 @@ Cette opération est irréversible.</value>
   <data name="Advisor_Q5_A3" xml:space="preserve">
     <value>Peu importe</value>
   </data>
+  <data name="Advisor_Q5_Word1" xml:space="preserve">
+    <value>Mise à jour</value>
+  </data>
+  <data name="Advisor_Q5_Word1_Meaning" xml:space="preserve">
+    <value>Une nouvelle version d'un logiciel ou de Linux, qui corrige des problèmes ou ajoute des nouveautés. Linux vous la propose : il suffit d'accepter.</value>
+  </data>
+  <data name="Advisor_Q5_Word2" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="Advisor_Q5_Word2_Meaning" xml:space="preserve">
+    <value>Une erreur dans un logiciel : il se bloque, se ferme tout seul ou ne fait pas ce qu'on attend.</value>
+  </data>
+  <data name="Advisor_Q5_Word3" xml:space="preserve">
+    <value>Vous hésitez ?</value>
+  </data>
+  <data name="Advisor_Q5_Word3_Meaning" xml:space="preserve">
+    <value>Choisissez la tranquillité : c'est le choix le plus sûr pour débuter.</value>
+  </data>
   <data name="Advisor_Q6" xml:space="preserve">
     <value>Accepteriez-vous de changer un réglage du BIOS de l'ordinateur ?</value>
   </data>
@@ -1043,6 +1139,24 @@ Cette opération est irréversible.</value>
   </data>
   <data name="Advisor_Q6_A2" xml:space="preserve">
     <value>Oui, si on m'explique comment faire</value>
+  </data>
+  <data name="Advisor_Q6_Word1" xml:space="preserve">
+    <value>BIOS (ou UEFI)</value>
+  </data>
+  <data name="Advisor_Q6_Word1_Meaning" xml:space="preserve">
+    <value>Le petit programme qui se lance en premier quand on allume l'ordinateur, avant Windows. On ouvre ses réglages en appuyant sur une touche juste après l'allumage, souvent F2 ou Suppr selon la marque du PC.</value>
+  </data>
+  <data name="Advisor_Q6_Word2" xml:space="preserve">
+    <value>Secure Boot (démarrage sécurisé)</value>
+  </data>
+  <data name="Advisor_Q6_Word2_Meaning" xml:space="preserve">
+    <value>Une protection du BIOS qui ne laisse démarrer que les systèmes qu'elle reconnaît. La plupart des distributions sont reconnues ; quelques-unes demandent de la désactiver.</value>
+  </data>
+  <data name="Advisor_Q6_Word3" xml:space="preserve">
+    <value>Vous hésitez ?</value>
+  </data>
+  <data name="Advisor_Q6_Word3_Meaning" xml:space="preserve">
+    <value>Répondez « Non » : l'application vous conseillera une distribution qui démarre sans rien changer dans le BIOS.</value>
   </data>
   <data name="AdvisorRecommend.Content" xml:space="preserve">
     <value>Voir mon conseil</value>

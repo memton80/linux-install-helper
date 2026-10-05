@@ -972,6 +972,12 @@ This cannot be undone.</value>
   <data name="Advisor_QuestionTitle" xml:space="preserve">
     <value>{0}. {1}</value>
   </data>
+  <data name="Advisor_WordsTitle" xml:space="preserve">
+    <value>The words, explained simply</value>
+  </data>
+  <data name="Advisor_WordsButton" xml:space="preserve">
+    <value>Explain the words of question {0}</value>
+  </data>
   <data name="Advisor_Q1" xml:space="preserve">
     <value>Have you used Linux before?</value>
   </data>
@@ -984,6 +990,24 @@ This cannot be undone.</value>
   <data name="Advisor_Q1_A3" xml:space="preserve">
     <value>Yes, I am at ease, terminal included</value>
   </data>
+  <data name="Advisor_Q1_Word1" xml:space="preserve">
+    <value>Linux</value>
+  </data>
+  <data name="Advisor_Q1_Word1_Meaning" xml:space="preserve">
+    <value>A system that makes the computer work, like Windows. It is free, and it can replace Windows or be installed next to it.</value>
+  </data>
+  <data name="Advisor_Q1_Word2" xml:space="preserve">
+    <value>Distribution</value>
+  </data>
+  <data name="Advisor_Q1_Word2_Meaning" xml:space="preserve">
+    <value>A version of Linux ready to install, with its own software and screen style. Ubuntu, Linux Mint and Fedora are distributions.</value>
+  </data>
+  <data name="Advisor_Q1_Word3" xml:space="preserve">
+    <value>Terminal</value>
+  </data>
+  <data name="Advisor_Q1_Word3_Meaning" xml:space="preserve">
+    <value>A window where you type commands on the keyboard instead of clicking. With the distributions made for beginners, you can almost always do without it.</value>
+  </data>
   <data name="Advisor_Q2" xml:space="preserve">
     <value>On which computer will you use it?</value>
   </data>
@@ -992,6 +1016,24 @@ This cannot be undone.</value>
   </data>
   <data name="Advisor_Q2_A2" xml:space="preserve">
     <value>An old or modest PC (less than 4 GB of memory)</value>
+  </data>
+  <data name="Advisor_Q2_Word1" xml:space="preserve">
+    <value>Memory (RAM)</value>
+  </data>
+  <data name="Advisor_Q2_Word1_Meaning" xml:space="preserve">
+    <value>The computer's working memory: the more it has, the more programs it can open at the same time without slowing down. Not to be confused with the disk, where your files are kept.</value>
+  </data>
+  <data name="Advisor_Q2_Word2" xml:space="preserve">
+    <value>GB (gigabyte)</value>
+  </data>
+  <data name="Advisor_Q2_Word2_Meaning" xml:space="preserve">
+    <value>The unit that measures memory and disk space. A recent PC usually has 8 GB of memory or more.</value>
+  </data>
+  <data name="Advisor_Q2_Word3" xml:space="preserve">
+    <value>Where to see a PC's memory?</value>
+  </data>
+  <data name="Advisor_Q2_Word3_Meaning" xml:space="preserve">
+    <value>In Windows, open Settings, then System, then About: it is shown on the "Installed RAM" line.</value>
   </data>
   <data name="Advisor_MemoryHint" xml:space="preserve">
     <value>For reference, this PC has {0} GB of memory.</value>
@@ -1008,6 +1050,24 @@ This cannot be undone.</value>
   <data name="Advisor_Q3_A3" xml:space="preserve">
     <value>Programming or advanced computing</value>
   </data>
+  <data name="Advisor_Q3_Word1" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="Advisor_Q3_Word1_Meaning" xml:space="preserve">
+    <value>Writing letters, making spreadsheets or slideshows, with software such as Word or Excel. On Linux, LibreOffice does the same for free.</value>
+  </data>
+  <data name="Advisor_Q3_Word2" xml:space="preserve">
+    <value>Programming</value>
+  </data>
+  <data name="Advisor_Q3_Word2_Meaning" xml:space="preserve">
+    <value>Writing your own software or websites, in a computer language such as Python or JavaScript.</value>
+  </data>
+  <data name="Advisor_Q3_Word3" xml:space="preserve">
+    <value>Advanced computing</value>
+  </data>
+  <data name="Advisor_Q3_Word3_Meaning" xml:space="preserve">
+    <value>Technical uses: hosting a website at home, testing software, tuning Linux in depth… If these words mean nothing to you, pick another answer.</value>
+  </data>
   <data name="Advisor_Q4" xml:space="preserve">
     <value>Which screen style do you prefer?</value>
   </data>
@@ -1019,6 +1079,24 @@ This cannot be undone.</value>
   </data>
   <data name="Advisor_Q4_A3" xml:space="preserve">
     <value>No preference</value>
+  </data>
+  <data name="Advisor_Q4_Word1" xml:space="preserve">
+    <value>Screen style (the "desktop")</value>
+  </data>
+  <data name="Advisor_Q4_Word1_Meaning" xml:space="preserve">
+    <value>What you see when the computer is on: the wallpaper, the windows and the menus to open your apps. Linux offers several styles.</value>
+  </data>
+  <data name="Advisor_Q4_Word2" xml:space="preserve">
+    <value>Taskbar</value>
+  </data>
+  <data name="Advisor_Q4_Word2_Meaning" xml:space="preserve">
+    <value>The strip at the bottom of the Windows screen, with the Start button, the open apps and the clock.</value>
+  </data>
+  <data name="Advisor_Q4_Word3" xml:space="preserve">
+    <value>Clean</value>
+  </data>
+  <data name="Advisor_Q4_Word3_Meaning" xml:space="preserve">
+    <value>Simple, with few things on the screen so you are not distracted. You find your apps in an overview, a bit like on a Mac.</value>
   </data>
   <data name="Advisor_Q5" xml:space="preserve">
     <value>For updates, what do you prefer?</value>
@@ -1032,6 +1110,24 @@ This cannot be undone.</value>
   <data name="Advisor_Q5_A3" xml:space="preserve">
     <value>No preference</value>
   </data>
+  <data name="Advisor_Q5_Word1" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Advisor_Q5_Word1_Meaning" xml:space="preserve">
+    <value>A new version of a program or of Linux, which fixes problems or adds new features. Linux offers it to you: you just accept.</value>
+  </data>
+  <data name="Advisor_Q5_Word2" xml:space="preserve">
+    <value>Bug</value>
+  </data>
+  <data name="Advisor_Q5_Word2_Meaning" xml:space="preserve">
+    <value>A mistake in a program: it freezes, closes by itself or does not do what you expect.</value>
+  </data>
+  <data name="Advisor_Q5_Word3" xml:space="preserve">
+    <value>Not sure?</value>
+  </data>
+  <data name="Advisor_Q5_Word3_Meaning" xml:space="preserve">
+    <value>Choose peace of mind: it is the safest choice to start with.</value>
+  </data>
   <data name="Advisor_Q6" xml:space="preserve">
     <value>Would you change a setting of the computer's BIOS?</value>
   </data>
@@ -1043,6 +1139,24 @@ This cannot be undone.</value>
   </data>
   <data name="Advisor_Q6_A2" xml:space="preserve">
     <value>Yes, if someone explains how</value>
+  </data>
+  <data name="Advisor_Q6_Word1" xml:space="preserve">
+    <value>BIOS (or UEFI)</value>
+  </data>
+  <data name="Advisor_Q6_Word1_Meaning" xml:space="preserve">
+    <value>The small program that starts first when you turn the computer on, before Windows. You open its settings by pressing a key right after turning it on, often F2 or Delete depending on the brand of the PC.</value>
+  </data>
+  <data name="Advisor_Q6_Word2" xml:space="preserve">
+    <value>Secure Boot</value>
+  </data>
+  <data name="Advisor_Q6_Word2_Meaning" xml:space="preserve">
+    <value>A protection of the BIOS that only lets the systems it recognizes start. Most distributions are recognized; a few need it to be turned off.</value>
+  </data>
+  <data name="Advisor_Q6_Word3" xml:space="preserve">
+    <value>Not sure?</value>
+  </data>
+  <data name="Advisor_Q6_Word3_Meaning" xml:space="preserve">
+    <value>Answer "No": the application will suggest a distribution that starts without changing anything in the BIOS.</value>
   </data>
   <data name="AdvisorRecommend.Content" xml:space="preserve">
     <value>See my suggestion</value>

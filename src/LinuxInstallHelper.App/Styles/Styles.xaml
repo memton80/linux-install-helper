@@ -290,6 +290,36 @@
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
     </Style>
 
+    <!-- A question and its "?" button, which stays right after the text instead of at the far end of the card. -->
+    <Style x:Key="AdvisorQuestionHeaderGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="8" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="AdvisorQuestionTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AdvisorWordsButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Padding" Value="7" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AdvisorWordsIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
+    <Style x:Key="AdvisorWordsPanelStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="12" />
+        <Setter Property="MaxWidth" Value="360" />
+    </Style>
+
+    <Style x:Key="AdvisorWordsListStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="10" />
+    </Style>
+
     <!-- Linux tour (progress and guide pages) -->
     <Style x:Key="TourHeaderGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />

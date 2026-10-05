@@ -65,7 +65,43 @@
                     <DataTemplate x:DataType="vm:AdvisorQuestionViewModel">
                         <Border Style="{StaticResource CardBorderStyle}">
                             <StackPanel Style="{StaticResource CompactStackStyle}">
-                                <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
+                                <Grid Style="{StaticResource AdvisorQuestionHeaderGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Style="{StaticResource AdvisorQuestionTitleStyle}" Text="{x:Bind Title}" />
+                                    <Button
+                                        Grid.Column="1"
+                                        Style="{StaticResource AdvisorWordsButtonStyle}"
+                                        AutomationProperties.Name="{x:Bind WordsLabel}"
+                                        ToolTipService.ToolTip="{x:Bind WordsLabel}"
+                                        Visibility="{x:Bind helpers:Ui.Visible(HasWords)}">
+                                        <FontIcon Style="{StaticResource AdvisorWordsIconStyle}" Glyph="&#xE9CE;" />
+                                        <Button.Flyout>
+                                            <Flyout>
+                                                <StackPanel Style="{StaticResource AdvisorWordsPanelStyle}">
+                                                    <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind WordsTitle}" />
+                                                    <ItemsControl ItemsSource="{x:Bind Words}">
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <StackPanel Style="{StaticResource AdvisorWordsListStyle}" />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate x:DataType="vm:AdvisorWord">
+                                                                <StackPanel Style="{StaticResource CompactStackStyle}">
+                                                                    <TextBlock Style="{StaticResource TourLabelStyle}" Text="{x:Bind Word}" />
+                                                                    <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Meaning}" />
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </Flyout>
+                                        </Button.Flyout>
+                                    </Button>
+                                </Grid>
                                 <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint)}" />
                                 <RadioButtons ItemsSource="{x:Bind Options}" SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
                             </StackPanel>
