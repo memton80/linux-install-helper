@@ -8,8 +8,15 @@ using LinuxInstallHelper.Core.Disks.Windows;
 using LinuxInstallHelper.Core.Download;
 using LinuxInstallHelper.Core.Http;
 using LinuxInstallHelper.Core.Images;
+using LinuxInstallHelper.Core.Network;
+using LinuxInstallHelper.Core.Network.Windows;
+using LinuxInstallHelper.Core.Readiness;
+using LinuxInstallHelper.Core.Readiness.Windows;
 using LinuxInstallHelper.Core.Settings;
+using LinuxInstallHelper.Core.Software;
+using LinuxInstallHelper.Core.Software.Windows;
 using LinuxInstallHelper.Core.Tour;
+using LinuxInstallHelper.Core.Updates;
 using LinuxInstallHelper.Core.Verification;
 using LinuxInstallHelper.Core.Workflow;
 using LinuxInstallHelper.Core.Writing;
@@ -69,6 +76,10 @@ public partial class App : Application
         Services.GetRequiredService<IThemeService>().Apply(_startup.Theme ?? settings.Theme);
         _window.Start(_startup.Page ?? PageKeys.Advisor);
         _window.Activate();
+
+        // In the background: the pages that need them get them without waiting.
+        _ = Services.GetRequiredService<PcInfo>().GetAsync();
+        _ = Services.GetRequiredService<UpdateNotifier>().CheckAsync();
     }
 
     private static void ApplyLanguage(string? language)
@@ -113,7 +124,9 @@ public partial class App : Application
             sp.GetRequiredService<HttpClient>(), null, sp.GetRequiredService<ILogger<ResumableDownloader>>()));
         services.AddSingleton<IImageVerifier, ImageVerifier>();
         services.AddSingleton<IDiskService, WindowsDiskService>();
-        services.AddSingleton<IRawDiskAccess, WindowsRawDiskAccess>();
+        services.AddSingleton<WindowsRawDiskAccess>();
+        services.AddSingleton<IRawDiskAccess>(sp => sp.GetRequiredService<WindowsRawDiskAccess>());
+        services.AddSingleton<IRawDiskReader>(sp => sp.GetRequiredService<WindowsRawDiskAccess>());
         services.AddSingleton<IDiskEjector, WindowsDiskEjector>();
         services.AddSingleton<IDiskFormatter, DiskpartFormatter>();
         services.AddSingleton<IUsbWriter>(sp => new RawDiskWriter(
@@ -123,6 +136,11 @@ public partial class App : Application
             sp.GetRequiredService<ILogger<RawDiskWriter>>()));
         services.AddSingleton<ICreationPipeline, CreationPipeline>();
         services.AddSingleton(_ => TourBook.LoadEmbedded());
+        services.AddSingleton<IPcProbe, WindowsPcProbe>();
+        services.AddSingleton<IWifiNetworkReader, WindowsWifiNetworkReader>();
+        services.AddSingleton<IInstalledProgramSource, WindowsInstalledPrograms>();
+        services.AddSingleton<IAppUpdateChecker>(sp => new AppUpdateChecker(
+            sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<ILogger<AppUpdateChecker>>()));
 
         // UI services
         services.AddSingleton<ILocalizer, ResourceLocalizer>();
@@ -137,6 +155,9 @@ public partial class App : Application
         services.AddSingleton<Glossary>();
         services.AddSingleton<ErrorDescriber>();
         services.AddSingleton<DriveScanner>();
+        services.AddSingleton<PcInfo>();
+        services.AddSingleton<ReadinessActions>();
+        services.AddSingleton<UpdateNotifier>();
         services.AddSingleton<MainWindow>();
 
         // View models (the distributions list keeps its state while navigating)
@@ -150,6 +171,9 @@ public partial class App : Application
         services.AddTransient<DoneViewModel>();
         services.AddTransient<RestoreViewModel>();
         services.AddTransient<GuideViewModel>();
+        services.AddTransient<ReadinessViewModel>();
+        services.AddTransient<SoftwareViewModel>();
+        services.AddTransient<TroubleshootViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<AboutViewModel>();
 

@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
 using LinuxInstallHelper.Core.Catalog;
+using LinuxInstallHelper.Core.Readiness;
 
 namespace LinuxInstallHelper.App.ViewModels;
 
@@ -13,10 +14,12 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
     private readonly Action _changed;
     private int _selectedIndex;
 
+    private string _hint;
+
     public AdvisorQuestionViewModel(string title, string hint, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
     {
         Title = title;
-        Hint = hint;
+        _hint = hint;
         Options = options;
         Words = words;
         WordsLabel = wordsLabel;
@@ -26,8 +29,12 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
 
     public string Title { get; }
 
-    /// <summary>Extra explanation, may be empty.</summary>
-    public string Hint { get; }
+    /// <summary>Extra explanation, may be empty. Completed with what this computer says once it is known.</summary>
+    public string Hint
+    {
+        get => _hint;
+        set => SetProperty(ref _hint, value);
+    }
 
     public IReadOnlyList<string> Options { get; }
 
@@ -109,9 +116,11 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     private readonly WizardState _wizard;
     private readonly DisplayFormatter _formatter;
     private readonly Glossary _glossary;
+    private readonly PcInfo _pc;
     private IReadOnlyList<Distro> _distros = [];
+    private bool _secureBootShown;
 
-    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary)
+    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary, PcInfo pc)
     {
         _catalog = catalog;
         _localizer = localizer;
@@ -119,6 +128,7 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         _wizard = wizard;
         _formatter = formatter;
         _glossary = glossary;
+        _pc = pc;
 
         // The memory of this PC preselects the second answer: the drive is usually made for the same computer.
         var memory = GC.GetGCMemoryInfo().TotalAvailableMemoryBytes;
@@ -172,6 +182,35 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         if (_distros.Count == 0 && !IsLoading)
         {
             _ = LoadAsync();
+        }
+
+        if (!_secureBootShown)
+        {
+            _ = ShowSecureBootAsync();
+        }
+    }
+
+    /// <summary>
+    /// The question about the BIOS: when Secure Boot is already off on this computer (or absent, in the old BIOS mode), no
+    /// distribution needs a change, so "Yes" is preselected; otherwise the hint says that it is on.
+    /// </summary>
+    private async Task ShowSecureBootAsync()
+    {
+        _secureBootShown = true;
+        var facts = await _pc.GetAsync();
+        var question = Questions[QuestionCount - 1];
+        var off = facts.SecureBootEnabled == false || facts.Firmware == FirmwareKind.Bios;
+        if (off)
+        {
+            question.Hint = _localizer.Get("Advisor_SecureBootOff");
+            if (question.SelectedIndex < 0)
+            {
+                question.SelectedIndex = 1;
+            }
+        }
+        else if (facts.SecureBootEnabled == true)
+        {
+            question.Hint = $"{question.Hint} {_localizer.Get("Advisor_SecureBootOn")}".Trim();
         }
     }
 

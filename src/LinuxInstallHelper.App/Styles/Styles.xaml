@@ -75,6 +75,10 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <Style x:Key="BodyStrongWrapTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
     <Style x:Key="MonospaceTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
         <Setter Property="FontFamily" Value="Cascadia Mono, Consolas" />
         <Setter Property="IsTextSelectionEnabled" Value="True" />
@@ -111,6 +115,32 @@
     <Style x:Key="IconTextPanelStyle" TargetType="StackPanel">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="Spacing" Value="8" />
+    </Style>
+
+    <!-- A button at the end of a row (list of folders, programs, images, networks) -->
+    <Style x:Key="RowButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="RowToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- A button next to a control that has a header above it (combo boxes) -->
+    <Style x:Key="BottomAlignedButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="InfoBarListPanelStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+    </Style>
+
+    <!-- New version of the application, above the pages -->
+    <Style x:Key="UpdateInfoBarStyle" TargetType="InfoBar">
+        <Setter Property="Margin" Value="36,12,36,0" />
+        <Setter Property="Severity" Value="Informational" />
+        <Setter Property="IsClosable" Value="True" />
+        <Setter Property="IsOpen" Value="False" />
     </Style>
 
     <!-- Distribution cards -->
@@ -186,6 +216,12 @@
 
     <Style x:Key="FilterComboBoxStyle" TargetType="ComboBox">
         <Setter Property="MinWidth" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="WideComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="MinWidth" Value="280" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 
@@ -423,6 +459,16 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
+    <Style x:Key="ChecklistRowGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+    </Style>
+
+    <!-- What this computer says about a step of the checklist -->
+    <Style x:Key="ChecklistNoteStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
     <Style x:Key="GuideLessonsHeaderGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />
         <Setter Property="Margin" Value="0,8,0,0" />
@@ -461,6 +507,11 @@
         <Setter Property="Width" Value="20" />
     </Style>
 
+    <Style x:Key="BootKeysTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <!-- Backup -->
     <Style x:Key="BackupHeroIconStyle" TargetType="FontIcon" BasedOn="{StaticResource HeroIconStyle}">
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCautionBrush}" />
@@ -483,6 +534,28 @@
 
     <Style x:Key="FolderNameStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
+    <!-- Prepare my PC -->
+    <Style x:Key="WifiRowGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+        <Setter Property="Padding" Value="0,6,0,6" />
+    </Style>
+
+    <Style x:Key="PasswordTextStyle" TargetType="TextBlock" BasedOn="{StaticResource MonospaceTextStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+    </Style>
+
+    <!-- My programs on Linux -->
+    <Style x:Key="SuggestionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- Troubleshooting -->
+    <Style x:Key="ProblemExpanderStyle" TargetType="Expander">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
 
     <!-- About -->

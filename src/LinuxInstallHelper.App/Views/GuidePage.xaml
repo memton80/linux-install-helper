@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
     xmlns:views="using:LinuxInstallHelper.App.Views"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
@@ -32,12 +33,25 @@
                     <ItemsControl ItemsSource="{x:Bind ViewModel.Checklist}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:ChecklistItemViewModel">
-                                <CheckBox Style="{StaticResource ChecklistCheckBoxStyle}" IsChecked="{x:Bind IsDone, Mode=TwoWay}">
-                                    <StackPanel Style="{StaticResource CompactStackStyle}">
-                                        <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
-                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Body}" />
-                                    </StackPanel>
-                                </CheckBox>
+                                <Grid Style="{StaticResource ChecklistRowGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Style="{StaticResource ChecklistCheckBoxStyle}" IsChecked="{x:Bind IsDone, Mode=TwoWay}">
+                                        <StackPanel Style="{StaticResource CompactStackStyle}">
+                                            <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
+                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Body}" />
+                                            <TextBlock Style="{StaticResource ChecklistNoteStyle}" Text="{x:Bind Note, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Note), Mode=OneWay}" />
+                                        </StackPanel>
+                                    </CheckBox>
+                                    <Button
+                                        Grid.Column="1"
+                                        Style="{StaticResource RowButtonStyle}"
+                                        Content="{x:Bind ActionLabel, Mode=OneWay}"
+                                        Command="{x:Bind ActionCommand, Mode=OneWay}"
+                                        Visibility="{x:Bind helpers:Ui.VisibleIfText(ActionLabel), Mode=OneWay}" />
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

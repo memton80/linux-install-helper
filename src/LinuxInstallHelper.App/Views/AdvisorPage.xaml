@@ -76,7 +76,7 @@
                                     <TextBlock Style="{StaticResource AdvisorQuestionTitleStyle}" Text="{x:Bind Title}" />
                                     <views:WordsButton Grid.Column="1" Words="{x:Bind Words}" Label="{x:Bind WordsLabel}" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint)}" />
+                                <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint), Mode=OneWay}" />
                                 <RadioButtons ItemsSource="{x:Bind Options}" SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
                             </StackPanel>
                         </Border>

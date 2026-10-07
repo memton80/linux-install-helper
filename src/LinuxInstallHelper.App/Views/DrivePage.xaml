@@ -16,6 +16,8 @@
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.ImageSummary, Mode=OneWay}" />
             </StackPanel>
 
+            <InfoBar x:Uid="DriveProcessorWarning" IsClosable="False" Severity="Error" IsOpen="{x:Bind ViewModel.ShowProcessorWarning, Mode=OneWay}" />
+
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Style="{StaticResource CardStackStyle}">
                     <Grid Style="{StaticResource SettingRowGridStyle}">

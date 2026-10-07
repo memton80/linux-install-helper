@@ -7,19 +7,24 @@ using LinuxInstallHelper.Core.Settings;
 
 namespace LinuxInstallHelper.App.ViewModels;
 
-/// <summary>A personal folder that holds files, with a button to open it.</summary>
-public sealed partial class PersonalFolderItemViewModel
+/// <summary>A personal folder that holds files, with what it holds and a button to open it.</summary>
+public sealed partial class PersonalFolderItemViewModel : ObservableObject
 {
     public PersonalFolderItemViewModel(PersonalFolder folder, ILocalizer localizer)
     {
         Name = localizer.Get("Folder_" + folder.Kind);
         FullPath = folder.Path;
         OpenName = localizer.Format("Backup_OpenFolderName", Name);
+        Size = localizer.Get("Backup_Measuring");
     }
 
     public string Name { get; }
 
     public string FullPath { get; }
+
+    /// <summary>"12.3 GB · 4,512 files", or "Measuring…" until it is known.</summary>
+    [ObservableProperty]
+    private string _size = string.Empty;
 
     /// <summary>Accessible name of the open button.</summary>
     public string OpenName { get; }
@@ -41,16 +46,23 @@ public sealed partial class BackupViewModel : ObservableObject, INavigationAware
     private readonly INavigationService _navigation;
     private readonly ISettingsStore _settings;
     private readonly WizardState _wizard;
+    private readonly DisplayFormatter _formatter;
+    private CancellationTokenSource? _measuring;
 
-    public BackupViewModel(ILocalizer localizer, INavigationService navigation, ISettingsStore settings, WizardState wizard)
+    public BackupViewModel(ILocalizer localizer, INavigationService navigation, ISettingsStore settings, WizardState wizard, DisplayFormatter formatter)
     {
         _localizer = localizer;
         _navigation = navigation;
         _settings = settings;
         _wizard = wizard;
+        _formatter = formatter;
     }
 
     public ObservableCollection<PersonalFolderItemViewModel> Folders { get; } = [];
+
+    /// <summary>"About 38.2 GB to back up", empty until every folder is measured.</summary>
+    [ObservableProperty]
+    private string _total = string.Empty;
 
     public void OnNavigatedTo(object? parameter)
     {
@@ -71,10 +83,37 @@ public sealed partial class BackupViewModel : ObservableObject, INavigationAware
         {
             Folders.Add(new PersonalFolderItemViewModel(folder, _localizer));
         }
+
+        _ = MeasureAsync(_wizard.LastResult.ImagePath);
     }
 
-    public void OnNavigatedFrom()
+    public void OnNavigatedFrom() => _measuring?.Cancel();
+
+    /// <summary>Sizes the folders one by one, so that the user knows how large the backup drive must be.</summary>
+    private async Task MeasureAsync(string imagePath)
     {
+        var cancellation = new CancellationTokenSource();
+        _measuring = cancellation;
+        long total = 0;
+        try
+        {
+            foreach (var folder in Folders.ToList())
+            {
+                var size = await Task.Run(() => PersonalFolders.Measure(folder.FullPath, [imagePath], cancellation.Token), cancellation.Token);
+                folder.Size = _localizer.Format("Backup_FolderSize", _formatter.Size(size.Bytes), size.Files);
+                total += size.Bytes;
+            }
+
+            Total = _localizer.Format("Backup_Total", _formatter.Size(total));
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        finally
+        {
+            _measuring = null;
+            cancellation.Dispose();
+        }
     }
 
     [RelayCommand]

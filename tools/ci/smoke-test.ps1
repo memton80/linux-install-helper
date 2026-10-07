@@ -76,6 +76,9 @@ $runs = @(
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Guide";    Theme = "dark";  Lang = "fr-FR"; Expect = "Avant de quitter Windows" },
+    @{ Page = "Readiness"; Theme = "light"; Lang = "fr-FR"; Expect = "Processeur Intel ou AMD" },
+    @{ Page = "Software"; Theme = "light"; Lang = "fr-FR"; Expect = "ont une solution sous Linux" },
+    @{ Page = "Troubleshoot"; Theme = "dark"; Lang = "fr-FR"; Expect = "Vérifier ma clé" },
     @{ Page = "Settings"; Theme = "dark";  Lang = "fr-FR"; Expect = "Paramètres" },
     @{ Page = "About";    Theme = "light"; Lang = "en-US"; Expect = "Open source components" }
 )

@@ -31,7 +31,21 @@
             </Border>
 
             <InfoBar x:Uid="DoneBackupReminder" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowBackupReminder, Mode=OneWay}" />
-            <InfoBar x:Uid="DoneSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
+            <InfoBar x:Uid="DoneSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}">
+                <InfoBar.ActionButton>
+                    <Button x:Uid="DoneOpenFirmware" Command="{x:Bind ViewModel.RestartToFirmwareCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}" />
+                </InfoBar.ActionButton>
+            </InfoBar>
+            <InfoBar
+                IsClosable="False"
+                IsOpen="{x:Bind ViewModel.ShowReadiness, Mode=OneWay}"
+                Severity="{x:Bind ViewModel.ReadinessSeverity, Mode=OneWay}"
+                Title="{x:Bind ViewModel.ReadinessTitle, Mode=OneWay}"
+                Message="{x:Bind ViewModel.ReadinessMessage, Mode=OneWay}">
+                <InfoBar.ActionButton>
+                    <Button x:Uid="DoneOpenReadiness" Command="{x:Bind ViewModel.OpenReadinessCommand}" />
+                </InfoBar.ActionButton>
+            </InfoBar>
             <InfoBar x:Uid="DoneHiddenInWindows" IsClosable="False" Severity="Informational" IsOpen="True" />
 
             <Border Style="{StaticResource CardBorderStyle}">
@@ -57,6 +71,16 @@
                         <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
                         <TextBlock x:Uid="DoneStep4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
                     </Grid>
+                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                        <FontIcon Glyph="&#xE765;" Style="{StaticResource StageIconStyle}" />
+                        <TextBlock Style="{StaticResource BootKeysTextStyle}" Text="{x:Bind ViewModel.BootKeys, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource CompactStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}">
+                        <TextBlock x:Uid="DoneRestartHelp" Style="{StaticResource SecondaryTextStyle}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource ButtonRowStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}">
+                        <Button x:Uid="DoneRestartDrive" Command="{x:Bind ViewModel.RestartToDriveCommand}" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
 

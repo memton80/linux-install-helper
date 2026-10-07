@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.ReadinessPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="ReadinessHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock x:Uid="ReadinessSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+            </StackPanel>
+
+            <Grid Style="{StaticResource FilterBarGridStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Uid="ReadinessDistro"
+                    Style="{StaticResource FilterComboBoxStyle}"
+                    ItemsSource="{x:Bind ViewModel.DistroOptions}"
+                    SelectedIndex="{x:Bind ViewModel.DistroIndex, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="vm:FilterOption">
+                            <TextBlock Text="{x:Bind Label}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button x:Uid="ReadinessRefresh" Grid.Column="2" Style="{StaticResource BottomAlignedButtonStyle}" Command="{x:Bind ViewModel.RefreshCommand}" />
+            </Grid>
+
+            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsLoading), Mode=OneWay}" />
+
+            <InfoBar
+                IsClosable="False"
+                IsOpen="{x:Bind helpers:Ui.Not(ViewModel.IsLoading), Mode=OneWay}"
+                Severity="{x:Bind ViewModel.SummarySeverity, Mode=OneWay}"
+                Title="{x:Bind ViewModel.SummaryTitle, Mode=OneWay}"
+                Message="{x:Bind ViewModel.SummaryMessage, Mode=OneWay}" />
+
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Items}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Style="{StaticResource InfoBarListPanelStyle}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ReadinessItemViewModel">
+                        <InfoBar IsClosable="False" IsOpen="True" Severity="{x:Bind Severity}" Title="{x:Bind Title}" Message="{x:Bind Message}">
+                            <InfoBar.ActionButton>
+                                <Button Content="{x:Bind ActionLabel}" Command="{x:Bind ActionCommand}" Visibility="{x:Bind helpers:Ui.Visible(HasAction)}" />
+                            </InfoBar.ActionButton>
+                        </InfoBar>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock x:Uid="ReadinessBootTitle" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.BootKeys, Mode=OneWay}" />
+                    <TextBlock x:Uid="ReadinessBootRestartHelp" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}" />
+                    <StackPanel Style="{StaticResource ButtonRowStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}">
+                        <Button x:Uid="ReadinessRestartDrive" Command="{x:Bind ViewModel.RestartToDriveCommand}" />
+                        <Button x:Uid="ReadinessRestartFirmware" Command="{x:Bind ViewModel.RestartToFirmwareCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="ReadinessWifiTitle" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock x:Uid="ReadinessWifiHelp" Style="{StaticResource BodyWrapTextStyle}" />
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="ReadinessWifiShow" Command="{x:Bind ViewModel.ShowWifiCommand}" />
+                        <ProgressRing Style="{StaticResource StageRingStyle}" IsActive="{x:Bind ViewModel.IsReadingWifi, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsReadingWifi), Mode=OneWay}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.WifiStatus, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.WifiStatus), Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Networks}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:WifiNetworkViewModel">
+                                <Grid Style="{StaticResource WifiRowGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE701;" Style="{StaticResource FolderIconStyle}" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource FolderTextStackStyle}">
+                                        <TextBlock Style="{StaticResource FolderNameStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock Style="{StaticResource PasswordTextStyle}" Text="{x:Bind DisplayedPassword, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(HasPassword)}" />
+                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Detail}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Detail)}" />
+                                    </StackPanel>
+                                    <ToggleButton
+                                        Grid.Column="2"
+                                        Style="{StaticResource RowToggleButtonStyle}"
+                                        Content="{x:Bind ShowLabel}"
+                                        IsChecked="{x:Bind IsRevealed, Mode=TwoWay}"
+                                        Visibility="{x:Bind helpers:Ui.Visible(HasPassword)}" />
+                                    <Button
+                                        Grid.Column="3"
+                                        Style="{StaticResource RowButtonStyle}"
+                                        Content="{x:Bind CopyLabel}"
+                                        AutomationProperties.Name="{x:Bind CopyName}"
+                                        Command="{x:Bind CopyCommand}"
+                                        Visibility="{x:Bind helpers:Ui.Visible(HasPassword)}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="ReadinessSoftwareTitle" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock x:Uid="ReadinessSoftwareHelp" Style="{StaticResource BodyWrapTextStyle}" />
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="ReadinessSoftwareOpen" Command="{x:Bind ViewModel.OpenSoftwareCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

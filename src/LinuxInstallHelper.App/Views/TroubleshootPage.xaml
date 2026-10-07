@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LinuxInstallHelper.App.Views.TroubleshootPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
+    mc:Ignorable="d">
+
+    <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
+        <StackPanel Style="{StaticResource PageContentStackStyle}">
+            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                <TextBlock x:Uid="TroubleshootHeader" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock x:Uid="TroubleshootSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+            </StackPanel>
+
+            <TextBlock x:Uid="VerifyTitle" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Style="{StaticResource CardStackStyle}">
+                    <TextBlock x:Uid="VerifyHelp" Style="{StaticResource BodyWrapTextStyle}" />
+
+                    <Grid Style="{StaticResource FilterBarGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            x:Uid="VerifyDrive"
+                            Style="{StaticResource WideComboBoxStyle}"
+                            ItemsSource="{x:Bind ViewModel.Drives}"
+                            SelectedIndex="{x:Bind ViewModel.DriveIndex, Mode=TwoWay}"
+                            IsEnabled="{x:Bind helpers:Ui.Not(ViewModel.IsVerifying), Mode=OneWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DriveItemViewModel">
+                                    <StackPanel Style="{StaticResource CompactStackStyle}" AutomationProperties.Name="{x:Bind AutomationName}">
+                                        <TextBlock Style="{StaticResource DistroNameStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Details}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button x:Uid="DriveRefresh" Grid.Column="1" Style="{StaticResource BottomAlignedButtonStyle}" Command="{x:Bind ViewModel.RefreshCommand}">
+                            <SymbolIcon Symbol="Refresh" />
+                        </Button>
+                    </Grid>
+                    <TextBlock x:Uid="DriveNone" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasNoDrives), Mode=OneWay}" />
+
+                    <Grid Style="{StaticResource FilterBarGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            x:Uid="VerifyImage"
+                            Style="{StaticResource WideComboBoxStyle}"
+                            ItemsSource="{x:Bind ViewModel.Images}"
+                            SelectedIndex="{x:Bind ViewModel.ImageIndex, Mode=TwoWay}"
+                            IsEnabled="{x:Bind helpers:Ui.Not(ViewModel.IsVerifying), Mode=OneWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ImageChoice">
+                                    <TextBlock Text="{x:Bind Label}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button x:Uid="VerifyBrowse" Grid.Column="1" Style="{StaticResource BottomAlignedButtonStyle}" Command="{x:Bind ViewModel.BrowseCommand}" />
+                    </Grid>
+
+                    <StackPanel Style="{StaticResource ButtonRowStyle}">
+                        <Button x:Uid="VerifyStart" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.VerifyCommand}" />
+                        <Button x:Uid="VerifyCancel" Command="{x:Bind ViewModel.CancelCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsVerifying), Mode=OneWay}" />
+                    </StackPanel>
+
+                    <StackPanel Style="{StaticResource CompactStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsVerifying), Mode=OneWay}">
+                        <ProgressBar Style="{StaticResource MainProgressBarStyle}" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.ProgressText, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <InfoBar
+                        IsClosable="True"
+                        IsOpen="{x:Bind ViewModel.HasResult, Mode=TwoWay}"
+                        Severity="{x:Bind ViewModel.ResultSeverity, Mode=OneWay}"
+                        Title="{x:Bind ViewModel.ResultTitle, Mode=OneWay}"
+                        Message="{x:Bind ViewModel.ResultMessage, Mode=OneWay}" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="TroubleshootProblemsTitle" Style="{StaticResource SectionTitleStyle}" />
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Problems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Style="{StaticResource InfoBarListPanelStyle}" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TroubleshootProblemViewModel">
+                        <Expander Style="{StaticResource ProblemExpanderStyle}" Header="{x:Bind Title}">
+                            <StackPanel Style="{StaticResource CardStackStyle}">
+                                <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Body}" />
+                                <Button Content="{x:Bind ActionLabel}" Command="{x:Bind ActionCommand}" Visibility="{x:Bind helpers:Ui.Visible(HasAction)}" />
+                            </StackPanel>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

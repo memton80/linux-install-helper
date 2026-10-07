@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
@@ -32,12 +33,14 @@
                                     <StackPanel Grid.Column="1" Style="{StaticResource FolderTextStackStyle}">
                                         <TextBlock Style="{StaticResource FolderNameStyle}" Text="{x:Bind Name}" />
                                         <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind FullPath}" />
+                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Size, Mode=OneWay}" />
                                     </StackPanel>
                                     <Button x:Uid="BackupOpenFolder" Grid.Column="2" AutomationProperties.Name="{x:Bind OpenName}" Command="{x:Bind OpenCommand}" />
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <TextBlock Style="{StaticResource BodyStrongWrapTextStyle}" Text="{x:Bind ViewModel.Total, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Total), Mode=OneWay}" />
                 </StackPanel>
             </Border>
 

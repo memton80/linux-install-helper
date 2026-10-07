@@ -1389,4 +1389,685 @@ Cette opération est irréversible.</value>
   <data name="DoneBackupReminder.Message" xml:space="preserve">
     <value>Copiez vos documents, images et autres fichiers personnels sur une autre clé USB ou un disque externe : l'installation peut effacer le disque de l'ordinateur.</value>
   </data>
+  <data name="NavReadiness.Content" xml:space="preserve">
+    <value>Préparer mon PC</value>
+  </data>
+  <data name="NavTroubleshoot.Content" xml:space="preserve">
+    <value>Dépannage</value>
+  </data>
+  <data name="UpdateBar.Title" xml:space="preserve">
+    <value>Une nouvelle version est disponible</value>
+  </data>
+  <data name="UpdateBar_Message" xml:space="preserve">
+    <value>Linux Install Helper {0} est sorti (vous avez la version {1}).</value>
+  </data>
+  <data name="UpdateBarDownload.Content" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="About_UpdateAvailable" xml:space="preserve">
+    <value>La version {0} est disponible.</value>
+  </data>
+  <data name="ReadinessHeader.Text" xml:space="preserve">
+    <value>Préparer mon PC</value>
+  </data>
+  <data name="ReadinessSubtitle.Text" xml:space="preserve">
+    <value>La clé démarrera-t-elle sur cet ordinateur, et que préparer avant d'installer Linux : tout ce que l'application peut vérifier depuis Windows.</value>
+  </data>
+  <data name="ReadinessDistro.Header" xml:space="preserve">
+    <value>Pour la distribution</value>
+  </data>
+  <data name="Readiness_AnyDistro" xml:space="preserve">
+    <value>Linux en général</value>
+  </data>
+  <data name="ReadinessRefresh.Content" xml:space="preserve">
+    <value>Vérifier à nouveau</value>
+  </data>
+  <data name="Readiness_ReadyTitle" xml:space="preserve">
+    <value>Cet ordinateur est prêt pour Linux</value>
+  </data>
+  <data name="Readiness_Ready" xml:space="preserve">
+    <value>Rien à changer : la clé démarrera et Linux pourra être installé.</value>
+  </data>
+  <data name="Readiness_WarningsTitle" xml:space="preserve">
+    <value>Quelques points à vérifier avant d'installer</value>
+  </data>
+  <data name="Readiness_Warnings" xml:space="preserve">
+    <value>{0} point(s) ci-dessous demandent votre attention.</value>
+  </data>
+  <data name="Readiness_BlockedTitle" xml:space="preserve">
+    <value>La clé ne démarrera pas sur cet ordinateur</value>
+  </data>
+  <data name="Readiness_Counts" xml:space="preserve">
+    <value>{0} point(s) bloquant(s) et {1} point(s) à vérifier ci-dessous.</value>
+  </data>
+  <data name="ReadinessBootTitle.Text" xml:space="preserve">
+    <value>Démarrer sur la clé</value>
+  </data>
+  <data name="ReadinessBootRestartHelp.Text" xml:space="preserve">
+    <value>Windows peut aussi redémarrer directement dans ses options de démarrage : choisissez « Utiliser un périphérique », puis la clé USB. Ou dans les réglages UEFI, pour désactiver le Secure Boot.</value>
+  </data>
+  <data name="ReadinessRestartDrive.Content" xml:space="preserve">
+    <value>Redémarrer sur la clé</value>
+  </data>
+  <data name="ReadinessRestartFirmware.Content" xml:space="preserve">
+    <value>Redémarrer dans les réglages UEFI</value>
+  </data>
+  <data name="ReadinessWifiTitle.Text" xml:space="preserve">
+    <value>Mots de passe Wi-Fi</value>
+  </data>
+  <data name="ReadinessWifiHelp.Text" xml:space="preserve">
+    <value>Linux vous demandera le mot de passe de votre réseau Wi-Fi. Windows retient les réseaux que vous avez utilisés : affichez leurs mots de passe et notez celui de votre box.</value>
+  </data>
+  <data name="ReadinessWifiShow.Content" xml:space="preserve">
+    <value>Afficher les réseaux enregistrés</value>
+  </data>
+  <data name="Wifi_Show" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="Wifi_Copy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="Wifi_CopyName" xml:space="preserve">
+    <value>Copier le mot de passe de {0}</value>
+  </data>
+  <data name="Wifi_Open" xml:space="preserve">
+    <value>Réseau ouvert : pas de mot de passe</value>
+  </data>
+  <data name="Wifi_Enterprise" xml:space="preserve">
+    <value>Réseau d'entreprise ou d'école : on s'y connecte avec son propre identifiant</value>
+  </data>
+  <data name="Wifi_Unavailable" xml:space="preserve">
+    <value>Windows ne donne pas ce mot de passe</value>
+  </data>
+  <data name="Wifi_NoWifi" xml:space="preserve">
+    <value>Cet ordinateur n'a pas de Wi-Fi, ou le service Wi-Fi de Windows est arrêté.</value>
+  </data>
+  <data name="Wifi_Failed" xml:space="preserve">
+    <value>Les réseaux enregistrés n'ont pas pu être lus.</value>
+  </data>
+  <data name="Wifi_None" xml:space="preserve">
+    <value>Aucun réseau Wi-Fi n'est enregistré sur cet ordinateur.</value>
+  </data>
+  <data name="ReadinessSoftwareTitle.Text" xml:space="preserve">
+    <value>Vos logiciels</value>
+  </data>
+  <data name="ReadinessSoftwareHelp.Text" xml:space="preserve">
+    <value>Voyez lesquels de vos logiciels Windows existent sous Linux, lesquels ont un équivalent gratuit et lesquels ne fonctionnent que sous Windows.</value>
+  </data>
+  <data name="ReadinessSoftwareOpen.Content" xml:space="preserve">
+    <value>Voir mes logiciels</value>
+  </data>
+  <data name="Ready_Processor_X64_Title" xml:space="preserve">
+    <value>Processeur Intel ou AMD</value>
+  </data>
+  <data name="Ready_Processor_X64_Message" xml:space="preserve">
+    <value>Les distributions proposées ici sont faites pour lui.</value>
+  </data>
+  <data name="Ready_Processor_Arm64_Title" xml:space="preserve">
+    <value>Processeur ARM : la clé ne démarrera pas sur cet ordinateur</value>
+  </data>
+  <data name="Ready_Processor_Arm64_Message" xml:space="preserve">
+    <value>Cet ordinateur a un processeur ARM (Snapdragon…). Les distributions proposées ici sont faites pour les processeurs Intel et AMD (x86_64) : une clé créée avec elles démarre sur un autre ordinateur, pas sur celui-ci.</value>
+  </data>
+  <data name="Ready_Processor_Arm64Ok_Title" xml:space="preserve">
+    <value>Processeur ARM</value>
+  </data>
+  <data name="Ready_Processor_Arm64Ok_Message" xml:space="preserve">
+    <value>{0} est faite pour les processeurs ARM.</value>
+  </data>
+  <data name="Ready_Processor_NeedsArm_Title" xml:space="preserve">
+    <value>{0} est pour les processeurs ARM</value>
+  </data>
+  <data name="Ready_Processor_NeedsArm_Message" xml:space="preserve">
+    <value>Cet ordinateur a un processeur Intel ou AMD : la clé ne démarrera pas dessus.</value>
+  </data>
+  <data name="Ready_Firmware_Uefi_Title" xml:space="preserve">
+    <value>Démarrage moderne (UEFI)</value>
+  </data>
+  <data name="Ready_Firmware_Uefi_Message" xml:space="preserve">
+    <value>La clé démarre en mode UEFI, comme Windows sur cet ordinateur.</value>
+  </data>
+  <data name="Ready_Firmware_Bios_Title" xml:space="preserve">
+    <value>Ancien mode de démarrage (BIOS, Legacy)</value>
+  </data>
+  <data name="Ready_Firmware_Bios_Message" xml:space="preserve">
+    <value>Windows démarre dans l'ancien mode BIOS. La clé démarre aussi dans ce mode : dans le menu de démarrage, choisissez son entrée sans « UEFI ». Pour garder Windows, installez Linux dans le même mode.</value>
+  </data>
+  <data name="Ready_SecureBoot_Off_Title" xml:space="preserve">
+    <value>Secure Boot désactivé</value>
+  </data>
+  <data name="Ready_SecureBoot_Off_Message" xml:space="preserve">
+    <value>Toutes les distributions démarrent sans rien changer.</value>
+  </data>
+  <data name="Ready_SecureBoot_On_Title" xml:space="preserve">
+    <value>Secure Boot activé</value>
+  </data>
+  <data name="Ready_SecureBoot_On_Message" xml:space="preserve">
+    <value>La plupart des distributions démarrent avec. Les quelques-unes qui demandent de le désactiver sont signalées dans la liste.</value>
+  </data>
+  <data name="Ready_SecureBoot_Supported_Title" xml:space="preserve">
+    <value>Secure Boot activé, {0} démarre avec</value>
+  </data>
+  <data name="Ready_SecureBoot_Supported_Message" xml:space="preserve">
+    <value>Rien à changer dans les réglages UEFI.</value>
+  </data>
+  <data name="Ready_SecureBoot_MustDisable_Title" xml:space="preserve">
+    <value>Désactivez le Secure Boot pour {0}</value>
+  </data>
+  <data name="Ready_SecureBoot_MustDisable_Message" xml:space="preserve">
+    <value>{0} ne démarre pas tant que le Secure Boot est activé. Désactivez-le dans les réglages UEFI (souvent dans « Security » ou « Boot »), puis enregistrez et redémarrez.</value>
+  </data>
+  <data name="Ready_StorageMode_Standard_Title" xml:space="preserve">
+    <value>Disque en mode standard</value>
+  </data>
+  <data name="Ready_StorageMode_Standard_Message" xml:space="preserve">
+    <value>Linux voit le disque de cet ordinateur sans aucun réglage.</value>
+  </data>
+  <data name="Ready_StorageMode_Raid_Title" xml:space="preserve">
+    <value>Le disque passe par Intel RST (RAID, VMD)</value>
+  </data>
+  <data name="Ready_StorageMode_Raid_Message" xml:space="preserve">
+    <value>Certains installateurs Linux ne trouvent aucun disque dans ce mode. Si cela arrive, passez le stockage en « AHCI » dans les réglages UEFI, mais préparez d'abord Windows (démarrage une fois en mode sans échec), sinon il ne démarrera plus. Cherchez la procédure du fabricant de votre ordinateur.</value>
+  </data>
+  <data name="Ready_Encryption_On_Title" xml:space="preserve">
+    <value>BitLocker chiffre le disque C:</value>
+  </data>
+  <data name="Ready_Encryption_On_Message" xml:space="preserve">
+    <value>Notez la clé de récupération : Windows peut la demander après un changement des réglages de démarrage. Pour installer Linux à côté de Windows, désactivez d'abord BitLocker (Paramètres › Confidentialité et sécurité › Chiffrement de l'appareil, ou BitLocker dans le Panneau de configuration), sinon l'installateur ne peut pas faire de place.</value>
+  </data>
+  <data name="Ready_Encryption_Off_Title" xml:space="preserve">
+    <value>BitLocker désactivé</value>
+  </data>
+  <data name="Ready_Encryption_Off_Message" xml:space="preserve">
+    <value>Le disque C: n'est pas chiffré : rien à préparer.</value>
+  </data>
+  <data name="Ready_FastStartup_On_Title" xml:space="preserve">
+    <value>Démarrage rapide de Windows activé</value>
+  </data>
+  <data name="Ready_FastStartup_On_Message" xml:space="preserve">
+    <value>Si vous gardez Windows à côté de Linux, désactivez-le : Windows s'arrête alors vraiment, et Linux peut accéder sans risque au disque et aux fichiers de Windows.</value>
+  </data>
+  <data name="Ready_FastStartup_Off_Title" xml:space="preserve">
+    <value>Démarrage rapide désactivé</value>
+  </data>
+  <data name="Ready_FastStartup_Off_Message" xml:space="preserve">
+    <value>Windows s'arrête complètement : rien à changer.</value>
+  </data>
+  <data name="Ready_DiskSpace_Enough_Title" xml:space="preserve">
+    <value>{1} libres sur le disque C:</value>
+  </data>
+  <data name="Ready_DiskSpace_Enough_Message" xml:space="preserve">
+    <value>Assez pour installer Linux à côté de Windows (il faut {2}).</value>
+  </data>
+  <data name="Ready_DiskSpace_Low_Title" xml:space="preserve">
+    <value>Seulement {1} libres sur le disque C:</value>
+  </data>
+  <data name="Ready_DiskSpace_Low_Message" xml:space="preserve">
+    <value>Pour garder Windows à côté de Linux, il faut environ {2} de libre. Pas de problème si Linux remplace Windows.</value>
+  </data>
+  <data name="Ready_Memory_Enough_Title" xml:space="preserve">
+    <value>{1} de mémoire</value>
+  </data>
+  <data name="Ready_Memory_Enough_Message" xml:space="preserve">
+    <value>C'est suffisant ({2} recommandés).</value>
+  </data>
+  <data name="Ready_Memory_Low_Title" xml:space="preserve">
+    <value>{1} de mémoire, {0} demande {2}</value>
+  </data>
+  <data name="Ready_Memory_Low_Message" xml:space="preserve">
+    <value>Elle risque d'être lente : une distribution légère comme Linux Mint Xfce ou Lubuntu conviendra mieux à cet ordinateur.</value>
+  </data>
+  <data name="Ready_Memory_Modest_Title" xml:space="preserve">
+    <value>{1} de mémoire</value>
+  </data>
+  <data name="Ready_Memory_Modest_Message" xml:space="preserve">
+    <value>Un ordinateur modeste : choisissez une distribution légère, comme Linux Mint Xfce ou Lubuntu.</value>
+  </data>
+  <data name="Ready_Graphics_Standard_Title" xml:space="preserve">
+    <value>Graphique : {0}</value>
+  </data>
+  <data name="Ready_Graphics_Standard_Message" xml:space="preserve">
+    <value>Fonctionne avec les pilotes inclus dans Linux.</value>
+  </data>
+  <data name="Ready_Graphics_Nvidia_Title" xml:space="preserve">
+    <value>Carte graphique NVIDIA</value>
+  </data>
+  <data name="Ready_Graphics_Nvidia_Message" xml:space="preserve">
+    <value>{0}. Si l'écran reste noir après le menu de démarrage, choisissez son entrée « safe graphics » (affichage de secours). Une fois Linux installé, installez le pilote NVIDIA depuis la logithèque ou l'outil des pilotes.</value>
+  </data>
+  <data name="Ready_Wifi_Standard_Title" xml:space="preserve">
+    <value>Wi-Fi : {0}</value>
+  </data>
+  <data name="Ready_Wifi_Standard_Message" xml:space="preserve">
+    <value>Fonctionne avec les pilotes inclus dans Linux.</value>
+  </data>
+  <data name="Ready_Wifi_Broadcom_Title" xml:space="preserve">
+    <value>Carte Wi-Fi Broadcom</value>
+  </data>
+  <data name="Ready_Wifi_Broadcom_Message" xml:space="preserve">
+    <value>{0} a souvent besoin d'un pilote absent de la clé : le Wi-Fi peut ne pas fonctionner avant son installation. Prévoyez un câble Ethernet, ou partagez la connexion de votre téléphone en USB.</value>
+  </data>
+  <data name="Ready_Action_OpenFirmwareSettings" xml:space="preserve">
+    <value>Ouvrir les réglages UEFI</value>
+  </data>
+  <data name="Ready_Action_DisableFastStartup" xml:space="preserve">
+    <value>Désactiver</value>
+  </data>
+  <data name="Ready_Action_OpenRecoveryKeyPage" xml:space="preserve">
+    <value>Retrouver ma clé de récupération</value>
+  </data>
+  <data name="Ready_Action_OpenStorageSettings" xml:space="preserve">
+    <value>Libérer de l'espace</value>
+  </data>
+  <data name="Boot_Keys" xml:space="preserve">
+    <value>Sur cet ordinateur ({0}), appuyez plusieurs fois sur {1} juste après l'avoir allumé pour ouvrir le menu de démarrage, ou sur {2} pour ouvrir ses réglages UEFI/BIOS.</value>
+  </data>
+  <data name="Boot_KeysNoSetup" xml:space="preserve">
+    <value>Sur cet ordinateur ({0}), maintenez {1} enfoncée en l'allumant, puis choisissez la clé USB.</value>
+  </data>
+  <data name="Boot_KeysHold" xml:space="preserve">
+    <value>Sur cet ordinateur ({0}), maintenez {1} en l'allumant pour démarrer sur la clé, ou {2} pour ouvrir ses réglages UEFI.</value>
+  </data>
+  <data name="Boot_KeysUnknown" xml:space="preserve">
+    <value>La touche du menu de démarrage dépend du fabricant : souvent F12, F11, F10, F9, F8 ou Échap, à presser plusieurs fois juste après l'allumage. Elle s'affiche parfois brièvement à l'écran.</value>
+  </data>
+  <data name="Boot_Note_AcerF12" xml:space="preserve">
+    <value>Si F12 ne fait rien, activez « F12 Boot Menu » dans les réglages (F2).</value>
+  </data>
+  <data name="Key_Esc" xml:space="preserve">
+    <value>Échap</value>
+  </data>
+  <data name="Key_Del" xml:space="preserve">
+    <value>Suppr</value>
+  </data>
+  <data name="Key_VolumeDown" xml:space="preserve">
+    <value>le bouton Volume -</value>
+  </data>
+  <data name="Key_VolumeUp" xml:space="preserve">
+    <value>le bouton Volume +</value>
+  </data>
+  <data name="Key_Option" xml:space="preserve">
+    <value>la touche Option (Alt)</value>
+  </data>
+  <data name="Restart_DriveTitle" xml:space="preserve">
+    <value>Redémarrer sur la clé USB ?</value>
+  </data>
+  <data name="Restart_DriveMessage" xml:space="preserve">
+    <value>L'ordinateur redémarre tout de suite dans les options de démarrage de Windows : choisissez « Utiliser un périphérique », puis la clé USB.
+
+Enregistrez d'abord votre travail et fermez vos programmes. Si la clé a été éjectée, débranchez-la et rebranchez-la maintenant. Si « Utiliser un périphérique » n'apparaît pas ou que la clé n'y est pas, redémarrez et utilisez plutôt la touche du menu de démarrage.</value>
+  </data>
+  <data name="Restart_DrivePrimary" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="Restart_DriveFailed" xml:space="preserve">
+    <value>Windows n'a pas pu redémarrer dans ses options de démarrage. Redémarrez l'ordinateur et utilisez plutôt la touche du menu de démarrage.</value>
+  </data>
+  <data name="Restart_FirmwareTitle" xml:space="preserve">
+    <value>Redémarrer dans les réglages UEFI ?</value>
+  </data>
+  <data name="Restart_FirmwareMessage" xml:space="preserve">
+    <value>L'ordinateur redémarre tout de suite dans ses réglages UEFI. Enregistrez d'abord votre travail et fermez vos programmes.
+
+Le Secure Boot se trouve souvent dans « Security » ou « Boot ». Enregistrez les changements (souvent F10) avant de quitter.</value>
+  </data>
+  <data name="Restart_FirmwarePrimary" xml:space="preserve">
+    <value>Redémarrer maintenant</value>
+  </data>
+  <data name="Restart_FirmwareFailed" xml:space="preserve">
+    <value>Cet ordinateur ne laisse pas Windows ouvrir ses réglages UEFI. Redémarrez-le et appuyez sur la touche des réglages juste après l'avoir allumé.</value>
+  </data>
+  <data name="Restart_FailedTitle" xml:space="preserve">
+    <value>Impossible de redémarrer</value>
+  </data>
+  <data name="FastStartup_ConfirmTitle" xml:space="preserve">
+    <value>Désactiver le démarrage rapide ?</value>
+  </data>
+  <data name="FastStartup_ConfirmMessage" xml:space="preserve">
+    <value>Windows s'arrêtera complètement quand vous éteindrez l'ordinateur. Il démarre quelques secondes plus lentement, et Linux peut accéder sans risque au disque de Windows. Vous pourrez le réactiver dans les options d'alimentation du Panneau de configuration.</value>
+  </data>
+  <data name="FastStartup_ConfirmPrimary" xml:space="preserve">
+    <value>Désactiver</value>
+  </data>
+  <data name="FastStartup_FailedTitle" xml:space="preserve">
+    <value>Impossible de désactiver le démarrage rapide</value>
+  </data>
+  <data name="FastStartup_Failed" xml:space="preserve">
+    <value>Désactivez-le vous-même : Panneau de configuration › Options d'alimentation › Choisir l'action des boutons d'alimentation › Activer le démarrage rapide.</value>
+  </data>
+  <data name="DoneOpenFirmware.Content" xml:space="preserve">
+    <value>Ouvrir les réglages UEFI</value>
+  </data>
+  <data name="DoneOpenReadiness.Content" xml:space="preserve">
+    <value>Voir le détail</value>
+  </data>
+  <data name="Done_Readiness" xml:space="preserve">
+    <value>Cet ordinateur : {0} point(s) à vérifier avant d'installer</value>
+  </data>
+  <data name="Done_ReadinessBlocked" xml:space="preserve">
+    <value>Cette clé ne démarrera pas sur cet ordinateur</value>
+  </data>
+  <data name="DoneRestartHelp.Text" xml:space="preserve">
+    <value>Si la clé est pour cet ordinateur, Windows peut redémarrer directement dans ses options de démarrage, sans chercher la touche.</value>
+  </data>
+  <data name="DoneRestartDrive.Content" xml:space="preserve">
+    <value>Redémarrer sur la clé</value>
+  </data>
+  <data name="DriveProcessorWarning.Title" xml:space="preserve">
+    <value>Cette clé ne démarrera pas sur cet ordinateur</value>
+  </data>
+  <data name="DriveProcessorWarning.Message" xml:space="preserve">
+    <value>Cette distribution est faite pour un autre type de processeur que celui de cet ordinateur (ARM, ou Intel et AMD). La clé fonctionnera sur un autre ordinateur, pas sur celui-ci.</value>
+  </data>
+  <data name="Backup_Measuring" xml:space="preserve">
+    <value>Calcul de la taille…</value>
+  </data>
+  <data name="Backup_FolderSize" xml:space="preserve">
+    <value>{0} · {1:N0} fichiers</value>
+  </data>
+  <data name="Backup_Total" xml:space="preserve">
+    <value>Au total, environ {0} à sauvegarder : le disque de sauvegarde doit avoir au moins cette place libre.</value>
+  </data>
+  <data name="SettingsImages.Text" xml:space="preserve">
+    <value>Images téléchargées</value>
+  </data>
+  <data name="SettingsImagesHelp.Text" xml:space="preserve">
+    <value>Les fichiers ISO gardés dans le dossier de téléchargement, pour créer une autre clé sans tout retélécharger. Supprimez-les pour libérer de la place.</value>
+  </data>
+  <data name="SettingsDeleteAllImages.Content" xml:space="preserve">
+    <value>Tout supprimer</value>
+  </data>
+  <data name="Settings_ImagesSummary" xml:space="preserve">
+    <value>{0} image(s), {1}</value>
+  </data>
+  <data name="Settings_NoImages" xml:space="preserve">
+    <value>Aucune image dans le dossier de téléchargement.</value>
+  </data>
+  <data name="Settings_ImageDetails" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Settings_ImagePartial" xml:space="preserve">
+    <value>{0} · {1} · téléchargement interrompu</value>
+  </data>
+  <data name="Settings_ImageDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Settings_ImageDeleteName" xml:space="preserve">
+    <value>Supprimer {0}</value>
+  </data>
+  <data name="Settings_DeleteTitle" xml:space="preserve">
+    <value>Supprimer cette image ?</value>
+  </data>
+  <data name="Settings_DeleteMessage" xml:space="preserve">
+    <value>{0} ({1}) va être supprimée. Elle sera de nouveau téléchargée si vous créez une clé avec.</value>
+  </data>
+  <data name="Settings_DeletePrimary" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Settings_DeleteAllTitle" xml:space="preserve">
+    <value>Supprimer toutes les images ?</value>
+  </data>
+  <data name="Settings_DeleteAllMessage" xml:space="preserve">
+    <value>{0} image(s) ({1}) vont être supprimées du dossier de téléchargement.</value>
+  </data>
+  <data name="Settings_DeleteAllPrimary" xml:space="preserve">
+    <value>Tout supprimer</value>
+  </data>
+  <data name="SettingsUpdates.Text" xml:space="preserve">
+    <value>Mises à jour</value>
+  </data>
+  <data name="SettingsCheckUpdates.Header" xml:space="preserve">
+    <value>Rechercher une nouvelle version de l'application au démarrage</value>
+  </data>
+  <data name="SettingsCheckUpdates.OnContent" xml:space="preserve">
+    <value>Activé (interroge GitHub)</value>
+  </data>
+  <data name="SettingsCheckUpdates.OffContent" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="SoftwareHeader.Text" xml:space="preserve">
+    <value>Mes logiciels sous Linux</value>
+  </data>
+  <data name="SoftwareSubtitle.Text" xml:space="preserve">
+    <value>Les logiciels installés sur cet ordinateur, et quoi utiliser sous Linux. Ceux qui ne fonctionnent que sous Windows sont une bonne raison de garder Windows à côté de Linux.</value>
+  </data>
+  <data name="SoftwareError.Title" xml:space="preserve">
+    <value>Impossible de lister les logiciels</value>
+  </data>
+  <data name="SoftwareError.Message" xml:space="preserve">
+    <value>Le journal de l'application donne les détails.</value>
+  </data>
+  <data name="SoftwareSaveHelp.Text" xml:space="preserve">
+    <value>Enregistrez cette liste dans vos Documents : elle sera sauvegardée avec vos fichiers et vous aidera à retrouver vos logiciels sous Linux.</value>
+  </data>
+  <data name="SoftwareSave.Content" xml:space="preserve">
+    <value>Enregistrer la liste</value>
+  </data>
+  <data name="SoftwareShowSaved.Content" xml:space="preserve">
+    <value>Afficher le fichier</value>
+  </data>
+  <data name="Software_Summary" xml:space="preserve">
+    <value>{0} logiciels : {1} ont une solution sous Linux, {2} à examiner.</value>
+  </data>
+  <data name="Software_Suggestions" xml:space="preserve">
+    <value>Sous Linux : {0}</value>
+  </data>
+  <data name="Software_Search" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
+  <data name="Software_SearchName" xml:space="preserve">
+    <value>Chercher un équivalent de {0}</value>
+  </data>
+  <data name="Software_FileName" xml:space="preserve">
+    <value>Mes logiciels Windows</value>
+  </data>
+  <data name="Software_FileTitle" xml:space="preserve">
+    <value>Mes logiciels Windows et quoi utiliser sous Linux ({0})</value>
+  </data>
+  <data name="Software_Saved" xml:space="preserve">
+    <value>Enregistrée dans {0}</value>
+  </data>
+  <data name="Software_SaveFailed" xml:space="preserve">
+    <value>La liste n'a pas pu être enregistrée : {0}</value>
+  </data>
+  <data name="Software_Group_WindowsOnly" xml:space="preserve">
+    <value>Seulement sous Windows ({0})</value>
+  </data>
+  <data name="Software_Group_WindowsOnly_Help" xml:space="preserve">
+    <value>Pas de version Linux ni de vrai équivalent : gardez Windows à côté de Linux si vous en avez besoin.</value>
+  </data>
+  <data name="Software_Group_Unknown" xml:space="preserve">
+    <value>À vérifier ({0})</value>
+  </data>
+  <data name="Software_Group_Unknown_Help" xml:space="preserve">
+    <value>L'application ne les connaît pas : cherchez s'ils fonctionnent sous Linux.</value>
+  </data>
+  <data name="Software_Group_Alternative" xml:space="preserve">
+    <value>Un équivalent gratuit existe ({0})</value>
+  </data>
+  <data name="Software_Group_Alternative_Help" xml:space="preserve">
+    <value>Ces logiciels n'existent pas sous Linux, mais ceux proposés font la même chose.</value>
+  </data>
+  <data name="Software_Group_Web" xml:space="preserve">
+    <value>Dans le navigateur ({0})</value>
+  </data>
+  <data name="Software_Group_Web_Help" xml:space="preserve">
+    <value>Utilisez leur site ou leur version web : rien à installer.</value>
+  </data>
+  <data name="Software_Group_Native" xml:space="preserve">
+    <value>Existent aussi sous Linux ({0})</value>
+  </data>
+  <data name="Software_Group_Native_Help" xml:space="preserve">
+    <value>Installez-les depuis la logithèque de votre distribution.</value>
+  </data>
+  <data name="Software_Group_NotNeeded" xml:space="preserve">
+    <value>Inutiles sous Linux ({0})</value>
+  </data>
+  <data name="Software_Group_NotNeeded_Help" xml:space="preserve">
+    <value>Antivirus, nettoyeurs et outils de pilotes : Linux s'en charge lui-même.</value>
+  </data>
+  <data name="TroubleshootHeader.Text" xml:space="preserve">
+    <value>Dépannage</value>
+  </data>
+  <data name="TroubleshootSubtitle.Text" xml:space="preserve">
+    <value>La clé ne démarre pas, ou Linux ne s'installe pas ? Vérifiez la clé, puis trouvez votre problème ci-dessous.</value>
+  </data>
+  <data name="VerifyTitle.Text" xml:space="preserve">
+    <value>Vérifier ma clé</value>
+  </data>
+  <data name="VerifyHelp.Text" xml:space="preserve">
+    <value>Relit la clé et la compare octet par octet à l'image avec laquelle elle a été créée. Rien n'est écrit sur la clé.</value>
+  </data>
+  <data name="VerifyDrive.Header" xml:space="preserve">
+    <value>Clé USB</value>
+  </data>
+  <data name="VerifyDrive.PlaceholderText" xml:space="preserve">
+    <value>Choisissez une clé USB</value>
+  </data>
+  <data name="VerifyImage.Header" xml:space="preserve">
+    <value>Image (fichier ISO)</value>
+  </data>
+  <data name="VerifyImage.PlaceholderText" xml:space="preserve">
+    <value>Choisissez l'image utilisée pour la clé</value>
+  </data>
+  <data name="VerifyBrowse.Content" xml:space="preserve">
+    <value>Parcourir…</value>
+  </data>
+  <data name="VerifyStart.Content" xml:space="preserve">
+    <value>Vérifier la clé</value>
+  </data>
+  <data name="VerifyCancel.Content" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Verify_Identical_Title" xml:space="preserve">
+    <value>La clé est identique à l'image</value>
+  </data>
+  <data name="Verify_Identical" xml:space="preserve">
+    <value>Elle a été écrite correctement. Si elle ne démarre pas, la cause vient des réglages de démarrage de l'ordinateur : voyez les problèmes ci-dessous.</value>
+  </data>
+  <data name="Verify_NearlyIdentical_Title" xml:space="preserve">
+    <value>La clé correspond à l'image</value>
+  </data>
+  <data name="Verify_NearlyIdentical" xml:space="preserve">
+    <value>Seules {1} petite(s) zone(s) diffèrent, à partir de {0} : Windows ou la distribution écrivent un peu sur une clé déjà branchée ou démarrée. La clé est bonne : si elle ne démarre pas, voyez les problèmes ci-dessous.</value>
+  </data>
+  <data name="Verify_Different_Title" xml:space="preserve">
+    <value>La clé ne correspond pas à cette image</value>
+  </data>
+  <data name="Verify_Different" xml:space="preserve">
+    <value>Elle diffère à partir de {0}. Vérifiez que vous avez choisi l'image utilisée pour cette clé ; si oui, recréez la clé. Si cela se reproduit, la clé est peut-être défectueuse ou contrefaite : essayez-en une autre.</value>
+  </data>
+  <data name="Verify_TooSmall_Title" xml:space="preserve">
+    <value>La clé est plus petite que l'image</value>
+  </data>
+  <data name="Verify_TooSmall" xml:space="preserve">
+    <value>Cette image ne peut pas être sur cette clé : choisissez l'image qui a servi à la créer.</value>
+  </data>
+  <data name="Verify_DriveChanged_Title" xml:space="preserve">
+    <value>La clé a changé</value>
+  </data>
+  <data name="Verify_DriveChanged" xml:space="preserve">
+    <value>La clé USB a été débranchée ou remplacée. Choisissez-la de nouveau dans la liste.</value>
+  </data>
+  <data name="TroubleshootProblemsTitle.Text" xml:space="preserve">
+    <value>Problèmes fréquents</value>
+  </data>
+  <data name="Trouble_Action_RestartToDrive" xml:space="preserve">
+    <value>Redémarrer sur la clé</value>
+  </data>
+  <data name="Trouble_Action_OpenFirmwareSettings" xml:space="preserve">
+    <value>Ouvrir les réglages UEFI</value>
+  </data>
+  <data name="Trouble_Action_OpenReadiness" xml:space="preserve">
+    <value>Vérifier mon PC</value>
+  </data>
+  <data name="Trouble_NotListed_Title" xml:space="preserve">
+    <value>La clé n'apparaît pas dans le menu de démarrage</value>
+  </data>
+  <data name="Trouble_NotListed_Body" xml:space="preserve">
+    <value>• Branchez la clé avant d'allumer l'ordinateur, directement sur l'ordinateur (pas sur un hub), et essayez un autre port, en USB 2 s'il y en a un.
+• Désactivez « Fast Boot » dans les réglages UEFI : certains ordinateurs ignorent alors les clés USB.
+• Sur un ordinateur d'avant 2012, activez « Legacy » ou « CSM » dans les réglages.
+• Vérifiez la clé ci-dessus, et recréez-la si elle ne correspond pas.</value>
+  </data>
+  <data name="Trouble_WindowsStarts_Title" xml:space="preserve">
+    <value>Windows démarre comme d'habitude</value>
+  </data>
+  <data name="Trouble_WindowsStarts_Body" xml:space="preserve">
+    <value>• La touche du menu de démarrage se presse plusieurs fois juste après l'allumage, avant le logo de Windows.
+• Le démarrage rapide de Windows peut sauter le menu : choisissez Redémarrer plutôt qu'Arrêter, ou maintenez Maj en cliquant sur Arrêter.
+• Plus simple : laissez Windows redémarrer dans ses options de démarrage et choisissez « Utiliser un périphérique ».</value>
+  </data>
+  <data name="Trouble_SecureBoot_Title" xml:space="preserve">
+    <value>« Secure Boot violation » ou « image non autorisée »</value>
+  </data>
+  <data name="Trouble_SecureBoot_Body" xml:space="preserve">
+    <value>Cette distribution ne démarre pas avec le Secure Boot. Désactivez-le dans les réglages UEFI (souvent dans « Security » ou « Boot »), enregistrez (souvent F10) et redémarrez. Ou choisissez une distribution qui démarre avec, comme Ubuntu, Linux Mint ou Fedora.</value>
+  </data>
+  <data name="Trouble_BlackScreen_Title" xml:space="preserve">
+    <value>Écran noir après avoir choisi Linux</value>
+  </data>
+  <data name="Trouble_BlackScreen_Body" xml:space="preserve">
+    <value>Fréquent avec les cartes graphiques NVIDIA. Dans le menu de démarrage de la clé, choisissez l'entrée qui mentionne « safe graphics » ou « nomodeset » (ou appuyez sur E sur la première entrée, ajoutez nomodeset à la fin de la ligne qui commence par « linux », puis appuyez sur F10). Une fois Linux installé, installez le pilote NVIDIA.</value>
+  </data>
+  <data name="Trouble_Errors_Title" xml:space="preserve">
+    <value>Messages d'erreur ou blocage pendant le démarrage de Linux</value>
+  </data>
+  <data name="Trouble_Errors_Body" xml:space="preserve">
+    <value>Des erreurs comme « squashfs error » ou « I/O error » viennent d'une clé mal écrite ou défectueuse. Vérifiez la clé ci-dessus, recréez-la, et essayez une autre clé et un autre port USB si cela se reproduit.</value>
+  </data>
+  <data name="Trouble_NoDisk_Title" xml:space="preserve">
+    <value>L'installateur ne trouve aucun disque</value>
+  </data>
+  <data name="Trouble_NoDisk_Body" xml:space="preserve">
+    <value>Le disque de l'ordinateur passe sans doute par Intel RST (« RAID On », « VMD »). Passez le stockage en mode « AHCI » dans les réglages UEFI, mais préparez d'abord Windows (démarrage une fois en mode sans échec), sinon il ne démarrera plus. « Vérifier mon PC » indique si cet ordinateur utilise ce mode.</value>
+  </data>
+  <data name="Trouble_NoAlongside_Title" xml:space="preserve">
+    <value>« Installer à côté de Windows » n'est pas proposé</value>
+  </data>
+  <data name="Trouble_NoAlongside_Body" xml:space="preserve">
+    <value>L'installateur ne peut pas faire de place à côté de Windows quand BitLocker chiffre le disque, quand Windows n'est pas complètement arrêté (démarrage rapide) ou quand le disque est trop plein. Désactivez BitLocker et le démarrage rapide, libérez de la place, puis réessayez.</value>
+  </data>
+  <data name="Trouble_NoWifi_Title" xml:space="preserve">
+    <value>Pas de Wi-Fi sous Linux</value>
+  </data>
+  <data name="Trouble_NoWifi_Body" xml:space="preserve">
+    <value>Certaines cartes Wi-Fi (Broadcom surtout) ont besoin d'un pilote absent de la clé. Connectez-vous avec un câble Ethernet ou partagez la connexion de votre téléphone en USB, puis ouvrez l'outil des pilotes de la distribution (« Pilotes additionnels » ou « Gestionnaire de pilotes »). « Vérifier mon PC » montre votre carte Wi-Fi et les mots de passe enregistrés.</value>
+  </data>
+  <data name="Check_wifi_Title" xml:space="preserve">
+    <value>Notez le mot de passe de votre Wi-Fi</value>
+  </data>
+  <data name="Check_wifi_Body" xml:space="preserve">
+    <value>Linux en aura besoin pour se connecter. L'application peut afficher les mots de passe des réseaux enregistrés sur cet ordinateur.</value>
+  </data>
+  <data name="Guide_Action_Wifi" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="Guide_Action_Software" xml:space="preserve">
+    <value>Voir mes logiciels</value>
+  </data>
+  <data name="Check_bitlocker_On" xml:space="preserve">
+    <value>Sur cet ordinateur : BitLocker chiffre le disque C:.</value>
+  </data>
+  <data name="Check_bitlocker_Off" xml:space="preserve">
+    <value>Sur cet ordinateur : BitLocker est désactivé, rien à faire.</value>
+  </data>
+  <data name="Check_dualboot_Free" xml:space="preserve">
+    <value>Sur cet ordinateur : {0} libres sur le disque C:.</value>
+  </data>
+  <data name="Check_dualboot_FastStartupOn" xml:space="preserve">
+    <value>Le démarrage rapide est activé.</value>
+  </data>
+  <data name="Check_dualboot_FastStartupOff" xml:space="preserve">
+    <value>Le démarrage rapide est désactivé.</value>
+  </data>
+  <data name="Check_power_Laptop" xml:space="preserve">
+    <value>Cet ordinateur est un portable : gardez-le branché.</value>
+  </data>
+  <data name="Advisor_SecureBootOff" xml:space="preserve">
+    <value>Sur cet ordinateur, le Secure Boot est déjà désactivé : aucune distribution ne demande de changement.</value>
+  </data>
+  <data name="Advisor_SecureBootOn" xml:space="preserve">
+    <value>Sur cet ordinateur, le Secure Boot est activé.</value>
+  </data>
 </root>

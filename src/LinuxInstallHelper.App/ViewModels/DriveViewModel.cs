@@ -2,7 +2,9 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
+using System.Runtime.InteropServices;
 using LinuxInstallHelper.Core;
+using LinuxInstallHelper.Core.Readiness;
 using LinuxInstallHelper.Core.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
@@ -86,6 +88,10 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private string _errorMessage = string.Empty;
 
+    /// <summary>The image is for another kind of processor: the drive will not start on this computer.</summary>
+    [ObservableProperty]
+    private bool _showProcessorWarning;
+
     public void OnNavigatedTo(object? parameter)
     {
         if (_wizard.Source is null)
@@ -95,6 +101,8 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         }
 
         ImageSummary = _localizer.Format("Drive_ImageSummary", _wizard.SourceName, _formatter.Size(_wizard.ImageSize));
+        ShowProcessorWarning = _wizard.Distro is { } distro
+            && PcReadiness.CannotStart(PcFacts.ProcessorOf(RuntimeInformation.OSArchitecture), distro);
         IsConfirmed = false;
         _ = RefreshAsync();
         _timer.Start();

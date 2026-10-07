@@ -16,6 +16,12 @@
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Version}" />
             </StackPanel>
 
+            <InfoBar IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.IsUpdateAvailable}" Title="{x:Bind ViewModel.UpdateText}">
+                <InfoBar.ActionButton>
+                    <Button x:Uid="UpdateBarDownload" Command="{x:Bind ViewModel.OpenUpdateCommand}" />
+                </InfoBar.ActionButton>
+            </InfoBar>
+
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Style="{StaticResource CardStackStyle}">
                     <TextBlock x:Uid="AboutDescription" Style="{StaticResource BodyWrapTextStyle}" />
