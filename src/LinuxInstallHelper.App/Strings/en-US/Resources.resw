@@ -1624,7 +1624,7 @@ This cannot be undone.</value>
     <value>A modest computer: choose a lightweight distribution, such as Linux Mint Xfce or Lubuntu.</value>
   </data>
   <data name="Ready_Graphics_Standard_Title" xml:space="preserve">
-    <value>Graphics: {0}</value>
+    <value>Graphics card: {0}</value>
   </data>
   <data name="Ready_Graphics_Standard_Message" xml:space="preserve">
     <value>Works with the drivers included in Linux.</value>

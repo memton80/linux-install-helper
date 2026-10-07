@@ -1543,7 +1543,7 @@ Cette opération est irréversible.</value>
     <value>Secure Boot activé</value>
   </data>
   <data name="Ready_SecureBoot_On_Message" xml:space="preserve">
-    <value>La plupart des distributions démarrent avec. Les quelques-unes qui demandent de le désactiver sont signalées dans la liste.</value>
+    <value>La plupart des distributions démarrent avec. Les rares distributions qui demandent de le désactiver sont signalées dans la liste.</value>
   </data>
   <data name="Ready_SecureBoot_Supported_Title" xml:space="preserve">
     <value>Secure Boot activé, {0} démarre avec</value>
@@ -1624,7 +1624,7 @@ Cette opération est irréversible.</value>
     <value>Un ordinateur modeste : choisissez une distribution légère, comme Linux Mint Xfce ou Lubuntu.</value>
   </data>
   <data name="Ready_Graphics_Standard_Title" xml:space="preserve">
-    <value>Graphique : {0}</value>
+    <value>Carte graphique : {0}</value>
   </data>
   <data name="Ready_Graphics_Standard_Message" xml:space="preserve">
     <value>Fonctionne avec les pilotes inclus dans Linux.</value>
