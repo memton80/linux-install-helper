@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using LinuxInstallHelper.Core.Download;
 
@@ -135,23 +134,5 @@ public sealed class ImageWriteEngine
                 UsbWriteFailure.VerificationFailed,
                 "The data read back from the USB drive differs from the image. The drive may be faulty or counterfeit.");
         }
-    }
-
-    /// <summary>Native memory aligned on the sector size, as required by unbuffered raw I/O.</summary>
-    private sealed unsafe class AlignedBuffer : IDisposable
-    {
-        private readonly void* _pointer;
-        private readonly int _length;
-
-        public AlignedBuffer(int length, int alignment)
-        {
-            var align = (nuint)Math.Max(alignment, 4096);
-            _length = (int)AlignUp(length, (int)align);
-            _pointer = NativeMemory.AlignedAlloc((nuint)_length, align);
-        }
-
-        public Span<byte> Span => new(_pointer, _length);
-
-        public void Dispose() => NativeMemory.AlignedFree(_pointer);
     }
 }

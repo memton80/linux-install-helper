@@ -32,6 +32,9 @@ public sealed record UserSettings
     /// <summary>Safely remove the drive when it is ready.</summary>
     public bool EjectWhenDone { get; init; } = true;
 
+    /// <summary>Ask GitHub at startup whether a newer version of the application is published.</summary>
+    public bool CheckForUpdates { get; init; } = true;
+
     /// <summary>
     /// Items of the "before leaving Windows" checklist already done, as comma-separated keys (a string keeps the record's
     /// value equality).

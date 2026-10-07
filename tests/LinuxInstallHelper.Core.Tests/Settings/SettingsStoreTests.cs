@@ -17,6 +17,7 @@ public sealed class SettingsStoreTests : IDisposable
         Assert.True(settings.VerifyAfterWrite);
         Assert.True(settings.EjectWhenDone);
         Assert.True(settings.KeepIsoAfterWrite);
+        Assert.True(settings.CheckForUpdates);
         Assert.Null(settings.Language);
         Assert.Equal(AppTheme.System, settings.Theme);
     }
