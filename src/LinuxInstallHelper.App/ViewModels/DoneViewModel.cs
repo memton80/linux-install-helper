@@ -116,7 +116,14 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
             ? _localizer.Format("Done_VerifiedWrite", algorithm, result.ImageHash)
             : _localizer.Format("Done_VerifiedImage", algorithm, result.ImageHash);
 
-        VerificationSimple = _localizer.Get(result.WriteVerified ? "Done_VerifiedWriteSimple" : "Done_VerifiedImageSimple");
+        // A local image is not compared with an official one: never say so.
+        VerificationSimple = _localizer.Get((result.WriteVerified, _wizard.IsLocalIso) switch
+        {
+            (true, false) => "Done_VerifiedWriteSimple",
+            (false, false) => "Done_VerifiedImageSimple",
+            (true, true) => "Done_VerifiedWriteLocalSimple",
+            (false, true) => "Done_VerifiedImageLocalSimple",
+        });
 
         var signed = result.ChecksumSignature == SignatureStatus.Verified || result.ImageSignature == SignatureStatus.Verified;
         Signature = signed

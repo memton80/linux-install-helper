@@ -2402,4 +2402,10 @@ An orange frame around the window reminds you that this mode is on. You can turn
   <data name="AdvancedDetailsHint.Text" xml:space="preserve">
     <value>To see the technical details, turn on the "Advanced mode" at the top right of the window.</value>
   </data>
+  <data name="Done_VerifiedWriteLocalSimple" xml:space="preserve">
+    <value>Drive verified: it is identical to the image you chose.</value>
+  </data>
+  <data name="Done_VerifiedImageLocalSimple" xml:space="preserve">
+    <value>The image you chose was read in full, then written to the drive.</value>
+  </data>
 </root>

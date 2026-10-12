@@ -2402,4 +2402,10 @@ Un cadre orange autour de la fenêtre rappelle que ce mode est actif. Vous pouve
   <data name="AdvancedDetailsHint.Text" xml:space="preserve">
     <value>Pour voir les détails techniques, activez le « Mode avancé » en haut à droite de la fenêtre.</value>
   </data>
+  <data name="Done_VerifiedWriteLocalSimple" xml:space="preserve">
+    <value>Clé vérifiée : elle est identique à l'image que vous avez choisie.</value>
+  </data>
+  <data name="Done_VerifiedImageLocalSimple" xml:space="preserve">
+    <value>L'image que vous avez choisie a été lue en entier, puis écrite sur la clé.</value>
+  </data>
 </root>

@@ -200,12 +200,21 @@ public sealed partial class MainWindow : Window
         }
 
         args.Cancel = true;
-        var confirmed = await _dialogs.ConfirmAsync(
-            _localizer.Get("Close_BusyTitle"),
-            _localizer.Get(_busy.IsWriting ? "Close_BusyWriting" : "Close_BusyMessage"),
-            _localizer.Get("Close_BusyPrimary"),
-            _localizer.Get("Close_BusyClose"),
-            destructive: true);
+        bool confirmed;
+        try
+        {
+            confirmed = await _dialogs.ConfirmAsync(
+                _localizer.Get("Close_BusyTitle"),
+                _localizer.Get(_busy.IsWriting ? "Close_BusyWriting" : "Close_BusyMessage"),
+                _localizer.Get("Close_BusyPrimary"),
+                _localizer.Get("Close_BusyClose"),
+                destructive: true);
+        }
+        catch (COMException)
+        {
+            // Another dialog is open (the advanced mode warning): the window stays open, the user can close it again.
+            return;
+        }
 
         if (confirmed)
         {
