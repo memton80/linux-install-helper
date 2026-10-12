@@ -47,8 +47,9 @@ Developer options: `LinuxInstallHelper.exe --page Settings --theme dark --lang f
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/): `feat(core): ...`, `fix(catalog): ...`,
   `ci: ...`, `docs: ...`.
-- Open the pull request against `main`. The `Build` workflow must be green (build, tests, publish and the
-  smoke test that starts the application). Catalog changes also run `Check catalog links`.
+- Open the pull request against `main`. The `Build` workflow must be green (build, tests, publish, the
+  smoke test that starts the application and the layout test that uses its pages and checks that they never move
+  sideways). Catalog changes also run `Check catalog links`.
 
 ## Adding or updating a distribution
 

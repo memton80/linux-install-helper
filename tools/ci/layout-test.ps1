@@ -3,7 +3,8 @@
     Uses the pages like a person would (Tab key, lists, expanders) and checks that they never move sideways.
 .DESCRIPTION
     The title of a page must keep its position and its width whatever is focused, selected or expanded: when it
-    changes, the whole page jumps from left to right. The page must not scroll horizontally either.
+    changes, the whole page jumps from left to right. The page must not scroll horizontally either. The pages are
+    tested at the usual size of the window and maximized, where their column is centered.
 .PARAMETER Exe
     Path of LinuxInstallHelper.exe.
 .PARAMETER Strict
