@@ -2353,13 +2353,13 @@ There, Secure Boot is often under "Security" or "Boot". Save the changes (often 
     <value>How to choose?</value>
   </data>
   <data name="Alone_DistrosHow1.Text" xml:space="preserve">
-    <value>Each card presents a version of Linux: its name, what it is good at, the size of the download and its family.</value>
+    <value>Each card presents a version of Linux: its name, what it is good at and the size of the download. The bottom line also shows its desktop (how the windows and menus look) and its family (versions of the same family work the same way).</value>
   </data>
   <data name="Alone_DistrosHow2.Text" xml:space="preserve">
-    <value>Use the search box or the two lists to show, for example, only the distributions for beginners.</value>
+    <value>Use the search box or the two lists. For example, choose "Beginner friendly" in the "Use" list.</value>
   </data>
   <data name="Alone_DistrosHow3.Text" xml:space="preserve">
-    <value>Click a card to read its presentation. This installs nothing: the drive is only created after you confirm.</value>
+    <value>Click a card to read its presentation. This installs nothing. The drive is only created after you confirm.</value>
   </data>
   <data name="Alone_DistrosSecureBoot.Text" xml:space="preserve">
     <value>This sign marks a distribution that needs Secure Boot to be turned off in the computer's settings. If you are a beginner, prefer another one.</value>
@@ -2398,5 +2398,8 @@ An orange frame around the window reminds you that this mode is on. You can turn
   </data>
   <data name="Done_SignedSimple" xml:space="preserve">
     <value>Authentic image: signed by the distribution.</value>
+  </data>
+  <data name="AdvancedDetailsHint.Text" xml:space="preserve">
+    <value>To see the technical details, turn on the "Advanced mode" at the top right of the window.</value>
   </data>
 </root>

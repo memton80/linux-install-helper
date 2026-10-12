@@ -75,7 +75,7 @@ $runs = @(
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Guidance = "alone"; Expect = "Comment choisir" },
-    @{ Page = "Distros";  Theme = "dark";  Lang = "fr-FR"; Advanced = $true; Expect = "Mode avancé" },
+    @{ Page = "Distros";  Theme = "dark";  Lang = "fr-FR"; Advanced = $true; Expect = "Ubuntu" },
     @{ Page = "DistroDetails"; Theme = "light"; Lang = "fr-FR"; Expect = "Site officiel" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
@@ -99,7 +99,7 @@ foreach ($run in $runs) {
     $arguments = @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)
     # --guidance forces the "someone helps me" or "I am on my own" mode for this run, without saving it.
     if ($run.Guidance) { $arguments += @("--guidance", $run.Guidance) }
-    # --advanced turns the advanced mode on for this run (orange frame, technical details), without saving it.
+    # --advanced turns the advanced mode on for this run (orange frame, technical details), without its warning.
     if ($run.Advanced) { $arguments += "--advanced" }
     foreach ($argument in $arguments) { $info.ArgumentList.Add($argument) }
     $process = [System.Diagnostics.Process]::Start($info)

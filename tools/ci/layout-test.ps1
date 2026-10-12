@@ -190,7 +190,7 @@ function Write-Layout($run) {
 }
 
 # $guidance: "helper" or "alone" forces that mode for this run (without saving it); empty keeps the saved one.
-# $advanced: turns the advanced mode on for this run (orange frame around the window), without saving it.
+# $advanced: turns the advanced mode on for this run (orange frame around the window), without its warning.
 function Start-App($page, [string] $guidance, [bool] $advanced) {
     $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
     $info.UseShellExecute = $false

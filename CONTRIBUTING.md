@@ -44,7 +44,8 @@ The application asks for administrator rights (writing to a raw disk requires th
 Developer options: `LinuxInstallHelper.exe --page Settings --theme dark --lang fr-FR --guidance alone --advanced`. None
 of them is saved. `--guidance helper|alone` forces the "someone helps me" or "I am on my own" mode for the session; with
 `--page`, the welcome screen that asks for it at the first start is never shown (`--page Welcome` opens it).
-`--advanced` turns the advanced mode on without its warning (orange frame, technical details shown).
+`--advanced` turns the advanced mode on without its warning (orange frame, technical details shown); otherwise it is
+off at each start.
 
 The "on my own" mode only adds explanations: its blocks are hidden otherwise (`helpers:Ui.Visible(...IsAlone)`), use
 their own `Alone_*` strings, and never remove a confirmation or touch a safety check. Without a choice or with someone

@@ -63,9 +63,12 @@
                             Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
                             Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
                             <InfoBar.Content>
-                                <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
-                                    <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
-                                </Expander>
+                                <StackPanel Style="{StaticResource InfoBarDetailsStackStyle}">
+                                    <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
+                                        <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
+                                    </Expander>
+                                    <TextBlock x:Uid="AdvancedDetailsHint" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
+                                </StackPanel>
                             </InfoBar.Content>
                         </InfoBar>
                         <InfoBar x:Uid="ProgressCancelled" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.WasCancelled, Mode=OneWay}" />

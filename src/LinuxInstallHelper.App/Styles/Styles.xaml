@@ -40,11 +40,24 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <!-- An overlay that takes no room: the pages never move when the mode is turned on. No background, so Mica shows. -->
     <Style x:Key="AdvancedFrameStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="{StaticResource AdvancedModeBrush}" />
         <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <!-- Windows 10, and maximized windows: square corners. -->
+    <Style x:Key="AdvancedFrameSquareStyle" TargetType="Border" BasedOn="{StaticResource AdvancedFrameStyle}">
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <!-- Under the message of an error: its technical details (advanced mode) or how to show them -->
+    <Style x:Key="InfoBarDetailsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="Margin" Value="0,0,0,12" />
     </Style>
 
     <!-- Pages -->

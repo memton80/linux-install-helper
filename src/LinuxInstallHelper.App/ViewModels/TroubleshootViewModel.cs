@@ -156,6 +156,13 @@ public sealed partial class TroubleshootViewModel : ObservableObject, INavigatio
     [ObservableProperty]
     private string _resultMessage = string.Empty;
 
+    /// <summary>The exception behind an error result, only shown in the advanced mode; empty for a verdict.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasResultDetails))]
+    private string _resultDetails = string.Empty;
+
+    public bool HasResultDetails => !string.IsNullOrEmpty(ResultDetails);
+
     public void OnNavigatedTo(object? parameter)
     {
         LoadImages();
@@ -346,13 +353,14 @@ public sealed partial class TroubleshootViewModel : ObservableObject, INavigatio
     }
 
     private void ShowResult(InfoBarSeverity severity, ErrorDescription error) =>
-        ShowResult(severity, error.Title, $"{error.Message}\n{error.Details}");
+        ShowResult(severity, error.Title, error.Message, error.Details);
 
-    private void ShowResult(InfoBarSeverity severity, string title, string message)
+    private void ShowResult(InfoBarSeverity severity, string title, string message, string details = "")
     {
         ResultSeverity = severity;
         ResultTitle = title;
         ResultMessage = message;
+        ResultDetails = details;
         HasResult = true;
     }
 

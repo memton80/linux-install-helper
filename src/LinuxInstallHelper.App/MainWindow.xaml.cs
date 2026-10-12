@@ -1,10 +1,8 @@
 using System.Runtime.InteropServices;
 using LinuxInstallHelper.App.Services;
-using Microsoft.UI.Input;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.Foundation;
 using Windows.Graphics;
 
 namespace LinuxInstallHelper.App;
@@ -23,7 +21,6 @@ public sealed partial class MainWindow : Window
     private readonly AdvancedModeState _advanced;
     private bool _closeConfirmed;
     private bool _showingAdvanced;
-    private RectInt32? _passthrough;
 
     public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates, AdvancedModeState advanced)
     {
@@ -47,14 +44,21 @@ public sealed partial class MainWindow : Window
         AppWindow.Closing += OnClosing;
         ResizeAndCenter(DefaultWidth, DefaultHeight);
 
-        // The title bar is a drag area: keep the advanced mode switch clickable wherever it is drawn.
-        AppTitleBar.Loaded += (_, _) =>
+        // The window buttons are drawn over the content: keep the advanced mode switch out of them, and fit the frame.
+        RootGrid.Loaded += (_, _) =>
         {
-            AppTitleBar.XamlRoot.Changed += (_, _) => UpdateCaptionButtonsColumn();
+            RootGrid.XamlRoot.Changed += (_, _) => UpdateCaptionButtonsColumn();
             UpdateCaptionButtonsColumn();
+            UpdateFrameCorners();
         };
-        AppTitleBar.SizeChanged += (_, _) => UpdateCaptionButtonsColumn();
-        AdvancedToggle.LayoutUpdated += (_, _) => UpdatePassthrough();
+        AppWindow.Changed += (_, args) =>
+        {
+            if (args.DidSizeChange || args.DidPresenterChange)
+            {
+                UpdateCaptionButtonsColumn();
+                UpdateFrameCorners();
+            }
+        };
 
         _navigation.Navigated += OnNavigated;
         _navigation.Initialize(ContentFrame);
@@ -107,6 +111,27 @@ public sealed partial class MainWindow : Window
 
     private void OnDownloadUpdate(object sender, RoutedEventArgs e) => _updates.OpenReleasePage();
 
+    private void OnNavigated(object? sender, string pageKey)
+    {
+        NavView.IsBackEnabled = _navigation.CanGoBack;
+        SyncSelection(pageKey);
+    }
+
+    private void SyncSelection(string pageKey)
+    {
+        if (pageKey == PageKeys.Settings)
+        {
+            NavView.SelectedItem = NavView.SettingsItem;
+            return;
+        }
+
+        var menuKey = PageKeys.MenuKeyFor(pageKey, _wizard.IsLocalIso);
+        NavView.SelectedItem = NavView.MenuItems
+            .Concat(NavView.FooterMenuItems)
+            .OfType<NavigationViewItem>()
+            .FirstOrDefault(item => item.Tag as string == menuKey);
+    }
+
     /// <summary>The switch and the orange frame follow the advanced mode.</summary>
     private void ShowAdvanced()
     {
@@ -126,19 +151,23 @@ public sealed partial class MainWindow : Window
 
         if (!AdvancedToggle.IsOn)
         {
-            _advanced.Set(false);
+            _advanced.IsOn = false;
             return;
         }
 
-        var confirmed = await _dialogs.ConfirmAsync(
-            _localizer.Get("Advanced_ConfirmTitle"),
-            _localizer.Get("Advanced_ConfirmMessage"),
-            _localizer.Get("Advanced_ConfirmPrimary"),
-            _localizer.Get("Dialog_Cancel"),
-            destructive: true);
-        if (confirmed)
+        try
         {
-            _advanced.Set(true);
+            // Cancel is the default button: Enter or Escape never turns it on by accident.
+            _advanced.IsOn = await _dialogs.ConfirmAsync(
+                _localizer.Get("Advanced_ConfirmTitle"),
+                _localizer.Get("Advanced_ConfirmMessage"),
+                _localizer.Get("Advanced_ConfirmPrimary"),
+                _localizer.Get("Dialog_Cancel"),
+                destructive: true);
+        }
+        catch (COMException)
+        {
+            // Another dialog is already open (only one can be shown at a time): leave the mode off.
         }
 
         // Puts the switch back when the warning is refused.
@@ -148,37 +177,19 @@ public sealed partial class MainWindow : Window
     /// <summary>Keeps the advanced mode switch clear of the minimize, maximize and close buttons drawn by Windows.</summary>
     private void UpdateCaptionButtonsColumn()
     {
-        if (AppTitleBar.XamlRoot is { } root)
+        if (RootGrid.XamlRoot is { } root)
         {
+            // RightInset is in physical pixels, XAML in effective pixels.
             CaptionButtonsColumn.Width = new GridLength(AppWindow.TitleBar.RightInset / root.RasterizationScale);
         }
     }
 
-    /// <summary>
-    /// With <see cref="Window.ExtendsContentIntoTitleBar"/>, the title bar is a drag area that receives no click: the area of
-    /// the switch is made a "passthrough" region, again each time the switch moves (window resized, DPI changed).
-    /// </summary>
-    private void UpdatePassthrough()
+    /// <summary>Windows 11 rounds the corners of a window that is not maximized; Windows 10 and maximized windows are square.</summary>
+    private void UpdateFrameCorners()
     {
-        if (AdvancedToggle.XamlRoot is not { } root || AdvancedToggle.ActualWidth <= 0)
-        {
-            return;
-        }
-
-        var scale = root.RasterizationScale;
-        var bounds = AdvancedToggle.TransformToVisual(null).TransformBounds(new Rect(0, 0, AdvancedToggle.ActualWidth, AdvancedToggle.ActualHeight));
-        var region = new RectInt32(
-            (int)Math.Round(bounds.X * scale),
-            (int)Math.Round(bounds.Y * scale),
-            (int)Math.Round(bounds.Width * scale),
-            (int)Math.Round(bounds.Height * scale));
-        if (_passthrough is { } last && last.X == region.X && last.Y == region.Y && last.Width == region.Width && last.Height == region.Height)
-        {
-            return;
-        }
-
-        _passthrough = region;
-        InputNonClientPointerSource.GetForWindowId(AppWindow.Id).SetRegionRects(NonClientRegionKind.Passthrough, [region]);
+        var rounded = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)
+            && AppWindow.Presenter is OverlappedPresenter { State: not OverlappedPresenterState.Maximized };
+        AdvancedFrame.Style = (Style)Application.Current.Resources[rounded ? "AdvancedFrameStyle" : "AdvancedFrameSquareStyle"];
     }
 
     private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)

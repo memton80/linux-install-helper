@@ -2353,16 +2353,16 @@ Le Secure Boot se trouve souvent dans « Security » ou « Boot ». Enregistrez 
     <value>Comment choisir ?</value>
   </data>
   <data name="Alone_DistrosHow1.Text" xml:space="preserve">
-    <value>Chaque carte présente une version de Linux : son nom, ce qu'elle sait faire, la taille du téléchargement et sa famille.</value>
+    <value>Chaque carte présente une version de Linux : son nom, ce qu'elle sait faire et la taille du téléchargement. La ligne du bas indique aussi son bureau (l'apparence des fenêtres et des menus) et sa famille (les versions d'une même famille fonctionnent de la même façon).</value>
   </data>
   <data name="Alone_DistrosHow2.Text" xml:space="preserve">
-    <value>Utilisez la recherche ou les deux listes pour n'afficher, par exemple, que les distributions pour débutants.</value>
+    <value>Utilisez la recherche ou les deux listes. Par exemple, choisissez « Débutant » dans la liste « Usage ».</value>
   </data>
   <data name="Alone_DistrosHow3.Text" xml:space="preserve">
-    <value>Cliquez sur une carte pour lire sa présentation. Cela n'installe rien : la clé n'est créée qu'après votre confirmation.</value>
+    <value>Cliquez sur une carte pour lire sa présentation. Cela n'installe rien. La clé n'est créée qu'après votre confirmation.</value>
   </data>
   <data name="Alone_DistrosSecureBoot.Text" xml:space="preserve">
-    <value>Ce symbole signale une distribution qui demande de désactiver le Secure Boot dans les réglages de l'ordinateur. Si vous débutez, préférez-en une autre.</value>
+    <value>Ce symbole signale une distribution qui demande de désactiver le Secure Boot (démarrage sécurisé) dans les réglages de l'ordinateur. Si vous débutez, préférez-en une autre.</value>
   </data>
   <data name="Alone_DistrosAdvisor.Content" xml:space="preserve">
     <value>Je ne sais pas : aidez-moi à choisir</value>
@@ -2398,5 +2398,8 @@ Un cadre orange autour de la fenêtre rappelle que ce mode est actif. Vous pouve
   </data>
   <data name="Done_SignedSimple" xml:space="preserve">
     <value>Image authentique : signée par la distribution.</value>
+  </data>
+  <data name="AdvancedDetailsHint.Text" xml:space="preserve">
+    <value>Pour voir les détails techniques, activez le « Mode avancé » en haut à droite de la fenêtre.</value>
   </data>
 </root>

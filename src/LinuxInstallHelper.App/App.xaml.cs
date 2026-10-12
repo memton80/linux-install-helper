@@ -81,7 +81,7 @@ public partial class App : Application
 
         if (_startup.Advanced)
         {
-            Services.GetRequiredService<AdvancedModeState>().Force();
+            Services.GetRequiredService<AdvancedModeState>().IsOn = true;
         }
 
         // The welcome screen asks once whether someone helps; never with --page (the CI opens each page directly).

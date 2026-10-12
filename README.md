@@ -29,8 +29,8 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   confirmations et les garde-fous restent les mêmes. Le choix se change à tout moment dans les Paramètres.
 - **Mode avancé** : un interrupteur dans la barre de titre affiche les détails techniques, masqués par défaut pour ne pas
   inquiéter : le journal pendant la création de la clé, les détails techniques d'une erreur, les empreintes SHA-256 et
-  OpenPGP de la page finale. L'activer demande une confirmation, et un cadre orange entoure alors la fenêtre. Il ne change
-  aucune vérification ni confirmation.
+  OpenPGP de la page finale, les messages bruts des erreurs. L'activer demande une confirmation, et un cadre orange entoure
+  alors la fenêtre. Il est désactivé à chaque lancement et ne change aucune vérification ni confirmation.
 - **Catalogue de 15 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
   Manjaro, Zorin OS…) avec recherche et filtres par famille et par usage (bureau, léger, serveur…).
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
@@ -225,5 +225,5 @@ you or whether you are on your own: on your own, every page adds step-by-step ex
 does, how to back up your files, the complete plan to start from the drive and go back to Windows), without removing any
 confirmation or safety check. The choice can be changed at any time in the settings. The technical details (the creation
 log, the technical details of an error, the SHA-256 and OpenPGP fingerprints) are hidden until the "Advanced mode" switch
-of the title bar is turned on, after a warning; an orange frame then surrounds the window. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+of the title bar is turned on, after a warning; an orange frame then surrounds the window. It is off at each start. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).
