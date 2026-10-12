@@ -63,7 +63,7 @@
                             Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
                             Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
                             <InfoBar.Content>
-                                <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
                                     <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
                                 </Expander>
                             </InfoBar.Content>
@@ -108,7 +108,7 @@
                     </StackPanel>
                 </Border>
 
-                <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True">
+                <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
                     <StackPanel Style="{StaticResource CardStackStyle}">
                         <ListView x:Name="LogList" Style="{StaticResource LogListViewStyle}" ItemsSource="{x:Bind ViewModel.Logs}">
                             <ListView.ItemTemplate>

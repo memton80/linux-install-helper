@@ -31,6 +31,22 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <!-- Advanced mode: the switch in the title bar and the orange frame around the window while it is on -->
+    <SolidColorBrush x:Key="AdvancedModeBrush" Color="#F7630C" />
+
+    <Style x:Key="AdvancedToggleStyle" TargetType="ToggleSwitch">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AdvancedFrameStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AdvancedModeBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
     <!-- Pages -->
     <Style x:Key="PageRootStyle" TargetType="Grid">
         <Setter Property="Padding" Value="{StaticResource PageMargin}" />

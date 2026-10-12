@@ -16,15 +16,21 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     private readonly ILocalizer _localizer;
     private readonly INavigationService _navigation;
     private readonly DisplayFormatter _formatter;
+    private readonly GuidanceState _guidance;
     private IReadOnlyList<Distro> _all = [];
     private bool _loaded;
 
-    public DistrosViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, DisplayFormatter formatter)
+    public DistrosViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, DisplayFormatter formatter, GuidanceState guidance)
     {
         _catalog = catalog;
         _localizer = localizer;
         _navigation = navigation;
         _formatter = formatter;
+        _guidance = guidance;
+
+        // A singleton: it follows the mode when it is changed in the settings.
+        IsAlone = guidance.IsAlone;
+        guidance.PropertyChanged += (_, _) => IsAlone = _guidance.IsAlone;
 
         Families =
         [
@@ -43,6 +49,10 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     public IReadOnlyList<FilterOption> Families { get; }
 
     public IReadOnlyList<FilterOption> Categories { get; }
+
+    /// <summary>The user is on their own: the page explains how to read the cards and choose one.</summary>
+    [ObservableProperty]
+    private bool _isAlone;
 
     [ObservableProperty]
     private string _searchText = string.Empty;
@@ -76,6 +86,9 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     public void OnNavigatedFrom()
     {
     }
+
+    [RelayCommand]
+    private void OpenAdvisor() => _navigation.NavigateTo(PageKeys.Advisor);
 
     /// <summary>Opens the page that presents the distribution, from which the drive is created.</summary>
     public void Select(DistroItemViewModel item) => _navigation.NavigateTo(PageKeys.DistroDetails, item.Distro);

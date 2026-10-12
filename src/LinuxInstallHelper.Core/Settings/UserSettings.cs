@@ -54,6 +54,12 @@ public sealed record UserSettings
     /// <summary><c>null</c> until the welcome screen has asked; behaves like <see cref="GuidanceMode.WithHelper"/>.</summary>
     public GuidanceMode? Guidance { get; init; }
 
+    /// <summary>
+    /// Show the technical details (the creation log, hashes, ignored disks…). Off by default: turning it on asks for a
+    /// confirmation, and it never changes a safety check.
+    /// </summary>
+    public bool AdvancedMode { get; init; }
+
     public static IReadOnlyList<string> SupportedLanguages { get; } = ["en-US", "fr-FR"];
 
     /// <summary>Returns these settings with the checklist item <paramref name="key"/> marked as done.</summary>

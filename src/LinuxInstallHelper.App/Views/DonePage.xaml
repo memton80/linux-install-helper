@@ -26,9 +26,11 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <FontIcon Glyph="&#xE8FB;" Style="{StaticResource IconTextIconStyle}" />
-                            <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Signature, Mode=OneWay}" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Signature, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.SignatureSimple, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
                         </Grid>
-                        <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Verification, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Verification, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.VerificationSimple, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
                         <Grid Style="{StaticResource IconTextGridStyle}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />

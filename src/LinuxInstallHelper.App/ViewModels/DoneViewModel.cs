@@ -48,6 +48,14 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private string _signature = string.Empty;
 
+    /// <summary><see cref="Verification"/> without the hash, shown outside the advanced mode.</summary>
+    [ObservableProperty]
+    private string _verificationSimple = string.Empty;
+
+    /// <summary><see cref="Signature"/> without the key fingerprint, shown outside the advanced mode.</summary>
+    [ObservableProperty]
+    private string _signatureSimple = string.Empty;
+
     [ObservableProperty]
     private string _ejectStatus = string.Empty;
 
@@ -108,10 +116,13 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
             ? _localizer.Format("Done_VerifiedWrite", algorithm, result.ImageHash)
             : _localizer.Format("Done_VerifiedImage", algorithm, result.ImageHash);
 
+        VerificationSimple = _localizer.Get(result.WriteVerified ? "Done_VerifiedWriteSimple" : "Done_VerifiedImageSimple");
+
         var signed = result.ChecksumSignature == SignatureStatus.Verified || result.ImageSignature == SignatureStatus.Verified;
         Signature = signed
             ? _localizer.Format("Done_Signed", DisplayFormatter.Fingerprint(result.Signer))
             : _wizard.IsLocalIso ? _localizer.Get("Done_LocalImage") : _localizer.Get("Done_NotSigned");
+        SignatureSimple = signed ? _localizer.Get("Done_SignedSimple") : Signature;
 
         Ejected = result.Ejected;
         EjectStatus = result.Ejected

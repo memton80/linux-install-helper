@@ -74,6 +74,8 @@ $runs = @(
     @{ Page = "Advisor";  Theme = "light"; Lang = "fr-FR"; Guidance = "alone"; Expect = "Le parcours en 5 étapes" },
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
+    @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Guidance = "alone"; Expect = "Comment choisir" },
+    @{ Page = "Distros";  Theme = "dark";  Lang = "fr-FR"; Advanced = $true; Expect = "Mode avancé" },
     @{ Page = "DistroDetails"; Theme = "light"; Lang = "fr-FR"; Expect = "Site officiel" },
     @{ Page = "LocalIso"; Theme = "light"; Lang = "fr-FR" },
     @{ Page = "Restore";  Theme = "light"; Lang = "fr-FR" },
@@ -89,7 +91,7 @@ $runs = @(
 if ($Launcher) { $runs = @($runs[0]) }
 
 foreach ($run in $runs) {
-    $name = "$(if ($Launcher) { 'launcher-' })$($run.Page)-$($run.Theme)-$($run.Lang)$(if ($run.Guidance) { "-$($run.Guidance)" })".ToLowerInvariant()
+    $name = "$(if ($Launcher) { 'launcher-' })$($run.Page)-$($run.Theme)-$($run.Lang)$(if ($run.Guidance) { "-$($run.Guidance)" })$(if ($run.Advanced) { '-advanced' })".ToLowerInvariant()
     Write-Host "Starting $name"
     $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
     $info.UseShellExecute = $false
@@ -97,6 +99,8 @@ foreach ($run in $runs) {
     $arguments = @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)
     # --guidance forces the "someone helps me" or "I am on my own" mode for this run, without saving it.
     if ($run.Guidance) { $arguments += @("--guidance", $run.Guidance) }
+    # --advanced turns the advanced mode on for this run (orange frame, technical details), without saving it.
+    if ($run.Advanced) { $arguments += "--advanced" }
     foreach ($argument in $arguments) { $info.ArgumentList.Add($argument) }
     $process = [System.Diagnostics.Process]::Start($info)
     $started = $process

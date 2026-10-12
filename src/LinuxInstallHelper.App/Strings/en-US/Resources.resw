@@ -2349,4 +2349,54 @@ There, Secure Boot is often under "Security" or "Boot". Save the changes (often 
   <data name="SettingsGuidanceAlone.Content" xml:space="preserve">
     <value>I am on my own</value>
   </data>
+  <data name="Alone_DistrosHowTitle.Text" xml:space="preserve">
+    <value>How to choose?</value>
+  </data>
+  <data name="Alone_DistrosHow1.Text" xml:space="preserve">
+    <value>Each card presents a version of Linux: its name, what it is good at, the size of the download and its family.</value>
+  </data>
+  <data name="Alone_DistrosHow2.Text" xml:space="preserve">
+    <value>Use the search box or the two lists to show, for example, only the distributions for beginners.</value>
+  </data>
+  <data name="Alone_DistrosHow3.Text" xml:space="preserve">
+    <value>Click a card to read its presentation. This installs nothing: the drive is only created after you confirm.</value>
+  </data>
+  <data name="Alone_DistrosSecureBoot.Text" xml:space="preserve">
+    <value>This sign marks a distribution that needs Secure Boot to be turned off in the computer's settings. If you are a beginner, prefer another one.</value>
+  </data>
+  <data name="Alone_DistrosAdvisor.Content" xml:space="preserve">
+    <value>I don't know: help me choose</value>
+  </data>
+  <data name="AdvancedToggle.OnContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.OffContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Shows the technical details: the creation log, the verification fingerprints and the details of errors.</value>
+  </data>
+  <data name="Advanced_ConfirmTitle" xml:space="preserve">
+    <value>Turn on the advanced mode?</value>
+  </data>
+  <data name="Advanced_ConfirmMessage" xml:space="preserve">
+    <value>The advanced mode shows technical details: the log of the drive creation, the fingerprints used to check the image and the details of errors. They can look worrying, but they change nothing to safety: the checks and the confirmations stay the same.
+
+An orange frame around the window reminds you that this mode is on. You can turn it off at any time with the same switch.</value>
+  </data>
+  <data name="Advanced_ConfirmPrimary" xml:space="preserve">
+    <value>Turn on</value>
+  </data>
+  <data name="Done_VerifiedWriteSimple" xml:space="preserve">
+    <value>Image and drive verified: the drive is identical to the official image.</value>
+  </data>
+  <data name="Done_VerifiedImageSimple" xml:space="preserve">
+    <value>Image verified: it is identical to the official image.</value>
+  </data>
+  <data name="Done_SignedSimple" xml:space="preserve">
+    <value>Authentic image: signed by the distribution.</value>
+  </data>
 </root>

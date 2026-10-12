@@ -21,6 +21,7 @@ public sealed class SettingsStoreTests : IDisposable
         Assert.Null(settings.Language);
         Assert.Equal(AppTheme.System, settings.Theme);
         Assert.Null(settings.Guidance);
+        Assert.False(settings.AdvancedMode);
     }
 
     [Fact]
@@ -71,6 +72,17 @@ public sealed class SettingsStoreTests : IDisposable
 
         Assert.Equal(AppTheme.Dark, settings.Theme);
         Assert.Null(settings.Guidance);
+        Assert.False(settings.AdvancedMode);
+    }
+
+    [Fact]
+    public void The_advanced_mode_is_saved_and_reloaded()
+    {
+        var paths = new AppPaths(_temp.Path);
+        new SettingsStore(paths).Save(new UserSettings { AdvancedMode = true });
+
+        Assert.Contains("\"advancedMode\": true", File.ReadAllText(paths.SettingsFile), StringComparison.Ordinal);
+        Assert.True(new SettingsStore(paths).Current.AdvancedMode);
     }
 
     [Fact]

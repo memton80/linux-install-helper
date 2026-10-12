@@ -22,10 +22,15 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 
 - **Accompagné ou seul** : au premier lancement, l'application demande si quelqu'un qui s'y connaît vous aide ou si vous
   êtes seul(e). Accompagné, elle reste sobre. Seul, elle ajoute des explications pas à pas : le parcours en 5 étapes, une
-  aide sous chaque question, « Est-ce fait pour moi ? » et les mots à connaître pour chaque distribution, quoi vérifier
+  aide sous chaque question, comment lire la liste des distributions, « Est-ce fait pour moi ? » et les mots à connaître
+  pour chaque distribution, quoi vérifier
   avant de brancher la clé, ce que fait chaque étape de la création, comment sauvegarder vos fichiers, et le plan complet
   pour démarrer sur la clé, l'essayer ou l'installer, puis revenir à Windows. Ce mode n'ajoute que des explications : les
   confirmations et les garde-fous restent les mêmes. Le choix se change à tout moment dans les Paramètres.
+- **Mode avancé** : un interrupteur dans la barre de titre affiche les détails techniques, masqués par défaut pour ne pas
+  inquiéter : le journal pendant la création de la clé, les détails techniques d'une erreur, les empreintes SHA-256 et
+  OpenPGP de la page finale. L'activer demande une confirmation, et un cadre orange entoure alors la fenêtre. Il ne change
+  aucune vérification ni confirmation.
 - **Catalogue de 15 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
   Manjaro, Zorin OS…) avec recherche et filtres par famille et par usage (bureau, léger, serveur…).
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
@@ -216,7 +221,9 @@ passwords on request; "My programs on Linux" tells what to use on Linux for each
 reads a drive back (read only) to compare it with its image and lists the usual problems. It can also write a local ISO
 and restore a drive to a normal exFAT drive. At the first start, it asks whether someone who knows computers is helping
 you or whether you are on your own: on your own, every page adds step-by-step explanations in plain words (the journey in
-5 steps, what to check before plugging in the drive, what each creation step does, how to back up your files, the
-complete plan to start from the drive and go back to Windows), without removing any confirmation or safety check. The
-choice can be changed at any time in the settings. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+5 steps, how to read the list of distributions, what to check before plugging in the drive, what each creation step
+does, how to back up your files, the complete plan to start from the drive and go back to Windows), without removing any
+confirmation or safety check. The choice can be changed at any time in the settings. The technical details (the creation
+log, the technical details of an error, the SHA-256 and OpenPGP fingerprints) are hidden until the "Advanced mode" switch
+of the title bar is turned on, after a warning; an orange frame then surrounds the window. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

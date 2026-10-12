@@ -79,6 +79,11 @@ public partial class App : Application
             Services.GetRequiredService<GuidanceState>().Force(guidance);
         }
 
+        if (_startup.Advanced)
+        {
+            Services.GetRequiredService<AdvancedModeState>().Force();
+        }
+
         // The welcome screen asks once whether someone helps; never with --page (the CI opens each page directly).
         _window.Start(_startup.Page ?? (settings.Guidance is null ? PageKeys.Welcome : PageKeys.Advisor));
         _window.Activate();
@@ -158,6 +163,7 @@ public partial class App : Application
         services.AddSingleton<AppBusyState>();
         services.AddSingleton<WizardState>();
         services.AddSingleton<GuidanceState>();
+        services.AddSingleton<AdvancedModeState>();
         services.AddSingleton<DisplayFormatter>();
         services.AddSingleton<Glossary>();
         services.AddSingleton<ErrorDescriber>();
@@ -195,10 +201,10 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c>, <c>--guidance alone</c> (used by the
-    /// CI to take screenshots). None of them is saved.
+    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c>, <c>--guidance alone</c>,
+    /// <c>--advanced</c> (used by the CI to take screenshots). None of them is saved.
     /// </summary>
-    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language, GuidanceMode? Guidance)
+    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language, GuidanceMode? Guidance, bool Advanced)
     {
         public static StartupOptions Parse(string[] args)
         {
@@ -220,7 +226,8 @@ public partial class App : Application
                 Value("--page"),
                 theme,
                 language is not null && UserSettings.SupportedLanguages.Contains(language) ? language : null,
-                guidance);
+                guidance,
+                Array.Exists(args, a => string.Equals(a, "--advanced", StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

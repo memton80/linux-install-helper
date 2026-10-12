@@ -1,8 +1,10 @@
 using System.Runtime.InteropServices;
 using LinuxInstallHelper.App.Services;
+using Microsoft.UI.Input;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Windows.Foundation;
 using Windows.Graphics;
 
 namespace LinuxInstallHelper.App;
@@ -18,9 +20,12 @@ public sealed partial class MainWindow : Window
     private readonly IDialogService _dialogs;
     private readonly WizardState _wizard;
     private readonly UpdateNotifier _updates;
+    private readonly AdvancedModeState _advanced;
     private bool _closeConfirmed;
+    private bool _showingAdvanced;
+    private RectInt32? _passthrough;
 
-    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates)
+    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates, AdvancedModeState advanced)
     {
         _navigation = navigation;
         _localizer = localizer;
@@ -28,8 +33,11 @@ public sealed partial class MainWindow : Window
         _dialogs = dialogs;
         _wizard = wizard;
         _updates = updates;
+        _advanced = advanced;
         InitializeComponent();
         _updates.PropertyChanged += (_, _) => ShowUpdate();
+        _advanced.PropertyChanged += (_, _) => ShowAdvanced();
+        ShowAdvanced();
 
         Title = localizer.Get("AppDisplayName");
         ExtendsContentIntoTitleBar = true;
@@ -38,6 +46,15 @@ public sealed partial class MainWindow : Window
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
         AppWindow.Closing += OnClosing;
         ResizeAndCenter(DefaultWidth, DefaultHeight);
+
+        // The title bar is a drag area: keep the advanced mode switch clickable wherever it is drawn.
+        AppTitleBar.Loaded += (_, _) =>
+        {
+            AppTitleBar.XamlRoot.Changed += (_, _) => UpdateCaptionButtonsColumn();
+            UpdateCaptionButtonsColumn();
+        };
+        AppTitleBar.SizeChanged += (_, _) => UpdateCaptionButtonsColumn();
+        AdvancedToggle.LayoutUpdated += (_, _) => UpdatePassthrough();
 
         _navigation.Navigated += OnNavigated;
         _navigation.Initialize(ContentFrame);
@@ -90,25 +107,78 @@ public sealed partial class MainWindow : Window
 
     private void OnDownloadUpdate(object sender, RoutedEventArgs e) => _updates.OpenReleasePage();
 
-    private void OnNavigated(object? sender, string pageKey)
+    /// <summary>The switch and the orange frame follow the advanced mode.</summary>
+    private void ShowAdvanced()
     {
-        NavView.IsBackEnabled = _navigation.CanGoBack;
-        SyncSelection(pageKey);
+        _showingAdvanced = true;
+        AdvancedToggle.IsOn = _advanced.IsOn;
+        _showingAdvanced = false;
+        AdvancedFrame.Visibility = _advanced.IsOn ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private void SyncSelection(string pageKey)
+    /// <summary>Turning the advanced mode on asks first (its details can look worrying); turning it off does not.</summary>
+    private async void OnAdvancedToggled(object sender, RoutedEventArgs e)
     {
-        if (pageKey == PageKeys.Settings)
+        if (_showingAdvanced || AdvancedToggle.IsOn == _advanced.IsOn)
         {
-            NavView.SelectedItem = NavView.SettingsItem;
             return;
         }
 
-        var menuKey = PageKeys.MenuKeyFor(pageKey, _wizard.IsLocalIso);
-        NavView.SelectedItem = NavView.MenuItems
-            .Concat(NavView.FooterMenuItems)
-            .OfType<NavigationViewItem>()
-            .FirstOrDefault(item => item.Tag as string == menuKey);
+        if (!AdvancedToggle.IsOn)
+        {
+            _advanced.Set(false);
+            return;
+        }
+
+        var confirmed = await _dialogs.ConfirmAsync(
+            _localizer.Get("Advanced_ConfirmTitle"),
+            _localizer.Get("Advanced_ConfirmMessage"),
+            _localizer.Get("Advanced_ConfirmPrimary"),
+            _localizer.Get("Dialog_Cancel"),
+            destructive: true);
+        if (confirmed)
+        {
+            _advanced.Set(true);
+        }
+
+        // Puts the switch back when the warning is refused.
+        ShowAdvanced();
+    }
+
+    /// <summary>Keeps the advanced mode switch clear of the minimize, maximize and close buttons drawn by Windows.</summary>
+    private void UpdateCaptionButtonsColumn()
+    {
+        if (AppTitleBar.XamlRoot is { } root)
+        {
+            CaptionButtonsColumn.Width = new GridLength(AppWindow.TitleBar.RightInset / root.RasterizationScale);
+        }
+    }
+
+    /// <summary>
+    /// With <see cref="Window.ExtendsContentIntoTitleBar"/>, the title bar is a drag area that receives no click: the area of
+    /// the switch is made a "passthrough" region, again each time the switch moves (window resized, DPI changed).
+    /// </summary>
+    private void UpdatePassthrough()
+    {
+        if (AdvancedToggle.XamlRoot is not { } root || AdvancedToggle.ActualWidth <= 0)
+        {
+            return;
+        }
+
+        var scale = root.RasterizationScale;
+        var bounds = AdvancedToggle.TransformToVisual(null).TransformBounds(new Rect(0, 0, AdvancedToggle.ActualWidth, AdvancedToggle.ActualHeight));
+        var region = new RectInt32(
+            (int)Math.Round(bounds.X * scale),
+            (int)Math.Round(bounds.Y * scale),
+            (int)Math.Round(bounds.Width * scale),
+            (int)Math.Round(bounds.Height * scale));
+        if (_passthrough is { } last && last.X == region.X && last.Y == region.Y && last.Width == region.Width && last.Height == region.Height)
+        {
+            return;
+        }
+
+        _passthrough = region;
+        InputNonClientPointerSource.GetForWindowId(AppWindow.Id).SetRegionRects(NonClientRegionKind.Passthrough, [region]);
     }
 
     private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
