@@ -13,12 +13,21 @@ public sealed record ThirdPartyComponent(string Name, string License, Uri Url)
 
 public sealed partial class AboutViewModel
 {
-    public AboutViewModel(ILocalizer localizer)
+    private readonly UpdateNotifier _updates;
+
+    public AboutViewModel(ILocalizer localizer, UpdateNotifier updates)
     {
+        _updates = updates;
         Version = localizer.Format("About_Version", AppInfo.Version);
+        UpdateText = updates.Available is { } release ? localizer.Format("About_UpdateAvailable", release.Version.ToString(3)) : string.Empty;
     }
 
     public string Version { get; }
+
+    /// <summary>"Version 1.0.4 is available", empty when this version is the latest known.</summary>
+    public string UpdateText { get; }
+
+    public bool IsUpdateAvailable => UpdateText.Length > 0;
 
     public string RepositoryUrl => AppInfo.RepositoryUrl;
 
@@ -37,4 +46,7 @@ public sealed partial class AboutViewModel
 
     [RelayCommand]
     private void OpenRepository() => SystemActions.OpenUrl(AppInfo.RepositoryUrl);
+
+    [RelayCommand]
+    private void OpenUpdate() => _updates.OpenReleasePage();
 }

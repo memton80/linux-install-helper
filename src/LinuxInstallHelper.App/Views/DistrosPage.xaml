@@ -112,10 +112,14 @@
                         <TextBlock Grid.Row="1" Style="{StaticResource DistroDescriptionStyle}" Text="{x:Bind Description}" />
                         <StackPanel Grid.Row="2" Style="{StaticResource CompactStackStyle}">
                             <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind Details}" />
-                            <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(ShowSecureBootWarning)}">
+                            <Grid Style="{StaticResource IconTextGridStyle}" Visibility="{x:Bind helpers:Ui.Visible(ShowSecureBootWarning)}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
                                 <FontIcon Glyph="&#xE7BA;" Style="{StaticResource WarningIconStyle}" />
-                                <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind SecureBootWarning}" />
-                            </StackPanel>
+                                <TextBlock Grid.Column="1" Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind SecureBootWarning}" />
+                            </Grid>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

@@ -6,47 +6,52 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:LinuxInstallHelper.App.ViewModels"
+    xmlns:helpers="using:LinuxInstallHelper.App.Helpers"
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
-        <StackPanel Style="{StaticResource PageContentStackStyle}">
-            <FontIcon Glyph="&#xE8B7;" Style="{StaticResource BackupHeroIconStyle}" />
-            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
-                <TextBlock x:Uid="BackupHeader" Style="{StaticResource PageTitleStyle}" />
-                <TextBlock x:Uid="BackupSubtitle" Style="{StaticResource PageSubtitleStyle}" />
-            </StackPanel>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <TextBlock x:Uid="BackupFoldersTitle" Style="{StaticResource TourHeaderStyle}" />
-                    <ItemsControl ItemsSource="{x:Bind ViewModel.Folders}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="vm:PersonalFolderItemViewModel">
-                                <Grid Style="{StaticResource FolderRowGridStyle}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <FontIcon Glyph="&#xE8B7;" Style="{StaticResource FolderIconStyle}" />
-                                    <StackPanel Grid.Column="1" Style="{StaticResource FolderTextStackStyle}">
-                                        <TextBlock Style="{StaticResource FolderNameStyle}" Text="{x:Bind Name}" />
-                                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind FullPath}" />
-                                    </StackPanel>
-                                    <Button x:Uid="BackupOpenFolder" Grid.Column="2" AutomationProperties.Name="{x:Bind OpenName}" Command="{x:Bind OpenCommand}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+        <Grid Style="{StaticResource PageContentHostStyle}">
+            <StackPanel Style="{StaticResource PageContentStackStyle}">
+                <FontIcon Glyph="&#xE8B7;" Style="{StaticResource BackupHeroIconStyle}" />
+                <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                    <TextBlock x:Uid="BackupHeader" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock x:Uid="BackupSubtitle" Style="{StaticResource PageSubtitleStyle}" />
                 </StackPanel>
-            </Border>
 
-            <InfoBar x:Uid="BackupWarning" IsClosable="False" Severity="Warning" IsOpen="True" />
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="BackupFoldersTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Folders}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:PersonalFolderItemViewModel">
+                                    <Grid Style="{StaticResource FolderRowGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Glyph="&#xE8B7;" Style="{StaticResource FolderIconStyle}" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource FolderTextStackStyle}">
+                                            <TextBlock Style="{StaticResource FolderNameStyle}" Text="{x:Bind Name}" />
+                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind FullPath}" />
+                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Size, Mode=OneWay}" />
+                                        </StackPanel>
+                                        <Button x:Uid="BackupOpenFolder" Grid.Column="2" AutomationProperties.Name="{x:Bind OpenName}" Command="{x:Bind OpenCommand}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Style="{StaticResource BodyStrongWrapTextStyle}" Text="{x:Bind ViewModel.Total, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(ViewModel.Total), Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
 
-            <StackPanel Style="{StaticResource ButtonRowStyle}">
-                <Button x:Uid="BackupConfirm" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.ConfirmCommand}" />
-                <Button x:Uid="BackupLater" Command="{x:Bind ViewModel.LaterCommand}" />
+                <InfoBar x:Uid="BackupWarning" IsClosable="False" Severity="Warning" IsOpen="True" />
+
+                <StackPanel Style="{StaticResource ButtonRowStyle}">
+                    <Button x:Uid="BackupConfirm" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.ConfirmCommand}" />
+                    <Button x:Uid="BackupLater" Command="{x:Bind ViewModel.LaterCommand}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </ScrollViewer>
 </Page>

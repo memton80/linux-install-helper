@@ -8,9 +8,12 @@ using Microsoft.Win32.SafeHandles;
 
 namespace LinuxInstallHelper.Core.Disks.Windows;
 
-/// <summary>Opens <c>\\.\PhysicalDriveN</c> for unbuffered raw I/O after locking and dismounting its volumes.</summary>
+/// <summary>
+/// Opens <c>\\.\PhysicalDriveN</c> for unbuffered raw I/O after locking and dismounting its volumes, or for reading only
+/// without touching its volumes.
+/// </summary>
 [SupportedOSPlatform("windows")]
-public sealed class WindowsRawDiskAccess : IRawDiskAccess
+public sealed class WindowsRawDiskAccess : IRawDiskAccess, IRawDiskReader
 {
     private readonly ILogger _logger;
 
@@ -20,6 +23,68 @@ public sealed class WindowsRawDiskAccess : IRawDiskAccess
     }
 
     public IBlockDevice Open(DiskInfo disk) => PhysicalDriveDevice.Open(disk, _logger);
+
+    public IBlockDevice OpenForReading(DiskInfo disk) => ReadOnlyPhysicalDrive.Open(disk, _logger);
+}
+
+/// <summary>
+/// A physical drive opened with read access only: Windows lets a drive be read while its volumes stay mounted, so nothing is
+/// locked or dismounted, and writing is refused.
+/// </summary>
+[SupportedOSPlatform("windows")]
+internal sealed class ReadOnlyPhysicalDrive : IBlockDevice
+{
+    private readonly SafeFileHandle _disk;
+
+    private ReadOnlyPhysicalDrive(SafeFileHandle disk, int sectorSize, long size)
+    {
+        _disk = disk;
+        SectorSize = sectorSize;
+        Size = size;
+    }
+
+    public int SectorSize { get; }
+
+    public long Size { get; }
+
+    public static ReadOnlyPhysicalDrive Open(DiskInfo disk, ILogger logger)
+    {
+        var handle = NativeMethods.CreateFileW(
+            disk.DevicePath,
+            NativeMethods.GenericRead,
+            NativeMethods.FileShareRead | NativeMethods.FileShareWrite,
+            IntPtr.Zero,
+            NativeMethods.OpenExisting,
+            NativeMethods.FileFlagNoBuffering,
+            IntPtr.Zero);
+        if (handle.IsInvalid)
+        {
+            throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Windows refused to open {disk.DevicePath}: {PhysicalDriveDevice.LastError()}");
+        }
+
+        try
+        {
+            var (sectorSize, size) = PhysicalDriveDevice.Geometry(handle, disk);
+            logger.LogInformation("Opened {Device} for reading: {Size} bytes, {Sector}-byte sectors", disk.DevicePath, size, sectorSize);
+            return new ReadOnlyPhysicalDrive(handle, sectorSize, size);
+        }
+        catch
+        {
+            handle.Dispose();
+            throw;
+        }
+    }
+
+    public void Read(long offset, Span<byte> buffer) => PhysicalDriveDevice.Read(_disk, offset, buffer);
+
+    public void Write(long offset, ReadOnlySpan<byte> data) =>
+        throw new InvalidOperationException("This drive is open for reading only.");
+
+    public void Flush()
+    {
+    }
+
+    public void Dispose() => _disk.Dispose();
 }
 
 [SupportedOSPlatform("windows")]
@@ -91,17 +156,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
                 throw WriteProtected();
             }
 
-            var geometry = NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskGetDriveGeometryEx, null, 256)
-                ?? throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Cannot read the geometry of {disk.DevicePath}: {LastError()}");
-
-            // DISK_GEOMETRY_EX: DISK_GEOMETRY (BytesPerSector at offset 20), then LARGE_INTEGER DiskSize at offset 24.
-            var sectorSize = BitConverter.ToInt32(geometry, 20);
-            var size = BitConverter.ToInt64(geometry, 24);
-            if (sectorSize <= 0 || (sectorSize & (sectorSize - 1)) != 0)
-            {
-                sectorSize = 512;
-            }
-
+            var (sectorSize, size) = Geometry(handle, disk);
             logger.LogInformation(
                 "Opened {Device}: {Size} bytes, {Sector}-byte sectors, drive locked: {DiskLocked}, controlled folder access: {Cfa}",
                 disk.DevicePath, size, sectorSize, diskLocked, ControlledFolderAccess.Describe());
@@ -167,7 +222,26 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
         }
     }
 
-    public void Read(long offset, Span<byte> buffer)
+    public void Read(long offset, Span<byte> buffer) => Read(_disk, offset, buffer);
+
+    /// <summary>Sector size and capacity of an open drive.</summary>
+    internal static (int SectorSize, long Size) Geometry(SafeFileHandle handle, DiskInfo disk)
+    {
+        var geometry = NativeMethods.Ioctl(handle, NativeMethods.IoctlDiskGetDriveGeometryEx, null, 256)
+            ?? throw new UsbWriteException(UsbWriteFailure.DeviceError, $"Cannot read the geometry of {disk.DevicePath}: {LastError()}");
+
+        // DISK_GEOMETRY_EX: DISK_GEOMETRY (BytesPerSector at offset 20), then LARGE_INTEGER DiskSize at offset 24.
+        var sectorSize = BitConverter.ToInt32(geometry, 20);
+        var size = BitConverter.ToInt64(geometry, 24);
+        if (sectorSize <= 0 || (sectorSize & (sectorSize - 1)) != 0)
+        {
+            sectorSize = 512;
+        }
+
+        return (sectorSize, size);
+    }
+
+    internal static void Read(SafeFileHandle disk, long offset, Span<byte> buffer)
     {
         fixed (byte* pointer = buffer)
         {
@@ -176,7 +250,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
             {
                 var position = offset + done;
                 var overlapped = new NativeOverlapped { OffsetLow = (int)(position & 0xFFFFFFFF), OffsetHigh = (int)(position >> 32) };
-                var ok = NativeMethods.ReadFile(_disk, pointer + done, (uint)(buffer.Length - done), out var read, &overlapped);
+                var ok = NativeMethods.ReadFile(disk, pointer + done, (uint)(buffer.Length - done), out var read, &overlapped);
                 var error = Marshal.GetLastWin32Error();
                 if (!ok || read == 0)
                 {
@@ -317,7 +391,7 @@ internal sealed unsafe class PhysicalDriveDevice : IBlockDevice
 
     private static string Describe(int error) => $"{new Win32Exception(error).Message} (error {error})";
 
-    private static string LastError() => Describe(Marshal.GetLastWin32Error());
+    internal static string LastError() => Describe(Marshal.GetLastWin32Error());
 
     /// <summary>Describes the NTSTATUS that the I/O manager stored in <c>OVERLAPPED.Internal</c>.</summary>
     private static string DescribeStatus(IntPtr internalLow)

@@ -36,13 +36,27 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   éjection propre.
 - **Rappel de sauvegarde** : une fois la clé prête, si vos dossiers personnels (Documents, Images, Bureau, Musique,
   Vidéos, Téléchargements) contiennent des fichiers, l'application vous demande si vous les avez sauvegardés sur une
-  clé USB ou un disque externe avant d'installer Linux.
+  clé USB ou un disque externe avant d'installer Linux, avec la taille de chaque dossier et le total à sauvegarder.
+- **Préparer mon PC** : l'application vérifie depuis Windows ce qui compte pour démarrer et installer Linux sur cet
+  ordinateur, pour la distribution choisie : processeur ARM (la clé ne démarrerait pas, ce qui est aussi signalé avant
+  la création), démarrage UEFI ou BIOS, Secure Boot, disque en mode Intel RST/RAID/VMD, BitLocker, démarrage rapide de
+  Windows (désactivable en un clic), place libre pour garder Windows, mémoire, carte NVIDIA, Wi-Fi Broadcom. Elle donne
+  la touche du menu de démarrage selon le fabricant du PC, peut redémarrer directement sur la clé (« Utiliser un
+  périphérique ») ou dans les réglages UEFI, et affiche à la demande les mots de passe des réseaux Wi-Fi enregistrés.
+  La page finale et la liste « Avant de quitter Windows » du guide reprennent ces informations.
+- **Mes logiciels sous Linux** : les logiciels installés sur Windows, classés selon ce qu'ils deviennent sous Linux
+  (même logiciel, équivalent gratuit, version web, inutile, seulement sous Windows, à vérifier), avec une liste à
+  enregistrer dans Documents.
+- **Dépannage** : « Vérifier ma clé » relit la clé, sans rien y écrire, et la compare octet par octet à l'image ; les
+  problèmes fréquents (clé absente du menu, Secure Boot, écran noir, aucun disque, pas de Wi-Fi…) et leurs solutions.
 - **ISO locale** : utilisez une image déjà téléchargée, avec contrôle facultatif de son SHA-256.
 - **Tutoriel illustré pour chaque distribution** pendant la création de la clé : démarrer sur la clé, son menu de
   démarrage avec les entrées exactes, l'essai et l'installation, le bureau, la logithèque, les mises à jour, le
   terminal et l'aide, avec des illustrations annotées (repères numérotés ①②③) en français et en anglais. On le
   retrouve dans la page « Guide Linux ».
 - **Restaurer une clé** : après usage, la clé est effacée et reformatée en exFAT pour redevenir une clé normale.
+- Les images ISO conservées se suppriment depuis les Paramètres, et l'application signale au démarrage qu'une nouvelle
+  version est publiée (désactivable).
 - Interface **Windows 11** (WinUI 3, Mica, thème clair/sombre automatique, couleur d'accentuation), en
   **français et en anglais**.
 
@@ -189,5 +203,10 @@ drives only (never the system or an internal disk) with a double confirmation, w
 reads the drive back to check it and ejects it. While the drive is written, an illustrated tour of the chosen
 distribution explains its boot menu, how to try and install it, its desktop, software center and updates. If your
 personal folders hold files, it then asks whether you have backed them up to a USB drive or an external disk before
-installing Linux. It can also write a local ISO and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+installing Linux. The "Prepare my PC" page checks this computer for the chosen distribution (ARM processor, UEFI or
+BIOS, Secure Boot, Intel RST/RAID, BitLocker, fast startup, free space, memory, NVIDIA, Broadcom Wi-Fi), gives the boot
+menu key of its maker, restarts it into the Windows startup options or the UEFI settings, and shows the saved Wi-Fi
+passwords on request; "My programs on Linux" tells what to use on Linux for each installed program; "Troubleshooting"
+reads a drive back (read only) to compare it with its image and lists the usual problems. It can also write a local ISO
+and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

@@ -17,16 +17,19 @@ public sealed partial class MainWindow : Window
     private readonly AppBusyState _busy;
     private readonly IDialogService _dialogs;
     private readonly WizardState _wizard;
+    private readonly UpdateNotifier _updates;
     private bool _closeConfirmed;
 
-    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard)
+    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates)
     {
         _navigation = navigation;
         _localizer = localizer;
         _busy = busy;
         _dialogs = dialogs;
         _wizard = wizard;
+        _updates = updates;
         InitializeComponent();
+        _updates.PropertyChanged += (_, _) => ShowUpdate();
 
         Title = localizer.Get("AppDisplayName");
         ExtendsContentIntoTitleBar = true;
@@ -74,6 +77,18 @@ public sealed partial class MainWindow : Window
 
     private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         => _navigation.GoBack();
+
+    private void ShowUpdate()
+    {
+        if (_updates.Available is { } release)
+        {
+            UpdateBar.Message = _localizer.Format("UpdateBar_Message", release.Version.ToString(3), AppInfo.Version);
+        }
+
+        UpdateBar.IsOpen = _updates.IsAvailable;
+    }
+
+    private void OnDownloadUpdate(object sender, RoutedEventArgs e) => _updates.OpenReleasePage();
 
     private void OnNavigated(object? sender, string pageKey)
     {

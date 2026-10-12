@@ -59,6 +59,16 @@
                         <FontIcon Glyph="&#xE736;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="NavReadiness" Tag="Readiness">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7F8;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="NavTroubleshoot" Tag="Troubleshoot">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEBE8;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem x:Uid="NavAbout" Tag="About">
@@ -68,7 +78,18 @@
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
 
-            <Frame x:Name="ContentFrame" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <InfoBar x:Name="UpdateBar" x:Uid="UpdateBar" Style="{StaticResource UpdateInfoBarStyle}">
+                    <InfoBar.ActionButton>
+                        <Button x:Uid="UpdateBarDownload" Click="OnDownloadUpdate" />
+                    </InfoBar.ActionButton>
+                </InfoBar>
+                <Frame x:Name="ContentFrame" Grid.Row="1" />
+            </Grid>
         </NavigationView>
     </Grid>
 </Window>

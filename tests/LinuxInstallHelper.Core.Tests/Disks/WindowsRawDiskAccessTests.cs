@@ -51,10 +51,29 @@ public sealed class WindowsRawDiskAccessTests
         var image = new byte[(9 * 1024 * 1024) + 1000];
         new Random(7).NextBytes(image);
         var engine = new ImageWriteEngine(TimeSpan.Zero);
+        var access = new WindowsRawDiskAccess(new OutputLogger<WindowsRawDiskAccess>(_output));
 
-        using var device = new WindowsRawDiskAccess(new OutputLogger<WindowsRawDiskAccess>(_output)).Open(disk);
-        Assert.Equal(disk.Size, device.Size);
+        using (var device = access.Open(disk))
+        {
+            Assert.Equal(disk.Size, device.Size);
+            Write(device, engine, image);
+        }
 
+        // Read only, like "Check my drive": the volumes Windows mounts again over the image stay mounted.
+        using var reader = access.OpenForReading(disk);
+        Assert.Equal(disk.Size, reader.Size);
+        Assert.Throws<InvalidOperationException>(() => reader.Write(0, new byte[reader.SectorSize]));
+        var comparison = new DriveImageComparer(TimeSpan.Zero).Compare(new MemoryStream(image), image.Length, reader, null, CancellationToken.None);
+        Assert.Equal(DriveComparisonOutcome.Identical, comparison.Outcome);
+
+        image[5 * 1024 * 1024] ^= 0xFF;
+        var different = new DriveImageComparer(TimeSpan.Zero).Compare(new MemoryStream(image), image.Length, reader, null, CancellationToken.None);
+        Assert.Equal(DriveComparisonOutcome.NearlyIdentical, different.Outcome);
+        Assert.Equal(5 * 1024 * 1024, different.FirstDifference);
+    }
+
+    private static void Write(IBlockDevice device, ImageWriteEngine engine, byte[] image)
+    {
         // The tail is written first, like RawDiskWriter does: with a mounted volume, it lies inside that volume.
         var tail = AlignedBuffer(ImageWriteEngine.TailWipeSize);
         tail.Span.Fill(0xA5);
