@@ -18,6 +18,8 @@
                     <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Subtitle, Mode=OneWay}" />
                 </StackPanel>
 
+                <InfoBar x:Uid="Alone_ProgressKeepPlugged" IsClosable="False" Severity="Informational" IsOpen="{x:Bind helpers:Ui.Both(ViewModel.IsAlone, ViewModel.IsRunning), Mode=OneWay}" />
+
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Style="{StaticResource CardStackStyle}">
                         <ItemsControl ItemsSource="{x:Bind ViewModel.Stages}">
@@ -35,7 +37,10 @@
                                             Foreground="{x:Bind IconBrush, Mode=OneWay}"
                                             Visibility="{x:Bind helpers:Ui.Visible(IsNotRunning), Mode=OneWay}" />
                                         <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(IsRunning), Mode=OneWay}" />
-                                        <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Label}" Opacity="{x:Bind LabelOpacity, Mode=OneWay}" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource CompactStackStyle}">
+                                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Label}" Opacity="{x:Bind LabelOpacity, Mode=OneWay}" />
+                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Explanation}" Visibility="{x:Bind helpers:Ui.Visible(ShowExplanation)}" />
+                                        </StackPanel>
                                         <TextBlock Grid.Column="2" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Detail, Mode=OneWay}" />
                                     </Grid>
                                 </DataTemplate>
@@ -58,9 +63,12 @@
                             Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
                             Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
                             <InfoBar.Content>
-                                <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                    <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
-                                </Expander>
+                                <StackPanel Style="{StaticResource InfoBarDetailsStackStyle}">
+                                    <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
+                                        <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
+                                    </Expander>
+                                    <TextBlock x:Uid="AdvancedDetailsHint" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
+                                </StackPanel>
                             </InfoBar.Content>
                         </InfoBar>
                         <InfoBar x:Uid="ProgressCancelled" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.WasCancelled, Mode=OneWay}" />
@@ -103,7 +111,7 @@
                     </StackPanel>
                 </Border>
 
-                <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True">
+                <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
                     <StackPanel Style="{StaticResource CardStackStyle}">
                         <ListView x:Name="LogList" Style="{StaticResource LogListViewStyle}" ItemsSource="{x:Bind ViewModel.Logs}">
                             <ListView.ItemTemplate>

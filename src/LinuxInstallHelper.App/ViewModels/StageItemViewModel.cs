@@ -8,15 +8,23 @@ namespace LinuxInstallHelper.App.ViewModels;
 /// <summary>One line of the steps list.</summary>
 public sealed partial class StageItemViewModel : ObservableObject
 {
-    public StageItemViewModel(CreationStage stage, string label)
+    public StageItemViewModel(CreationStage stage, string label, string explanation = "", bool isAlone = false)
     {
         Stage = stage;
         Label = label;
+        Explanation = explanation;
+        ShowExplanation = isAlone && !string.IsNullOrWhiteSpace(explanation);
     }
 
     public CreationStage Stage { get; }
 
     public string Label { get; }
+
+    /// <summary>What happens during this step, in plain words.</summary>
+    public string Explanation { get; }
+
+    /// <summary>The explanation is shown to a user on their own (a template cannot see the page's view model).</summary>
+    public bool ShowExplanation { get; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Glyph), nameof(IconBrush), nameof(IsRunning), nameof(IsNotRunning), nameof(LabelOpacity))]

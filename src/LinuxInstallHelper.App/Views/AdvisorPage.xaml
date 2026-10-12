@@ -67,6 +67,43 @@
                     <TextBlock x:Uid="AdvisorSubtitle" Style="{StaticResource PageSubtitleStyle}" />
                 </StackPanel>
 
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsAlone), Mode=OneWay}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="Alone_AdvisorJourneyTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <Grid Style="{StaticResource AloneStepsGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney2" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney3" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="4" Style="{StaticResource StepNumberStyle}" Text="5" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney5" Grid.Row="4" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                        <Grid Style="{StaticResource IconTextGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE73E;" Style="{StaticResource AdvisorReasonIconStyle}" />
+                            <TextBlock x:Uid="Alone_AdvisorNothingChanged" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <ItemsControl ItemsSource="{x:Bind ViewModel.Questions}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -86,6 +123,7 @@
                                         <views:WordsButton Grid.Column="1" Words="{x:Bind Words}" Label="{x:Bind WordsLabel}" />
                                     </Grid>
                                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint), Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource AloneHintTextStyle}" Text="{x:Bind HintAlone}" Visibility="{x:Bind helpers:Ui.Visible(ShowHintAlone), Mode=OneWay}" />
                                     <RadioButtons ItemsSource="{x:Bind Options}" SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
                                 </StackPanel>
                             </Border>

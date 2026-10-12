@@ -9,6 +9,9 @@ namespace LinuxInstallHelper.App.ViewModels;
 
 public sealed partial class DoneViewModel : ObservableObject, INavigationAware
 {
+    // The words of the complete plan explained behind its "?" button.
+    private static readonly string[] PlanWordIds = ["bootmenu", "live", "bios", "secureboot"];
+
     private readonly ILocalizer _localizer;
     private readonly INavigationService _navigation;
     private readonly WizardState _wizard;
@@ -16,7 +19,7 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     private readonly ReadinessActions _actions;
     private readonly DisplayFormatter _formatter;
 
-    public DoneViewModel(ILocalizer localizer, INavigationService navigation, WizardState wizard, PcInfo pc, ReadinessActions actions, DisplayFormatter formatter)
+    public DoneViewModel(ILocalizer localizer, INavigationService navigation, WizardState wizard, PcInfo pc, ReadinessActions actions, DisplayFormatter formatter, GuidanceState guidance, Glossary glossary)
     {
         _localizer = localizer;
         _navigation = navigation;
@@ -24,7 +27,17 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
         _pc = pc;
         _actions = actions;
         _formatter = formatter;
+        IsAlone = guidance.IsAlone;
+        PlanWords = glossary.Get(PlanWordIds);
+        PlanWordsLabel = localizer.Get("Alone_DonePlanWordsButton");
     }
+
+    /// <summary>The user is on their own: the page details the plan step by step, and says when this PC is ready.</summary>
+    public bool IsAlone { get; }
+
+    public IReadOnlyList<ExplainedWord> PlanWords { get; }
+
+    public string PlanWordsLabel { get; }
 
     [ObservableProperty]
     private string _summary = string.Empty;
@@ -34,6 +47,14 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     private string _signature = string.Empty;
+
+    /// <summary><see cref="Verification"/> without the hash, shown outside the advanced mode.</summary>
+    [ObservableProperty]
+    private string _verificationSimple = string.Empty;
+
+    /// <summary><see cref="Signature"/> without the key fingerprint, shown outside the advanced mode.</summary>
+    [ObservableProperty]
+    private string _signatureSimple = string.Empty;
 
     [ObservableProperty]
     private string _ejectStatus = string.Empty;
@@ -62,6 +83,13 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _showReadiness;
 
+    /// <summary>
+    /// The user is on their own and nothing on this computer needs a change: say so, since no warning is shown. Separate
+    /// from <see cref="ShowReadiness"/>, which is unchanged.
+    /// </summary>
+    [ObservableProperty]
+    private bool _showReadinessOk;
+
     [ObservableProperty]
     private InfoBarSeverity _readinessSeverity = InfoBarSeverity.Warning;
 
@@ -88,10 +116,20 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
             ? _localizer.Format("Done_VerifiedWrite", algorithm, result.ImageHash)
             : _localizer.Format("Done_VerifiedImage", algorithm, result.ImageHash);
 
+        // A local image is not compared with an official one: never say so.
+        VerificationSimple = _localizer.Get((result.WriteVerified, _wizard.IsLocalIso) switch
+        {
+            (true, false) => "Done_VerifiedWriteSimple",
+            (false, false) => "Done_VerifiedImageSimple",
+            (true, true) => "Done_VerifiedWriteLocalSimple",
+            (false, true) => "Done_VerifiedImageLocalSimple",
+        });
+
         var signed = result.ChecksumSignature == SignatureStatus.Verified || result.ImageSignature == SignatureStatus.Verified;
         Signature = signed
             ? _localizer.Format("Done_Signed", DisplayFormatter.Fingerprint(result.Signer))
             : _wizard.IsLocalIso ? _localizer.Get("Done_LocalImage") : _localizer.Get("Done_NotSigned");
+        SignatureSimple = signed ? _localizer.Get("Done_SignedSimple") : Signature;
 
         Ejected = result.Ejected;
         EjectStatus = result.Ejected
@@ -117,6 +155,9 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
     private void OpenReadiness() => _navigation.NavigateTo(PageKeys.Readiness);
 
     [RelayCommand]
+    private void OpenTroubleshoot() => _navigation.NavigateTo(PageKeys.Troubleshoot);
+
+    [RelayCommand]
     private Task RestartToDriveAsync() => _actions.RestartToDriveAsync();
 
     [RelayCommand]
@@ -136,6 +177,7 @@ public sealed partial class DoneViewModel : ObservableObject, INavigationAware
             .Where(item => item.Level >= ReadinessLevel.Warning && item.Check != ReadinessCheck.SecureBoot)
             .ToList();
         ShowReadiness = issues.Count > 0;
+        ShowReadinessOk = IsAlone && issues.Count == 0 && !ShowSecureBootWarning;
         if (issues.Count > 0)
         {
             ReadinessSeverity = ReadinessItemViewModel.SeverityOf(PcReadiness.Worst(issues));

@@ -31,6 +31,35 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <!-- Advanced mode: the switch in the title bar and the orange frame around the window while it is on -->
+    <SolidColorBrush x:Key="AdvancedModeBrush" Color="#F7630C" />
+
+    <Style x:Key="AdvancedToggleStyle" TargetType="ToggleSwitch">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- An overlay that takes no room: the pages never move when the mode is turned on. No background, so Mica shows. -->
+    <Style x:Key="AdvancedFrameStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AdvancedModeBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <!-- Windows 10, and maximized windows: square corners. -->
+    <Style x:Key="AdvancedFrameSquareStyle" TargetType="Border" BasedOn="{StaticResource AdvancedFrameStyle}">
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <!-- Under the message of an error: its technical details (advanced mode) or how to show them -->
+    <Style x:Key="InfoBarDetailsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+    </Style>
+
     <!-- Pages -->
     <Style x:Key="PageRootStyle" TargetType="Grid">
         <Setter Property="Padding" Value="{StaticResource PageMargin}" />
@@ -584,6 +613,47 @@
     <Style x:Key="ProblemTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Margin" Value="0,12,0,12" />
+    </Style>
+
+    <!-- Welcome: two large cards, one click is the answer -->
+    <Style x:Key="WelcomeChoicesGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="16" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="CornerRadius" Value="{StaticResource OverlayCornerRadius}" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
+    <!-- What the pages add for a user on their own ("Alone" mode) -->
+    <Style x:Key="AloneStepsGridStyle" TargetType="Grid" BasedOn="{StaticResource ComponentRowGridStyle}">
+        <Setter Property="RowSpacing" Value="10" />
+    </Style>
+
+    <Style x:Key="AloneSubStepsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="4" />
+    </Style>
+
+    <Style x:Key="AloneHintTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="AloneBulletIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
     </Style>
 
     <!-- About -->

@@ -18,9 +18,11 @@ public sealed partial class MainWindow : Window
     private readonly IDialogService _dialogs;
     private readonly WizardState _wizard;
     private readonly UpdateNotifier _updates;
+    private readonly AdvancedModeState _advanced;
     private bool _closeConfirmed;
+    private bool _showingAdvanced;
 
-    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates)
+    public MainWindow(INavigationService navigation, ILocalizer localizer, AppBusyState busy, IDialogService dialogs, WizardState wizard, UpdateNotifier updates, AdvancedModeState advanced)
     {
         _navigation = navigation;
         _localizer = localizer;
@@ -28,8 +30,11 @@ public sealed partial class MainWindow : Window
         _dialogs = dialogs;
         _wizard = wizard;
         _updates = updates;
+        _advanced = advanced;
         InitializeComponent();
         _updates.PropertyChanged += (_, _) => ShowUpdate();
+        _advanced.PropertyChanged += (_, _) => ShowAdvanced();
+        ShowAdvanced();
 
         Title = localizer.Get("AppDisplayName");
         ExtendsContentIntoTitleBar = true;
@@ -38,6 +43,22 @@ public sealed partial class MainWindow : Window
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
         AppWindow.Closing += OnClosing;
         ResizeAndCenter(DefaultWidth, DefaultHeight);
+
+        // The window buttons are drawn over the content: keep the advanced mode switch out of them, and fit the frame.
+        RootGrid.Loaded += (_, _) =>
+        {
+            RootGrid.XamlRoot.Changed += (_, _) => UpdateCaptionButtonsColumn();
+            UpdateCaptionButtonsColumn();
+            UpdateFrameCorners();
+        };
+        AppWindow.Changed += (_, args) =>
+        {
+            if (args.DidSizeChange || args.DidPresenterChange)
+            {
+                UpdateCaptionButtonsColumn();
+                UpdateFrameCorners();
+            }
+        };
 
         _navigation.Navigated += OnNavigated;
         _navigation.Initialize(ContentFrame);
@@ -111,6 +132,66 @@ public sealed partial class MainWindow : Window
             .FirstOrDefault(item => item.Tag as string == menuKey);
     }
 
+    /// <summary>The switch and the orange frame follow the advanced mode.</summary>
+    private void ShowAdvanced()
+    {
+        _showingAdvanced = true;
+        AdvancedToggle.IsOn = _advanced.IsOn;
+        _showingAdvanced = false;
+        AdvancedFrame.Visibility = _advanced.IsOn ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    /// <summary>Turning the advanced mode on asks first (its details can look worrying); turning it off does not.</summary>
+    private async void OnAdvancedToggled(object sender, RoutedEventArgs e)
+    {
+        if (_showingAdvanced || AdvancedToggle.IsOn == _advanced.IsOn)
+        {
+            return;
+        }
+
+        if (!AdvancedToggle.IsOn)
+        {
+            _advanced.IsOn = false;
+            return;
+        }
+
+        try
+        {
+            // Cancel is the default button: Enter or Escape never turns it on by accident.
+            _advanced.IsOn = await _dialogs.ConfirmAsync(
+                _localizer.Get("Advanced_ConfirmTitle"),
+                _localizer.Get("Advanced_ConfirmMessage"),
+                _localizer.Get("Advanced_ConfirmPrimary"),
+                _localizer.Get("Dialog_Cancel"),
+                destructive: true);
+        }
+        catch (COMException)
+        {
+            // Another dialog is already open (only one can be shown at a time): leave the mode off.
+        }
+
+        // Puts the switch back when the warning is refused.
+        ShowAdvanced();
+    }
+
+    /// <summary>Keeps the advanced mode switch clear of the minimize, maximize and close buttons drawn by Windows.</summary>
+    private void UpdateCaptionButtonsColumn()
+    {
+        if (RootGrid.XamlRoot is { } root)
+        {
+            // RightInset is in physical pixels, XAML in effective pixels.
+            CaptionButtonsColumn.Width = new GridLength(AppWindow.TitleBar.RightInset / root.RasterizationScale);
+        }
+    }
+
+    /// <summary>Windows 11 rounds the corners of a window that is not maximized; Windows 10 and maximized windows are square.</summary>
+    private void UpdateFrameCorners()
+    {
+        var rounded = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)
+            && AppWindow.Presenter is OverlappedPresenter { State: not OverlappedPresenterState.Maximized };
+        AdvancedFrame.Style = (Style)Application.Current.Resources[rounded ? "AdvancedFrameStyle" : "AdvancedFrameSquareStyle"];
+    }
+
     private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
     {
         if (_closeConfirmed || !_busy.IsBusy)
@@ -119,12 +200,21 @@ public sealed partial class MainWindow : Window
         }
 
         args.Cancel = true;
-        var confirmed = await _dialogs.ConfirmAsync(
-            _localizer.Get("Close_BusyTitle"),
-            _localizer.Get(_busy.IsWriting ? "Close_BusyWriting" : "Close_BusyMessage"),
-            _localizer.Get("Close_BusyPrimary"),
-            _localizer.Get("Close_BusyClose"),
-            destructive: true);
+        bool confirmed;
+        try
+        {
+            confirmed = await _dialogs.ConfirmAsync(
+                _localizer.Get("Close_BusyTitle"),
+                _localizer.Get(_busy.IsWriting ? "Close_BusyWriting" : "Close_BusyMessage"),
+                _localizer.Get("Close_BusyPrimary"),
+                _localizer.Get("Close_BusyClose"),
+                destructive: true);
+        }
+        catch (COMException)
+        {
+            // Another dialog is open (the advanced mode warning): the window stays open, the user can close it again.
+            return;
+        }
 
         if (confirmed)
         {

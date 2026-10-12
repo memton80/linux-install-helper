@@ -74,7 +74,18 @@ public partial class App : Application
 
         var settings = Services.GetRequiredService<ISettingsStore>().Current;
         Services.GetRequiredService<IThemeService>().Apply(_startup.Theme ?? settings.Theme);
-        _window.Start(_startup.Page ?? PageKeys.Advisor);
+        if (_startup.Guidance is { } guidance)
+        {
+            Services.GetRequiredService<GuidanceState>().Force(guidance);
+        }
+
+        if (_startup.Advanced)
+        {
+            Services.GetRequiredService<AdvancedModeState>().IsOn = true;
+        }
+
+        // The welcome screen asks once whether someone helps; never with --page (the CI opens each page directly).
+        _window.Start(_startup.Page ?? (settings.Guidance is null ? PageKeys.Welcome : PageKeys.Advisor));
         _window.Activate();
 
         // In the background: the pages that need them get them without waiting.
@@ -151,6 +162,8 @@ public partial class App : Application
         services.AddSingleton<IUiDispatcher, UiDispatcher>();
         services.AddSingleton<AppBusyState>();
         services.AddSingleton<WizardState>();
+        services.AddSingleton<GuidanceState>();
+        services.AddSingleton<AdvancedModeState>();
         services.AddSingleton<DisplayFormatter>();
         services.AddSingleton<Glossary>();
         services.AddSingleton<ErrorDescriber>();
@@ -161,6 +174,7 @@ public partial class App : Application
         services.AddSingleton<MainWindow>();
 
         // View models (the distributions list keeps its state while navigating)
+        services.AddTransient<WelcomeViewModel>();
         services.AddSingleton<AdvisorViewModel>();
         services.AddSingleton<DistrosViewModel>();
         services.AddTransient<DistroDetailsViewModel>();
@@ -187,9 +201,10 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c> (used by the CI to take screenshots).
+    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c>, <c>--guidance alone</c>,
+    /// <c>--advanced</c> (used by the CI to take screenshots). None of them is saved.
     /// </summary>
-    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language)
+    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language, GuidanceMode? Guidance, bool Advanced)
     {
         public static StartupOptions Parse(string[] args)
         {
@@ -201,10 +216,18 @@ public partial class App : Application
 
             AppTheme? theme = Enum.TryParse<AppTheme>(Value("--theme"), ignoreCase: true, out var t) ? t : null;
             var language = Value("--lang");
+            GuidanceMode? guidance = Value("--guidance")?.ToLowerInvariant() switch
+            {
+                "helper" => GuidanceMode.WithHelper,
+                "alone" => GuidanceMode.Alone,
+                _ => null,
+            };
             return new StartupOptions(
                 Value("--page"),
                 theme,
-                language is not null && UserSettings.SupportedLanguages.Contains(language) ? language : null);
+                language is not null && UserSettings.SupportedLanguages.Contains(language) ? language : null,
+                guidance,
+                Array.Exists(args, a => string.Equals(a, "--advanced", StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

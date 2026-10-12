@@ -38,6 +38,17 @@
                     </StackPanel>
                 </Border>
 
+                <TextBlock x:Uid="SettingsGuidance" Style="{StaticResource SectionTitleStyle}" />
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="SettingsGuidanceHelp" Style="{StaticResource SecondaryTextStyle}" />
+                        <RadioButtons x:Uid="SettingsGuidanceMode" SelectedIndex="{x:Bind ViewModel.GuidanceIndex, Mode=TwoWay}">
+                            <RadioButton x:Uid="SettingsGuidanceHelper" />
+                            <RadioButton x:Uid="SettingsGuidanceAlone" />
+                        </RadioButtons>
+                    </StackPanel>
+                </Border>
+
                 <TextBlock x:Uid="SettingsDownloads" Style="{StaticResource SectionTitleStyle}" />
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Style="{StaticResource CardStackStyle}">

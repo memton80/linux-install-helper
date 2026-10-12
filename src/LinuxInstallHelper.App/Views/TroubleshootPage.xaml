@@ -83,7 +83,14 @@
                             IsOpen="{x:Bind ViewModel.HasResult, Mode=TwoWay}"
                             Severity="{x:Bind ViewModel.ResultSeverity, Mode=OneWay}"
                             Title="{x:Bind ViewModel.ResultTitle, Mode=OneWay}"
-                            Message="{x:Bind ViewModel.ResultMessage, Mode=OneWay}" />
+                            Message="{x:Bind ViewModel.ResultMessage, Mode=OneWay}">
+                            <InfoBar.Content>
+                                <StackPanel Style="{StaticResource InfoBarDetailsStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasResultDetails), Mode=OneWay}">
+                                    <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ResultDetails, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}" />
+                                    <TextBlock x:Uid="AdvancedDetailsHint" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
+                                </StackPanel>
+                            </InfoBar.Content>
+                        </InfoBar>
                     </StackPanel>
                 </Border>
 

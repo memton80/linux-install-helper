@@ -2070,4 +2070,342 @@ There, Secure Boot is often under "Security" or "Boot". Save the changes (often 
   <data name="Advisor_SecureBootOn" xml:space="preserve">
     <value>On this computer, Secure Boot is on.</value>
   </data>
+  <data name="WelcomeHeader.Text" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="WelcomeSubtitle.Text" xml:space="preserve">
+    <value>Before you start, tell us how you will create your Linux USB drive. You can change this choice at any time in the Settings.</value>
+  </data>
+  <data name="WelcomeWithHelper.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Someone is helping me: the application stays simple</value>
+  </data>
+  <data name="WelcomeWithHelperTitle.Text" xml:space="preserve">
+    <value>Someone is helping me</value>
+  </data>
+  <data name="WelcomeWithHelperText.Text" xml:space="preserve">
+    <value>A person who knows computers is with you. The application stays simple: it gives what matters, without extra details.</value>
+  </data>
+  <data name="WelcomeAlone.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>I am on my own: the application explains each step in detail</value>
+  </data>
+  <data name="WelcomeAloneTitle.Text" xml:space="preserve">
+    <value>I am on my own</value>
+  </data>
+  <data name="WelcomeAloneText.Text" xml:space="preserve">
+    <value>Nobody is helping you. The application explains each step in detail, in plain words, from choosing Linux to starting the computer from the drive.</value>
+  </data>
+  <data name="Alone_AdvisorJourneyTitle.Text" xml:space="preserve">
+    <value>The journey in 5 steps</value>
+  </data>
+  <data name="Alone_AdvisorJourney1.Text" xml:space="preserve">
+    <value>Choose the distribution: answer the questions below, and the application suggests a version of Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney2.Text" xml:space="preserve">
+    <value>Plug in a USB drive: take a drive you no longer need (8 GB is almost always enough), because everything on it will be erased.</value>
+  </data>
+  <data name="Alone_AdvisorJourney3.Text" xml:space="preserve">
+    <value>Automatic creation: the application downloads Linux, checks that the file is intact, then writes it to the drive. You have nothing to do meanwhile.</value>
+  </data>
+  <data name="Alone_AdvisorJourney4.Text" xml:space="preserve">
+    <value>Prepare the PC: the application checks your computer and tells you whether a setting must be changed before starting Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney5.Text" xml:space="preserve">
+    <value>Start from the drive: you restart the computer from the drive, then you try Linux without changing anything, or you install it.</value>
+  </data>
+  <data name="Alone_AdvisorNothingChanged.Text" xml:space="preserve">
+    <value>This step changes nothing on your PC: answer without worry, you can change your mind.</value>
+  </data>
+  <data name="Advisor_Q1_HintAlone" xml:space="preserve">
+    <value>If Linux is new to you, pick the first answer: the application will suggest a distribution that is easy to get started with.</value>
+  </data>
+  <data name="Advisor_Q2_HintAlone" xml:space="preserve">
+    <value>The answer is already selected from the memory of this computer: you can leave it as it is.</value>
+  </data>
+  <data name="Advisor_Q3_HintAlone" xml:space="preserve">
+    <value>When in doubt, pick the first answer: it suits most people.</value>
+  </data>
+  <data name="Advisor_Q4_HintAlone" xml:space="preserve">
+    <value>If you are used to Windows, the first answer will feel the most familiar.</value>
+  </data>
+  <data name="Advisor_Q5_HintAlone" xml:space="preserve">
+    <value>To get started, peace of mind is the safest choice.</value>
+  </data>
+  <data name="Advisor_Q6_HintAlone" xml:space="preserve">
+    <value>"No" is a very good choice: the application will suggest a distribution that starts without touching the computer's settings.</value>
+  </data>
+  <data name="Alone_DistroFitTitle.Text" xml:space="preserve">
+    <value>Is it right for me?</value>
+  </data>
+  <data name="Alone_Fit_Beginner" xml:space="preserve">
+    <value>It is designed for beginners: a good choice to discover Linux.</value>
+  </data>
+  <data name="Alone_Fit_Desktop" xml:space="preserve">
+    <value>It comes with the {0} desktop: windows, a menu and icons, like on Windows.</value>
+  </data>
+  <data name="Alone_Fit_NoDesktop" xml:space="preserve">
+    <value>It has no desktop: everything is done by typing commands. It is made for servers, not for beginners.</value>
+  </data>
+  <data name="Alone_Fit_Rolling" xml:space="preserve">
+    <value>It updates continuously: always the latest features, but sometimes surprises. Some experience helps.</value>
+  </data>
+  <data name="Alone_Fit_Lts" xml:space="preserve">
+    <value>It is a long-term version (LTS): it gets fixes for several years, without big changes. It is the most peaceful choice.</value>
+  </data>
+  <data name="Alone_Fit_Stable" xml:space="preserve">
+    <value>It gets regular updates, and a new version from time to time.</value>
+  </data>
+  <data name="Alone_Fit_Needs" xml:space="preserve">
+    <value>To install it, the computer needs at least {0} GB of memory and {1} GB of free space. The "Prepare my PC" page checks this for you.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOk" xml:space="preserve">
+    <value>It starts without changing anything in the computer's settings.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOff" xml:space="preserve">
+    <value>It needs Secure Boot to be turned off in the computer's settings before it starts: one more setting to change.</value>
+  </data>
+  <data name="Alone_Fit_NothingInstalled" xml:space="preserve">
+    <value>Creating the drive installs nothing on this PC: you can try Linux from the drive before deciding.</value>
+  </data>
+  <data name="Alone_DistroWordsExpander.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Words to know</value>
+  </data>
+  <data name="Alone_DistroWordsTitle.Text" xml:space="preserve">
+    <value>Words to know</value>
+  </data>
+  <data name="Alone_DriveBeforeTitle.Text" xml:space="preserve">
+    <value>Before plugging in the drive</value>
+  </data>
+  <data name="Alone_DriveCapacity" xml:space="preserve">
+    <value>Check that the drive is large enough: the image to write takes {0}. The size is printed on the drive or on its package.</value>
+  </data>
+  <data name="Alone_DriveErase.Text" xml:space="preserve">
+    <value>Everything on the drive will be erased. Copy your files elsewhere first, for example to the Documents folder of this PC.</value>
+  </data>
+  <data name="Alone_DrivePlug.Text" xml:space="preserve">
+    <value>Plug the drive directly into a USB port of the computer, not into a box that adds USB ports (a "hub") nor into the screen.</value>
+  </data>
+  <data name="Alone_DriveWait.Text" xml:space="preserve">
+    <value>Wait a few seconds for Windows to recognize it, then click the "Refresh" button (the circular arrow) if it does not appear in the list.</value>
+  </data>
+  <data name="Alone_DriveNoneTitle.Text" xml:space="preserve">
+    <value>The drive does not appear? Try in this order:</value>
+  </data>
+  <data name="Alone_DriveNone1.Text" xml:space="preserve">
+    <value>Unplug the drive, wait five seconds, plug it in again, then click the "Refresh" button (the circular arrow).</value>
+  </data>
+  <data name="Alone_DriveNone2.Text" xml:space="preserve">
+    <value>Try another USB port, preferably at the back of the computer for a desktop PC.</value>
+  </data>
+  <data name="Alone_DriveNone3.Text" xml:space="preserve">
+    <value>Check that the drive opens in File Explorer. If Windows does not see it either, try another drive.</value>
+  </data>
+  <data name="Alone_DriveNone4.Text" xml:space="preserve">
+    <value>External hard disks and memory cards are not offered, for safety: use a USB drive.</value>
+  </data>
+  <data name="Alone_DriveTroubleshoot.Content" xml:space="preserve">
+    <value>Open troubleshooting</value>
+  </data>
+  <data name="Drive_ConfirmMessage_Alone" xml:space="preserve">
+    <value>After "Erase and create", the application downloads Linux, checks it, then writes it to this drive. Windows and the files of your PC are not touched. When in doubt, choose "Cancel" and check the name of the drive.</value>
+  </data>
+  <data name="Stage_Resolve_Explain" xml:space="preserve">
+    <value>The application looks on the official website for the distribution's file and its "fingerprint", used to check that it is intact.</value>
+  </data>
+  <data name="Stage_CheckLinks_Explain" xml:space="preserve">
+    <value>It checks that the download addresses answer, to pick the most reliable one.</value>
+  </data>
+  <data name="Stage_Download_Explain" xml:space="preserve">
+    <value>The Linux file is downloaded to this PC. It is often the longest step: it depends on your Internet connection.</value>
+  </data>
+  <data name="Stage_Verify_Explain" xml:space="preserve">
+    <value>The application compares the file with its official fingerprint: if it is damaged or changed, nothing is written to the drive.</value>
+  </data>
+  <data name="Stage_Write_Explain" xml:space="preserve">
+    <value>The file is copied to the drive, which is erased along the way. Then the drive is read back to check that the copy is exact.</value>
+  </data>
+  <data name="Stage_Eject_Explain" xml:space="preserve">
+    <value>The drive is safely ejected: you can then remove it without risk.</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Title" xml:space="preserve">
+    <value>Do not unplug the drive or close the application</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Message" xml:space="preserve">
+    <value>It can take from a few minutes to more than half an hour depending on your Internet connection. Meanwhile, read the tutorial below: it explains what awaits you on Linux.</value>
+  </data>
+  <data name="Alone_BackupHowTitle.Text" xml:space="preserve">
+    <value>How to make a backup</value>
+  </data>
+  <data name="Alone_BackupHow1.Text" xml:space="preserve">
+    <value>Plug in another USB drive or an external disk, large enough for the total shown above. Not the Linux drive: it cannot be used as a backup.</value>
+  </data>
+  <data name="Alone_BackupHow2.Text" xml:space="preserve">
+    <value>Click "Open" next to a folder, select everything in it with Ctrl+A, then copy it with Ctrl+C.</value>
+  </data>
+  <data name="Alone_BackupHow3.Text" xml:space="preserve">
+    <value>In File Explorer, open the drive or the external disk, create a folder on it, then paste with Ctrl+V. Wait for the copy to finish, then do the same for each folder.</value>
+  </data>
+  <data name="Alone_BackupHow4.Text" xml:space="preserve">
+    <value>Open a few files from the backup to check that they are there, then eject the drive or the disk and put it away.</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Title" xml:space="preserve">
+    <value>No problem found on this PC</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Message" xml:space="preserve">
+    <value>Nothing needs to change on this computer before starting Linux.</value>
+  </data>
+  <data name="Alone_DoneOpenReadiness.Content" xml:space="preserve">
+    <value>Prepare my PC</value>
+  </data>
+  <data name="Alone_DonePlanTitle.Text" xml:space="preserve">
+    <value>The complete plan</value>
+  </data>
+  <data name="Alone_DonePlanWordsButton" xml:space="preserve">
+    <value>Explain the words of this plan</value>
+  </data>
+  <data name="Alone_DonePlan1.Text" xml:space="preserve">
+    <value>Before restarting</value>
+  </data>
+  <data name="Alone_DonePlan1a.Text" xml:space="preserve">
+    <value>• Save your work and close your programs: the computer is going to restart.</value>
+  </data>
+  <data name="Alone_DonePlan1b.Text" xml:space="preserve">
+    <value>• Plug the drive directly into a USB port of the computer where you want to try Linux.</value>
+  </data>
+  <data name="Alone_DonePlan2.Text" xml:space="preserve">
+    <value>Open the boot menu</value>
+  </data>
+  <data name="Alone_DonePlan2a.Text" xml:space="preserve">
+    <value>• Restart the computer: Start menu, Power button, then "Restart".</value>
+  </data>
+  <data name="Alone_DonePlan2b.Text" xml:space="preserve">
+    <value>• As soon as the screen goes dark, press the boot menu key several times in a row:</value>
+  </data>
+  <data name="Alone_DonePlan2c.Text" xml:space="preserve">
+    <value>• If Windows starts as usual, try again and press the key earlier, or use the "Restart from the drive" button if it is offered above.</value>
+  </data>
+  <data name="Alone_DonePlan3.Text" xml:space="preserve">
+    <value>Choose the drive</value>
+  </data>
+  <data name="Alone_DonePlan3a.Text" xml:space="preserve">
+    <value>• With the arrow keys, choose the line that shows the name of the drive. If there are two, take the one that starts with "UEFI".</value>
+  </data>
+  <data name="Alone_DonePlan3b.Text" xml:space="preserve">
+    <value>• Press Enter: Linux starts from the drive, which can take a minute.</value>
+  </data>
+  <data name="Alone_DonePlan4.Text" xml:space="preserve">
+    <value>Try or install</value>
+  </data>
+  <data name="Alone_DonePlan4a.Text" xml:space="preserve">
+    <value>• Linux offers to try or to install it. Start by trying: see whether everything works (screen, sound, Wi-Fi) before deciding.</value>
+  </data>
+  <data name="Alone_DoneTryOrInstallTitle.Text" xml:space="preserve">
+    <value>Try or install: what is the difference?</value>
+  </data>
+  <data name="Alone_DoneTry.Text" xml:space="preserve">
+    <value>Try: Linux runs from the drive, without changing anything on the computer's disk. It is a little slower, and nothing is kept when you shut down.</value>
+  </data>
+  <data name="Alone_DoneInstall.Text" xml:space="preserve">
+    <value>Install: Linux is copied to the computer's disk. This can erase Windows and your files: install only after making a backup.</value>
+  </data>
+  <data name="Alone_DoneBackToWindows.Text" xml:space="preserve">
+    <value>Back to Windows: shut down the computer, remove the drive, then turn it on again. Windows starts as before.</value>
+  </data>
+  <data name="Alone_DoneTroubleshootHelp.Text" xml:space="preserve">
+    <value>The drive does not show in the menu, or the screen stays black? The Troubleshooting page explains what to do.</value>
+  </data>
+  <data name="Alone_DoneTroubleshoot.Content" xml:space="preserve">
+    <value>Open troubleshooting</value>
+  </data>
+  <data name="Word_bootmenu" xml:space="preserve">
+    <value>Boot menu</value>
+  </data>
+  <data name="Word_bootmenu_Meaning" xml:space="preserve">
+    <value>A list shown right after the computer is turned on, when you press the right key: it lets the computer start from the USB drive instead of Windows.</value>
+  </data>
+  <data name="Word_live" xml:space="preserve">
+    <value>Try ("live" mode)</value>
+  </data>
+  <data name="Word_live_Meaning" xml:space="preserve">
+    <value>Linux runs directly from the drive, without installing or changing anything on the computer. Remove the drive to get Windows back.</value>
+  </data>
+  <data name="Alone_GuideInOrder.Title" xml:space="preserve">
+    <value>Follow the list in order</value>
+  </data>
+  <data name="Alone_GuideInOrder.Message" xml:space="preserve">
+    <value>Go through the steps of "Before leaving Windows" one by one, from top to bottom, and tick each one once done. Your ticks are kept: you can take a break and come back later.</value>
+  </data>
+  <data name="SettingsGuidance.Text" xml:space="preserve">
+    <value>Guidance</value>
+  </data>
+  <data name="SettingsGuidanceHelp.Text" xml:space="preserve">
+    <value>On your own, the application explains each step in detail. With someone's help, it stays simple.</value>
+  </data>
+  <data name="SettingsGuidanceMode.Header" xml:space="preserve">
+    <value>How are you creating your drive?</value>
+  </data>
+  <data name="SettingsGuidanceHelper.Content" xml:space="preserve">
+    <value>Someone is helping me</value>
+  </data>
+  <data name="SettingsGuidanceAlone.Content" xml:space="preserve">
+    <value>I am on my own</value>
+  </data>
+  <data name="Alone_DistrosHowTitle.Text" xml:space="preserve">
+    <value>How to choose?</value>
+  </data>
+  <data name="Alone_DistrosHow1.Text" xml:space="preserve">
+    <value>Each card presents a version of Linux: its name, what it is good at and the size of the download. The bottom line also shows its desktop (how the windows and menus look) and its family (versions of the same family work the same way).</value>
+  </data>
+  <data name="Alone_DistrosHow2.Text" xml:space="preserve">
+    <value>Use the search box or the two lists. For example, choose "Beginner friendly" in the "Use" list.</value>
+  </data>
+  <data name="Alone_DistrosHow3.Text" xml:space="preserve">
+    <value>Click a card to read its presentation. This installs nothing. The drive is only created after you confirm.</value>
+  </data>
+  <data name="Alone_DistrosSecureBoot.Text" xml:space="preserve">
+    <value>This sign marks a distribution that needs Secure Boot to be turned off in the computer's settings. If you are a beginner, prefer another one.</value>
+  </data>
+  <data name="Alone_DistrosAdvisor.Content" xml:space="preserve">
+    <value>I don't know: help me choose</value>
+  </data>
+  <data name="AdvancedToggle.OnContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.OffContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Shows the technical details: the creation log, the verification fingerprints and the details of errors.</value>
+  </data>
+  <data name="Advanced_ConfirmTitle" xml:space="preserve">
+    <value>Turn on the advanced mode?</value>
+  </data>
+  <data name="Advanced_ConfirmMessage" xml:space="preserve">
+    <value>The advanced mode shows technical details: the log of the drive creation, the fingerprints used to check the image and the details of errors. They can look worrying, but they change nothing to safety: the checks and the confirmations stay the same.
+
+An orange frame around the window reminds you that this mode is on. You can turn it off at any time with the same switch.</value>
+  </data>
+  <data name="Advanced_ConfirmPrimary" xml:space="preserve">
+    <value>Turn on</value>
+  </data>
+  <data name="Done_VerifiedWriteSimple" xml:space="preserve">
+    <value>Image and drive verified: the drive is identical to the official image.</value>
+  </data>
+  <data name="Done_VerifiedImageSimple" xml:space="preserve">
+    <value>Image verified: it is identical to the official image.</value>
+  </data>
+  <data name="Done_SignedSimple" xml:space="preserve">
+    <value>Authentic image: signed by the distribution.</value>
+  </data>
+  <data name="AdvancedDetailsHint.Text" xml:space="preserve">
+    <value>To see the technical details, turn on the "Advanced mode" at the top right of the window.</value>
+  </data>
+  <data name="Done_VerifiedWriteLocalSimple" xml:space="preserve">
+    <value>Drive verified: it is identical to the image you chose.</value>
+  </data>
+  <data name="Done_VerifiedImageLocalSimple" xml:space="preserve">
+    <value>The image you chose was read in full, then written to the drive.</value>
+  </data>
 </root>

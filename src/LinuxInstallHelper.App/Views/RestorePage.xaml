@@ -73,7 +73,14 @@
                     Severity="Error"
                     IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
                     Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
-                    Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" />
+                    Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
+                    <InfoBar.Content>
+                        <StackPanel Style="{StaticResource InfoBarDetailsStackStyle}">
+                            <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}" />
+                            <TextBlock x:Uid="AdvancedDetailsHint" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
+                        </StackPanel>
+                    </InfoBar.Content>
+                </InfoBar>
 
                 <StackPanel Style="{StaticResource ButtonRowStyle}">
                     <Button x:Uid="RestoreStart" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RestoreCommand}" />
