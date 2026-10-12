@@ -70,6 +70,8 @@ function Wait-ForText([System.Diagnostics.Process] $process, [string] $text, [in
 
 $runs = @(
     @{ Page = "Advisor";  Theme = "light"; Lang = "fr-FR"; Expect = "Avez-vous déjà utilisé Linux" },
+    @{ Page = "Welcome";  Theme = "light"; Lang = "fr-FR"; Expect = "Bienvenue" },
+    @{ Page = "Advisor";  Theme = "light"; Lang = "fr-FR"; Guidance = "alone"; Expect = "Le parcours en 5 étapes" },
     @{ Page = "Distros";  Theme = "light"; Lang = "fr-FR"; Expect = "Ubuntu" },
     @{ Page = "Distros";  Theme = "dark";  Lang = "en-US"; Expect = "Linux Mint" },
     @{ Page = "DistroDetails"; Theme = "light"; Lang = "fr-FR"; Expect = "Site officiel" },
@@ -80,18 +82,22 @@ $runs = @(
     @{ Page = "Software"; Theme = "light"; Lang = "fr-FR"; Expect = "ont une solution sous Linux" },
     @{ Page = "Troubleshoot"; Theme = "dark"; Lang = "fr-FR"; Expect = "Vérifier ma clé" },
     @{ Page = "Settings"; Theme = "dark";  Lang = "fr-FR"; Expect = "Paramètres" },
+    @{ Page = "Settings"; Theme = "light"; Lang = "fr-FR"; Guidance = "alone"; Expect = "Accompagnement" },
     @{ Page = "About";    Theme = "light"; Lang = "en-US"; Expect = "Open source components" }
 )
 
 if ($Launcher) { $runs = @($runs[0]) }
 
 foreach ($run in $runs) {
-    $name = "$(if ($Launcher) { 'launcher-' })$($run.Page)-$($run.Theme)-$($run.Lang)".ToLowerInvariant()
+    $name = "$(if ($Launcher) { 'launcher-' })$($run.Page)-$($run.Theme)-$($run.Lang)$(if ($run.Guidance) { "-$($run.Guidance)" })".ToLowerInvariant()
     Write-Host "Starting $name"
     $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
     $info.UseShellExecute = $false
     $info.WorkingDirectory = Split-Path $Exe
-    foreach ($argument in @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)) { $info.ArgumentList.Add($argument) }
+    $arguments = @("--page", $run.Page, "--theme", $run.Theme, "--lang", $run.Lang)
+    # --guidance forces the "someone helps me" or "I am on my own" mode for this run, without saving it.
+    if ($run.Guidance) { $arguments += @("--guidance", $run.Guidance) }
+    foreach ($argument in $arguments) { $info.ArgumentList.Add($argument) }
     $process = [System.Diagnostics.Process]::Start($info)
     $started = $process
 

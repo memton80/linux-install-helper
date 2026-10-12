@@ -2070,4 +2070,283 @@ Le Secure Boot se trouve souvent dans « Security » ou « Boot ». Enregistrez 
   <data name="Advisor_SecureBootOn" xml:space="preserve">
     <value>Sur cet ordinateur, le Secure Boot est activé.</value>
   </data>
+  <data name="WelcomeHeader.Text" xml:space="preserve">
+    <value>Bienvenue</value>
+  </data>
+  <data name="WelcomeSubtitle.Text" xml:space="preserve">
+    <value>Avant de commencer, dites-nous comment vous allez créer votre clé USB Linux. Ce choix se change à tout moment dans les Paramètres.</value>
+  </data>
+  <data name="WelcomeWithHelper.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Quelqu'un m'accompagne : l'application reste sobre</value>
+  </data>
+  <data name="WelcomeWithHelperTitle.Text" xml:space="preserve">
+    <value>Quelqu'un m'accompagne</value>
+  </data>
+  <data name="WelcomeWithHelperText.Text" xml:space="preserve">
+    <value>Une personne qui s'y connaît en informatique est avec vous. L'application reste sobre : elle donne l'essentiel, sans détails en plus.</value>
+  </data>
+  <data name="WelcomeAlone.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Je suis seul(e) : l'application explique chaque étape en détail</value>
+  </data>
+  <data name="WelcomeAloneTitle.Text" xml:space="preserve">
+    <value>Je suis seul(e)</value>
+  </data>
+  <data name="WelcomeAloneText.Text" xml:space="preserve">
+    <value>Personne ne vous aide. L'application explique chaque étape en détail, avec des mots simples, du choix de Linux jusqu'au démarrage sur la clé.</value>
+  </data>
+  <data name="Alone_AdvisorJourneyTitle.Text" xml:space="preserve">
+    <value>Le parcours en 5 étapes</value>
+  </data>
+  <data name="Alone_AdvisorJourney1.Text" xml:space="preserve">
+    <value>Choisir la distribution : répondez aux questions ci-dessous, l'application vous conseille une version de Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney2.Text" xml:space="preserve">
+    <value>Brancher une clé USB : prenez une clé dont vous n'avez plus besoin (8 Go suffisent presque toujours), car tout son contenu sera effacé.</value>
+  </data>
+  <data name="Alone_AdvisorJourney3.Text" xml:space="preserve">
+    <value>Création automatique : l'application télécharge Linux, vérifie que le fichier est intact, puis l'écrit sur la clé. Vous n'avez rien à faire pendant ce temps.</value>
+  </data>
+  <data name="Alone_AdvisorJourney4.Text" xml:space="preserve">
+    <value>Préparer le PC : l'application vérifie votre ordinateur et vous dit s'il faut changer un réglage avant de démarrer Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney5.Text" xml:space="preserve">
+    <value>Démarrer sur la clé : vous redémarrez l'ordinateur sur la clé, puis vous essayez Linux sans rien changer, ou vous l'installez.</value>
+  </data>
+  <data name="Alone_AdvisorNothingChanged.Text" xml:space="preserve">
+    <value>Cette étape ne modifie rien sur votre PC : répondez sans crainte, vous pourrez changer d'avis.</value>
+  </data>
+  <data name="Advisor_Q1_HintAlone" xml:space="preserve">
+    <value>Si vous découvrez Linux, choisissez la première réponse : l'application vous conseillera une distribution facile à prendre en main.</value>
+  </data>
+  <data name="Advisor_Q2_HintAlone" xml:space="preserve">
+    <value>La réponse est déjà cochée d'après la mémoire de cet ordinateur : vous pouvez la laisser telle quelle.</value>
+  </data>
+  <data name="Advisor_Q3_HintAlone" xml:space="preserve">
+    <value>Dans le doute, choisissez la première réponse : elle convient à la plupart des gens.</value>
+  </data>
+  <data name="Advisor_Q4_HintAlone" xml:space="preserve">
+    <value>Si vous êtes habitué(e) à Windows, la première réponse vous dépaysera le moins.</value>
+  </data>
+  <data name="Advisor_Q5_HintAlone" xml:space="preserve">
+    <value>Pour débuter, la tranquillité est le choix le plus sûr.</value>
+  </data>
+  <data name="Advisor_Q6_HintAlone" xml:space="preserve">
+    <value>« Non » est un très bon choix : l'application vous conseillera une distribution qui démarre sans toucher aux réglages de l'ordinateur.</value>
+  </data>
+  <data name="Alone_DistroFitTitle.Text" xml:space="preserve">
+    <value>Est-ce fait pour moi ?</value>
+  </data>
+  <data name="Alone_Fit_Beginner" xml:space="preserve">
+    <value>Elle est pensée pour les débutants : c'est un bon choix pour découvrir Linux.</value>
+  </data>
+  <data name="Alone_Fit_Desktop" xml:space="preserve">
+    <value>Elle s'affiche avec le bureau {0} : des fenêtres, un menu et des icônes, comme sur Windows.</value>
+  </data>
+  <data name="Alone_Fit_NoDesktop" xml:space="preserve">
+    <value>Elle n'a pas de bureau : tout se fait en tapant des commandes. Elle est faite pour les serveurs, pas pour débuter.</value>
+  </data>
+  <data name="Alone_Fit_Rolling" xml:space="preserve">
+    <value>Elle se met à jour en continu : toujours les dernières nouveautés, mais parfois des surprises. Un peu d'expérience aide.</value>
+  </data>
+  <data name="Alone_Fit_Lts" xml:space="preserve">
+    <value>C'est une version suivie longtemps (LTS) : elle reçoit des corrections pendant plusieurs années, sans gros changements. C'est le choix le plus tranquille.</value>
+  </data>
+  <data name="Alone_Fit_Stable" xml:space="preserve">
+    <value>Elle reçoit des mises à jour régulières, et une nouvelle version de temps en temps.</value>
+  </data>
+  <data name="Alone_Fit_Needs" xml:space="preserve">
+    <value>Pour l'installer, l'ordinateur doit avoir au moins {0} Go de mémoire et {1} Go de place libre. La page « Préparer mon PC » le vérifie pour vous.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOk" xml:space="preserve">
+    <value>Elle démarre sans rien changer dans les réglages de l'ordinateur.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOff" xml:space="preserve">
+    <value>Elle demande de désactiver le Secure Boot dans les réglages de l'ordinateur avant de démarrer : c'est un réglage de plus à faire.</value>
+  </data>
+  <data name="Alone_Fit_NothingInstalled" xml:space="preserve">
+    <value>Créer la clé n'installe rien sur ce PC : vous pourrez essayer Linux depuis la clé avant de décider.</value>
+  </data>
+  <data name="Alone_DistroWordsExpander.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Les mots à connaître</value>
+  </data>
+  <data name="Alone_DistroWordsTitle.Text" xml:space="preserve">
+    <value>Les mots à connaître</value>
+  </data>
+  <data name="Alone_DriveBeforeTitle.Text" xml:space="preserve">
+    <value>Avant de brancher la clé</value>
+  </data>
+  <data name="Alone_DriveCapacity" xml:space="preserve">
+    <value>Vérifiez que la clé est assez grande : l'image à écrire fait {0}. La taille est écrite sur la clé ou sur son emballage.</value>
+  </data>
+  <data name="Alone_DriveErase.Text" xml:space="preserve">
+    <value>Tout ce qui est sur la clé sera effacé. Copiez d'abord vos fichiers ailleurs, par exemple dans le dossier Documents de ce PC.</value>
+  </data>
+  <data name="Alone_DrivePlug.Text" xml:space="preserve">
+    <value>Branchez la clé directement sur un port USB de l'ordinateur, pas sur un boîtier qui ajoute des ports USB (un « hub ») ni sur l'écran.</value>
+  </data>
+  <data name="Alone_DriveWait.Text" xml:space="preserve">
+    <value>Attendez quelques secondes que Windows la reconnaisse, puis cliquez sur le bouton « Actualiser » (la flèche en rond) si elle n'apparaît pas dans la liste.</value>
+  </data>
+  <data name="Alone_DriveNoneTitle.Text" xml:space="preserve">
+    <value>La clé n'apparaît pas ? Essayez dans cet ordre :</value>
+  </data>
+  <data name="Alone_DriveNone1.Text" xml:space="preserve">
+    <value>Débranchez la clé, attendez cinq secondes, rebranchez-la, puis cliquez sur le bouton « Actualiser » (la flèche en rond).</value>
+  </data>
+  <data name="Alone_DriveNone2.Text" xml:space="preserve">
+    <value>Essayez un autre port USB, de préférence à l'arrière de l'ordinateur pour un PC de bureau.</value>
+  </data>
+  <data name="Alone_DriveNone3.Text" xml:space="preserve">
+    <value>Vérifiez que la clé s'ouvre dans l'Explorateur de fichiers. Si Windows ne la voit pas non plus, essayez une autre clé.</value>
+  </data>
+  <data name="Alone_DriveNone4.Text" xml:space="preserve">
+    <value>Les disques durs externes et les cartes mémoire ne sont pas proposés, par sécurité : utilisez une clé USB.</value>
+  </data>
+  <data name="Alone_DriveTroubleshoot.Content" xml:space="preserve">
+    <value>Ouvrir le dépannage</value>
+  </data>
+  <data name="Drive_ConfirmMessage_Alone" xml:space="preserve">
+    <value>Après « Effacer et créer », l'application télécharge Linux, le vérifie, puis l'écrit sur cette clé. Windows et les fichiers de votre PC ne sont pas touchés. Dans le doute, choisissez « Annuler » et vérifiez le nom de la clé.</value>
+  </data>
+  <data name="Stage_Resolve_Explain" xml:space="preserve">
+    <value>L'application cherche sur le site officiel le fichier de la distribution et son « empreinte », qui sert à vérifier qu'il est intact.</value>
+  </data>
+  <data name="Stage_CheckLinks_Explain" xml:space="preserve">
+    <value>Elle vérifie que les adresses de téléchargement répondent, pour choisir la plus fiable.</value>
+  </data>
+  <data name="Stage_Download_Explain" xml:space="preserve">
+    <value>Le fichier de Linux est téléchargé sur ce PC. C'est souvent l'étape la plus longue : elle dépend de votre connexion Internet.</value>
+  </data>
+  <data name="Stage_Verify_Explain" xml:space="preserve">
+    <value>L'application compare le fichier à son empreinte officielle : s'il est abîmé ou modifié, rien n'est écrit sur la clé.</value>
+  </data>
+  <data name="Stage_Write_Explain" xml:space="preserve">
+    <value>Le fichier est copié sur la clé, qui est effacée au passage. Ensuite, la clé est relue pour vérifier que la copie est exacte.</value>
+  </data>
+  <data name="Stage_Eject_Explain" xml:space="preserve">
+    <value>La clé est éjectée proprement : vous pourrez la retirer sans risque.</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Title" xml:space="preserve">
+    <value>Ne débranchez pas la clé et ne fermez pas l'application</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Message" xml:space="preserve">
+    <value>Cela peut prendre de quelques minutes à plus d'une demi-heure selon votre connexion Internet. Pendant ce temps, lisez le tutoriel ci-dessous : il explique ce qui vous attend sous Linux.</value>
+  </data>
+  <data name="Alone_BackupHowTitle.Text" xml:space="preserve">
+    <value>Comment faire une sauvegarde</value>
+  </data>
+  <data name="Alone_BackupHow1.Text" xml:space="preserve">
+    <value>Branchez une autre clé USB ou un disque externe, assez grand pour le total indiqué ci-dessus. Pas la clé Linux : elle ne peut pas servir de sauvegarde.</value>
+  </data>
+  <data name="Alone_BackupHow2.Text" xml:space="preserve">
+    <value>Cliquez sur « Ouvrir » à côté d'un dossier, sélectionnez tout son contenu avec Ctrl+A, puis copiez-le avec Ctrl+C.</value>
+  </data>
+  <data name="Alone_BackupHow3.Text" xml:space="preserve">
+    <value>Dans l'Explorateur, ouvrez la clé ou le disque externe, créez-y un dossier, puis collez avec Ctrl+V. Attendez la fin de la copie, puis recommencez pour chaque dossier.</value>
+  </data>
+  <data name="Alone_BackupHow4.Text" xml:space="preserve">
+    <value>Ouvrez quelques fichiers depuis la sauvegarde pour vérifier qu'ils sont bien là, puis éjectez la clé ou le disque et rangez-le.</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Title" xml:space="preserve">
+    <value>Aucun problème détecté sur ce PC</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Message" xml:space="preserve">
+    <value>Rien n'est à changer sur cet ordinateur avant de démarrer Linux.</value>
+  </data>
+  <data name="Alone_DoneOpenReadiness.Content" xml:space="preserve">
+    <value>Préparer mon PC</value>
+  </data>
+  <data name="Alone_DonePlanTitle.Text" xml:space="preserve">
+    <value>Le plan complet</value>
+  </data>
+  <data name="Alone_DonePlanWordsButton" xml:space="preserve">
+    <value>Expliquer les mots de ce plan</value>
+  </data>
+  <data name="Alone_DonePlan1.Text" xml:space="preserve">
+    <value>Avant de redémarrer</value>
+  </data>
+  <data name="Alone_DonePlan1a.Text" xml:space="preserve">
+    <value>• Enregistrez votre travail et fermez vos programmes : l'ordinateur va redémarrer.</value>
+  </data>
+  <data name="Alone_DonePlan1b.Text" xml:space="preserve">
+    <value>• Branchez la clé directement sur un port USB de l'ordinateur où vous voulez essayer Linux.</value>
+  </data>
+  <data name="Alone_DonePlan2.Text" xml:space="preserve">
+    <value>Ouvrir le menu de démarrage</value>
+  </data>
+  <data name="Alone_DonePlan2a.Text" xml:space="preserve">
+    <value>• Redémarrez l'ordinateur : menu Démarrer, bouton Marche/Arrêt, puis « Redémarrer ».</value>
+  </data>
+  <data name="Alone_DonePlan2b.Text" xml:space="preserve">
+    <value>• Dès que l'écran s'éteint, appuyez plusieurs fois de suite sur la touche du menu de démarrage :</value>
+  </data>
+  <data name="Alone_DonePlan2c.Text" xml:space="preserve">
+    <value>• Si Windows redémarre comme d'habitude, recommencez en appuyant plus tôt, ou utilisez le bouton « Redémarrer sur la clé » s'il est proposé ci-dessus.</value>
+  </data>
+  <data name="Alone_DonePlan3.Text" xml:space="preserve">
+    <value>Choisir la clé</value>
+  </data>
+  <data name="Alone_DonePlan3a.Text" xml:space="preserve">
+    <value>• Avec les flèches du clavier, choisissez la ligne qui porte le nom de la clé. S'il y en a deux, prenez celle qui commence par « UEFI ».</value>
+  </data>
+  <data name="Alone_DonePlan3b.Text" xml:space="preserve">
+    <value>• Appuyez sur Entrée : Linux démarre depuis la clé, cela peut prendre une minute.</value>
+  </data>
+  <data name="Alone_DonePlan4.Text" xml:space="preserve">
+    <value>Essayer ou installer</value>
+  </data>
+  <data name="Alone_DonePlan4a.Text" xml:space="preserve">
+    <value>• Linux vous propose d'essayer ou d'installer. Commencez par essayer : voyez si tout fonctionne (écran, son, Wi-Fi) avant de décider.</value>
+  </data>
+  <data name="Alone_DoneTryOrInstallTitle.Text" xml:space="preserve">
+    <value>Essayer ou installer : quelle différence ?</value>
+  </data>
+  <data name="Alone_DoneTry.Text" xml:space="preserve">
+    <value>Essayer : Linux fonctionne depuis la clé, sans rien modifier sur le disque de l'ordinateur. C'est un peu plus lent, et rien n'est gardé à l'arrêt.</value>
+  </data>
+  <data name="Alone_DoneInstall.Text" xml:space="preserve">
+    <value>Installer : Linux est copié sur le disque de l'ordinateur. Cela peut effacer Windows et vos fichiers : installez seulement après avoir fait une sauvegarde.</value>
+  </data>
+  <data name="Alone_DoneBackToWindows.Text" xml:space="preserve">
+    <value>Revenir à Windows : éteignez l'ordinateur, retirez la clé, puis rallumez-le. Windows démarre comme avant.</value>
+  </data>
+  <data name="Alone_DoneTroubleshootHelp.Text" xml:space="preserve">
+    <value>La clé n'apparaît pas dans le menu, ou l'écran reste noir ? La page Dépannage explique quoi faire.</value>
+  </data>
+  <data name="Alone_DoneTroubleshoot.Content" xml:space="preserve">
+    <value>Ouvrir le dépannage</value>
+  </data>
+  <data name="Word_bootmenu" xml:space="preserve">
+    <value>Menu de démarrage</value>
+  </data>
+  <data name="Word_bootmenu_Meaning" xml:space="preserve">
+    <value>Une liste qui s'affiche juste après l'allumage, si l'on appuie sur la bonne touche : elle permet de démarrer l'ordinateur sur la clé USB plutôt que sur Windows.</value>
+  </data>
+  <data name="Word_live" xml:space="preserve">
+    <value>Essayer (mode « live »)</value>
+  </data>
+  <data name="Word_live_Meaning" xml:space="preserve">
+    <value>Linux fonctionne directement depuis la clé, sans rien installer ni modifier sur l'ordinateur. Il suffit de retirer la clé pour retrouver Windows.</value>
+  </data>
+  <data name="Alone_GuideInOrder.Title" xml:space="preserve">
+    <value>Suivez la liste dans l'ordre</value>
+  </data>
+  <data name="Alone_GuideInOrder.Message" xml:space="preserve">
+    <value>Prenez les étapes de « Avant de quitter Windows » une par une, de haut en bas, et cochez chacune une fois faite. Vos coches sont gardées : vous pouvez faire une pause et revenir plus tard.</value>
+  </data>
+  <data name="SettingsGuidance.Text" xml:space="preserve">
+    <value>Accompagnement</value>
+  </data>
+  <data name="SettingsGuidanceHelp.Text" xml:space="preserve">
+    <value>Seul(e), l'application explique chaque étape en détail. Accompagné(e), elle reste sobre.</value>
+  </data>
+  <data name="SettingsGuidanceMode.Header" xml:space="preserve">
+    <value>Comment créez-vous votre clé ?</value>
+  </data>
+  <data name="SettingsGuidanceHelper.Content" xml:space="preserve">
+    <value>Quelqu'un m'accompagne</value>
+  </data>
+  <data name="SettingsGuidanceAlone.Content" xml:space="preserve">
+    <value>Je suis seul(e)</value>
+  </data>
 </root>

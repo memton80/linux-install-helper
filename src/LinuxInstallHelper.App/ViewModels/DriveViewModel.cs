@@ -34,6 +34,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         DisplayFormatter formatter,
         ISettingsStore settings,
         AppPaths paths,
+        GuidanceState guidance,
         ILogger<DriveViewModel> logger)
     {
         _scanner = scanner;
@@ -45,6 +46,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         _settings = settings;
         _paths = paths;
         _logger = logger;
+        IsAlone = guidance.IsAlone;
 
         _timer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         _timer.Interval = TimeSpan.FromSeconds(3);
@@ -52,6 +54,16 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     }
 
     public ObservableCollection<DriveItemViewModel> Drives { get; } = [];
+
+    /// <summary>The user is on their own: the page says what to check before plugging the drive in.</summary>
+    public bool IsAlone { get; }
+
+    /// <summary>"The image takes 5.8 GB: …", shown to a user on their own.</summary>
+    [ObservableProperty]
+    private string _capacityTip = string.Empty;
+
+    /// <summary>No drive found and the user is on their own: what to try, and a way to the troubleshooting page.</summary>
+    public bool ShowNoDrivesHelp => IsAlone && HasNoDrives;
 
     [ObservableProperty]
     private string _imageSummary = string.Empty;
@@ -71,6 +83,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     private bool _hasSelection;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowNoDrivesHelp))]
     private bool _hasNoDrives;
 
     [ObservableProperty]
@@ -101,6 +114,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         }
 
         ImageSummary = _localizer.Format("Drive_ImageSummary", _wizard.SourceName, _formatter.Size(_wizard.ImageSize));
+        CapacityTip = _localizer.Format("Alone_DriveCapacity", _formatter.Size(_wizard.ImageSize));
         ShowProcessorWarning = _wizard.Distro is { } distro
             && PcReadiness.CannotStart(PcFacts.ProcessorOf(RuntimeInformation.OSArchitecture), distro);
         IsConfirmed = false;
@@ -149,10 +163,16 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     {
         var drive = SelectedDrive!;
 
-        // Second, explicit confirmation naming the drive.
+        // Second, explicit confirmation naming the drive (a user on their own also reads what happens next).
+        var message = _localizer.Format("Drive_ConfirmMessage", drive.Name, drive.Size, drive.Disk.DisplayLetters, _wizard.SourceName);
+        if (IsAlone)
+        {
+            message += "\n\n" + _localizer.Get("Drive_ConfirmMessage_Alone");
+        }
+
         var confirmed = await _dialogs.ConfirmAsync(
             _localizer.Get("Drive_ConfirmTitle"),
-            _localizer.Format("Drive_ConfirmMessage", drive.Name, drive.Size, drive.Disk.DisplayLetters, _wizard.SourceName),
+            message,
             _localizer.Get("Drive_ConfirmPrimary"),
             _localizer.Get("Dialog_Cancel"),
             destructive: true);
@@ -165,6 +185,9 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         _wizard.ConfirmCreation(drive.Disk);
         _navigation.NavigateTo(PageKeys.Progress);
     }
+
+    [RelayCommand]
+    private void OpenTroubleshoot() => _navigation.NavigateTo(PageKeys.Troubleshoot);
 
     private bool CanStart() => SelectedDrive is not null && IsConfirmed;
 

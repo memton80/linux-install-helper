@@ -189,11 +189,14 @@ function Write-Layout($run) {
     }
 }
 
-function Start-App($page) {
+# $guidance: "helper" or "alone" forces that mode for this run (without saving it); empty keeps the saved one.
+function Start-App($page, [string] $guidance) {
     $info = New-Object System.Diagnostics.ProcessStartInfo $Exe
     $info.UseShellExecute = $false
     $info.WorkingDirectory = Split-Path $Exe
-    foreach ($argument in @("--page", $page, "--theme", "light", "--lang", "fr-FR")) { $info.ArgumentList.Add($argument) }
+    $arguments = @("--page", $page, "--theme", "light", "--lang", "fr-FR")
+    if ($guidance) { $arguments += @("--guidance", $guidance) }
+    foreach ($argument in $arguments) { $info.ArgumentList.Add($argument) }
     $process = [System.Diagnostics.Process]::Start($info)
     $deadline = (Get-Date).AddSeconds(30)
     do {
@@ -205,9 +208,9 @@ function Start-App($page) {
 }
 
 function Test-Page([hashtable] $spec, [string] $size) {
-    $name = "$($spec.Page) ($size)"
+    $name = "$($spec.Page)$(if ($spec.Guidance) { " $($spec.Guidance)" }) ($size)"
     Write-Host "== $name"
-    $process = Start-App $spec.Page
+    $process = Start-App $spec.Page $spec.Guidance
     try {
         $handle = $process.MainWindowHandle
         if ($size -eq "maximized") {
@@ -325,7 +328,9 @@ $pages = @(
     @{ Page = "Settings"; Title = "Paramètres" },
     @{ Page = "Distros"; Title = "Choisissez une distribution Linux" },
     @{ Page = "LocalIso"; Title = "Utiliser une image ISO locale" },
-    @{ Page = "Restore"; Title = "Restaurer une clé USB" }
+    @{ Page = "Restore"; Title = "Restaurer une clé USB" },
+    @{ Page = "Welcome"; Title = "Bienvenue" },
+    @{ Page = "Advisor"; Guidance = "alone"; Title = "Quelle distribution choisir ?"; Answers = $true; Buttons = @("Voir mon conseil") }
 )
 
 # The runner's screen is 1024x768: the window would not get its usual size, nor be larger than the content.
@@ -334,8 +339,8 @@ Write-Host "Screen resolution 1920x1080: $(if ($resolution -eq 0) { 'set' } else
 
 foreach ($page in $pages) { Test-Page $page "default size" }
 
-# A large window: the content is centered and must stay so.
-foreach ($page in $pages | Select-Object -First 3) { Test-Page $page "maximized" }
+# A large window: the content is centered and must stay so (the questionnaire also with its "on my own" explanations).
+foreach ($page in @($pages | Select-Object -First 3) + @($pages | Where-Object { $_.Guidance })) { Test-Page $page "maximized" }
 
 if ($moves.Count -gt 0) {
     Write-Host "Pages that moved:"

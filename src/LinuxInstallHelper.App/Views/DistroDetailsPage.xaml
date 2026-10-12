@@ -31,6 +31,46 @@
 
                 <InfoBar x:Uid="DistroDetailsSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
 
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsAlone)}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="Alone_DistroFitTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Fit, Mode=OneWay}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Grid Style="{StaticResource AdvisorReasonGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Style="{StaticResource AloneBulletIconStyle}" Glyph="&#xE76C;" />
+                                        <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Expander x:Uid="Alone_DistroWordsExpander" Style="{StaticResource ProblemExpanderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasWords), Mode=OneWay}">
+                            <Expander.Header>
+                                <TextBlock x:Uid="Alone_DistroWordsTitle" Style="{StaticResource ProblemTitleStyle}" />
+                            </Expander.Header>
+                            <ItemsControl ItemsSource="{x:Bind ViewModel.Words, Mode=OneWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Style="{StaticResource WordsListStyle}" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ExplainedWord">
+                                        <StackPanel Style="{StaticResource CompactStackStyle}">
+                                            <TextBlock Style="{StaticResource TourLabelStyle}" Text="{x:Bind Word}" />
+                                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Meaning}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander>
+                    </StackPanel>
+                </Border>
+
                 <TextBlock x:Uid="DistroDetailsAbout" Style="{StaticResource SectionTitleStyle}" />
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Style="{StaticResource CardStackStyle}">

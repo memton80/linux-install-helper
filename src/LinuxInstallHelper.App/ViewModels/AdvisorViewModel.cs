@@ -15,11 +15,13 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
     private int _selectedIndex;
 
     private string _hint;
+    private bool _isAlone;
 
-    public AdvisorQuestionViewModel(string title, string hint, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
+    public AdvisorQuestionViewModel(string title, string hint, string hintAlone, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
     {
         Title = title;
         _hint = hint;
+        HintAlone = hintAlone;
         Options = options;
         Words = words;
         WordsLabel = wordsLabel;
@@ -35,6 +37,24 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
         get => _hint;
         set => SetProperty(ref _hint, value);
     }
+
+    /// <summary>A reassuring sentence about the usual answer, shown only to a user on their own.</summary>
+    public string HintAlone { get; }
+
+    /// <summary>The user is on their own: <see cref="HintAlone"/> is shown (a template cannot see the page's view model).</summary>
+    public bool IsAlone
+    {
+        get => _isAlone;
+        set
+        {
+            if (SetProperty(ref _isAlone, value))
+            {
+                OnPropertyChanged(nameof(ShowHintAlone));
+            }
+        }
+    }
+
+    public bool ShowHintAlone => IsAlone && !string.IsNullOrWhiteSpace(HintAlone);
 
     public IReadOnlyList<string> Options { get; }
 
@@ -117,10 +137,11 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     private readonly DisplayFormatter _formatter;
     private readonly Glossary _glossary;
     private readonly PcInfo _pc;
+    private readonly GuidanceState _guidance;
     private IReadOnlyList<Distro> _distros = [];
     private bool _secureBootShown;
 
-    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary, PcInfo pc)
+    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary, PcInfo pc, GuidanceState guidance)
     {
         _catalog = catalog;
         _localizer = localizer;
@@ -129,6 +150,7 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         _formatter = formatter;
         _glossary = glossary;
         _pc = pc;
+        _guidance = guidance;
 
         // The memory of this PC preselects the second answer: the drive is usually made for the same computer.
         var memory = GC.GetGCMemoryInfo().TotalAvailableMemoryBytes;
@@ -148,13 +170,22 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
             Questions.Add(new AdvisorQuestionViewModel(
                 localizer.Format("Advisor_QuestionTitle", i, localizer.Get($"Advisor_Q{i}")),
                 hint,
+                Optional($"Advisor_Q{i}_HintAlone") ?? string.Empty,
                 options,
                 glossary.Get(QuestionWords[i - 1]),
                 localizer.Format("Advisor_WordsButton", i),
                 selected,
                 OnAnswerChanged));
         }
+
+        // A singleton: it follows the mode when it is changed in the settings.
+        ShowGuidance();
+        _guidance.PropertyChanged += (_, _) => ShowGuidance();
     }
+
+    /// <summary>The user is on their own: the page explains the whole journey and each question in more detail.</summary>
+    [ObservableProperty]
+    private bool _isAlone;
 
     public ObservableCollection<AdvisorQuestionViewModel> Questions { get; } = [];
 
@@ -216,6 +247,15 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
 
     public void OnNavigatedFrom()
     {
+    }
+
+    private void ShowGuidance()
+    {
+        IsAlone = _guidance.IsAlone;
+        foreach (var question in Questions)
+        {
+            question.IsAlone = IsAlone;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanRecommend))]

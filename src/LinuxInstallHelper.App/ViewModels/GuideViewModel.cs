@@ -98,7 +98,8 @@ public sealed partial class GuideViewModel : ObservableObject, INavigationAware
         PcInfo pc,
         ReadinessActions actions,
         INavigationService navigation,
-        DisplayFormatter formatter)
+        DisplayFormatter formatter,
+        GuidanceState guidance)
     {
         _localizer = localizer;
         _settings = settings;
@@ -109,6 +110,7 @@ public sealed partial class GuideViewModel : ObservableObject, INavigationAware
         _actions = actions;
         _navigation = navigation;
         _formatter = formatter;
+        IsAlone = guidance.IsAlone;
         _lessons = LinuxTourViewModel.LessonsFor(tours, null);
         TourOptions.Add(new FilterOption(null, localizer.Get("Guide_TourGeneric")));
 
@@ -132,6 +134,9 @@ public sealed partial class GuideViewModel : ObservableObject, INavigationAware
             AddDistros(current.Catalog.Distros);
         }
     }
+
+    /// <summary>The user is on their own: the page invites them to follow the checklist in order.</summary>
+    public bool IsAlone { get; }
 
     public ObservableCollection<ChecklistItemViewModel> Checklist { get; } = [];
 

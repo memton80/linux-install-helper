@@ -49,14 +49,18 @@ public sealed partial class BackupViewModel : ObservableObject, INavigationAware
     private readonly DisplayFormatter _formatter;
     private CancellationTokenSource? _measuring;
 
-    public BackupViewModel(ILocalizer localizer, INavigationService navigation, ISettingsStore settings, WizardState wizard, DisplayFormatter formatter)
+    public BackupViewModel(ILocalizer localizer, INavigationService navigation, ISettingsStore settings, WizardState wizard, DisplayFormatter formatter, GuidanceState guidance)
     {
         _localizer = localizer;
         _navigation = navigation;
         _settings = settings;
         _wizard = wizard;
         _formatter = formatter;
+        IsAlone = guidance.IsAlone;
     }
+
+    /// <summary>The user is on their own: the page explains how to copy the folders to a USB drive or an external disk.</summary>
+    public bool IsAlone { get; }
 
     public ObservableCollection<PersonalFolderItemViewModel> Folders { get; } = [];
 

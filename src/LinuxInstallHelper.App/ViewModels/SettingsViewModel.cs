@@ -66,6 +66,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         IDialogService dialogs,
         DisplayFormatter formatter,
         AppBusyState busy,
+        GuidanceState guidance,
         ILogger<SettingsViewModel> logger)
     {
         _store = store;
@@ -82,6 +83,9 @@ public sealed partial class SettingsViewModel : ObservableObject
         _startupLanguage = settings.Language;
         ThemeIndex = (int)settings.Theme;
         LanguageIndex = Math.Max(0, Array.IndexOf(Languages, settings.Language));
+
+        // Not asked yet (null) reads as "someone helps me", without saving anything.
+        GuidanceIndex = guidance.IsAlone ? 1 : 0;
         KeepIso = settings.KeepIsoAfterWrite;
         VerifyAfterWrite = settings.VerifyAfterWrite;
         EjectWhenDone = settings.EjectWhenDone;
@@ -109,6 +113,10 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty]
     private int _languageIndex;
+
+    /// <summary>0: someone helps the user, 1: the user is on their own.</summary>
+    [ObservableProperty]
+    private int _guidanceIndex;
 
     [ObservableProperty]
     private bool _restartRequired;
@@ -150,6 +158,16 @@ public sealed partial class SettingsViewModel : ObservableObject
         var language = Languages[Math.Clamp(value, 0, Languages.Length - 1)];
         Save(_store.Current with { Language = language });
         RestartRequired = language != _startupLanguage;
+    }
+
+    partial void OnGuidanceIndexChanged(int value)
+    {
+        if (_loading || value < 0)
+        {
+            return;
+        }
+
+        Save(_store.Current with { Guidance = value == 1 ? GuidanceMode.Alone : GuidanceMode.WithHelper });
     }
 
     partial void OnKeepIsoChanged(bool value) => Save(_store.Current with { KeepIsoAfterWrite = value });

@@ -18,6 +18,8 @@
                     <TextBlock x:Uid="GuideSubtitle" Style="{StaticResource PageSubtitleStyle}" />
                 </StackPanel>
 
+                <InfoBar x:Uid="Alone_GuideInOrder" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.IsAlone}" />
+
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Style="{StaticResource CardStackStyle}">
                         <Grid Style="{StaticResource TourHeaderGridStyle}">

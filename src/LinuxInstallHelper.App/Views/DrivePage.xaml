@@ -19,6 +19,32 @@
 
                 <InfoBar x:Uid="DriveProcessorWarning" IsClosable="False" Severity="Error" IsOpen="{x:Bind ViewModel.ShowProcessorWarning, Mode=OneWay}" />
 
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsAlone)}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="Alone_DriveBeforeTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <Grid Style="{StaticResource AloneStepsGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                            <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.CapacityTip, Mode=OneWay}" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                            <TextBlock x:Uid="Alone_DriveErase" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                            <TextBlock x:Uid="Alone_DrivePlug" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                            <TextBlock x:Uid="Alone_DriveWait" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <Border Style="{StaticResource CardBorderStyle}">
                     <StackPanel Style="{StaticResource CardStackStyle}">
                         <Grid Style="{StaticResource SettingRowGridStyle}">
@@ -40,6 +66,33 @@
                         <StackPanel Style="{StaticResource EmptyStateStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasNoDrives), Mode=OneWay}">
                             <FontIcon Glyph="&#xE88E;" Style="{StaticResource EmptyStateIconStyle}" />
                             <TextBlock x:Uid="DriveNone" Style="{StaticResource EmptyStateTextStyle}" />
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource CardStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowNoDrivesHelp), Mode=OneWay}">
+                            <TextBlock x:Uid="Alone_DriveNoneTitle" Style="{StaticResource BodyStrongWrapTextStyle}" />
+                            <Grid Style="{StaticResource AloneStepsGridStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                                <TextBlock x:Uid="Alone_DriveNone1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                                <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                                <TextBlock x:Uid="Alone_DriveNone2" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                                <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                                <TextBlock x:Uid="Alone_DriveNone3" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                                <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                                <TextBlock x:Uid="Alone_DriveNone4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            </Grid>
+                            <StackPanel Style="{StaticResource ButtonRowStyle}">
+                                <Button x:Uid="Alone_DriveTroubleshoot" Command="{x:Bind ViewModel.OpenTroubleshootCommand}" />
+                            </StackPanel>
                         </StackPanel>
 
                         <ListView

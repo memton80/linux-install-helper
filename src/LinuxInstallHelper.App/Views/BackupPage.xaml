@@ -47,6 +47,32 @@
 
                 <InfoBar x:Uid="BackupWarning" IsClosable="False" Severity="Warning" IsOpen="True" />
 
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsAlone)}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="Alone_BackupHowTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <Grid Style="{StaticResource AloneStepsGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                            <TextBlock x:Uid="Alone_BackupHow1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                            <TextBlock x:Uid="Alone_BackupHow2" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                            <TextBlock x:Uid="Alone_BackupHow3" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                            <TextBlock x:Uid="Alone_BackupHow4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <StackPanel Style="{StaticResource ButtonRowStyle}">
                     <Button x:Uid="BackupConfirm" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.ConfirmCommand}" />
                     <Button x:Uid="BackupLater" Command="{x:Bind ViewModel.LaterCommand}" />

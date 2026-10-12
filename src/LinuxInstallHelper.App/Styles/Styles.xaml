@@ -586,6 +586,47 @@
         <Setter Property="Margin" Value="0,12,0,12" />
     </Style>
 
+    <!-- Welcome: two large cards, one click is the answer -->
+    <Style x:Key="WelcomeChoicesGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="16" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="CornerRadius" Value="{StaticResource OverlayCornerRadius}" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
+    <!-- What the pages add for a user on their own ("Alone" mode) -->
+    <Style x:Key="AloneStepsGridStyle" TargetType="Grid" BasedOn="{StaticResource ComponentRowGridStyle}">
+        <Setter Property="RowSpacing" Value="10" />
+    </Style>
+
+    <Style x:Key="AloneSubStepsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="4" />
+    </Style>
+
+    <Style x:Key="AloneHintTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="AloneBulletIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
     <!-- About -->
     <Style x:Key="AppIconLargeStyle" TargetType="Image">
         <Setter Property="Width" Value="64" />
