@@ -3,8 +3,9 @@
     Uses the pages like a person would (Tab key, lists, expanders) and checks that they never move sideways.
 .DESCRIPTION
     The title of a page must keep its position and its width whatever is focused, selected or expanded: when it
-    changes, the whole page jumps from left to right. The page must not scroll horizontally either. The pages are
-    tested at the usual size of the window and maximized, where their column is centered.
+    changes, the whole page jumps from left to right. The page must not scroll horizontally either, and its column
+    must be centered. The pages are tested at the usual size of the window and maximized, where the column is
+    narrower than the page.
 .PARAMETER Exe
     Path of LinuxInstallHelper.exe.
 .PARAMETER Strict
@@ -77,6 +78,10 @@ $Types = [System.Windows.Automation.ControlType]
 $VkTab = 0x09
 $VkEscape = 0x1B
 
+# Layout tokens of Styles.xaml: the column of a page is at most ContentMaxWidth wide, centered, with PageMargin inside.
+$ContentMaxWidth = 1000
+$PageMargin = 36
+
 function Find-All($root, $condition) { $root.FindAll($Scope, $condition) }
 
 function New-Condition($property, $value) { New-Object System.Windows.Automation.PropertyCondition($property, $value) }
@@ -131,12 +136,19 @@ function Measure-Page($run) {
     $scrollable = $false
     $percent = 0
     $pattern = $null
-    if ($run.Scroll -and $run.Scroll.TryGetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern, [ref] $pattern)) {
-        $scrollable = $pattern.Current.HorizontallyScrollable
-        $percent = [math]::Max($pattern.Current.HorizontalScrollPercent, 0)
+    $expected = [double]::NaN
+    if ($run.Scroll) {
+        if ($run.Scroll.TryGetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern, [ref] $pattern)) {
+            $scrollable = $pattern.Current.HorizontallyScrollable
+            $percent = [math]::Max($pattern.Current.HorizontalScrollPercent, 0)
+        }
+
+        # Where the title is when the column is centered in the page.
+        $viewer = $run.Scroll.Current.BoundingRectangle
+        $expected = $viewer.Left + [math]::Max(0, ($viewer.Width - $ContentMaxWidth) / 2) + $PageMargin
     }
 
-    [pscustomobject]@{ Left = [math]::Round($rect.Left); Width = [math]::Round($rect.Width); Scrollable = $scrollable; Percent = [math]::Round($percent) }
+    [pscustomobject]@{ Left = [math]::Round($rect.Left); Width = [math]::Round($rect.Width); Scrollable = $scrollable; Percent = [math]::Round($percent); Expected = [math]::Round($expected) }
 }
 
 function Test-Step($run, [string] $what) {
@@ -149,7 +161,7 @@ function Test-Step($run, [string] $what) {
 
     $ref = $run.Reference
     $line = "{0,-70} x={1} width={2} hscroll={3} {4}%" -f $what, $now.Left, $now.Width, $now.Scrollable, $now.Percent
-    if ([math]::Abs($now.Left - $ref.Left) -gt 1 -or [math]::Abs($now.Width - $ref.Width) -gt 1 -or $now.Percent -gt 0) {
+    if ([math]::Abs($now.Left - $ref.Left) -gt 1 -or [math]::Abs($now.Width - $ref.Width) -gt 1 -or $now.Percent -gt 0 -or [math]::Abs($now.Left - $now.Expected) -gt 2) {
         Write-Host "  MOVED  $line"
         $script:moves += "$($run.Name): $what (x $($ref.Left) -> $($now.Left), width $($ref.Width) -> $($now.Width), hscroll $($now.Percent)%)"
     }
@@ -218,7 +230,11 @@ function Test-Page([hashtable] $spec, [string] $size) {
         $run.Reference = Measure-Page $run
         if (-not $run.Reference) { throw "'$title' was not displayed." }
         $window = $root.Current.BoundingRectangle
-        Write-Host ("  window {0}x{1}, title x={2} width={3}" -f [math]::Round($window.Width), [math]::Round($window.Height), $run.Reference.Left, $run.Reference.Width)
+        Write-Host ("  window {0}x{1}, title x={2} width={3}, centered at x={4}" -f [math]::Round($window.Width), [math]::Round($window.Height), $run.Reference.Left, $run.Reference.Width, $run.Reference.Expected)
+        if ([math]::Abs($run.Reference.Left - $run.Reference.Expected) -gt 2) {
+            Write-Host "  MOVED  the page is not centered"
+            $script:moves += "${name}: not centered (x $($run.Reference.Left), expected $($run.Reference.Expected))"
+        }
         Write-Layout $run
 
         # The keyboard: every Tab brings the focused control into view.
