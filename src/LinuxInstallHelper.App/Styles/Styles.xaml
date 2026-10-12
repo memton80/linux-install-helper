@@ -117,6 +117,19 @@
         <Setter Property="Spacing" Value="8" />
     </Style>
 
+    <!-- An icon before a text that wraps. Never a horizontal StackPanel: it gives the text all the width it wants, so the
+         text does not wrap and pushes the page past the right edge of the window. -->
+    <Style x:Key="IconTextGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="8" />
+    </Style>
+
+    <Style x:Key="IconTextIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
     <!-- A button at the end of a row (list of folders, programs, images, networks) -->
     <Style x:Key="RowButtonStyle" TargetType="Button">
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -197,6 +210,8 @@
 
     <Style x:Key="WarningIconStyle" TargetType="FontIcon">
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,1,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCautionBrush}" />
     </Style>
 
@@ -323,15 +338,14 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="AdvisorReasonPanelStyle" TargetType="StackPanel">
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="Spacing" Value="8" />
+    <Style x:Key="AdvisorReasonGridStyle" TargetType="Grid" BasedOn="{StaticResource IconTextGridStyle}">
         <Setter Property="Margin" Value="0,2,0,2" />
     </Style>
 
     <Style x:Key="AdvisorReasonIconStyle" TargetType="FontIcon">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,3,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
     </Style>
 
@@ -556,6 +570,12 @@
     <Style x:Key="ProblemExpanderStyle" TargetType="Expander">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- A text header, unlike a plain string, wraps when the window is narrow. -->
+    <Style x:Key="ProblemTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,12,0,12" />
     </Style>
 
     <!-- About -->

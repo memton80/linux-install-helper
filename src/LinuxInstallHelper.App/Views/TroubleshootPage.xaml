@@ -95,7 +95,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="vm:TroubleshootProblemViewModel">
-                        <Expander Style="{StaticResource ProblemExpanderStyle}" Header="{x:Bind Title}">
+                        <Expander Style="{StaticResource ProblemExpanderStyle}" AutomationProperties.Name="{x:Bind Title}">
+                            <Expander.Header>
+                                <TextBlock Style="{StaticResource ProblemTitleStyle}" Text="{x:Bind Title}" />
+                            </Expander.Header>
                             <StackPanel Style="{StaticResource CardStackStyle}">
                                 <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Body}" />
                                 <Button Content="{x:Bind ActionLabel}" Command="{x:Bind ActionCommand}" Visibility="{x:Bind helpers:Ui.Visible(HasAction)}" />

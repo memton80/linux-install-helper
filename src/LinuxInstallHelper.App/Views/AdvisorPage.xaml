@@ -33,18 +33,26 @@
                     <ItemsControl ItemsSource="{x:Bind Reasons}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="x:String">
-                                <StackPanel Style="{StaticResource AdvisorReasonPanelStyle}">
+                                <Grid Style="{StaticResource AdvisorReasonGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource AdvisorReasonIconStyle}" Glyph="&#xE73E;" />
-                                    <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind}" />
-                                </StackPanel>
+                                    <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind}" />
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Requirements}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Requirements)}" />
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowSecureBootWarning)}">
+                    <Grid Style="{StaticResource IconTextGridStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowSecureBootWarning)}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                         <FontIcon Style="{StaticResource WarningIconStyle}" Glyph="&#xE7BA;" />
-                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.SecureBootWarning}" />
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.SecureBootWarning}" />
+                    </Grid>
                     <Button Style="{StaticResource AccentButtonStyle}" Content="{x:Bind ChooseLabel}" Command="{x:Bind ChooseCommand}" />
                 </StackPanel>
             </Border>

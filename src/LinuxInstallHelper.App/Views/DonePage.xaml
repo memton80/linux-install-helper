@@ -18,15 +18,23 @@
 
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Style="{StaticResource CardStackStyle}">
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
-                        <FontIcon Glyph="&#xE8FB;" Style="{StaticResource StageIconStyle}" />
-                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Signature, Mode=OneWay}" />
-                    </StackPanel>
+                    <Grid Style="{StaticResource IconTextGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xE8FB;" Style="{StaticResource IconTextIconStyle}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.Signature, Mode=OneWay}" />
+                    </Grid>
                     <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.Verification, Mode=OneWay}" />
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
-                        <FontIcon Glyph="&#xE88E;" Style="{StaticResource StageIconStyle}" />
-                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.EjectStatus, Mode=OneWay}" />
-                    </StackPanel>
+                    <Grid Style="{StaticResource IconTextGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xE88E;" Style="{StaticResource IconTextIconStyle}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.EjectStatus, Mode=OneWay}" />
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -71,10 +79,14 @@
                         <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
                         <TextBlock x:Uid="DoneStep4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
                     </Grid>
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}">
-                        <FontIcon Glyph="&#xE765;" Style="{StaticResource StageIconStyle}" />
-                        <TextBlock Style="{StaticResource BootKeysTextStyle}" Text="{x:Bind ViewModel.BootKeys, Mode=OneWay}" />
-                    </StackPanel>
+                    <Grid Style="{StaticResource IconTextGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Glyph="&#xE765;" Style="{StaticResource IconTextIconStyle}" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource BootKeysTextStyle}" Text="{x:Bind ViewModel.BootKeys, Mode=OneWay}" />
+                    </Grid>
                     <StackPanel Style="{StaticResource CompactStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.CanRestart), Mode=OneWay}">
                         <TextBlock x:Uid="DoneRestartHelp" Style="{StaticResource SecondaryTextStyle}" />
                     </StackPanel>
