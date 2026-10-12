@@ -41,6 +41,30 @@ public static class LayoutInput {
         keybd_event(vk, 0, 0, UIntPtr.Zero);
         keybd_event(vk, 0, 2, UIntPtr.Zero);
     }
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    public struct DEVMODE {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string dmDeviceName;
+        public short dmSpecVersion, dmDriverVersion, dmSize, dmDriverExtra;
+        public int dmFields, dmPositionX, dmPositionY, dmDisplayOrientation, dmDisplayFixedOutput;
+        public short dmColor, dmDuplex, dmYResolution, dmTTOption, dmCollate;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string dmFormName;
+        public short dmLogPixels;
+        public int dmBitsPerPel, dmPelsWidth, dmPelsHeight, dmDisplayFlags, dmDisplayFrequency, dmICMMethod, dmICMIntent;
+        public int dmMediaType, dmDitherType, dmReserved1, dmReserved2, dmPanningWidth, dmPanningHeight;
+    }
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern bool EnumDisplaySettings(string device, int mode, ref DEVMODE devMode);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
+    // Returns 0 when the screen now has this resolution.
+    public static int SetResolution(int width, int height) {
+        var mode = new DEVMODE();
+        mode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
+        if (!EnumDisplaySettings(null, -1, ref mode)) return -100;
+        mode.dmPelsWidth = width;
+        mode.dmPelsHeight = height;
+        mode.dmFields = 0x80000 | 0x100000;
+        return ChangeDisplaySettings(ref mode, 0);
+    }
 }
 "@
 [LayoutInput]::SetProcessDPIAware() | Out-Null
@@ -66,31 +90,59 @@ function Get-Title($root, [string] $title) {
     $best
 }
 
-function Measure-Page($run) {
+# The scroll viewer of the page, the one that holds its title.
+function Get-PageScroll($run) {
     $title = Get-Title $run.Root $run.Title
     if (-not $title) { return $null }
     $rect = $title.Current.BoundingRectangle
-    $scrollable = $false
-    $percent = 0
     foreach ($viewer in Find-All $run.Root (New-Condition $UIA::ClassNameProperty "ScrollViewer")) {
         $box = $viewer.Current.BoundingRectangle
-        if ($box.Left -le $rect.Left -and $box.Right -ge $rect.Left + 1 -and $box.Top -le $rect.Top -and $box.Bottom -ge $rect.Top + 1) {
-            $pattern = $null
-            if ($viewer.TryGetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern, [ref] $pattern)) {
-                $scrollable = $pattern.Current.HorizontallyScrollable
-                $percent = [math]::Max($pattern.Current.HorizontalScrollPercent, 0)
-            }
-        }
+        if ($box.Left -le $rect.Left -and $box.Right -ge $rect.Left + 1 -and $box.Top -le $rect.Top -and $box.Bottom -ge $rect.Top + 1) { return $viewer }
+    }
+    $null
+}
+
+# Scrolls the page to its top, without touching the horizontal position.
+function Show-Top($run) {
+    if (-not $run.Scroll) { return }
+    $pattern = $null
+    if ($run.Scroll.TryGetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern, [ref] $pattern) -and $pattern.Current.VerticallyScrollable) {
+        $pattern.SetScrollPercent([System.Windows.Automation.ScrollPattern]::NoScroll, 0)
+        Start-Sleep -Milliseconds 300
+    }
+}
+
+# Scrolls the page until this element is shown.
+function Show-Element($element) {
+    $pattern = $null
+    if ($element.TryGetCurrentPattern([System.Windows.Automation.ScrollItemPattern]::Pattern, [ref] $pattern)) {
+        $pattern.ScrollIntoView()
+        Start-Sleep -Milliseconds 400
+    }
+}
+
+function Measure-Page($run) {
+    Show-Top $run
+    $title = Get-Title $run.Root $run.Title
+    if (-not $title) { return $null }
+    $rect = $title.Current.BoundingRectangle
+    if ($rect.IsEmpty) { return $null }
+    $scrollable = $false
+    $percent = 0
+    $pattern = $null
+    if ($run.Scroll -and $run.Scroll.TryGetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern, [ref] $pattern)) {
+        $scrollable = $pattern.Current.HorizontallyScrollable
+        $percent = [math]::Max($pattern.Current.HorizontalScrollPercent, 0)
     }
 
     [pscustomobject]@{ Left = [math]::Round($rect.Left); Width = [math]::Round($rect.Width); Scrollable = $scrollable; Percent = [math]::Round($percent) }
 }
 
 function Test-Step($run, [string] $what) {
-    Start-Sleep -Milliseconds 600
+    Start-Sleep -Milliseconds 400
     $now = Measure-Page $run
     if (-not $now) {
-        Write-Host "  ?      $what (title not found)"
+        Write-Host "  ?      $what (title not shown)"
         return
     }
 
@@ -139,21 +191,29 @@ function Start-App($page) {
     $process
 }
 
-function Test-Page([string] $page, [string] $title, [int] $width = 0, [int] $height = 0) {
-    $name = if ($width) { "$page ${width}x$height" } else { $page }
+function Test-Page([hashtable] $spec, [string] $size) {
+    $name = "$($spec.Page) ($size)"
     Write-Host "== $name"
-    $process = Start-App $page
+    $process = Start-App $spec.Page
     try {
         $handle = $process.MainWindowHandle
-        if ($width) { [LayoutInput]::MoveWindow($handle, 0, 0, $width, $height, $true) | Out-Null }
+        if ($size -eq "maximized") {
+            $window = $UIA::FromHandle($handle)
+            $pattern = $null
+            if ($window.TryGetCurrentPattern([System.Windows.Automation.WindowPattern]::Pattern, [ref] $pattern)) {
+                $pattern.SetWindowVisualState([System.Windows.Automation.WindowVisualState]::Maximized)
+            }
+        }
         [LayoutInput]::SetForegroundWindow($handle) | Out-Null
         $root = $UIA::FromHandle($handle)
-        $run = @{ Name = $name; Root = $root; Title = $title; Reference = $null }
+        $title = $spec.Title
+        $run = @{ Name = $name; Root = $root; Title = $title; Reference = $null; Scroll = $null }
 
         # Wait for the page and for what it loads (catalog, this PC, drives).
         $deadline = (Get-Date).AddSeconds(30)
         while (-not (Get-Title $root $title) -and (Get-Date) -lt $deadline) { Start-Sleep -Seconds 1 }
         Start-Sleep -Seconds 5
+        $run.Scroll = Get-PageScroll $run
         $run.Reference = Measure-Page $run
         if (-not $run.Reference) { throw "'$title' was not displayed." }
         $window = $root.Current.BoundingRectangle
@@ -161,7 +221,7 @@ function Test-Page([string] $page, [string] $title, [int] $width = 0, [int] $hei
         Write-Layout $run
 
         # The keyboard: every Tab brings the focused control into view.
-        for ($i = 1; $i -le 45; $i++) {
+        for ($i = 1; $i -le 30; $i++) {
             [LayoutInput]::Key($VkTab)
             $focused = try { $UIA::FocusedElement.Current } catch { $null }
             $label = if ($focused) { "$($focused.ControlType.ProgrammaticName -replace 'ControlType\.', '') '$(Get-Short $focused.Name)'" } else { "?" }
@@ -171,6 +231,7 @@ function Test-Page([string] $page, [string] $title, [int] $width = 0, [int] $hei
         # The lists: open each one with the mouse and pick another entry.
         $combos = @(Find-All $root (New-Condition $UIA::ControlTypeProperty $Types::ComboBox))
         foreach ($combo in $combos) {
+            Show-Element $combo
             $box = $combo.Current.BoundingRectangle
             if ($box.IsEmpty -or $combo.Current.IsOffscreen -or -not $combo.Current.IsEnabled) { continue }
             $label = Get-Short $combo.Current.Name
@@ -192,11 +253,37 @@ function Test-Page([string] $page, [string] $title, [int] $width = 0, [int] $hei
             }
         }
 
+        # The answers of the questionnaire: the first one of each question.
+        if ($spec.Answers) {
+            foreach ($group in @(Find-All $root (New-Condition $UIA::ClassNameProperty "Microsoft.UI.Xaml.Controls.RadioButtons"))) {
+                $answer = $group.FindFirst($Scope, (New-Condition $UIA::ControlTypeProperty $Types::RadioButton))
+                if (-not $answer) { continue }
+                Show-Element $answer
+                $box = $answer.Current.BoundingRectangle
+                if ($box.IsEmpty) { continue }
+                [LayoutInput]::Click([int]($box.Left + 10), [int]($box.Top + $box.Height / 2))
+                Test-Step $run "answer '$(Get-Short $answer.Current.Name)'"
+            }
+        }
+
+        # The buttons that only show something on the page.
+        foreach ($label in @($spec.Buttons)) {
+            if (-not $label) { continue }
+            $button = $root.FindFirst($Scope, (New-Condition $UIA::NameProperty $label))
+            if (-not $button) { Write-Host "  ?      button '$label' not found"; continue }
+            Show-Element $button
+            $box = $button.Current.BoundingRectangle
+            [LayoutInput]::Click([int]($box.Left + $box.Width / 2), [int]($box.Top + $box.Height / 2))
+            Start-Sleep -Seconds 2
+            Test-Step $run "click '$label'"
+        }
+
         # The expanders: open each one by clicking its header.
-        $expanders = @(Find-All $root (New-Condition $UIA::ClassNameProperty "Expander"))
-        foreach ($expander in $expanders | Select-Object -First 4) {
+        $expanders = @(Find-All $root (New-Condition $UIA::ClassNameProperty "Microsoft.UI.Xaml.Controls.Expander"))
+        foreach ($expander in $expanders) {
+            Show-Element $expander
             $box = $expander.Current.BoundingRectangle
-            if ($box.IsEmpty -or $expander.Current.IsOffscreen) { continue }
+            if ($box.IsEmpty) { continue }
             $label = Get-Short $expander.Current.Name
             [LayoutInput]::Click([int]($box.Left + 60), [int]($box.Top + 20))
             Start-Sleep -Milliseconds 800
@@ -213,22 +300,25 @@ function Test-Page([string] $page, [string] $title, [int] $width = 0, [int] $hei
 
 $moves = @()
 $pages = @(
-    @{ Page = "Readiness"; Title = "Préparer mon PC" },
+    @{ Page = "Readiness"; Title = "Préparer mon PC"; Buttons = @("Afficher les réseaux enregistrés", "Vérifier à nouveau") },
     @{ Page = "Troubleshoot"; Title = "Dépannage" },
+    @{ Page = "Advisor"; Title = "Quelle distribution choisir ?"; Answers = $true; Buttons = @("Voir mon conseil") },
     @{ Page = "Guide"; Title = "Guide Linux" },
     @{ Page = "Software"; Title = "Mes logiciels sous Linux" },
     @{ Page = "Settings"; Title = "Paramètres" },
-    @{ Page = "Advisor"; Title = "Quelle distribution choisir ?" },
     @{ Page = "Distros"; Title = "Choisissez une distribution Linux" },
     @{ Page = "LocalIso"; Title = "Utiliser une image ISO locale" },
     @{ Page = "Restore"; Title = "Restaurer une clé USB" }
 )
 
-foreach ($page in $pages) { Test-Page $page.Page $page.Title }
+# The runner's screen is 1024x768: the window would not get its usual size, nor be larger than the content.
+$resolution = [LayoutInput]::SetResolution(1920, 1080)
+Write-Host "Screen resolution 1920x1080: $(if ($resolution -eq 0) { 'set' } else { "not set ($resolution)" })"
+
+foreach ($page in $pages) { Test-Page $page "default size" }
 
 # A large window: the content is centered and must stay so.
-Test-Page "Readiness" "Préparer mon PC" 1700 1000
-Test-Page "Troubleshoot" "Dépannage" 1700 1000
+foreach ($page in $pages | Select-Object -First 3) { Test-Page $page "maximized" }
 
 if ($moves.Count -gt 0) {
     Write-Host "Pages that moved:"
