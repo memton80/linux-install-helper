@@ -42,6 +42,14 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
     </Style>
 
+    <!-- The direct child of a ScrollViewer is placed horizontally by DirectManipulation, which centers it from its desired
+         width, not from the width it is drawn at: a column limited by MaxWidth would then move from left to right each
+         time its content changes (an expander opens, a list changes). This host fills the width of the page, so it is
+         never centered, and the column below is centered by the layout, always at the same place. -->
+    <Style x:Key="PageContentHostStyle" TargetType="Grid">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
     <Style x:Key="PageContentStackStyle" TargetType="StackPanel">
         <Setter Property="Padding" Value="{StaticResource PageMargin}" />
         <Setter Property="Spacing" Value="16" />

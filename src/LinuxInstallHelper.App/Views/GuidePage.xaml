@@ -11,86 +11,88 @@
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
-        <StackPanel Style="{StaticResource PageContentStackStyle}">
-            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
-                <TextBlock x:Uid="GuideHeader" Style="{StaticResource PageTitleStyle}" />
-                <TextBlock x:Uid="GuideSubtitle" Style="{StaticResource PageSubtitleStyle}" />
-            </StackPanel>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <Grid Style="{StaticResource TourHeaderGridStyle}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Style="{StaticResource CompactStackStyle}">
-                            <TextBlock x:Uid="GuideChecklistTitle" Style="{StaticResource TourHeaderStyle}" />
-                            <TextBlock x:Uid="GuideChecklistSubtitle" Style="{StaticResource SecondaryTextStyle}" />
-                        </StackPanel>
-                        <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Progress, Mode=OneWay}" />
-                    </Grid>
-                    <ItemsControl ItemsSource="{x:Bind ViewModel.Checklist}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="vm:ChecklistItemViewModel">
-                                <Grid Style="{StaticResource ChecklistRowGridStyle}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox Style="{StaticResource ChecklistCheckBoxStyle}" IsChecked="{x:Bind IsDone, Mode=TwoWay}">
-                                        <StackPanel Style="{StaticResource CompactStackStyle}">
-                                            <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
-                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Body}" />
-                                            <TextBlock Style="{StaticResource ChecklistNoteStyle}" Text="{x:Bind Note, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Note), Mode=OneWay}" />
-                                        </StackPanel>
-                                    </CheckBox>
-                                    <Button
-                                        Grid.Column="1"
-                                        Style="{StaticResource RowButtonStyle}"
-                                        Content="{x:Bind ActionLabel, Mode=OneWay}"
-                                        Command="{x:Bind ActionCommand, Mode=OneWay}"
-                                        Visibility="{x:Bind helpers:Ui.VisibleIfText(ActionLabel), Mode=OneWay}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+        <Grid Style="{StaticResource PageContentHostStyle}">
+            <StackPanel Style="{StaticResource PageContentStackStyle}">
+                <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                    <TextBlock x:Uid="GuideHeader" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock x:Uid="GuideSubtitle" Style="{StaticResource PageSubtitleStyle}" />
                 </StackPanel>
-            </Border>
 
-            <Grid Style="{StaticResource GuideLessonsHeaderGridStyle}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Uid="GuideLessonsTitle" Style="{StaticResource GuideLessonsTitleStyle}" />
-                <ComboBox
-                    x:Uid="GuideTourDistro"
-                    Grid.Column="1"
-                    Style="{StaticResource FilterComboBoxStyle}"
-                    ItemsSource="{x:Bind ViewModel.TourOptions}"
-                    SelectedIndex="{x:Bind ViewModel.TourIndex, Mode=TwoWay}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="vm:FilterOption">
-                            <TextBlock Text="{x:Bind Label}" />
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <Grid Style="{StaticResource TourHeaderGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Style="{StaticResource CompactStackStyle}">
+                                <TextBlock x:Uid="GuideChecklistTitle" Style="{StaticResource TourHeaderStyle}" />
+                                <TextBlock x:Uid="GuideChecklistSubtitle" Style="{StaticResource SecondaryTextStyle}" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+                        </Grid>
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Checklist}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ChecklistItemViewModel">
+                                    <Grid Style="{StaticResource ChecklistRowGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Style="{StaticResource ChecklistCheckBoxStyle}" IsChecked="{x:Bind IsDone, Mode=TwoWay}">
+                                            <StackPanel Style="{StaticResource CompactStackStyle}">
+                                                <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind Title}" />
+                                                <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Body}" />
+                                                <TextBlock Style="{StaticResource ChecklistNoteStyle}" Text="{x:Bind Note, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Note), Mode=OneWay}" />
+                                            </StackPanel>
+                                        </CheckBox>
+                                        <Button
+                                            Grid.Column="1"
+                                            Style="{StaticResource RowButtonStyle}"
+                                            Content="{x:Bind ActionLabel, Mode=OneWay}"
+                                            Command="{x:Bind ActionCommand, Mode=OneWay}"
+                                            Visibility="{x:Bind helpers:Ui.VisibleIfText(ActionLabel), Mode=OneWay}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <Grid Style="{StaticResource GuideLessonsHeaderGridStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Uid="GuideLessonsTitle" Style="{StaticResource GuideLessonsTitleStyle}" />
+                    <ComboBox
+                        x:Uid="GuideTourDistro"
+                        Grid.Column="1"
+                        Style="{StaticResource FilterComboBoxStyle}"
+                        ItemsSource="{x:Bind ViewModel.TourOptions}"
+                        SelectedIndex="{x:Bind ViewModel.TourIndex, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:FilterOption">
+                                <TextBlock Text="{x:Bind Label}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <ItemsControl ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:LinuxLesson">
+                            <Border Style="{StaticResource CardBorderStyle}">
+                                <views:LinuxLessonView Lesson="{x:Bind}" />
+                            </Border>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-            <ItemsControl ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="vm:LinuxLesson">
-                        <Border Style="{StaticResource CardBorderStyle}">
-                            <views:LinuxLessonView Lesson="{x:Bind}" />
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
     </ScrollViewer>
 </Page>
