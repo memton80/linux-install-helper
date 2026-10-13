@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using LinuxInstallHelper.Core.Catalog;
+using LinuxInstallHelper.Core.Readiness;
 using LinuxInstallHelper.Core.Tests.Helpers;
 
 namespace LinuxInstallHelper.Core.Tests.Catalog;
@@ -52,19 +53,21 @@ public class DistroArchitecturesTests
     }
 
     [Theory]
-    [InlineData((ushort)0x8664, DistroArchitectures.X64)]
-    [InlineData((ushort)0xAA64, DistroArchitectures.Arm64)]
-    [InlineData((ushort)0x014C, null)]
-    public void Windows_machine_types_are_named_like_the_catalog(ushort machine, string? expected)
+    [InlineData((ushort)0x8664, ProcessorKind.X64, DistroArchitectures.X64)]
+    [InlineData((ushort)0xAA64, ProcessorKind.Arm64, DistroArchitectures.Arm64)]
+    [InlineData((ushort)0x014C, ProcessorKind.Unknown, null)]
+    public void Windows_machine_types_are_named_like_the_catalog(ushort machine, ProcessorKind processor, string? architecture)
     {
-        Assert.Equal(expected, MachineArchitecture.FromMachine(machine));
+        Assert.Equal(processor, PcFacts.ProcessorOfMachine(machine));
+        Assert.Equal(architecture, PcFacts.ArchitectureOf(processor));
     }
 
     [Fact]
-    public void This_computer_has_a_processor_of_the_catalog()
+    public void This_computer_starts_the_images_made_for_its_processor()
     {
-        Assert.Equal(MachineArchitecture.FromArchitecture(RuntimeInformation.OSArchitecture), MachineArchitecture.Current);
-        Assert.True(MachineArchitecture.Boots(MachineArchitecture.Current));
-        Assert.True(MachineArchitecture.Boots(null));
+        // The tests run natively (not emulated), so Windows and .NET agree on the processor.
+        Assert.Equal(PcFacts.ProcessorOf(RuntimeInformation.OSArchitecture), PcFacts.ThisProcessor);
+        Assert.Equal(PcFacts.ThisProcessor, PcFacts.Basic().Processor);
+        Assert.False(PcReadiness.CannotStart(PcFacts.ThisProcessor, PcFacts.ArchitectureOf(PcFacts.ThisProcessor)));
     }
 }

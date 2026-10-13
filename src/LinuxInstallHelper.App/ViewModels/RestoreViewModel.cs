@@ -88,6 +88,10 @@ public sealed partial class RestoreViewModel : ObservableObject, INavigationAwar
     [ObservableProperty]
     private string _errorMessage = string.Empty;
 
+    /// <summary>The exception itself, only shown in the advanced mode.</summary>
+    [ObservableProperty]
+    private string _errorDetails = string.Empty;
+
     public void OnNavigatedTo(object? parameter) => _ = RefreshAsync();
 
     public void OnNavigatedFrom()
@@ -171,7 +175,8 @@ public sealed partial class RestoreViewModel : ObservableObject, INavigationAwar
     {
         var description = _errors.Describe(ex);
         ErrorTitle = description.Title;
-        ErrorMessage = $"{description.Message}\n{description.Details}";
+        ErrorMessage = description.Message;
+        ErrorDetails = description.Details;
         HasError = true;
     }
 }

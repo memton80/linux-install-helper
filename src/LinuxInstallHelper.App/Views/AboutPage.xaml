@@ -9,47 +9,55 @@
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
-        <StackPanel Style="{StaticResource PageContentStackStyle}">
-            <Image Source="ms-appx:///Assets/AppIcon.png" Style="{StaticResource AppIconLargeStyle}" />
-            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
-                <TextBlock x:Uid="AboutHeader" Style="{StaticResource PageTitleStyle}" />
-                <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Version}" />
+        <Grid Style="{StaticResource PageContentHostStyle}">
+            <StackPanel Style="{StaticResource PageContentStackStyle}">
+                <Image Source="ms-appx:///Assets/AppIcon.png" Style="{StaticResource AppIconLargeStyle}" />
+                <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                    <TextBlock x:Uid="AboutHeader" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Version}" />
+                </StackPanel>
+
+                <InfoBar IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.IsUpdateAvailable}" Title="{x:Bind ViewModel.UpdateText}">
+                    <InfoBar.ActionButton>
+                        <Button x:Uid="UpdateBarDownload" Command="{x:Bind ViewModel.OpenUpdateCommand}" />
+                    </InfoBar.ActionButton>
+                </InfoBar>
+
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="AboutDescription" Style="{StaticResource BodyWrapTextStyle}" />
+                        <TextBlock x:Uid="AboutLicense" Style="{StaticResource BodyWrapTextStyle}" />
+                        <HyperlinkButton x:Uid="AboutRepository" Command="{x:Bind ViewModel.OpenRepositoryCommand}" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock x:Uid="AboutSafety" Style="{StaticResource SectionTitleStyle}" />
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="AboutSafetyText" Style="{StaticResource BodyWrapTextStyle}" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock x:Uid="AboutComponents" Style="{StaticResource SectionTitleStyle}" />
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Components}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ThirdPartyComponent">
+                                <Grid Style="{StaticResource ComponentRowGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <HyperlinkButton Content="{x:Bind Name}" NavigateUri="{x:Bind Url}" />
+                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind License}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+
+                <TextBlock x:Uid="AboutTrademarks" Style="{StaticResource SecondaryTextStyle}" />
             </StackPanel>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <TextBlock x:Uid="AboutDescription" Style="{StaticResource BodyWrapTextStyle}" />
-                    <TextBlock x:Uid="AboutLicense" Style="{StaticResource BodyWrapTextStyle}" />
-                    <HyperlinkButton x:Uid="AboutRepository" Command="{x:Bind ViewModel.OpenRepositoryCommand}" />
-                </StackPanel>
-            </Border>
-
-            <TextBlock x:Uid="AboutSafety" Style="{StaticResource SectionTitleStyle}" />
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <TextBlock x:Uid="AboutSafetyText" Style="{StaticResource BodyWrapTextStyle}" />
-                </StackPanel>
-            </Border>
-
-            <TextBlock x:Uid="AboutComponents" Style="{StaticResource SectionTitleStyle}" />
-            <Border Style="{StaticResource CardBorderStyle}">
-                <ItemsControl ItemsSource="{x:Bind ViewModel.Components}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="vm:ThirdPartyComponent">
-                            <Grid Style="{StaticResource ComponentRowGridStyle}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <HyperlinkButton Content="{x:Bind Name}" NavigateUri="{x:Bind Url}" />
-                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind License}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Border>
-
-            <TextBlock x:Uid="AboutTrademarks" Style="{StaticResource SecondaryTextStyle}" />
-        </StackPanel>
+        </Grid>
     </ScrollViewer>
 </Page>

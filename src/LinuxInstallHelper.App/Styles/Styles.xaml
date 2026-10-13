@@ -31,6 +31,35 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <!-- Advanced mode: the switch in the title bar and the orange frame around the window while it is on -->
+    <SolidColorBrush x:Key="AdvancedModeBrush" Color="#F7630C" />
+
+    <Style x:Key="AdvancedToggleStyle" TargetType="ToggleSwitch">
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- An overlay that takes no room: the pages never move when the mode is turned on. No background, so Mica shows. -->
+    <Style x:Key="AdvancedFrameStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource AdvancedModeBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <!-- Windows 10, and maximized windows: square corners. -->
+    <Style x:Key="AdvancedFrameSquareStyle" TargetType="Border" BasedOn="{StaticResource AdvancedFrameStyle}">
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+
+    <!-- Under the message of an error: its technical details (advanced mode) or how to show them -->
+    <Style x:Key="InfoBarDetailsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+    </Style>
+
     <!-- Pages -->
     <Style x:Key="PageRootStyle" TargetType="Grid">
         <Setter Property="Padding" Value="{StaticResource PageMargin}" />
@@ -40,6 +69,14 @@
     <Style x:Key="PageScrollViewerStyle" TargetType="ScrollViewer">
         <Setter Property="HorizontalScrollMode" Value="Disabled" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+    <!-- The direct child of a ScrollViewer is placed horizontally by DirectManipulation, which centers it from its desired
+         width, not from the width it is drawn at: a column limited by MaxWidth would then move from left to right each
+         time its content changes (an expander opens, a list changes). This host fills the width of the page, so it is
+         never centered, and the column below is centered by the layout, always at the same place. -->
+    <Style x:Key="PageContentHostStyle" TargetType="Grid">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
     <Style x:Key="PageContentStackStyle" TargetType="StackPanel">
@@ -72,6 +109,10 @@
     </Style>
 
     <Style x:Key="BodyWrapTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="BodyStrongWrapTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
@@ -111,6 +152,45 @@
     <Style x:Key="IconTextPanelStyle" TargetType="StackPanel">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="Spacing" Value="8" />
+    </Style>
+
+    <!-- An icon before a text that wraps. Never a horizontal StackPanel: it gives the text all the width it wants, so the
+         text does not wrap and pushes the page past the right edge of the window. -->
+    <Style x:Key="IconTextGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="8" />
+    </Style>
+
+    <Style x:Key="IconTextIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <!-- A button at the end of a row (list of folders, programs, images, networks) -->
+    <Style x:Key="RowButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="RowToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- A button next to a control that has a header above it (combo boxes) -->
+    <Style x:Key="BottomAlignedButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="InfoBarListPanelStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="8" />
+    </Style>
+
+    <!-- New version of the application, above the pages -->
+    <Style x:Key="UpdateInfoBarStyle" TargetType="InfoBar">
+        <Setter Property="Margin" Value="36,12,36,0" />
+        <Setter Property="Severity" Value="Informational" />
+        <Setter Property="IsClosable" Value="True" />
+        <Setter Property="IsOpen" Value="False" />
     </Style>
 
     <!-- Distribution cards -->
@@ -167,6 +247,8 @@
 
     <Style x:Key="WarningIconStyle" TargetType="FontIcon">
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,1,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCautionBrush}" />
     </Style>
 
@@ -182,10 +264,17 @@
     <!-- Filters -->
     <Style x:Key="FilterBarGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />
+        <Setter Property="RowSpacing" Value="12" />
     </Style>
 
     <Style x:Key="FilterComboBoxStyle" TargetType="ComboBox">
         <Setter Property="MinWidth" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="WideComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="MinWidth" Value="280" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 
@@ -287,15 +376,14 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="AdvisorReasonPanelStyle" TargetType="StackPanel">
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="Spacing" Value="8" />
+    <Style x:Key="AdvisorReasonGridStyle" TargetType="Grid" BasedOn="{StaticResource IconTextGridStyle}">
         <Setter Property="Margin" Value="0,2,0,2" />
     </Style>
 
     <Style x:Key="AdvisorReasonIconStyle" TargetType="FontIcon">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,3,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorSuccessBrush}" />
     </Style>
 
@@ -423,6 +511,16 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
 
+    <Style x:Key="ChecklistRowGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+    </Style>
+
+    <!-- What this computer says about a step of the checklist -->
+    <Style x:Key="ChecklistNoteStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
     <Style x:Key="GuideLessonsHeaderGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />
         <Setter Property="Margin" Value="0,8,0,0" />
@@ -461,6 +559,11 @@
         <Setter Property="Width" Value="20" />
     </Style>
 
+    <Style x:Key="BootKeysTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <!-- Backup -->
     <Style x:Key="BackupHeroIconStyle" TargetType="FontIcon" BasedOn="{StaticResource HeroIconStyle}">
         <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCautionBrush}" />
@@ -483,6 +586,75 @@
 
     <Style x:Key="FolderNameStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
+    <!-- Prepare my PC -->
+    <Style x:Key="WifiRowGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="12" />
+        <Setter Property="Padding" Value="0,6,0,6" />
+    </Style>
+
+    <Style x:Key="PasswordTextStyle" TargetType="TextBlock" BasedOn="{StaticResource MonospaceTextStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+    </Style>
+
+    <!-- My programs on Linux -->
+    <Style x:Key="SuggestionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- Troubleshooting -->
+    <Style x:Key="ProblemExpanderStyle" TargetType="Expander">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- A text header, unlike a plain string, wraps when the window is narrow. -->
+    <Style x:Key="ProblemTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,12,0,12" />
+    </Style>
+
+    <!-- Welcome: two large cards, one click is the answer -->
+    <Style x:Key="WelcomeChoicesGridStyle" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="16" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="CornerRadius" Value="{StaticResource OverlayCornerRadius}" />
+    </Style>
+
+    <Style x:Key="WelcomeChoiceIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+    </Style>
+
+    <!-- What the pages add for a user on their own ("Alone" mode) -->
+    <Style x:Key="AloneStepsGridStyle" TargetType="Grid" BasedOn="{StaticResource ComponentRowGridStyle}">
+        <Setter Property="RowSpacing" Value="10" />
+    </Style>
+
+    <Style x:Key="AloneSubStepsStackStyle" TargetType="StackPanel">
+        <Setter Property="Spacing" Value="4" />
+    </Style>
+
+    <Style x:Key="AloneHintTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="AloneBulletIconStyle" TargetType="FontIcon">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
     </Style>
 
     <!-- About -->

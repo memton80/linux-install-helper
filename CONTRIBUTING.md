@@ -41,14 +41,27 @@ dotnet publish src/LinuxInstallHelper.App -c Release -r win-x64 -p:Platform=x64 
 
 The application asks for administrator rights (writing to a raw disk requires them).
 
-Developer options: `LinuxInstallHelper.exe --page Settings --theme dark --lang fr-FR`.
+Developer options: `LinuxInstallHelper.exe --page Settings --theme dark --lang fr-FR --guidance alone --advanced`. None
+of them is saved. `--guidance helper|alone` forces the "someone helps me" or "I am on my own" mode for the session; with
+`--page`, the welcome screen that asks for it at the first start is never shown (`--page Welcome` opens it).
+`--advanced` turns the advanced mode on without its warning (orange frame, technical details shown); otherwise it is
+off at each start.
+
+The "on my own" mode only adds explanations: its blocks are hidden otherwise (`helpers:Ui.Visible(...IsAlone)`), use
+their own `Alone_*` strings, and never remove a confirmation or touch a safety check. Without a choice or with someone
+helping, every page stays exactly as before.
+
+The advanced mode (`AdvancedModeState`, the switch of the title bar) only shows or hides technical details: the pages bind
+them to `Advanced.IsOn`. Never hide a confirmation, a warning or an error message behind it, and never make a check
+depend on it.
 
 ## Commits and pull requests
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/): `feat(core): ...`, `fix(catalog): ...`,
   `ci: ...`, `docs: ...`.
-- Open the pull request against `main`. The `Build` workflow must be green (build, tests, publish and the
-  smoke test that starts the application). Catalog changes also run `Check catalog links`.
+- Open the pull request against `main`. The `Build` workflow must be green (build, tests, publish, the
+  smoke test that starts the application and the layout test that uses its pages and checks that they never move
+  sideways). Catalog changes also run `Check catalog links`.
 
 ## Adding or updating a distribution
 

@@ -17,11 +17,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid x:Name="AppTitleBar" Style="{StaticResource TitleBarGridStyle}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/AppIcon.png" Style="{StaticResource TitleBarIconStyle}" />
-                <TextBlock x:Uid="AppTitle" Style="{StaticResource TitleBarTextStyle}" />
-            </StackPanel>
+        <!-- The drag area of the title bar is AppTitleBar only (SetTitleBar): the switch next to it receives clicks. -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <!-- Room for the minimize, maximize and close buttons drawn by Windows (set from AppWindow.TitleBar.RightInset). -->
+                <ColumnDefinition x:Name="CaptionButtonsColumn" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="AppTitleBar" Style="{StaticResource TitleBarGridStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/AppIcon.png" Style="{StaticResource TitleBarIconStyle}" />
+                    <TextBlock x:Uid="AppTitle" Style="{StaticResource TitleBarTextStyle}" />
+                </StackPanel>
+            </Grid>
+            <ToggleSwitch
+                x:Name="AdvancedToggle"
+                x:Uid="AdvancedToggle"
+                Grid.Column="1"
+                Style="{StaticResource AdvancedToggleStyle}"
+                Toggled="OnAdvancedToggled" />
         </Grid>
 
         <NavigationView
@@ -59,6 +74,16 @@
                         <FontIcon Glyph="&#xE736;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem x:Uid="NavReadiness" Tag="Readiness">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7F8;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="NavTroubleshoot" Tag="Troubleshoot">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEBE8;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem x:Uid="NavAbout" Tag="About">
@@ -68,7 +93,21 @@
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
 
-            <Frame x:Name="ContentFrame" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <InfoBar x:Name="UpdateBar" x:Uid="UpdateBar" Style="{StaticResource UpdateInfoBarStyle}">
+                    <InfoBar.ActionButton>
+                        <Button x:Uid="UpdateBarDownload" Click="OnDownloadUpdate" />
+                    </InfoBar.ActionButton>
+                </InfoBar>
+                <Frame x:Name="ContentFrame" Grid.Row="1" />
+            </Grid>
         </NavigationView>
+
+        <!-- Orange frame around the window while the advanced mode is on; it lets every click through. -->
+        <Border x:Name="AdvancedFrame" Grid.RowSpan="2" Style="{StaticResource AdvancedFrameStyle}" />
     </Grid>
 </Window>

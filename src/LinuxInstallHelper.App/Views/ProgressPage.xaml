@@ -11,118 +11,128 @@
     mc:Ignorable="d">
 
     <ScrollViewer Style="{StaticResource PageScrollViewerStyle}">
-        <StackPanel Style="{StaticResource PageContentStackStyle}">
-            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
-                <TextBlock x:Uid="ProgressHeader" Style="{StaticResource PageTitleStyle}" />
-                <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Subtitle, Mode=OneWay}" />
-            </StackPanel>
-
-            <Border Style="{StaticResource CardBorderStyle}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <ItemsControl ItemsSource="{x:Bind ViewModel.Stages}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="vm:StageItemViewModel">
-                                <Grid Style="{StaticResource StageRowGridStyle}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <FontIcon
-                                        Style="{StaticResource StageIconStyle}"
-                                        Glyph="{x:Bind Glyph, Mode=OneWay}"
-                                        Foreground="{x:Bind IconBrush, Mode=OneWay}"
-                                        Visibility="{x:Bind helpers:Ui.Visible(IsNotRunning), Mode=OneWay}" />
-                                    <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(IsRunning), Mode=OneWay}" />
-                                    <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Label}" Opacity="{x:Bind LabelOpacity, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="2" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Detail, Mode=OneWay}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-
-                    <StackPanel Style="{StaticResource CompactStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}">
-                        <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.CurrentStep, Mode=OneWay}" />
-                        <ProgressBar
-                            Style="{StaticResource MainProgressBarStyle}"
-                            IsIndeterminate="{x:Bind ViewModel.IsIndeterminate, Mode=OneWay}"
-                            Value="{x:Bind ViewModel.ProgressValue, Mode=OneWay}" />
-                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.ProgressText, Mode=OneWay}" />
-                    </StackPanel>
-
-                    <InfoBar
-                        IsClosable="False"
-                        Severity="Error"
-                        IsOpen="{x:Bind ViewModel.HasFailed, Mode=OneWay}"
-                        Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
-                        Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
-                        <InfoBar.Content>
-                            <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
-                            </Expander>
-                        </InfoBar.Content>
-                    </InfoBar>
-                    <InfoBar x:Uid="ProgressCancelled" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.WasCancelled, Mode=OneWay}" />
-                    <InfoBar x:Uid="ProgressDriveUnusable" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.DriveMayBeUnusable, Mode=OneWay}" />
-
-                    <StackPanel Style="{StaticResource ButtonRowStyle}">
-                        <Button x:Uid="ProgressCancel" Command="{x:Bind ViewModel.CancelCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}" />
-                        <Button x:Uid="ProgressRetry" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RetryCommand}" Visibility="{x:Bind helpers:Ui.Collapsed(ViewModel.IsRunning), Mode=OneWay}" />
-                        <Button x:Uid="ProgressBack" Command="{x:Bind ViewModel.BackCommand}" Visibility="{x:Bind helpers:Ui.Collapsed(ViewModel.IsRunning), Mode=OneWay}" />
-                    </StackPanel>
+        <Grid Style="{StaticResource PageContentHostStyle}">
+            <StackPanel Style="{StaticResource PageContentStackStyle}">
+                <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                    <TextBlock x:Uid="ProgressHeader" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.Subtitle, Mode=OneWay}" />
                 </StackPanel>
-            </Border>
 
-            <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <Grid Style="{StaticResource TourHeaderGridStyle}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Style="{StaticResource CompactStackStyle}">
-                            <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind ViewModel.Tour.Header, Mode=OneWay}" />
-                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Tour.Subtitle, Mode=OneWay}" />
+                <InfoBar x:Uid="Alone_ProgressKeepPlugged" IsClosable="False" Severity="Informational" IsOpen="{x:Bind helpers:Ui.Both(ViewModel.IsAlone, ViewModel.IsRunning), Mode=OneWay}" />
+
+                <Border Style="{StaticResource CardBorderStyle}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Stages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:StageItemViewModel">
+                                    <Grid Style="{StaticResource StageRowGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon
+                                            Style="{StaticResource StageIconStyle}"
+                                            Glyph="{x:Bind Glyph, Mode=OneWay}"
+                                            Foreground="{x:Bind IconBrush, Mode=OneWay}"
+                                            Visibility="{x:Bind helpers:Ui.Visible(IsNotRunning), Mode=OneWay}" />
+                                        <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(IsRunning), Mode=OneWay}" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource CompactStackStyle}">
+                                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind Label}" Opacity="{x:Bind LabelOpacity, Mode=OneWay}" />
+                                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Explanation}" Visibility="{x:Bind helpers:Ui.Visible(ShowExplanation)}" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Detail, Mode=OneWay}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <StackPanel Style="{StaticResource CompactStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}">
+                            <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind ViewModel.CurrentStep, Mode=OneWay}" />
+                            <ProgressBar
+                                Style="{StaticResource MainProgressBarStyle}"
+                                IsIndeterminate="{x:Bind ViewModel.IsIndeterminate, Mode=OneWay}"
+                                Value="{x:Bind ViewModel.ProgressValue, Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.ProgressText, Mode=OneWay}" />
                         </StackPanel>
-                        <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Tour.Position, Mode=OneWay}" />
-                    </Grid>
 
-                    <views:LinuxLessonView Lesson="{x:Bind ViewModel.Tour.Current, Mode=OneWay}" />
+                        <InfoBar
+                            IsClosable="False"
+                            Severity="Error"
+                            IsOpen="{x:Bind ViewModel.HasFailed, Mode=OneWay}"
+                            Title="{x:Bind ViewModel.ErrorTitle, Mode=OneWay}"
+                            Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}">
+                            <InfoBar.Content>
+                                <StackPanel Style="{StaticResource InfoBarDetailsStackStyle}">
+                                    <Expander x:Uid="ProgressErrorDetails" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
+                                        <TextBlock Style="{StaticResource MonospaceTextStyle}" Text="{x:Bind ViewModel.ErrorDetails, Mode=OneWay}" />
+                                    </Expander>
+                                    <TextBlock x:Uid="AdvancedDetailsHint" Style="{StaticResource SecondaryTextStyle}" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOff), Mode=OneWay}" />
+                                </StackPanel>
+                            </InfoBar.Content>
+                        </InfoBar>
+                        <InfoBar x:Uid="ProgressCancelled" IsClosable="False" Severity="Informational" IsOpen="{x:Bind ViewModel.WasCancelled, Mode=OneWay}" />
+                        <InfoBar x:Uid="ProgressDriveUnusable" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.DriveMayBeUnusable, Mode=OneWay}" />
 
-                    <StackPanel Style="{StaticResource ButtonRowStyle}">
-                        <Button x:Uid="TourPrevious" Command="{x:Bind ViewModel.Tour.PreviousCommand}" />
-                        <Button x:Uid="TourNext" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.Tour.NextCommand}" />
-                        <Button Command="{x:Bind ViewModel.Tour.TogglePlayCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}">
-                            <StackPanel Style="{StaticResource IconTextPanelStyle}">
-                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="{x:Bind ViewModel.Tour.PlayGlyph, Mode=OneWay}" />
-                                <TextBlock Text="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}" />
-                            </StackPanel>
-                        </Button>
+                        <StackPanel Style="{StaticResource ButtonRowStyle}">
+                            <Button x:Uid="ProgressCancel" Command="{x:Bind ViewModel.CancelCommand}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}" />
+                            <Button x:Uid="ProgressRetry" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RetryCommand}" Visibility="{x:Bind helpers:Ui.Collapsed(ViewModel.IsRunning), Mode=OneWay}" />
+                            <Button x:Uid="ProgressBack" Command="{x:Bind ViewModel.BackCommand}" Visibility="{x:Bind helpers:Ui.Collapsed(ViewModel.IsRunning), Mode=OneWay}" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Border>
+                </Border>
 
-            <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True">
-                <StackPanel Style="{StaticResource CardStackStyle}">
-                    <ListView x:Name="LogList" Style="{StaticResource LogListViewStyle}" ItemsSource="{x:Bind ViewModel.Logs}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="vm:LogItemViewModel">
-                                <Grid Style="{StaticResource LogRowGridStyle}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Style="{StaticResource LogTimeStyle}" Text="{x:Bind Time}" />
-                                    <FontIcon Grid.Column="1" Style="{StaticResource LogIconStyle}" Glyph="{x:Bind Glyph}" Foreground="{x:Bind IconBrush}" />
-                                    <TextBlock Grid.Column="2" Style="{StaticResource LogMessageStyle}" Text="{x:Bind Message}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <HyperlinkButton x:Uid="ProgressOpenLogs" Command="{x:Bind ViewModel.OpenLogsCommand}" />
-                </StackPanel>
-            </Expander>
-        </StackPanel>
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsRunning), Mode=OneWay}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <Grid Style="{StaticResource TourHeaderGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Style="{StaticResource CompactStackStyle}">
+                                <TextBlock Style="{StaticResource TourHeaderStyle}" Text="{x:Bind ViewModel.Tour.Header, Mode=OneWay}" />
+                                <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Tour.Subtitle, Mode=OneWay}" />
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Style="{StaticResource TourPositionStyle}" Text="{x:Bind ViewModel.Tour.Position, Mode=OneWay}" />
+                        </Grid>
+
+                        <views:LinuxLessonView Lesson="{x:Bind ViewModel.Tour.Current, Mode=OneWay}" />
+
+                        <StackPanel Style="{StaticResource ButtonRowStyle}">
+                            <Button x:Uid="TourPrevious" Command="{x:Bind ViewModel.Tour.PreviousCommand}" />
+                            <Button x:Uid="TourNext" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.Tour.NextCommand}" />
+                            <Button Command="{x:Bind ViewModel.Tour.TogglePlayCommand}" ToolTipService.ToolTip="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}">
+                                <StackPanel Style="{StaticResource IconTextPanelStyle}">
+                                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="{x:Bind ViewModel.Tour.PlayGlyph, Mode=OneWay}" />
+                                    <TextBlock Text="{x:Bind ViewModel.Tour.PlayLabel, Mode=OneWay}" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Expander x:Uid="ProgressLog" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Visibility="{x:Bind helpers:Ui.Visible(Advanced.IsOn), Mode=OneWay}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <ListView x:Name="LogList" Style="{StaticResource LogListViewStyle}" ItemsSource="{x:Bind ViewModel.Logs}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:LogItemViewModel">
+                                    <Grid Style="{StaticResource LogRowGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource LogTimeStyle}" Text="{x:Bind Time}" />
+                                        <FontIcon Grid.Column="1" Style="{StaticResource LogIconStyle}" Glyph="{x:Bind Glyph}" Foreground="{x:Bind IconBrush}" />
+                                        <TextBlock Grid.Column="2" Style="{StaticResource LogMessageStyle}" Text="{x:Bind Message}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <HyperlinkButton x:Uid="ProgressOpenLogs" Command="{x:Bind ViewModel.OpenLogsCommand}" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Grid>
     </ScrollViewer>
 </Page>

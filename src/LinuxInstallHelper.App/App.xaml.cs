@@ -8,8 +8,15 @@ using LinuxInstallHelper.Core.Disks.Windows;
 using LinuxInstallHelper.Core.Download;
 using LinuxInstallHelper.Core.Http;
 using LinuxInstallHelper.Core.Images;
+using LinuxInstallHelper.Core.Network;
+using LinuxInstallHelper.Core.Network.Windows;
+using LinuxInstallHelper.Core.Readiness;
+using LinuxInstallHelper.Core.Readiness.Windows;
 using LinuxInstallHelper.Core.Settings;
+using LinuxInstallHelper.Core.Software;
+using LinuxInstallHelper.Core.Software.Windows;
 using LinuxInstallHelper.Core.Tour;
+using LinuxInstallHelper.Core.Updates;
 using LinuxInstallHelper.Core.Verification;
 using LinuxInstallHelper.Core.Workflow;
 using LinuxInstallHelper.Core.Writing;
@@ -67,8 +74,23 @@ public partial class App : Application
 
         var settings = Services.GetRequiredService<ISettingsStore>().Current;
         Services.GetRequiredService<IThemeService>().Apply(_startup.Theme ?? settings.Theme);
-        _window.Start(_startup.Page ?? PageKeys.Advisor);
+        if (_startup.Guidance is { } guidance)
+        {
+            Services.GetRequiredService<GuidanceState>().Force(guidance);
+        }
+
+        if (_startup.Advanced)
+        {
+            Services.GetRequiredService<AdvancedModeState>().IsOn = true;
+        }
+
+        // The welcome screen asks once whether someone helps; never with --page (the CI opens each page directly).
+        _window.Start(_startup.Page ?? (settings.Guidance is null ? PageKeys.Welcome : PageKeys.Advisor));
         _window.Activate();
+
+        // In the background: the pages that need them get them without waiting.
+        _ = Services.GetRequiredService<PcInfo>().GetAsync();
+        _ = Services.GetRequiredService<UpdateNotifier>().CheckAsync();
     }
 
     private static void ApplyLanguage(string? language)
@@ -113,7 +135,9 @@ public partial class App : Application
             sp.GetRequiredService<HttpClient>(), null, sp.GetRequiredService<ILogger<ResumableDownloader>>()));
         services.AddSingleton<IImageVerifier, ImageVerifier>();
         services.AddSingleton<IDiskService, WindowsDiskService>();
-        services.AddSingleton<IRawDiskAccess, WindowsRawDiskAccess>();
+        services.AddSingleton<WindowsRawDiskAccess>();
+        services.AddSingleton<IRawDiskAccess>(sp => sp.GetRequiredService<WindowsRawDiskAccess>());
+        services.AddSingleton<IRawDiskReader>(sp => sp.GetRequiredService<WindowsRawDiskAccess>());
         services.AddSingleton<IDiskEjector, WindowsDiskEjector>();
         services.AddSingleton<IDiskFormatter, DiskpartFormatter>();
         services.AddSingleton<IUsbWriter>(sp => new RawDiskWriter(
@@ -123,6 +147,11 @@ public partial class App : Application
             sp.GetRequiredService<ILogger<RawDiskWriter>>()));
         services.AddSingleton<ICreationPipeline, CreationPipeline>();
         services.AddSingleton(_ => TourBook.LoadEmbedded());
+        services.AddSingleton<IPcProbe, WindowsPcProbe>();
+        services.AddSingleton<IWifiNetworkReader, WindowsWifiNetworkReader>();
+        services.AddSingleton<IInstalledProgramSource, WindowsInstalledPrograms>();
+        services.AddSingleton<IAppUpdateChecker>(sp => new AppUpdateChecker(
+            sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<ILogger<AppUpdateChecker>>()));
 
         // UI services
         services.AddSingleton<ILocalizer, ResourceLocalizer>();
@@ -133,13 +162,19 @@ public partial class App : Application
         services.AddSingleton<IUiDispatcher, UiDispatcher>();
         services.AddSingleton<AppBusyState>();
         services.AddSingleton<WizardState>();
+        services.AddSingleton<GuidanceState>();
+        services.AddSingleton<AdvancedModeState>();
         services.AddSingleton<DisplayFormatter>();
         services.AddSingleton<Glossary>();
         services.AddSingleton<ErrorDescriber>();
         services.AddSingleton<DriveScanner>();
+        services.AddSingleton<PcInfo>();
+        services.AddSingleton<ReadinessActions>();
+        services.AddSingleton<UpdateNotifier>();
         services.AddSingleton<MainWindow>();
 
         // View models (the distributions list keeps its state while navigating)
+        services.AddTransient<WelcomeViewModel>();
         services.AddSingleton<AdvisorViewModel>();
         services.AddSingleton<DistrosViewModel>();
         services.AddTransient<DistroDetailsViewModel>();
@@ -150,6 +185,9 @@ public partial class App : Application
         services.AddTransient<DoneViewModel>();
         services.AddTransient<RestoreViewModel>();
         services.AddTransient<GuideViewModel>();
+        services.AddTransient<ReadinessViewModel>();
+        services.AddTransient<SoftwareViewModel>();
+        services.AddTransient<TroubleshootViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<AboutViewModel>();
 
@@ -163,9 +201,10 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c> (used by the CI to take screenshots).
+    /// Developer options: <c>--page Settings</c>, <c>--theme dark</c>, <c>--lang fr-FR</c>, <c>--guidance alone</c>,
+    /// <c>--advanced</c> (used by the CI to take screenshots). None of them is saved.
     /// </summary>
-    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language)
+    private sealed record StartupOptions(string? Page, AppTheme? Theme, string? Language, GuidanceMode? Guidance, bool Advanced)
     {
         public static StartupOptions Parse(string[] args)
         {
@@ -177,10 +216,18 @@ public partial class App : Application
 
             AppTheme? theme = Enum.TryParse<AppTheme>(Value("--theme"), ignoreCase: true, out var t) ? t : null;
             var language = Value("--lang");
+            GuidanceMode? guidance = Value("--guidance")?.ToLowerInvariant() switch
+            {
+                "helper" => GuidanceMode.WithHelper,
+                "alone" => GuidanceMode.Alone,
+                _ => null,
+            };
             return new StartupOptions(
                 Value("--page"),
                 theme,
-                language is not null && UserSettings.SupportedLanguages.Contains(language) ? language : null);
+                language is not null && UserSettings.SupportedLanguages.Contains(language) ? language : null,
+                guidance,
+                Array.Exists(args, a => string.Equals(a, "--advanced", StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

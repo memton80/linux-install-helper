@@ -40,6 +40,7 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         AppBusyState busy,
         IUiDispatcher dispatcher,
         TourBook tours,
+        GuidanceState guidance,
         ILogger<ProgressViewModel> logger)
     {
         _pipeline = pipeline;
@@ -54,13 +55,17 @@ public sealed partial class ProgressViewModel : ObservableObject, INavigationAwa
         _busy = busy;
         _dispatcher = dispatcher;
         _logger = logger;
+        IsAlone = guidance.IsAlone;
 
         Tour = new LinuxTourViewModel(localizer, tours, dispatcher);
         foreach (var stage in Enum.GetValues<CreationStage>())
         {
-            Stages.Add(new StageItemViewModel(stage, localizer.Get("Stage_" + stage)));
+            Stages.Add(new StageItemViewModel(stage, localizer.Get("Stage_" + stage), localizer.Get($"Stage_{stage}_Explain"), IsAlone));
         }
     }
+
+    /// <summary>The user is on their own: each step is explained, and the page says not to unplug the drive.</summary>
+    public bool IsAlone { get; }
 
     public ObservableCollection<StageItemViewModel> Stages { get; } = [];
 

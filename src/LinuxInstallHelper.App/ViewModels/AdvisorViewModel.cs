@@ -3,8 +3,8 @@ using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
-using LinuxInstallHelper.Core;
 using LinuxInstallHelper.Core.Catalog;
+using LinuxInstallHelper.Core.Readiness;
 
 namespace LinuxInstallHelper.App.ViewModels;
 
@@ -14,10 +14,14 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
     private readonly Action _changed;
     private int _selectedIndex;
 
-    public AdvisorQuestionViewModel(string title, string hint, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
+    private string _hint;
+    private bool _isAlone;
+
+    public AdvisorQuestionViewModel(string title, string hint, string hintAlone, IReadOnlyList<string> options, IReadOnlyList<ExplainedWord> words, string wordsLabel, int selectedIndex, Action changed)
     {
         Title = title;
-        Hint = hint;
+        _hint = hint;
+        HintAlone = hintAlone;
         Options = options;
         Words = words;
         WordsLabel = wordsLabel;
@@ -27,8 +31,30 @@ public sealed class AdvisorQuestionViewModel : ObservableObject
 
     public string Title { get; }
 
-    /// <summary>Extra explanation, may be empty.</summary>
-    public string Hint { get; }
+    /// <summary>Extra explanation, may be empty. Completed with what this computer says once it is known.</summary>
+    public string Hint
+    {
+        get => _hint;
+        set => SetProperty(ref _hint, value);
+    }
+
+    /// <summary>A reassuring sentence about the usual answer, shown only to a user on their own.</summary>
+    public string HintAlone { get; }
+
+    /// <summary>The user is on their own: <see cref="HintAlone"/> is shown (a template cannot see the page's view model).</summary>
+    public bool IsAlone
+    {
+        get => _isAlone;
+        set
+        {
+            if (SetProperty(ref _isAlone, value))
+            {
+                OnPropertyChanged(nameof(ShowHintAlone));
+            }
+        }
+    }
+
+    public bool ShowHintAlone => IsAlone && !string.IsNullOrWhiteSpace(HintAlone);
 
     public IReadOnlyList<string> Options { get; }
 
@@ -111,9 +137,12 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     private readonly WizardState _wizard;
     private readonly DisplayFormatter _formatter;
     private readonly Glossary _glossary;
+    private readonly PcInfo _pc;
+    private readonly GuidanceState _guidance;
     private IReadOnlyList<Distro> _distros = [];
+    private bool _secureBootShown;
 
-    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary)
+    public AdvisorViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary, PcInfo pc, GuidanceState guidance)
     {
         _catalog = catalog;
         _localizer = localizer;
@@ -121,6 +150,8 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         _wizard = wizard;
         _formatter = formatter;
         _glossary = glossary;
+        _pc = pc;
+        _guidance = guidance;
 
         // The memory and the processor of this PC preselect the second and third answers: the drive is usually made for
         // the same computer. They stay questions, since it may be for another one.
@@ -129,12 +160,12 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         var memoryHint = memory > 0
             ? localizer.Format("Advisor_MemoryHint", Math.Round(memory / (1024.0 * 1024 * 1024)).ToString(CultureInfo.CurrentCulture))
             : string.Empty;
-        var processor = MachineArchitecture.Current;
+        var processor = PcFacts.ArchitectureOf(PcFacts.ThisProcessor);
         var processorHint = processor is null ? string.Empty : localizer.Format("Advisor_ProcessorHint", ProcessorText.Name(localizer, processor));
-        var processorAnswer = processor switch
+        var processorAnswer = PcFacts.ThisProcessor switch
         {
-            DistroArchitectures.X64 => (int)ComputerProcessor.IntelOrAmd,
-            DistroArchitectures.Arm64 => (int)ComputerProcessor.Arm,
+            ProcessorKind.X64 => (int)ComputerProcessor.IntelOrAmd,
+            ProcessorKind.Arm64 => (int)ComputerProcessor.Arm,
             _ => -1,
         };
 
@@ -159,13 +190,22 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
             Questions.Add(new AdvisorQuestionViewModel(
                 localizer.Format("Advisor_QuestionTitle", i, localizer.Get($"Advisor_Q{i}")),
                 hint,
+                Optional($"Advisor_Q{i}_HintAlone") ?? string.Empty,
                 options,
                 glossary.Get(QuestionWords[i - 1]),
                 localizer.Format("Advisor_WordsButton", i),
                 selected,
                 OnAnswerChanged));
         }
+
+        // A singleton: it follows the mode when it is changed in the settings.
+        ShowGuidance();
+        _guidance.PropertyChanged += (_, _) => ShowGuidance();
     }
+
+    /// <summary>The user is on their own: the page explains the whole journey and each question in more detail.</summary>
+    [ObservableProperty]
+    private bool _isAlone;
 
     public ObservableCollection<AdvisorQuestionViewModel> Questions { get; } = [];
 
@@ -202,10 +242,48 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         {
             _ = LoadAsync();
         }
+
+        if (!_secureBootShown)
+        {
+            _ = ShowSecureBootAsync();
+        }
+    }
+
+    /// <summary>
+    /// The question about the BIOS: when Secure Boot is already off on this computer (or absent, in the old BIOS mode), no
+    /// distribution needs a change, so "Yes" is preselected; otherwise the hint says that it is on.
+    /// </summary>
+    private async Task ShowSecureBootAsync()
+    {
+        _secureBootShown = true;
+        var facts = await _pc.GetAsync();
+        var question = Questions[QuestionCount - 1];
+        var off = facts.SecureBootEnabled == false || facts.Firmware == FirmwareKind.Bios;
+        if (off)
+        {
+            question.Hint = _localizer.Get("Advisor_SecureBootOff");
+            if (question.SelectedIndex < 0)
+            {
+                question.SelectedIndex = 1;
+            }
+        }
+        else if (facts.SecureBootEnabled == true)
+        {
+            question.Hint = $"{question.Hint} {_localizer.Get("Advisor_SecureBootOn")}".Trim();
+        }
     }
 
     public void OnNavigatedFrom()
     {
+    }
+
+    private void ShowGuidance()
+    {
+        IsAlone = _guidance.IsAlone;
+        foreach (var question in Questions)
+        {
+            question.IsAlone = IsAlone;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanRecommend))]

@@ -12,6 +12,16 @@ public enum AppTheme
     Dark,
 }
 
+/// <summary>How much the application explains, chosen on the welcome screen.</summary>
+public enum GuidanceMode
+{
+    /// <summary>Someone who knows computers helps: the pages stay as they are.</summary>
+    WithHelper,
+
+    /// <summary>The user is on their own: the pages explain each step in more detail.</summary>
+    Alone,
+}
+
 /// <summary>Preferences saved in <c>%LOCALAPPDATA%\LinuxInstallHelper\settings.json</c>.</summary>
 public sealed record UserSettings
 {
@@ -32,11 +42,17 @@ public sealed record UserSettings
     /// <summary>Safely remove the drive when it is ready.</summary>
     public bool EjectWhenDone { get; init; } = true;
 
+    /// <summary>Ask GitHub at startup whether a newer version of the application is published.</summary>
+    public bool CheckForUpdates { get; init; } = true;
+
     /// <summary>
     /// Items of the "before leaving Windows" checklist already done, as comma-separated keys (a string keeps the record's
     /// value equality).
     /// </summary>
     public string? ChecklistDone { get; init; }
+
+    /// <summary><c>null</c> until the welcome screen has asked; behaves like <see cref="GuidanceMode.WithHelper"/>.</summary>
+    public GuidanceMode? Guidance { get; init; }
 
     public static IReadOnlyList<string> SupportedLanguages { get; } = ["en-US", "fr-FR"];
 

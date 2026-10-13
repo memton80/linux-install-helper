@@ -23,7 +23,7 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
     private readonly Glossary _glossary;
     private Distro? _distro;
 
-    public DistroDetailsViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary)
+    public DistroDetailsViewModel(ICatalogService catalog, ILocalizer localizer, INavigationService navigation, WizardState wizard, DisplayFormatter formatter, Glossary glossary, GuidanceState guidance)
     {
         _catalog = catalog;
         _localizer = localizer;
@@ -32,7 +32,15 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
         _formatter = formatter;
         _glossary = glossary;
         WordsLabel = localizer.Get("DistroDetails_WordsButton");
+        IsAlone = guidance.IsAlone;
     }
+
+    /// <summary>The user is on their own: the page says whether the distribution suits a beginner and explains its words.</summary>
+    public bool IsAlone { get; }
+
+    /// <summary>"Is it for me?": what the distribution means for the user, in plain sentences (only shown to a user on their own).</summary>
+    [ObservableProperty]
+    private IReadOnlyList<string> _fit = [];
 
     [ObservableProperty]
     private DistroItemViewModel? _item;
@@ -49,7 +57,10 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
     private IReadOnlyList<DistroFact> _facts = [];
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasWords))]
     private IReadOnlyList<ExplainedWord> _words = [];
+
+    public bool HasWords => Words.Count > 0;
 
     [ObservableProperty]
     private string _website = string.Empty;
@@ -132,6 +143,7 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
         Explanation = simple == key ? description : simple;
         Description = simple == key ? string.Empty : description;
         Facts = BuildFacts(distro);
+        Fit = IsAlone ? BuildFit(distro) : [];
         Words = _glossary.ForDistro(distro, mentionsSecureBoot: true, mentionsDownload: true);
         Website = distro.Homepage;
         WebsiteLabel = _localizer.Format("DistroDetails_Website", Host(distro.Homepage));
@@ -169,6 +181,33 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
             _localizer.Get("DistroDetails_Fact_SecureBoot"),
             _localizer.Get(distro.SecureBoot ? "DistroDetails_SecureBootOk" : "DistroDetails_SecureBootOff")));
         return facts;
+    }
+
+    private List<string> BuildFit(Distro distro)
+    {
+        var fit = new List<string>();
+        if (distro.HasCategory(DistroCategories.Beginner))
+        {
+            fit.Add(_localizer.Get("Alone_Fit_Beginner"));
+        }
+
+        fit.Add(!string.IsNullOrWhiteSpace(distro.Desktop) && distro.Desktop != "None"
+            ? _localizer.Format("Alone_Fit_Desktop", distro.Desktop)
+            : _localizer.Get("Alone_Fit_NoDesktop"));
+
+        fit.Add(_localizer.Get(
+            distro.HasCategory(DistroCategories.Rolling) ? "Alone_Fit_Rolling"
+            : distro.Version.Contains("LTS", StringComparison.Ordinal) ? "Alone_Fit_Lts"
+            : "Alone_Fit_Stable"));
+
+        if (distro.Requirements is { RamMb: { } ram, DiskGb: { } disk })
+        {
+            fit.Add(_localizer.Format("Alone_Fit_Needs", (ram / 1024.0).ToString("0.#", CultureInfo.CurrentCulture), disk));
+        }
+
+        fit.Add(_localizer.Get(distro.SecureBoot ? "Alone_Fit_SecureBootOk" : "Alone_Fit_SecureBootOff"));
+        fit.Add(_localizer.Get("Alone_Fit_NothingInstalled"));
+        return fit;
     }
 
     // "https://www.ubuntu.com/desktop" reads "ubuntu.com".

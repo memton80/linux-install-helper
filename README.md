@@ -20,6 +20,17 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
 
 ## Fonctionnalités
 
+- **Accompagné ou seul** : au premier lancement, l'application demande si quelqu'un qui s'y connaît vous aide ou si vous
+  êtes seul(e). Accompagné, elle reste sobre. Seul, elle ajoute des explications pas à pas : le parcours en 5 étapes, une
+  aide sous chaque question, comment lire la liste des distributions, « Est-ce fait pour moi ? » et les mots à connaître
+  pour chaque distribution, quoi vérifier
+  avant de brancher la clé, ce que fait chaque étape de la création, comment sauvegarder vos fichiers, et le plan complet
+  pour démarrer sur la clé, l'essayer ou l'installer, puis revenir à Windows. Ce mode n'ajoute que des explications : les
+  confirmations et les garde-fous restent les mêmes. Le choix se change à tout moment dans les Paramètres.
+- **Mode avancé** : un interrupteur dans la barre de titre affiche les détails techniques, masqués par défaut pour ne pas
+  inquiéter : le journal pendant la création de la clé, les détails techniques d'une erreur, les empreintes SHA-256 et
+  OpenPGP de la page finale, les messages bruts des erreurs. L'activer demande une confirmation, et un cadre orange entoure
+  alors la fenêtre. Il est désactivé à chaque lancement et ne change aucune vérification ni confirmation.
 - **Catalogue de 19 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
   Manjaro, Zorin OS…) avec recherche et filtres par famille, par usage (bureau, léger, serveur…) et par processeur.
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
@@ -36,7 +47,19 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   éjection propre.
 - **Rappel de sauvegarde** : une fois la clé prête, si vos dossiers personnels (Documents, Images, Bureau, Musique,
   Vidéos, Téléchargements) contiennent des fichiers, l'application vous demande si vous les avez sauvegardés sur une
-  clé USB ou un disque externe avant d'installer Linux.
+  clé USB ou un disque externe avant d'installer Linux, avec la taille de chaque dossier et le total à sauvegarder.
+- **Préparer mon PC** : l'application vérifie depuis Windows ce qui compte pour démarrer et installer Linux sur cet
+  ordinateur, pour la distribution choisie : processeur ARM (la clé ne démarrerait pas, ce qui est aussi signalé avant
+  la création), démarrage UEFI ou BIOS, Secure Boot, disque en mode Intel RST/RAID/VMD, BitLocker, démarrage rapide de
+  Windows (désactivable en un clic), place libre pour garder Windows, mémoire, carte NVIDIA, Wi-Fi Broadcom. Elle donne
+  la touche du menu de démarrage selon le fabricant du PC, peut redémarrer directement sur la clé (« Utiliser un
+  périphérique ») ou dans les réglages UEFI, et affiche à la demande les mots de passe des réseaux Wi-Fi enregistrés.
+  La page finale et la liste « Avant de quitter Windows » du guide reprennent ces informations.
+- **Mes logiciels sous Linux** : les logiciels installés sur Windows, classés selon ce qu'ils deviennent sous Linux
+  (même logiciel, équivalent gratuit, version web, inutile, seulement sous Windows, à vérifier), avec une liste à
+  enregistrer dans Documents.
+- **Dépannage** : « Vérifier ma clé » relit la clé, sans rien y écrire, et la compare octet par octet à l'image ; les
+  problèmes fréquents (clé absente du menu, Secure Boot, écran noir, aucun disque, pas de Wi-Fi…) et leurs solutions.
 - **PC Intel/AMD ou ARM** : le questionnaire demande le processeur de l'ordinateur (prérempli avec celui de ce PC)
   et ne conseille que des distributions qui démarrent dessus. Toutes les versions restent proposées, car la clé peut
   être pour un autre ordinateur : si l'image n'est pas faite pour le processeur de ce PC, l'application prévient
@@ -48,6 +71,8 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   terminal et l'aide, avec des illustrations annotées (repères numérotés ①②③) en français et en anglais. On le
   retrouve dans la page « Guide Linux ».
 - **Restaurer une clé** : après usage, la clé est effacée et reformatée en exFAT pour redevenir une clé normale.
+- Les images ISO conservées se suppriment depuis les Paramètres, et l'application signale au démarrage qu'une nouvelle
+  version est publiée (désactivable).
 - Interface **Windows 11** (WinUI 3, Mica, thème clair/sombre automatique, couleur d'accentuation), en
   **français et en anglais**.
 
@@ -203,8 +228,18 @@ drives only (never the system or an internal disk) with a double confirmation, w
 reads the drive back to check it and ejects it. While the drive is written, an illustrated tour of the chosen
 distribution explains its boot menu, how to try and install it, its desktop, software center and updates. If your
 personal folders hold files, it then asks whether you have backed them up to a USB drive or an external disk before
-installing Linux. The questionnaire asks for the computer's processor (Intel/AMD or ARM, prefilled with this PC's)
-and only suggests images that start on it; every image stays available, since the drive may be for another computer,
-and the app warns without blocking when an image is made for another processor than this PC's. It can also write a
-local ISO and restore a drive to a normal exFAT drive. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
+installing Linux. The "Prepare my PC" page checks this computer for the chosen distribution (ARM processor, UEFI or
+BIOS, Secure Boot, Intel RST/RAID, BitLocker, fast startup, free space, memory, NVIDIA, Broadcom Wi-Fi), gives the boot
+menu key of its maker, restarts it into the Windows startup options or the UEFI settings, and shows the saved Wi-Fi
+passwords on request; "My programs on Linux" tells what to use on Linux for each installed program; "Troubleshooting"
+reads a drive back (read only) to compare it with its image and lists the usual problems. The questionnaire asks for the computer's processor
+(Intel/AMD or ARM, prefilled with this PC's) and only suggests images that start on it; every image stays available,
+since the drive may be for another computer, and the app warns without blocking when an image is made for another
+processor than this PC's. It can also write a local ISO and restore a drive to a normal exFAT drive. At the first start, it asks whether someone who knows computers is helping
+you or whether you are on your own: on your own, every page adds step-by-step explanations in plain words (the journey in
+5 steps, how to read the list of distributions, what to check before plugging in the drive, what each creation step
+does, how to back up your files, the complete plan to start from the drive and go back to Windows), without removing any
+confirmation or safety check. The choice can be changed at any time in the settings. The technical details (the creation
+log, the technical details of an error, the SHA-256 and OpenPGP fingerprints) are hidden until the "Advanced mode" switch
+of the title bar is turned on, after a warning; an orange frame then surrounds the window. It is off at each start. Download it from the [Releases](https://github.com/memton80/linux-install-helper/releases),
 and run the `.exe`: nothing to install (administrator rights are required to write to a raw disk).

@@ -278,9 +278,6 @@
   <data name="DriveIgnored.Title" xml:space="preserve">
     <value>USB drives that cannot be used</value>
   </data>
-  <data name="DriveArchitecture.Title" xml:space="preserve">
-    <value>This drive will not start on this PC</value>
-  </data>
   <data name="DriveError.Title" xml:space="preserve">
     <value>The drives cannot be listed</value>
   </data>
@@ -1463,5 +1460,1030 @@ This cannot be undone.</value>
   </data>
   <data name="DoneBackupReminder.Message" xml:space="preserve">
     <value>Copy your documents, pictures and other personal files to another USB drive or an external disk: installing can erase the computer's disk.</value>
+  </data>
+  <data name="NavReadiness.Content" xml:space="preserve">
+    <value>Prepare my PC</value>
+  </data>
+  <data name="NavTroubleshoot.Content" xml:space="preserve">
+    <value>Troubleshooting</value>
+  </data>
+  <data name="UpdateBar.Title" xml:space="preserve">
+    <value>A new version is available</value>
+  </data>
+  <data name="UpdateBar_Message" xml:space="preserve">
+    <value>Linux Install Helper {0} is out (you have {1}).</value>
+  </data>
+  <data name="UpdateBarDownload.Content" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="About_UpdateAvailable" xml:space="preserve">
+    <value>Version {0} is available.</value>
+  </data>
+  <data name="ReadinessHeader.Text" xml:space="preserve">
+    <value>Prepare my PC</value>
+  </data>
+  <data name="ReadinessSubtitle.Text" xml:space="preserve">
+    <value>Will the drive start on this computer, and what to prepare before installing Linux: everything the application can check from Windows.</value>
+  </data>
+  <data name="ReadinessDistro.Header" xml:space="preserve">
+    <value>For the distribution</value>
+  </data>
+  <data name="Readiness_AnyDistro" xml:space="preserve">
+    <value>Linux in general</value>
+  </data>
+  <data name="ReadinessRefresh.Content" xml:space="preserve">
+    <value>Check again</value>
+  </data>
+  <data name="Readiness_ReadyTitle" xml:space="preserve">
+    <value>This computer is ready for Linux</value>
+  </data>
+  <data name="Readiness_Ready" xml:space="preserve">
+    <value>Nothing to change: the drive will start and Linux can be installed.</value>
+  </data>
+  <data name="Readiness_WarningsTitle" xml:space="preserve">
+    <value>A few points to check before installing</value>
+  </data>
+  <data name="Readiness_Warnings" xml:space="preserve">
+    <value>{0} point(s) below need your attention.</value>
+  </data>
+  <data name="Readiness_BlockedTitle" xml:space="preserve">
+    <value>The drive will not start on this computer</value>
+  </data>
+  <data name="Readiness_Counts" xml:space="preserve">
+    <value>{0} blocking point(s) and {1} point(s) to check below.</value>
+  </data>
+  <data name="ReadinessBootTitle.Text" xml:space="preserve">
+    <value>Starting from the drive</value>
+  </data>
+  <data name="ReadinessBootRestartHelp.Text" xml:space="preserve">
+    <value>Windows can also restart straight into its startup options: choose "Use a device", then the USB drive. Or into the UEFI settings, to turn Secure Boot off.</value>
+  </data>
+  <data name="ReadinessRestartDrive.Content" xml:space="preserve">
+    <value>Restart from the drive</value>
+  </data>
+  <data name="ReadinessRestartFirmware.Content" xml:space="preserve">
+    <value>Restart into the UEFI settings</value>
+  </data>
+  <data name="ReadinessWifiTitle.Text" xml:space="preserve">
+    <value>Wi-Fi passwords</value>
+  </data>
+  <data name="ReadinessWifiHelp.Text" xml:space="preserve">
+    <value>Linux will ask for the password of your Wi-Fi network. Windows remembers the networks you used: show their passwords and write down the one of your home network.</value>
+  </data>
+  <data name="ReadinessWifiShow.Content" xml:space="preserve">
+    <value>Show the saved networks</value>
+  </data>
+  <data name="Wifi_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Wifi_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Wifi_CopyName" xml:space="preserve">
+    <value>Copy the password of {0}</value>
+  </data>
+  <data name="Wifi_Open" xml:space="preserve">
+    <value>Open network: no password</value>
+  </data>
+  <data name="Wifi_Enterprise" xml:space="preserve">
+    <value>Company or school network: you sign in with your own user name and password</value>
+  </data>
+  <data name="Wifi_Unavailable" xml:space="preserve">
+    <value>Windows does not give this password</value>
+  </data>
+  <data name="Wifi_NoWifi" xml:space="preserve">
+    <value>This computer has no Wi-Fi, or the Wi-Fi service of Windows is stopped.</value>
+  </data>
+  <data name="Wifi_Failed" xml:space="preserve">
+    <value>The saved networks could not be read.</value>
+  </data>
+  <data name="Wifi_None" xml:space="preserve">
+    <value>No Wi-Fi network is saved on this computer.</value>
+  </data>
+  <data name="ReadinessSoftwareTitle.Text" xml:space="preserve">
+    <value>Your programs</value>
+  </data>
+  <data name="ReadinessSoftwareHelp.Text" xml:space="preserve">
+    <value>See which of the programs installed on Windows exist on Linux, which ones have a free equivalent and which ones only work on Windows.</value>
+  </data>
+  <data name="ReadinessSoftwareOpen.Content" xml:space="preserve">
+    <value>See my programs</value>
+  </data>
+  <data name="Ready_Processor_X64_Title" xml:space="preserve">
+    <value>Intel or AMD processor</value>
+  </data>
+  <data name="Ready_Processor_X64_Message" xml:space="preserve">
+    <value>Choose a distribution for Intel or AMD: every one offered here is, except the ARM versions.</value>
+  </data>
+  <data name="Ready_Processor_Arm64_Title" xml:space="preserve">
+    <value>ARM processor: the drive will not start on this computer</value>
+  </data>
+  <data name="Ready_Processor_Arm64_Message" xml:space="preserve">
+    <value>This computer has an ARM processor (Snapdragon…), and {0} is made for Intel and AMD processors (x86_64): the drive will start on another computer, not on this one. For this one, choose an ARM version, like Ubuntu Desktop ARM.</value>
+  </data>
+  <data name="Ready_Processor_Arm64Ok_Title" xml:space="preserve">
+    <value>ARM processor</value>
+  </data>
+  <data name="Ready_Processor_Arm64Ok_Message" xml:space="preserve">
+    <value>{0} is made for ARM processors. Linux works on only some ARM laptops so far: check on the distribution's website that this model is supported.</value>
+  </data>
+  <data name="Ready_Processor_Arm64Choose_Title" xml:space="preserve">
+    <value>ARM processor</value>
+  </data>
+  <data name="Ready_Processor_Arm64Choose_Message" xml:space="preserve">
+    <value>This computer has an ARM processor (Snapdragon…): choose an ARM version of a distribution, like Ubuntu Desktop ARM. Linux works on only some ARM laptops so far: check on the distribution's website that this model is supported.</value>
+  </data>
+  <data name="Ready_Processor_NeedsArm_Title" xml:space="preserve">
+    <value>{0} is for ARM processors</value>
+  </data>
+  <data name="Ready_Processor_NeedsArm_Message" xml:space="preserve">
+    <value>This computer has an Intel or AMD processor: the drive will not start on it.</value>
+  </data>
+  <data name="Ready_Firmware_Uefi_Title" xml:space="preserve">
+    <value>Modern startup (UEFI)</value>
+  </data>
+  <data name="Ready_Firmware_Uefi_Message" xml:space="preserve">
+    <value>The drive starts in UEFI mode, like Windows on this computer.</value>
+  </data>
+  <data name="Ready_Firmware_Bios_Title" xml:space="preserve">
+    <value>Old startup mode (BIOS, Legacy)</value>
+  </data>
+  <data name="Ready_Firmware_Bios_Message" xml:space="preserve">
+    <value>Windows starts in the old BIOS mode. The drive starts in this mode too: in the boot menu, choose its entry without "UEFI". To keep Windows, install Linux in the same mode.</value>
+  </data>
+  <data name="Ready_SecureBoot_Off_Title" xml:space="preserve">
+    <value>Secure Boot is off</value>
+  </data>
+  <data name="Ready_SecureBoot_Off_Message" xml:space="preserve">
+    <value>Every distribution starts without changing anything.</value>
+  </data>
+  <data name="Ready_SecureBoot_On_Title" xml:space="preserve">
+    <value>Secure Boot is on</value>
+  </data>
+  <data name="Ready_SecureBoot_On_Message" xml:space="preserve">
+    <value>Most distributions start with it. The few that need it turned off are marked in the list.</value>
+  </data>
+  <data name="Ready_SecureBoot_Supported_Title" xml:space="preserve">
+    <value>Secure Boot is on, {0} starts with it</value>
+  </data>
+  <data name="Ready_SecureBoot_Supported_Message" xml:space="preserve">
+    <value>Nothing to change in the UEFI settings.</value>
+  </data>
+  <data name="Ready_SecureBoot_MustDisable_Title" xml:space="preserve">
+    <value>Turn Secure Boot off for {0}</value>
+  </data>
+  <data name="Ready_SecureBoot_MustDisable_Message" xml:space="preserve">
+    <value>{0} does not start while Secure Boot is on. Turn it off in the UEFI settings (often under "Security" or "Boot"), then save and restart.</value>
+  </data>
+  <data name="Ready_StorageMode_Standard_Title" xml:space="preserve">
+    <value>Standard disk mode</value>
+  </data>
+  <data name="Ready_StorageMode_Standard_Message" xml:space="preserve">
+    <value>Linux sees the disk of this computer without any setting.</value>
+  </data>
+  <data name="Ready_StorageMode_Raid_Title" xml:space="preserve">
+    <value>The disk goes through Intel RST (RAID, VMD)</value>
+  </data>
+  <data name="Ready_StorageMode_Raid_Message" xml:space="preserve">
+    <value>Some Linux installers find no disk in this mode. If that happens, set the storage to "AHCI" in the UEFI settings, but prepare Windows first (start it once in safe mode), or it will no longer start. Look for the instructions of your computer's maker.</value>
+  </data>
+  <data name="Ready_Encryption_On_Title" xml:space="preserve">
+    <value>BitLocker encrypts drive C:</value>
+  </data>
+  <data name="Ready_Encryption_On_Message" xml:space="preserve">
+    <value>Write down the recovery key: Windows may ask for it after the startup settings change. To install Linux next to Windows, turn BitLocker off first (Settings › Privacy &amp; security › Device encryption, or BitLocker in the Control Panel), or the installer cannot make room.</value>
+  </data>
+  <data name="Ready_Encryption_Off_Title" xml:space="preserve">
+    <value>BitLocker is off</value>
+  </data>
+  <data name="Ready_Encryption_Off_Message" xml:space="preserve">
+    <value>Drive C: is not encrypted: nothing to prepare.</value>
+  </data>
+  <data name="Ready_FastStartup_On_Title" xml:space="preserve">
+    <value>Windows fast startup is on</value>
+  </data>
+  <data name="Ready_FastStartup_On_Message" xml:space="preserve">
+    <value>If you keep Windows next to Linux, turn it off: Windows then really shuts down, and Linux can use the Windows disk and files safely.</value>
+  </data>
+  <data name="Ready_FastStartup_Off_Title" xml:space="preserve">
+    <value>Fast startup is off</value>
+  </data>
+  <data name="Ready_FastStartup_Off_Message" xml:space="preserve">
+    <value>Windows shuts down completely: nothing to change.</value>
+  </data>
+  <data name="Ready_DiskSpace_Enough_Title" xml:space="preserve">
+    <value>{1} free on drive C:</value>
+  </data>
+  <data name="Ready_DiskSpace_Enough_Message" xml:space="preserve">
+    <value>Enough to install Linux next to Windows ({2} needed).</value>
+  </data>
+  <data name="Ready_DiskSpace_Low_Title" xml:space="preserve">
+    <value>Only {1} free on drive C:</value>
+  </data>
+  <data name="Ready_DiskSpace_Low_Message" xml:space="preserve">
+    <value>To keep Windows next to Linux, about {2} must be free. Not a problem if Linux replaces Windows.</value>
+  </data>
+  <data name="Ready_Memory_Enough_Title" xml:space="preserve">
+    <value>{1} of memory</value>
+  </data>
+  <data name="Ready_Memory_Enough_Message" xml:space="preserve">
+    <value>Enough ({2} recommended).</value>
+  </data>
+  <data name="Ready_Memory_Low_Title" xml:space="preserve">
+    <value>{1} of memory, {0} asks for {2}</value>
+  </data>
+  <data name="Ready_Memory_Low_Message" xml:space="preserve">
+    <value>It may be slow: a lightweight distribution such as Linux Mint Xfce or Lubuntu suits this computer better.</value>
+  </data>
+  <data name="Ready_Memory_Modest_Title" xml:space="preserve">
+    <value>{1} of memory</value>
+  </data>
+  <data name="Ready_Memory_Modest_Message" xml:space="preserve">
+    <value>A modest computer: choose a lightweight distribution, such as Linux Mint Xfce or Lubuntu.</value>
+  </data>
+  <data name="Ready_Graphics_Standard_Title" xml:space="preserve">
+    <value>Graphics card: {0}</value>
+  </data>
+  <data name="Ready_Graphics_Standard_Message" xml:space="preserve">
+    <value>Works with the drivers included in Linux.</value>
+  </data>
+  <data name="Ready_Graphics_Nvidia_Title" xml:space="preserve">
+    <value>NVIDIA graphics card</value>
+  </data>
+  <data name="Ready_Graphics_Nvidia_Message" xml:space="preserve">
+    <value>{0}. If the screen stays black after the boot menu, choose its "safe graphics" entry. Once Linux is installed, install the NVIDIA driver from the software center or the drivers tool.</value>
+  </data>
+  <data name="Ready_Wifi_Standard_Title" xml:space="preserve">
+    <value>Wi-Fi: {0}</value>
+  </data>
+  <data name="Ready_Wifi_Standard_Message" xml:space="preserve">
+    <value>Works with the drivers included in Linux.</value>
+  </data>
+  <data name="Ready_Wifi_Broadcom_Title" xml:space="preserve">
+    <value>Broadcom Wi-Fi card</value>
+  </data>
+  <data name="Ready_Wifi_Broadcom_Message" xml:space="preserve">
+    <value>{0} often needs a driver that is not on the drive: Wi-Fi may not work until it is installed. Keep an Ethernet cable at hand, or share your phone's connection over USB.</value>
+  </data>
+  <data name="Ready_Action_OpenFirmwareSettings" xml:space="preserve">
+    <value>Open the UEFI settings</value>
+  </data>
+  <data name="Ready_Action_DisableFastStartup" xml:space="preserve">
+    <value>Turn off</value>
+  </data>
+  <data name="Ready_Action_OpenRecoveryKeyPage" xml:space="preserve">
+    <value>Find my recovery key</value>
+  </data>
+  <data name="Ready_Action_OpenStorageSettings" xml:space="preserve">
+    <value>Free up space</value>
+  </data>
+  <data name="Boot_Keys" xml:space="preserve">
+    <value>On this computer ({0}), press {1} several times right after switching it on to open the boot menu, or {2} to open its UEFI/BIOS settings.</value>
+  </data>
+  <data name="Boot_KeysNoSetup" xml:space="preserve">
+    <value>On this computer ({0}), hold {1} down while switching it on, then choose the USB drive.</value>
+  </data>
+  <data name="Boot_KeysHold" xml:space="preserve">
+    <value>On this computer ({0}), hold {1} while switching it on to start from the drive, or {2} to open its UEFI settings.</value>
+  </data>
+  <data name="Boot_KeysUnknown" xml:space="preserve">
+    <value>The key of the boot menu depends on the maker: often F12, F11, F10, F9, F8 or Esc, pressed several times right after switching on. It is sometimes shown briefly on the screen.</value>
+  </data>
+  <data name="Boot_Note_AcerF12" xml:space="preserve">
+    <value>If F12 does nothing, turn "F12 Boot Menu" on in the settings (F2).</value>
+  </data>
+  <data name="Key_Esc" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="Key_Del" xml:space="preserve">
+    <value>Del</value>
+  </data>
+  <data name="Key_VolumeDown" xml:space="preserve">
+    <value>the Volume down button</value>
+  </data>
+  <data name="Key_VolumeUp" xml:space="preserve">
+    <value>the Volume up button</value>
+  </data>
+  <data name="Key_Option" xml:space="preserve">
+    <value>the Option (Alt) key</value>
+  </data>
+  <data name="Restart_DriveTitle" xml:space="preserve">
+    <value>Restart from the USB drive?</value>
+  </data>
+  <data name="Restart_DriveMessage" xml:space="preserve">
+    <value>The computer restarts right away into the Windows startup options: choose "Use a device", then the USB drive.
+
+Save your work and close your programs first. If the drive was ejected, unplug it and plug it back in now. If "Use a device" is missing or the drive is not listed, restart and use the boot menu key instead.</value>
+  </data>
+  <data name="Restart_DrivePrimary" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="Restart_DriveFailed" xml:space="preserve">
+    <value>Windows could not restart into its startup options. Restart the computer and use the boot menu key instead.</value>
+  </data>
+  <data name="Restart_FirmwareTitle" xml:space="preserve">
+    <value>Restart into the UEFI settings?</value>
+  </data>
+  <data name="Restart_FirmwareMessage" xml:space="preserve">
+    <value>The computer restarts right away into its UEFI settings. Save your work and close your programs first.
+
+There, Secure Boot is often under "Security" or "Boot". Save the changes (often F10) before leaving.</value>
+  </data>
+  <data name="Restart_FirmwarePrimary" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="Restart_FirmwareFailed" xml:space="preserve">
+    <value>This computer does not let Windows open its UEFI settings. Restart it and press the settings key right after switching it on.</value>
+  </data>
+  <data name="Restart_FailedTitle" xml:space="preserve">
+    <value>Could not restart</value>
+  </data>
+  <data name="FastStartup_ConfirmTitle" xml:space="preserve">
+    <value>Turn off fast startup?</value>
+  </data>
+  <data name="FastStartup_ConfirmMessage" xml:space="preserve">
+    <value>Windows will fully shut down when you turn the computer off. It starts a few seconds slower, and Linux can use the Windows disk safely. You can turn it back on in the power options of the Control Panel.</value>
+  </data>
+  <data name="FastStartup_ConfirmPrimary" xml:space="preserve">
+    <value>Turn off</value>
+  </data>
+  <data name="FastStartup_FailedTitle" xml:space="preserve">
+    <value>Could not turn off fast startup</value>
+  </data>
+  <data name="FastStartup_Failed" xml:space="preserve">
+    <value>Turn it off yourself: Control Panel › Power Options › Choose what the power buttons do › Turn on fast startup.</value>
+  </data>
+  <data name="DoneOpenFirmware.Content" xml:space="preserve">
+    <value>Open the UEFI settings</value>
+  </data>
+  <data name="DoneOpenReadiness.Content" xml:space="preserve">
+    <value>See the details</value>
+  </data>
+  <data name="Done_Readiness" xml:space="preserve">
+    <value>This computer: {0} point(s) to check before installing</value>
+  </data>
+  <data name="Done_ReadinessBlocked" xml:space="preserve">
+    <value>This drive will not start on this computer</value>
+  </data>
+  <data name="DoneRestartHelp.Text" xml:space="preserve">
+    <value>If the drive is for this computer, Windows can restart straight into its startup options, without looking for the key.</value>
+  </data>
+  <data name="DoneRestartDrive.Content" xml:space="preserve">
+    <value>Restart from the drive</value>
+  </data>
+  <data name="DriveProcessorWarning.Title" xml:space="preserve">
+    <value>This drive will not start on this computer</value>
+  </data>
+  <data name="Backup_Measuring" xml:space="preserve">
+    <value>Measuring…</value>
+  </data>
+  <data name="Backup_FolderSize" xml:space="preserve">
+    <value>{0} · {1:N0} files</value>
+  </data>
+  <data name="Backup_Total" xml:space="preserve">
+    <value>In all, about {0} to back up: the backup drive needs at least this much free space.</value>
+  </data>
+  <data name="SettingsImages.Text" xml:space="preserve">
+    <value>Downloaded images</value>
+  </data>
+  <data name="SettingsImagesHelp.Text" xml:space="preserve">
+    <value>The ISO files kept in the download folder, to create another drive without downloading again. Delete them to free disk space.</value>
+  </data>
+  <data name="SettingsDeleteAllImages.Content" xml:space="preserve">
+    <value>Delete all</value>
+  </data>
+  <data name="Settings_ImagesSummary" xml:space="preserve">
+    <value>{0} image(s), {1}</value>
+  </data>
+  <data name="Settings_NoImages" xml:space="preserve">
+    <value>No image in the download folder.</value>
+  </data>
+  <data name="Settings_ImageDetails" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Settings_ImagePartial" xml:space="preserve">
+    <value>{0} · {1} · interrupted download</value>
+  </data>
+  <data name="Settings_ImageDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Settings_ImageDeleteName" xml:space="preserve">
+    <value>Delete {0}</value>
+  </data>
+  <data name="Settings_DeleteTitle" xml:space="preserve">
+    <value>Delete this image?</value>
+  </data>
+  <data name="Settings_DeleteMessage" xml:space="preserve">
+    <value>{0} ({1}) will be deleted. It will be downloaded again if you create a drive with it.</value>
+  </data>
+  <data name="Settings_DeletePrimary" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Settings_DeleteAllTitle" xml:space="preserve">
+    <value>Delete all the images?</value>
+  </data>
+  <data name="Settings_DeleteAllMessage" xml:space="preserve">
+    <value>{0} image(s) ({1}) will be deleted from the download folder.</value>
+  </data>
+  <data name="Settings_DeleteAllPrimary" xml:space="preserve">
+    <value>Delete all</value>
+  </data>
+  <data name="SettingsUpdates.Text" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="SettingsCheckUpdates.Header" xml:space="preserve">
+    <value>Look for a new version of the application at startup</value>
+  </data>
+  <data name="SettingsCheckUpdates.OnContent" xml:space="preserve">
+    <value>On (asks GitHub)</value>
+  </data>
+  <data name="SettingsCheckUpdates.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SoftwareHeader.Text" xml:space="preserve">
+    <value>My programs on Linux</value>
+  </data>
+  <data name="SoftwareSubtitle.Text" xml:space="preserve">
+    <value>The programs installed on this computer, and what to use on Linux. Programs that only run on Windows are a good reason to keep Windows next to Linux.</value>
+  </data>
+  <data name="SoftwareError.Title" xml:space="preserve">
+    <value>The programs could not be listed</value>
+  </data>
+  <data name="SoftwareError.Message" xml:space="preserve">
+    <value>The log of the application gives the details.</value>
+  </data>
+  <data name="SoftwareSaveHelp.Text" xml:space="preserve">
+    <value>Save this list in your Documents folder: it is backed up with your files and will help you set up your programs on Linux.</value>
+  </data>
+  <data name="SoftwareSave.Content" xml:space="preserve">
+    <value>Save the list</value>
+  </data>
+  <data name="SoftwareShowSaved.Content" xml:space="preserve">
+    <value>Show the file</value>
+  </data>
+  <data name="Software_Summary" xml:space="preserve">
+    <value>{0} programs: {1} have a solution on Linux, {2} to look at.</value>
+  </data>
+  <data name="Software_Suggestions" xml:space="preserve">
+    <value>On Linux: {0}</value>
+  </data>
+  <data name="Software_Search" xml:space="preserve">
+    <value>Look up</value>
+  </data>
+  <data name="Software_SearchName" xml:space="preserve">
+    <value>Look up an equivalent of {0}</value>
+  </data>
+  <data name="Software_FileName" xml:space="preserve">
+    <value>My Windows programs</value>
+  </data>
+  <data name="Software_FileTitle" xml:space="preserve">
+    <value>My Windows programs and what to use on Linux ({0})</value>
+  </data>
+  <data name="Software_Saved" xml:space="preserve">
+    <value>Saved in {0}</value>
+  </data>
+  <data name="Software_SaveFailed" xml:space="preserve">
+    <value>The list could not be saved: {0}</value>
+  </data>
+  <data name="Software_Group_WindowsOnly" xml:space="preserve">
+    <value>Only on Windows ({0})</value>
+  </data>
+  <data name="Software_Group_WindowsOnly_Help" xml:space="preserve">
+    <value>No Linux version and no real equivalent: keep Windows next to Linux if you need them.</value>
+  </data>
+  <data name="Software_Group_Unknown" xml:space="preserve">
+    <value>To look up ({0})</value>
+  </data>
+  <data name="Software_Group_Unknown_Help" xml:space="preserve">
+    <value>The application does not know them: look them up to find out whether they run on Linux.</value>
+  </data>
+  <data name="Software_Group_Alternative" xml:space="preserve">
+    <value>A free equivalent exists ({0})</value>
+  </data>
+  <data name="Software_Group_Alternative_Help" xml:space="preserve">
+    <value>These programs do not exist on Linux, but the ones suggested do the same job.</value>
+  </data>
+  <data name="Software_Group_Web" xml:space="preserve">
+    <value>In the browser ({0})</value>
+  </data>
+  <data name="Software_Group_Web_Help" xml:space="preserve">
+    <value>Use their website or web version: nothing to install.</value>
+  </data>
+  <data name="Software_Group_Native" xml:space="preserve">
+    <value>Also on Linux ({0})</value>
+  </data>
+  <data name="Software_Group_Native_Help" xml:space="preserve">
+    <value>Install them from the software center of your distribution.</value>
+  </data>
+  <data name="Software_Group_NotNeeded" xml:space="preserve">
+    <value>Not needed on Linux ({0})</value>
+  </data>
+  <data name="Software_Group_NotNeeded_Help" xml:space="preserve">
+    <value>Antivirus, cleaners and driver tools: Linux does this itself.</value>
+  </data>
+  <data name="TroubleshootHeader.Text" xml:space="preserve">
+    <value>Troubleshooting</value>
+  </data>
+  <data name="TroubleshootSubtitle.Text" xml:space="preserve">
+    <value>The drive does not start, or Linux does not install? Check the drive, then find your problem below.</value>
+  </data>
+  <data name="VerifyTitle.Text" xml:space="preserve">
+    <value>Check my drive</value>
+  </data>
+  <data name="VerifyHelp.Text" xml:space="preserve">
+    <value>Reads the drive and compares it, byte for byte, with the image it was made with. Nothing is written on the drive.</value>
+  </data>
+  <data name="VerifyDrive.Header" xml:space="preserve">
+    <value>USB drive</value>
+  </data>
+  <data name="VerifyDrive.PlaceholderText" xml:space="preserve">
+    <value>Choose a USB drive</value>
+  </data>
+  <data name="VerifyImage.Header" xml:space="preserve">
+    <value>Image (ISO file)</value>
+  </data>
+  <data name="VerifyImage.PlaceholderText" xml:space="preserve">
+    <value>Choose the image used for the drive</value>
+  </data>
+  <data name="VerifyBrowse.Content" xml:space="preserve">
+    <value>Browse…</value>
+  </data>
+  <data name="VerifyStart.Content" xml:space="preserve">
+    <value>Check the drive</value>
+  </data>
+  <data name="VerifyCancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Verify_Identical_Title" xml:space="preserve">
+    <value>The drive is identical to the image</value>
+  </data>
+  <data name="Verify_Identical" xml:space="preserve">
+    <value>It was written correctly. If it does not start, the cause is in the startup settings of the computer: see the problems below.</value>
+  </data>
+  <data name="Verify_NearlyIdentical_Title" xml:space="preserve">
+    <value>The drive matches the image</value>
+  </data>
+  <data name="Verify_NearlyIdentical" xml:space="preserve">
+    <value>Only {1} small area(s) differ, from {0} on: Windows or the distribution writes a little on a drive that was plugged in or started. The drive is fine: if it does not start, see the problems below.</value>
+  </data>
+  <data name="Verify_Different_Title" xml:space="preserve">
+    <value>The drive does not match this image</value>
+  </data>
+  <data name="Verify_Different" xml:space="preserve">
+    <value>It differs from {0} on. Check that you chose the image used for this drive; if so, create the drive again. If it happens again, the drive may be faulty or counterfeit: try another one.</value>
+  </data>
+  <data name="Verify_TooSmall_Title" xml:space="preserve">
+    <value>The drive is smaller than the image</value>
+  </data>
+  <data name="Verify_TooSmall" xml:space="preserve">
+    <value>This image cannot be on this drive: choose the image that was used for it.</value>
+  </data>
+  <data name="Verify_DriveChanged_Title" xml:space="preserve">
+    <value>The drive changed</value>
+  </data>
+  <data name="Verify_DriveChanged" xml:space="preserve">
+    <value>The USB drive was unplugged or replaced. Choose it again in the list.</value>
+  </data>
+  <data name="TroubleshootProblemsTitle.Text" xml:space="preserve">
+    <value>Common problems</value>
+  </data>
+  <data name="Trouble_Action_RestartToDrive" xml:space="preserve">
+    <value>Restart from the drive</value>
+  </data>
+  <data name="Trouble_Action_OpenFirmwareSettings" xml:space="preserve">
+    <value>Open the UEFI settings</value>
+  </data>
+  <data name="Trouble_Action_OpenReadiness" xml:space="preserve">
+    <value>Check my PC</value>
+  </data>
+  <data name="Trouble_NotListed_Title" xml:space="preserve">
+    <value>The drive is not in the boot menu</value>
+  </data>
+  <data name="Trouble_NotListed_Body" xml:space="preserve">
+    <value>• Plug the drive in before switching the computer on, directly into the computer (not into a hub), and try another port, a USB 2 one if there is one.
+• Turn "Fast Boot" off in the UEFI settings: some computers skip USB drives with it.
+• On a computer from before 2012, turn on "Legacy" or "CSM" in the settings.
+• Check the drive above, and create it again if it does not match.</value>
+  </data>
+  <data name="Trouble_WindowsStarts_Title" xml:space="preserve">
+    <value>Windows starts as usual</value>
+  </data>
+  <data name="Trouble_WindowsStarts_Body" xml:space="preserve">
+    <value>• The boot menu key must be pressed several times right after switching on, before the Windows logo.
+• Windows fast startup can skip the menu: choose Restart rather than Shut down, or hold Shift while clicking Shut down.
+• Simpler: let Windows restart into its startup options and choose "Use a device".</value>
+  </data>
+  <data name="Trouble_SecureBoot_Title" xml:space="preserve">
+    <value>"Secure Boot violation" or "image not authorized"</value>
+  </data>
+  <data name="Trouble_SecureBoot_Body" xml:space="preserve">
+    <value>This distribution does not start with Secure Boot. Turn Secure Boot off in the UEFI settings (often under "Security" or "Boot"), save (often F10) and restart. Or choose a distribution that starts with it, such as Ubuntu, Linux Mint or Fedora.</value>
+  </data>
+  <data name="Trouble_BlackScreen_Title" xml:space="preserve">
+    <value>Black screen after choosing Linux</value>
+  </data>
+  <data name="Trouble_BlackScreen_Body" xml:space="preserve">
+    <value>Common with NVIDIA graphics cards. In the boot menu of the drive, choose the entry that mentions "safe graphics" or "nomodeset" (or press E on the first entry, add nomodeset at the end of the line that starts with "linux", then press F10). Once Linux is installed, install the NVIDIA driver.</value>
+  </data>
+  <data name="Trouble_Errors_Title" xml:space="preserve">
+    <value>Error messages or a freeze while Linux starts</value>
+  </data>
+  <data name="Trouble_Errors_Body" xml:space="preserve">
+    <value>Errors such as "squashfs error" or "I/O error" come from a badly written or faulty drive. Check the drive above, create it again, and try another drive and another USB port if it happens again.</value>
+  </data>
+  <data name="Trouble_NoDisk_Title" xml:space="preserve">
+    <value>The installer finds no disk</value>
+  </data>
+  <data name="Trouble_NoDisk_Body" xml:space="preserve">
+    <value>The disk of the computer probably goes through Intel RST ("RAID On", "VMD"). Set the storage mode to "AHCI" in the UEFI settings, but prepare Windows first (start it once in safe mode), or it will no longer start. "Check my PC" tells whether this computer uses this mode.</value>
+  </data>
+  <data name="Trouble_NoAlongside_Title" xml:space="preserve">
+    <value>"Install alongside Windows" is not offered</value>
+  </data>
+  <data name="Trouble_NoAlongside_Body" xml:space="preserve">
+    <value>The installer cannot make room next to Windows when BitLocker encrypts the disk, when Windows is not fully shut down (fast startup) or when the disk is too full. Turn BitLocker and fast startup off, free some space, then try again.</value>
+  </data>
+  <data name="Trouble_NoWifi_Title" xml:space="preserve">
+    <value>No Wi-Fi on Linux</value>
+  </data>
+  <data name="Trouble_NoWifi_Body" xml:space="preserve">
+    <value>Some Wi-Fi cards (Broadcom above all) need a driver that is not on the drive. Connect with an Ethernet cable or share your phone's connection over USB, then open the drivers tool of the distribution ("Additional Drivers" or "Driver Manager"). "Check my PC" shows your Wi-Fi card and the saved passwords.</value>
+  </data>
+  <data name="Check_wifi_Title" xml:space="preserve">
+    <value>Write down your Wi-Fi password</value>
+  </data>
+  <data name="Check_wifi_Body" xml:space="preserve">
+    <value>Linux will need it to connect. The application can show the passwords of the networks saved on this computer.</value>
+  </data>
+  <data name="Guide_Action_Wifi" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Guide_Action_Software" xml:space="preserve">
+    <value>See my programs</value>
+  </data>
+  <data name="Check_bitlocker_On" xml:space="preserve">
+    <value>On this computer: BitLocker encrypts drive C:.</value>
+  </data>
+  <data name="Check_bitlocker_Off" xml:space="preserve">
+    <value>On this computer: BitLocker is off, nothing to do.</value>
+  </data>
+  <data name="Check_dualboot_Free" xml:space="preserve">
+    <value>On this computer: {0} free on drive C:.</value>
+  </data>
+  <data name="Check_dualboot_FastStartupOn" xml:space="preserve">
+    <value>Fast startup is on.</value>
+  </data>
+  <data name="Check_dualboot_FastStartupOff" xml:space="preserve">
+    <value>Fast startup is off.</value>
+  </data>
+  <data name="Check_power_Laptop" xml:space="preserve">
+    <value>This computer is a laptop: keep it plugged in.</value>
+  </data>
+  <data name="Advisor_SecureBootOff" xml:space="preserve">
+    <value>On this computer, Secure Boot is already off: no distribution needs a change.</value>
+  </data>
+  <data name="Advisor_SecureBootOn" xml:space="preserve">
+    <value>On this computer, Secure Boot is on.</value>
+  </data>
+  <data name="WelcomeHeader.Text" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="WelcomeSubtitle.Text" xml:space="preserve">
+    <value>Before you start, tell us how you will create your Linux USB drive. You can change this choice at any time in the Settings.</value>
+  </data>
+  <data name="WelcomeWithHelper.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Someone is helping me: the application stays simple</value>
+  </data>
+  <data name="WelcomeWithHelperTitle.Text" xml:space="preserve">
+    <value>Someone is helping me</value>
+  </data>
+  <data name="WelcomeWithHelperText.Text" xml:space="preserve">
+    <value>A person who knows computers is with you. The application stays simple: it gives what matters, without extra details.</value>
+  </data>
+  <data name="WelcomeAlone.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>I am on my own: the application explains each step in detail</value>
+  </data>
+  <data name="WelcomeAloneTitle.Text" xml:space="preserve">
+    <value>I am on my own</value>
+  </data>
+  <data name="WelcomeAloneText.Text" xml:space="preserve">
+    <value>Nobody is helping you. The application explains each step in detail, in plain words, from choosing Linux to starting the computer from the drive.</value>
+  </data>
+  <data name="Alone_AdvisorJourneyTitle.Text" xml:space="preserve">
+    <value>The journey in 5 steps</value>
+  </data>
+  <data name="Alone_AdvisorJourney1.Text" xml:space="preserve">
+    <value>Choose the distribution: answer the questions below, and the application suggests a version of Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney2.Text" xml:space="preserve">
+    <value>Plug in a USB drive: take a drive you no longer need (8 GB is almost always enough), because everything on it will be erased.</value>
+  </data>
+  <data name="Alone_AdvisorJourney3.Text" xml:space="preserve">
+    <value>Automatic creation: the application downloads Linux, checks that the file is intact, then writes it to the drive. You have nothing to do meanwhile.</value>
+  </data>
+  <data name="Alone_AdvisorJourney4.Text" xml:space="preserve">
+    <value>Prepare the PC: the application checks your computer and tells you whether a setting must be changed before starting Linux.</value>
+  </data>
+  <data name="Alone_AdvisorJourney5.Text" xml:space="preserve">
+    <value>Start from the drive: you restart the computer from the drive, then you try Linux without changing anything, or you install it.</value>
+  </data>
+  <data name="Alone_AdvisorNothingChanged.Text" xml:space="preserve">
+    <value>This step changes nothing on your PC: answer without worry, you can change your mind.</value>
+  </data>
+  <data name="Advisor_Q1_HintAlone" xml:space="preserve">
+    <value>If Linux is new to you, pick the first answer: the application will suggest a distribution that is easy to get started with.</value>
+  </data>
+  <data name="Advisor_Q2_HintAlone" xml:space="preserve">
+    <value>The answer is already selected from the memory of this computer: you can leave it as it is.</value>
+  </data>
+  <data name="Advisor_Q3_HintAlone" xml:space="preserve">
+    <value>The answer is already selected from this computer's processor: leave it as it is if the drive is for this computer. When in doubt, pick the first answer: it fits almost every PC.</value>
+  </data>
+  <data name="Advisor_Q4_HintAlone" xml:space="preserve">
+    <value>When in doubt, pick the first answer: it suits most people.</value>
+  </data>
+  <data name="Advisor_Q5_HintAlone" xml:space="preserve">
+    <value>If you are used to Windows, the first answer will feel the most familiar.</value>
+  </data>
+  <data name="Advisor_Q6_HintAlone" xml:space="preserve">
+    <value>To get started, peace of mind is the safest choice.</value>
+  </data>
+  <data name="Advisor_Q7_HintAlone" xml:space="preserve">
+    <value>"No" is a very good choice: the application will suggest a distribution that starts without touching the computer's settings.</value>
+  </data>
+  <data name="Alone_DistroFitTitle.Text" xml:space="preserve">
+    <value>Is it right for me?</value>
+  </data>
+  <data name="Alone_Fit_Beginner" xml:space="preserve">
+    <value>It is designed for beginners: a good choice to discover Linux.</value>
+  </data>
+  <data name="Alone_Fit_Desktop" xml:space="preserve">
+    <value>It comes with the {0} desktop: windows, a menu and icons, like on Windows.</value>
+  </data>
+  <data name="Alone_Fit_NoDesktop" xml:space="preserve">
+    <value>It has no desktop: everything is done by typing commands. It is made for servers, not for beginners.</value>
+  </data>
+  <data name="Alone_Fit_Rolling" xml:space="preserve">
+    <value>It updates continuously: always the latest features, but sometimes surprises. Some experience helps.</value>
+  </data>
+  <data name="Alone_Fit_Lts" xml:space="preserve">
+    <value>It is a long-term version (LTS): it gets fixes for several years, without big changes. It is the most peaceful choice.</value>
+  </data>
+  <data name="Alone_Fit_Stable" xml:space="preserve">
+    <value>It gets regular updates, and a new version from time to time.</value>
+  </data>
+  <data name="Alone_Fit_Needs" xml:space="preserve">
+    <value>To install it, the computer needs at least {0} GB of memory and {1} GB of free space. The "Prepare my PC" page checks this for you.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOk" xml:space="preserve">
+    <value>It starts without changing anything in the computer's settings.</value>
+  </data>
+  <data name="Alone_Fit_SecureBootOff" xml:space="preserve">
+    <value>It needs Secure Boot to be turned off in the computer's settings before it starts: one more setting to change.</value>
+  </data>
+  <data name="Alone_Fit_NothingInstalled" xml:space="preserve">
+    <value>Creating the drive installs nothing on this PC: you can try Linux from the drive before deciding.</value>
+  </data>
+  <data name="Alone_DistroWordsExpander.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Words to know</value>
+  </data>
+  <data name="Alone_DistroWordsTitle.Text" xml:space="preserve">
+    <value>Words to know</value>
+  </data>
+  <data name="Alone_DriveBeforeTitle.Text" xml:space="preserve">
+    <value>Before plugging in the drive</value>
+  </data>
+  <data name="Alone_DriveCapacity" xml:space="preserve">
+    <value>Check that the drive is large enough: the image to write takes {0}. The size is printed on the drive or on its package.</value>
+  </data>
+  <data name="Alone_DriveErase.Text" xml:space="preserve">
+    <value>Everything on the drive will be erased. Copy your files elsewhere first, for example to the Documents folder of this PC.</value>
+  </data>
+  <data name="Alone_DrivePlug.Text" xml:space="preserve">
+    <value>Plug the drive directly into a USB port of the computer, not into a box that adds USB ports (a "hub") nor into the screen.</value>
+  </data>
+  <data name="Alone_DriveWait.Text" xml:space="preserve">
+    <value>Wait a few seconds for Windows to recognize it, then click the "Refresh" button (the circular arrow) if it does not appear in the list.</value>
+  </data>
+  <data name="Alone_DriveNoneTitle.Text" xml:space="preserve">
+    <value>The drive does not appear? Try in this order:</value>
+  </data>
+  <data name="Alone_DriveNone1.Text" xml:space="preserve">
+    <value>Unplug the drive, wait five seconds, plug it in again, then click the "Refresh" button (the circular arrow).</value>
+  </data>
+  <data name="Alone_DriveNone2.Text" xml:space="preserve">
+    <value>Try another USB port, preferably at the back of the computer for a desktop PC.</value>
+  </data>
+  <data name="Alone_DriveNone3.Text" xml:space="preserve">
+    <value>Check that the drive opens in File Explorer. If Windows does not see it either, try another drive.</value>
+  </data>
+  <data name="Alone_DriveNone4.Text" xml:space="preserve">
+    <value>External hard disks and memory cards are not offered, for safety: use a USB drive.</value>
+  </data>
+  <data name="Alone_DriveTroubleshoot.Content" xml:space="preserve">
+    <value>Open troubleshooting</value>
+  </data>
+  <data name="Drive_ConfirmMessage_Alone" xml:space="preserve">
+    <value>After "Erase and create", the application downloads Linux, checks it, then writes it to this drive. Windows and the files of your PC are not touched. When in doubt, choose "Cancel" and check the name of the drive.</value>
+  </data>
+  <data name="Stage_Resolve_Explain" xml:space="preserve">
+    <value>The application looks on the official website for the distribution's file and its "fingerprint", used to check that it is intact.</value>
+  </data>
+  <data name="Stage_CheckLinks_Explain" xml:space="preserve">
+    <value>It checks that the download addresses answer, to pick the most reliable one.</value>
+  </data>
+  <data name="Stage_Download_Explain" xml:space="preserve">
+    <value>The Linux file is downloaded to this PC. It is often the longest step: it depends on your Internet connection.</value>
+  </data>
+  <data name="Stage_Verify_Explain" xml:space="preserve">
+    <value>The application compares the file with its official fingerprint: if it is damaged or changed, nothing is written to the drive.</value>
+  </data>
+  <data name="Stage_Write_Explain" xml:space="preserve">
+    <value>The file is copied to the drive, which is erased along the way. Then the drive is read back to check that the copy is exact.</value>
+  </data>
+  <data name="Stage_Eject_Explain" xml:space="preserve">
+    <value>The drive is safely ejected: you can then remove it without risk.</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Title" xml:space="preserve">
+    <value>Do not unplug the drive or close the application</value>
+  </data>
+  <data name="Alone_ProgressKeepPlugged.Message" xml:space="preserve">
+    <value>It can take from a few minutes to more than half an hour depending on your Internet connection. Meanwhile, read the tutorial below: it explains what awaits you on Linux.</value>
+  </data>
+  <data name="Alone_BackupHowTitle.Text" xml:space="preserve">
+    <value>How to make a backup</value>
+  </data>
+  <data name="Alone_BackupHow1.Text" xml:space="preserve">
+    <value>Plug in another USB drive or an external disk, large enough for the total shown above. Not the Linux drive: it cannot be used as a backup.</value>
+  </data>
+  <data name="Alone_BackupHow2.Text" xml:space="preserve">
+    <value>Click "Open" next to a folder, select everything in it with Ctrl+A, then copy it with Ctrl+C.</value>
+  </data>
+  <data name="Alone_BackupHow3.Text" xml:space="preserve">
+    <value>In File Explorer, open the drive or the external disk, create a folder on it, then paste with Ctrl+V. Wait for the copy to finish, then do the same for each folder.</value>
+  </data>
+  <data name="Alone_BackupHow4.Text" xml:space="preserve">
+    <value>Open a few files from the backup to check that they are there, then eject the drive or the disk and put it away.</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Title" xml:space="preserve">
+    <value>No problem found on this PC</value>
+  </data>
+  <data name="Alone_DoneReadinessOk.Message" xml:space="preserve">
+    <value>Nothing needs to change on this computer before starting Linux.</value>
+  </data>
+  <data name="Alone_DoneOpenReadiness.Content" xml:space="preserve">
+    <value>Prepare my PC</value>
+  </data>
+  <data name="Alone_DonePlanTitle.Text" xml:space="preserve">
+    <value>The complete plan</value>
+  </data>
+  <data name="Alone_DonePlanWordsButton" xml:space="preserve">
+    <value>Explain the words of this plan</value>
+  </data>
+  <data name="Alone_DonePlan1.Text" xml:space="preserve">
+    <value>Before restarting</value>
+  </data>
+  <data name="Alone_DonePlan1a.Text" xml:space="preserve">
+    <value>• Save your work and close your programs: the computer is going to restart.</value>
+  </data>
+  <data name="Alone_DonePlan1b.Text" xml:space="preserve">
+    <value>• Plug the drive directly into a USB port of the computer where you want to try Linux.</value>
+  </data>
+  <data name="Alone_DonePlan2.Text" xml:space="preserve">
+    <value>Open the boot menu</value>
+  </data>
+  <data name="Alone_DonePlan2a.Text" xml:space="preserve">
+    <value>• Restart the computer: Start menu, Power button, then "Restart".</value>
+  </data>
+  <data name="Alone_DonePlan2b.Text" xml:space="preserve">
+    <value>• As soon as the screen goes dark, press the boot menu key several times in a row:</value>
+  </data>
+  <data name="Alone_DonePlan2c.Text" xml:space="preserve">
+    <value>• If Windows starts as usual, try again and press the key earlier, or use the "Restart from the drive" button if it is offered above.</value>
+  </data>
+  <data name="Alone_DonePlan3.Text" xml:space="preserve">
+    <value>Choose the drive</value>
+  </data>
+  <data name="Alone_DonePlan3a.Text" xml:space="preserve">
+    <value>• With the arrow keys, choose the line that shows the name of the drive. If there are two, take the one that starts with "UEFI".</value>
+  </data>
+  <data name="Alone_DonePlan3b.Text" xml:space="preserve">
+    <value>• Press Enter: Linux starts from the drive, which can take a minute.</value>
+  </data>
+  <data name="Alone_DonePlan4.Text" xml:space="preserve">
+    <value>Try or install</value>
+  </data>
+  <data name="Alone_DonePlan4a.Text" xml:space="preserve">
+    <value>• Linux offers to try or to install it. Start by trying: see whether everything works (screen, sound, Wi-Fi) before deciding.</value>
+  </data>
+  <data name="Alone_DoneTryOrInstallTitle.Text" xml:space="preserve">
+    <value>Try or install: what is the difference?</value>
+  </data>
+  <data name="Alone_DoneTry.Text" xml:space="preserve">
+    <value>Try: Linux runs from the drive, without changing anything on the computer's disk. It is a little slower, and nothing is kept when you shut down.</value>
+  </data>
+  <data name="Alone_DoneInstall.Text" xml:space="preserve">
+    <value>Install: Linux is copied to the computer's disk. This can erase Windows and your files: install only after making a backup.</value>
+  </data>
+  <data name="Alone_DoneBackToWindows.Text" xml:space="preserve">
+    <value>Back to Windows: shut down the computer, remove the drive, then turn it on again. Windows starts as before.</value>
+  </data>
+  <data name="Alone_DoneTroubleshootHelp.Text" xml:space="preserve">
+    <value>The drive does not show in the menu, or the screen stays black? The Troubleshooting page explains what to do.</value>
+  </data>
+  <data name="Alone_DoneTroubleshoot.Content" xml:space="preserve">
+    <value>Open troubleshooting</value>
+  </data>
+  <data name="Word_bootmenu" xml:space="preserve">
+    <value>Boot menu</value>
+  </data>
+  <data name="Word_bootmenu_Meaning" xml:space="preserve">
+    <value>A list shown right after the computer is turned on, when you press the right key: it lets the computer start from the USB drive instead of Windows.</value>
+  </data>
+  <data name="Word_live" xml:space="preserve">
+    <value>Try ("live" mode)</value>
+  </data>
+  <data name="Word_live_Meaning" xml:space="preserve">
+    <value>Linux runs directly from the drive, without installing or changing anything on the computer. Remove the drive to get Windows back.</value>
+  </data>
+  <data name="Alone_GuideInOrder.Title" xml:space="preserve">
+    <value>Follow the list in order</value>
+  </data>
+  <data name="Alone_GuideInOrder.Message" xml:space="preserve">
+    <value>Go through the steps of "Before leaving Windows" one by one, from top to bottom, and tick each one once done. Your ticks are kept: you can take a break and come back later.</value>
+  </data>
+  <data name="SettingsGuidance.Text" xml:space="preserve">
+    <value>Guidance</value>
+  </data>
+  <data name="SettingsGuidanceHelp.Text" xml:space="preserve">
+    <value>On your own, the application explains each step in detail. With someone's help, it stays simple.</value>
+  </data>
+  <data name="SettingsGuidanceMode.Header" xml:space="preserve">
+    <value>How are you creating your drive?</value>
+  </data>
+  <data name="SettingsGuidanceHelper.Content" xml:space="preserve">
+    <value>Someone is helping me</value>
+  </data>
+  <data name="SettingsGuidanceAlone.Content" xml:space="preserve">
+    <value>I am on my own</value>
+  </data>
+  <data name="Alone_DistrosHowTitle.Text" xml:space="preserve">
+    <value>How to choose?</value>
+  </data>
+  <data name="Alone_DistrosHow1.Text" xml:space="preserve">
+    <value>Each card presents a version of Linux: its name, what it is good at and the size of the download. The bottom line also shows its desktop (how the windows and menus look) and its family (versions of the same family work the same way).</value>
+  </data>
+  <data name="Alone_DistrosHow2.Text" xml:space="preserve">
+    <value>Use the search box or the two lists. For example, choose "Beginner friendly" in the "Use" list.</value>
+  </data>
+  <data name="Alone_DistrosHow3.Text" xml:space="preserve">
+    <value>Click a card to read its presentation. This installs nothing. The drive is only created after you confirm.</value>
+  </data>
+  <data name="Alone_DistrosSecureBoot.Text" xml:space="preserve">
+    <value>This sign marks a distribution that needs Secure Boot to be turned off in the computer's settings. If you are a beginner, prefer another one.</value>
+  </data>
+  <data name="Alone_DistrosAdvisor.Content" xml:space="preserve">
+    <value>I don't know: help me choose</value>
+  </data>
+  <data name="AdvancedToggle.OnContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.OffContent" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="AdvancedToggle.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Shows the technical details: the creation log, the verification fingerprints and the details of errors.</value>
+  </data>
+  <data name="Advanced_ConfirmTitle" xml:space="preserve">
+    <value>Turn on the advanced mode?</value>
+  </data>
+  <data name="Advanced_ConfirmMessage" xml:space="preserve">
+    <value>The advanced mode shows technical details: the log of the drive creation, the fingerprints used to check the image and the details of errors. They can look worrying, but they change nothing to safety: the checks and the confirmations stay the same.
+
+An orange frame around the window reminds you that this mode is on. You can turn it off at any time with the same switch.</value>
+  </data>
+  <data name="Advanced_ConfirmPrimary" xml:space="preserve">
+    <value>Turn on</value>
+  </data>
+  <data name="Done_VerifiedWriteSimple" xml:space="preserve">
+    <value>Image and drive verified: the drive is identical to the official image.</value>
+  </data>
+  <data name="Done_VerifiedImageSimple" xml:space="preserve">
+    <value>Image verified: it is identical to the official image.</value>
+  </data>
+  <data name="Done_SignedSimple" xml:space="preserve">
+    <value>Authentic image: signed by the distribution.</value>
+  </data>
+  <data name="AdvancedDetailsHint.Text" xml:space="preserve">
+    <value>To see the technical details, turn on the "Advanced mode" at the top right of the window.</value>
+  </data>
+  <data name="Done_VerifiedWriteLocalSimple" xml:space="preserve">
+    <value>Drive verified: it is identical to the image you chose.</value>
+  </data>
+  <data name="Done_VerifiedImageLocalSimple" xml:space="preserve">
+    <value>The image you chose was read in full, then written to the drive.</value>
   </data>
 </root>

@@ -33,22 +33,34 @@
                     <ItemsControl ItemsSource="{x:Bind Reasons}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="x:String">
-                                <StackPanel Style="{StaticResource AdvisorReasonPanelStyle}">
+                                <Grid Style="{StaticResource AdvisorReasonGridStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource AdvisorReasonIconStyle}" Glyph="&#xE73E;" />
-                                    <TextBlock Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind}" />
-                                </StackPanel>
+                                    <TextBlock Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" Text="{x:Bind}" />
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Requirements}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Requirements)}" />
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowSecureBootWarning)}">
+                    <Grid Style="{StaticResource IconTextGridStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowSecureBootWarning)}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                         <FontIcon Style="{StaticResource WarningIconStyle}" Glyph="&#xE7BA;" />
-                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.SecureBootWarning}" />
-                    </StackPanel>
-                    <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowProcessorWarning)}">
+                        <TextBlock Grid.Column="1" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.SecureBootWarning}" />
+                    </Grid>
+                    <Grid Style="{StaticResource IconTextGridStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowProcessorWarning)}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                         <FontIcon Style="{StaticResource WarningIconStyle}" Glyph="&#xE7BA;" />
-                        <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.ProcessorWarning}" />
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.ProcessorWarning}" />
+                    </Grid>
                     <Button Style="{StaticResource AccentButtonStyle}" Content="{x:Bind ChooseLabel}" Command="{x:Bind ChooseCommand}" />
                 </StackPanel>
             </Border>
@@ -56,69 +68,109 @@
     </Page.Resources>
 
     <ScrollViewer x:Name="PageScroll" Style="{StaticResource PageScrollViewerStyle}">
-        <StackPanel Style="{StaticResource PageContentStackStyle}">
-            <StackPanel Style="{StaticResource PageHeaderStackStyle}">
-                <TextBlock x:Uid="AdvisorHeader" Style="{StaticResource PageTitleStyle}" />
-                <TextBlock x:Uid="AdvisorSubtitle" Style="{StaticResource PageSubtitleStyle}" />
-            </StackPanel>
+        <Grid Style="{StaticResource PageContentHostStyle}">
+            <StackPanel Style="{StaticResource PageContentStackStyle}">
+                <StackPanel Style="{StaticResource PageHeaderStackStyle}">
+                    <TextBlock x:Uid="AdvisorHeader" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock x:Uid="AdvisorSubtitle" Style="{StaticResource PageSubtitleStyle}" />
+                </StackPanel>
 
-            <ItemsControl ItemsSource="{x:Bind ViewModel.Questions}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="vm:AdvisorQuestionViewModel">
-                        <Border Style="{StaticResource CardBorderStyle}">
-                            <StackPanel Style="{StaticResource CompactStackStyle}">
-                                <Grid Style="{StaticResource AdvisorQuestionHeaderGridStyle}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Style="{StaticResource AdvisorQuestionTitleStyle}" Text="{x:Bind Title}" />
-                                    <views:WordsButton Grid.Column="1" Words="{x:Bind Words}" Label="{x:Bind WordsLabel}" />
-                                </Grid>
-                                <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint)}" />
-                                <RadioButtons ItemsSource="{x:Bind Options}" SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                <Border Style="{StaticResource CardBorderStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsAlone), Mode=OneWay}">
+                    <StackPanel Style="{StaticResource CardStackStyle}">
+                        <TextBlock x:Uid="Alone_AdvisorJourneyTitle" Style="{StaticResource TourHeaderStyle}" />
+                        <Grid Style="{StaticResource AloneStepsGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Style="{StaticResource StepNumberStyle}" Text="1" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource StepNumberStyle}" Text="2" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney2" Grid.Row="1" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="2" Style="{StaticResource StepNumberStyle}" Text="3" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney3" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="3" Style="{StaticResource StepNumberStyle}" Text="4" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney4" Grid.Row="3" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                            <TextBlock Grid.Row="4" Style="{StaticResource StepNumberStyle}" Text="5" />
+                            <TextBlock x:Uid="Alone_AdvisorJourney5" Grid.Row="4" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                        <Grid Style="{StaticResource IconTextGridStyle}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <FontIcon Glyph="&#xE73E;" Style="{StaticResource AdvisorReasonIconStyle}" />
+                            <TextBlock x:Uid="Alone_AdvisorNothingChanged" Grid.Column="1" Style="{StaticResource BodyWrapTextStyle}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
 
-            <StackPanel Style="{StaticResource ButtonRowStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
-                <Button x:Uid="AdvisorRecommend" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RecommendCommand}" />
-                <HyperlinkButton x:Uid="AdvisorAllDistros" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
-                <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsLoading), Mode=OneWay}" />
-            </StackPanel>
-
-            <StackPanel x:Name="ResultsPanel" Style="{StaticResource PageContentInnerStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasResult), Mode=OneWay}">
-                <Grid Style="{StaticResource TourHeaderGridStyle}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Uid="AdvisorBestTitle" Style="{StaticResource SectionTitleStyle}" />
-                    <Button x:Uid="AdvisorEdit" Grid.Column="1" Command="{x:Bind ViewModel.EditAnswersCommand}" />
-                </Grid>
-                <InfoBar
-                    x:Uid="AdvisorArmNote"
-                    IsClosable="False"
-                    Severity="Informational"
-                    IsOpen="{x:Bind ViewModel.ShowArmNote, Mode=OneWay}" />
-                <ItemsControl ItemsSource="{x:Bind ViewModel.Best}" ItemTemplate="{StaticResource AdvisorResultTemplate}" />
-                <TextBlock x:Uid="AdvisorOthersTitle" Style="{StaticResource SectionTitleStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasAlternatives), Mode=OneWay}" />
-                <ItemsControl ItemsSource="{x:Bind ViewModel.Alternatives}" ItemTemplate="{StaticResource AdvisorResultTemplate}">
+                <ItemsControl ItemsSource="{x:Bind ViewModel.Questions}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:AdvisorQuestionViewModel">
+                            <Border Style="{StaticResource CardBorderStyle}">
+                                <StackPanel Style="{StaticResource CompactStackStyle}">
+                                    <Grid Style="{StaticResource AdvisorQuestionHeaderGridStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource AdvisorQuestionTitleStyle}" Text="{x:Bind Title}" />
+                                        <views:WordsButton Grid.Column="1" Words="{x:Bind Words}" Label="{x:Bind WordsLabel}" />
+                                    </Grid>
+                                    <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Hint, Mode=OneWay}" Visibility="{x:Bind helpers:Ui.VisibleIfText(Hint), Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource AloneHintTextStyle}" Text="{x:Bind HintAlone}" Visibility="{x:Bind helpers:Ui.Visible(ShowHintAlone), Mode=OneWay}" />
+                                    <RadioButtons ItemsSource="{x:Bind Options}" SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <HyperlinkButton x:Uid="AdvisorAllDistrosResults" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
+
+                <StackPanel Style="{StaticResource ButtonRowStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.ShowQuestions), Mode=OneWay}">
+                    <Button x:Uid="AdvisorRecommend" Style="{StaticResource AccentButtonStyle}" Command="{x:Bind ViewModel.RecommendCommand}" />
+                    <HyperlinkButton x:Uid="AdvisorAllDistros" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
+                    <ProgressRing Style="{StaticResource StageRingStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.IsLoading), Mode=OneWay}" />
+                </StackPanel>
+
+                <StackPanel x:Name="ResultsPanel" Style="{StaticResource PageContentInnerStackStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasResult), Mode=OneWay}">
+                    <Grid Style="{StaticResource TourHeaderGridStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="AdvisorBestTitle" Style="{StaticResource SectionTitleStyle}" />
+                        <Button x:Uid="AdvisorEdit" Grid.Column="1" Command="{x:Bind ViewModel.EditAnswersCommand}" />
+                    </Grid>
+                    <InfoBar
+                        x:Uid="AdvisorArmNote"
+                        IsClosable="False"
+                        Severity="Informational"
+                        IsOpen="{x:Bind ViewModel.ShowArmNote, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Best}" ItemTemplate="{StaticResource AdvisorResultTemplate}" />
+                    <TextBlock x:Uid="AdvisorOthersTitle" Style="{StaticResource SectionTitleStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasAlternatives), Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Alternatives}" ItemTemplate="{StaticResource AdvisorResultTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Style="{StaticResource GuideLessonsPanelStyle}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <HyperlinkButton x:Uid="AdvisorAllDistrosResults" Command="{x:Bind ViewModel.ShowAllDistrosCommand}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </Grid>
     </ScrollViewer>
 </Page>

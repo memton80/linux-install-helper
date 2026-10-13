@@ -12,12 +12,16 @@ public sealed class NavigationService : INavigationService
 {
     private static readonly Dictionary<string, Type> Pages = new()
     {
+        [PageKeys.Welcome] = typeof(WelcomePage),
         [PageKeys.Advisor] = typeof(AdvisorPage),
         [PageKeys.Distros] = typeof(DistrosPage),
         [PageKeys.DistroDetails] = typeof(DistroDetailsPage),
         [PageKeys.LocalIso] = typeof(LocalIsoPage),
         [PageKeys.Restore] = typeof(RestorePage),
         [PageKeys.Guide] = typeof(GuidePage),
+        [PageKeys.Readiness] = typeof(ReadinessPage),
+        [PageKeys.Software] = typeof(SoftwarePage),
+        [PageKeys.Troubleshoot] = typeof(TroubleshootPage),
         [PageKeys.Drive] = typeof(DrivePage),
         [PageKeys.Progress] = typeof(ProgressPage),
         [PageKeys.Backup] = typeof(BackupPage),

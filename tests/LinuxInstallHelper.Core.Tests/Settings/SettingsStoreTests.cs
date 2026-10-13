@@ -17,8 +17,10 @@ public sealed class SettingsStoreTests : IDisposable
         Assert.True(settings.VerifyAfterWrite);
         Assert.True(settings.EjectWhenDone);
         Assert.True(settings.KeepIsoAfterWrite);
+        Assert.True(settings.CheckForUpdates);
         Assert.Null(settings.Language);
         Assert.Equal(AppTheme.System, settings.Theme);
+        Assert.Null(settings.Guidance);
     }
 
     [Fact]
@@ -38,6 +40,37 @@ public sealed class SettingsStoreTests : IDisposable
         Assert.Equal(@"D:\ISO", reloaded.DownloadFolder);
         Assert.Equal("backup,passwords", reloaded.ChecklistDone);
         Assert.Equal(reloaded, changed);
+    }
+
+    [Fact]
+    public void The_guidance_mode_is_saved_and_reloaded()
+    {
+        var paths = new AppPaths(_temp.Path);
+        new SettingsStore(paths).Save(new UserSettings { Guidance = GuidanceMode.Alone });
+
+        Assert.Contains("\"guidance\": \"alone\"", File.ReadAllText(paths.SettingsFile), StringComparison.Ordinal);
+        Assert.Equal(GuidanceMode.Alone, new SettingsStore(paths).Current.Guidance);
+    }
+
+    [Fact]
+    public void A_file_saved_before_the_guidance_mode_loads_without_it()
+    {
+        var paths = new AppPaths(_temp.Path);
+        paths.EnsureCreated();
+        File.WriteAllText(paths.SettingsFile, """
+            {
+              "theme": "dark",
+              "language": "fr-FR",
+              "keepIsoAfterWrite": true,
+              "verifyAfterWrite": true,
+              "ejectWhenDone": true
+            }
+            """);
+
+        var settings = new SettingsStore(paths).Current;
+
+        Assert.Equal(AppTheme.Dark, settings.Theme);
+        Assert.Null(settings.Guidance);
     }
 
     [Fact]

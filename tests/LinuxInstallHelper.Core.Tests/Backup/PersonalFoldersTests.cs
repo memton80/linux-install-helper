@@ -69,6 +69,31 @@ public sealed class PersonalFoldersTests : IDisposable
         Assert.Equal(PersonalFolderKind.Documents, Assert.Single(found).Kind);
     }
 
+    [Fact]
+    public void Measures_the_files_to_back_up()
+    {
+        var pictures = Folder(PersonalFolderKind.Pictures);
+        File.WriteAllBytes(Path.Combine(pictures.Path, "beach.jpg"), new byte[3000]);
+        Directory.CreateDirectory(Path.Combine(pictures.Path, "2026"));
+        File.WriteAllBytes(Path.Combine(pictures.Path, "2026", "cat.png"), new byte[500]);
+        AddFile(pictures, "desktop.ini");
+        AddFile(pictures, "Album.lnk");
+        var hidden = AddFile(pictures, ".thumbnails");
+        File.SetAttributes(hidden, FileAttributes.Hidden);
+        var image = Path.Combine(pictures.Path, "debian.iso");
+        File.WriteAllBytes(image, new byte[9000]);
+
+        var size = PersonalFolders.Measure(pictures.Path, [image]);
+
+        Assert.Equal(new FolderSize(3500, 2), size);
+    }
+
+    [Fact]
+    public void A_missing_folder_measures_nothing()
+    {
+        Assert.Equal(new FolderSize(0, 0), PersonalFolders.Measure(_temp.File("missing")));
+    }
+
     private PersonalFolder Folder(PersonalFolderKind kind)
     {
         var path = _temp.File(kind.ToString());

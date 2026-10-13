@@ -1,4 +1,4 @@
-using LinuxInstallHelper.Core;
+using LinuxInstallHelper.Core.Readiness;
 
 namespace LinuxInstallHelper.App.Services;
 
@@ -13,7 +13,7 @@ public static class ProcessorText
     /// it will (or when the processor of the image or of the PC is unknown). It never blocks: the drive may be for another PC.
     /// </summary>
     public static string Mismatch(ILocalizer localizer, string? architecture) =>
-        architecture is null || MachineArchitecture.Current is not { } machine || machine == architecture
-            ? string.Empty
-            : localizer.Format("Architecture_Mismatch", Name(localizer, architecture), Name(localizer, machine));
+        PcReadiness.CannotStart(PcFacts.ThisProcessor, architecture) && PcFacts.ArchitectureOf(PcFacts.ThisProcessor) is { } machine
+            ? localizer.Format("Architecture_Mismatch", Name(localizer, architecture!), Name(localizer, machine))
+            : string.Empty;
 }

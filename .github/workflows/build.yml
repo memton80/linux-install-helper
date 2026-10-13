@@ -125,6 +125,13 @@ jobs:
           ./tools/ci/smoke-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Output artifacts/screenshots
           ./tools/ci/smoke-test.ps1 -Exe "artifacts/single/LinuxInstallHelper-${{ matrix.rid }}.exe" -Output artifacts/screenshots -Launcher
 
+      # Use the pages like a person would (Tab, lists, expanders) and check that they never move sideways.
+      - name: Layout test
+        if: matrix.platform == 'x64'
+        timeout-minutes: 20
+        shell: pwsh
+        run: ./tools/ci/layout-test.ps1 -Exe "artifacts/publish/${{ matrix.rid }}/LinuxInstallHelper.exe" -Strict
+
       - name: Application log
         if: always() && matrix.platform == 'x64'
         shell: pwsh
