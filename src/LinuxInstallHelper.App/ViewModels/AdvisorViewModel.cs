@@ -3,6 +3,7 @@ using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
+using LinuxInstallHelper.Core;
 using LinuxInstallHelper.Core.Catalog;
 
 namespace LinuxInstallHelper.App.ViewModels;
@@ -90,13 +91,14 @@ public sealed class AdvisorResultViewModel
 /// </summary>
 public sealed partial class AdvisorViewModel : ObservableObject, INavigationAware
 {
-    private const int QuestionCount = 6;
+    private const int QuestionCount = 7;
 
     // The words of the glossary explained behind the "?" button of each question.
     private static readonly string[][] QuestionWords =
     [
         ["linux", "distribution", "terminal"],
         ["memory", "gb", "memory-where"],
+        ["processor", "arm", "processor-where"],
         ["office", "programming", "advanced"],
         ["desktop", "taskbar", "clean"],
         ["update", "bug", "update-unsure"],
@@ -120,12 +122,21 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         _formatter = formatter;
         _glossary = glossary;
 
-        // The memory of this PC preselects the second answer: the drive is usually made for the same computer.
+        // The memory and the processor of this PC preselect the second and third answers: the drive is usually made for
+        // the same computer. They stay questions, since it may be for another one.
         var memory = GC.GetGCMemoryInfo().TotalAvailableMemoryBytes;
         var modest = memory > 0 && memory < DistroAdvisor.ModestMemoryBytes * 7 / 8;
         var memoryHint = memory > 0
             ? localizer.Format("Advisor_MemoryHint", Math.Round(memory / (1024.0 * 1024 * 1024)).ToString(CultureInfo.CurrentCulture))
             : string.Empty;
+        var processor = MachineArchitecture.Current;
+        var processorHint = processor is null ? string.Empty : localizer.Format("Advisor_ProcessorHint", ProcessorText.Name(localizer, processor));
+        var processorAnswer = processor switch
+        {
+            DistroArchitectures.X64 => (int)ComputerProcessor.IntelOrAmd,
+            DistroArchitectures.Arm64 => (int)ComputerProcessor.Arm,
+            _ => -1,
+        };
 
         for (var i = 1; i <= QuestionCount; i++)
         {
@@ -133,8 +144,18 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
                 .Select(o => Optional($"Advisor_Q{i}_A{o}"))
                 .OfType<string>()
                 .ToList();
-            var hint = i == 2 ? memoryHint : Optional($"Advisor_Q{i}_Hint") ?? string.Empty;
-            var selected = i == 2 && memory > 0 ? (modest ? 1 : 0) : -1;
+            var hint = i switch
+            {
+                2 => memoryHint,
+                3 => processorHint,
+                _ => Optional($"Advisor_Q{i}_Hint") ?? string.Empty,
+            };
+            var selected = i switch
+            {
+                2 when memory > 0 => modest ? 1 : 0,
+                3 => processorAnswer,
+                _ => -1,
+            };
             Questions.Add(new AdvisorQuestionViewModel(
                 localizer.Format("Advisor_QuestionTitle", i, localizer.Get($"Advisor_Q{i}")),
                 hint,
@@ -152,6 +173,14 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     public ObservableCollection<AdvisorResultViewModel> Best { get; } = [];
 
     public ObservableCollection<AdvisorResultViewModel> Alternatives { get; } = [];
+
+    /// <summary>Few distributions exist for ARM PCs: the "other good choices" may be missing.</summary>
+    [ObservableProperty]
+    private bool _hasAlternatives;
+
+    /// <summary>The answers are for an ARM PC, where Linux works on some laptops only.</summary>
+    [ObservableProperty]
+    private bool _showArmNote;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(RecommendCommand))]
@@ -184,6 +213,8 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
     {
         Best.Clear();
         Alternatives.Clear();
+        HasAlternatives = false;
+        ShowArmNote = false;
         if (Answers() is not { } answers || _distros.Count == 0)
         {
             HasResult = false;
@@ -197,6 +228,8 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
             (i == 0 ? Best : Alternatives).Add(ToResult(suggestions[i], language, best: i == 0));
         }
 
+        HasAlternatives = Alternatives.Count > 0;
+        ShowArmNote = answers.Processor == ComputerProcessor.Arm;
         HasResult = Best.Count > 0;
     }
 
@@ -237,10 +270,11 @@ public sealed partial class AdvisorViewModel : ObservableObject, INavigationAwar
         return new AdvisorAnswers(
             (LinuxExperience)a[0],
             (ComputerPower)a[1],
-            (MainUse)a[2],
-            (DesktopLook)a[3],
-            (UpdatePace)a[4],
-            AvoidFirmwareSettings: a[5] == 0);
+            (ComputerProcessor)a[2],
+            (MainUse)a[3],
+            (DesktopLook)a[4],
+            (UpdatePace)a[5],
+            AvoidFirmwareSettings: a[6] == 0);
     }
 
     /// <summary>The string for <paramref name="key"/>, or null when the questionnaire does not define it.</summary>

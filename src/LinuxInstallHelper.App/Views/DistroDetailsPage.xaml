@@ -28,6 +28,12 @@
                 <views:WordsButton Grid.Column="2" Words="{x:Bind ViewModel.Words, Mode=OneWay}" Label="{x:Bind ViewModel.WordsLabel}" />
             </Grid>
 
+            <InfoBar
+                x:Uid="DistroDetailsArchitecture"
+                IsClosable="False"
+                Severity="Warning"
+                IsOpen="{x:Bind ViewModel.ShowArchitectureWarning, Mode=OneWay}"
+                Message="{x:Bind ViewModel.ArchitectureWarning, Mode=OneWay}" />
             <InfoBar x:Uid="DistroDetailsSecureBoot" IsClosable="False" Severity="Warning" IsOpen="{x:Bind ViewModel.ShowSecureBootWarning, Mode=OneWay}" />
 
             <TextBlock x:Uid="DistroDetailsAbout" Style="{StaticResource SectionTitleStyle}" />

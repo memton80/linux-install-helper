@@ -65,6 +65,11 @@ public sealed class Glossary
             ids.AddRange(["memory", "gb", "disk"]);
         }
 
+        if (distro.Architecture == DistroArchitectures.Arm64)
+        {
+            ids.AddRange(["processor", "arm"]);
+        }
+
         if (mentionsSecureBoot || !distro.SecureBoot)
         {
             ids.AddRange(["bios", "secureboot"]);

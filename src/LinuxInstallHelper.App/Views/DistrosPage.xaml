@@ -27,6 +27,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <AutoSuggestBox
                 x:Uid="DistrosSearch"
@@ -51,6 +52,18 @@
                 Style="{StaticResource FilterComboBoxStyle}"
                 ItemsSource="{x:Bind ViewModel.Categories}"
                 SelectedIndex="{x:Bind ViewModel.CategoryIndex, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FilterOption">
+                        <TextBlock Text="{x:Bind Label}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox
+                x:Uid="DistrosProcessor"
+                Grid.Column="3"
+                Style="{StaticResource FilterComboBoxStyle}"
+                ItemsSource="{x:Bind ViewModel.Processors}"
+                SelectedIndex="{x:Bind ViewModel.ProcessorIndex, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:FilterOption">
                         <TextBlock Text="{x:Bind Label}" />
@@ -115,6 +128,10 @@
                             <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(ShowSecureBootWarning)}">
                                 <FontIcon Glyph="&#xE7BA;" Style="{StaticResource WarningIconStyle}" />
                                 <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind SecureBootWarning}" />
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource IconTextPanelStyle}" Visibility="{x:Bind helpers:Ui.Visible(ShowProcessorWarning)}">
+                                <FontIcon Glyph="&#xE7BA;" Style="{StaticResource WarningIconStyle}" />
+                                <TextBlock Style="{StaticResource DistroDetailsStyle}" Text="{x:Bind ProcessorWarning}" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>

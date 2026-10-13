@@ -36,6 +36,12 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
             new FilterOption(null, localizer.Get("Filter_AllCategories")),
             .. DistroCategories.All.Select(c => new FilterOption(c, localizer.Get("Category_" + c))),
         ];
+        // Every processor by default: the drive may be for another PC than this one.
+        Processors =
+        [
+            new FilterOption(null, localizer.Get("Filter_AllProcessors")),
+            .. DistroArchitectures.All.Select(a => new FilterOption(a, ProcessorText.Name(localizer, a))),
+        ];
     }
 
     public ObservableCollection<DistroItemViewModel> Distros { get; } = [];
@@ -43,6 +49,8 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
     public IReadOnlyList<FilterOption> Families { get; }
 
     public IReadOnlyList<FilterOption> Categories { get; }
+
+    public IReadOnlyList<FilterOption> Processors { get; }
 
     [ObservableProperty]
     private string _searchText = string.Empty;
@@ -52,6 +60,9 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
 
     [ObservableProperty]
     private int _categoryIndex;
+
+    [ObservableProperty]
+    private int _processorIndex;
 
     [ObservableProperty]
     private bool _isLoading;
@@ -107,13 +118,16 @@ public sealed partial class DistrosViewModel : ObservableObject, INavigationAwar
 
     partial void OnCategoryIndexChanged(int value) => ApplyFilter();
 
+    partial void OnProcessorIndexChanged(int value) => ApplyFilter();
+
     private void ApplyFilter()
     {
         var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var query = new DistroQuery(
             SearchText,
             Families.ElementAtOrDefault(FamilyIndex)?.Key,
-            Categories.ElementAtOrDefault(CategoryIndex)?.Key);
+            Categories.ElementAtOrDefault(CategoryIndex)?.Key,
+            Processors.ElementAtOrDefault(ProcessorIndex)?.Key);
 
         Distros.Clear();
         foreach (var distro in DistroFilter.Apply(_all, query, language))

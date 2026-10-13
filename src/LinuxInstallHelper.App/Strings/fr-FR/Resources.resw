@@ -98,6 +98,9 @@
   <data name="DistrosCategory.Header" xml:space="preserve">
     <value>Usage</value>
   </data>
+  <data name="DistrosProcessor.Header" xml:space="preserve">
+    <value>Processeur</value>
+  </data>
   <data name="DistrosOffline.Title" xml:space="preserve">
     <value>Catalogue hors ligne</value>
   </data>
@@ -118,6 +121,9 @@
   </data>
   <data name="Filter_AllCategories" xml:space="preserve">
     <value>Tous les usages</value>
+  </data>
+  <data name="Filter_AllProcessors" xml:space="preserve">
+    <value>Tous les processeurs</value>
   </data>
   <data name="Family_ubuntu" xml:space="preserve">
     <value>Famille Ubuntu</value>
@@ -163,6 +169,18 @@
   </data>
   <data name="Distro_NoSecureBoot" xml:space="preserve">
     <value>Secure Boot à désactiver</value>
+  </data>
+  <data name="Processor_x86_64" xml:space="preserve">
+    <value>Intel ou AMD</value>
+  </data>
+  <data name="Processor_aarch64" xml:space="preserve">
+    <value>ARM</value>
+  </data>
+  <data name="Distro_OtherProcessor" xml:space="preserve">
+    <value>Pour PC {0} : ne démarre pas ici</value>
+  </data>
+  <data name="Architecture_Mismatch" xml:space="preserve">
+    <value>Cette image est faite pour les PC à processeur {0}, or ce PC a un processeur {1}. Si la clé est pour un autre ordinateur, à processeur {0}, vous pouvez continuer.</value>
   </data>
   <data name="LocalIsoHeader.Text" xml:space="preserve">
     <value>Utiliser une image ISO locale</value>
@@ -259,6 +277,9 @@
   </data>
   <data name="DriveIgnored.Title" xml:space="preserve">
     <value>Clés USB inutilisables</value>
+  </data>
+  <data name="DriveArchitecture.Title" xml:space="preserve">
+    <value>Cette clé ne démarrera pas sur ce PC</value>
   </data>
   <data name="DriveError.Title" xml:space="preserve">
     <value>Impossible de lister les disques</value>
@@ -967,7 +988,7 @@ Cette opération est irréversible.</value>
     <value>Quelle distribution choisir ?</value>
   </data>
   <data name="AdvisorSubtitle.Text" xml:space="preserve">
-    <value>Il existe beaucoup de versions de Linux, appelées « distributions ». Répondez à 6 questions : l'application vous conseille celle qui vous convient le mieux, expliquée simplement.</value>
+    <value>Il existe beaucoup de versions de Linux, appelées « distributions ». Répondez à 7 questions : l'application vous conseille celle qui vous convient le mieux, expliquée simplement.</value>
   </data>
   <data name="Advisor_QuestionTitle" xml:space="preserve">
     <value>{0}. {1}</value>
@@ -1000,51 +1021,66 @@ Cette opération est irréversible.</value>
     <value>Pour info, ce PC a {0} Go de mémoire.</value>
   </data>
   <data name="Advisor_Q3" xml:space="preserve">
-    <value>Qu'allez-vous surtout faire ?</value>
+    <value>Quel processeur a cet ordinateur ?</value>
   </data>
   <data name="Advisor_Q3_A1" xml:space="preserve">
-    <value>Internet, e-mails, bureautique, photos et vidéos</value>
+    <value>Intel ou AMD, comme la plupart des PC</value>
   </data>
   <data name="Advisor_Q3_A2" xml:space="preserve">
-    <value>Jouer à des jeux vidéo</value>
+    <value>ARM, par exemple un portable Snapdragon</value>
   </data>
   <data name="Advisor_Q3_A3" xml:space="preserve">
-    <value>Programmer ou faire de l'informatique avancée</value>
+    <value>Je ne sais pas</value>
+  </data>
+  <data name="Advisor_ProcessorHint" xml:space="preserve">
+    <value>Pour info, ce PC a un processeur {0}.</value>
   </data>
   <data name="Advisor_Q4" xml:space="preserve">
-    <value>Quel style d'écran préférez-vous ?</value>
+    <value>Qu'allez-vous surtout faire ?</value>
   </data>
   <data name="Advisor_Q4_A1" xml:space="preserve">
-    <value>Proche de Windows : une barre des tâches et un menu en bas à gauche</value>
+    <value>Internet, e-mails, bureautique, photos et vidéos</value>
   </data>
   <data name="Advisor_Q4_A2" xml:space="preserve">
-    <value>Moderne et épuré, un peu comme sur un Mac</value>
+    <value>Jouer à des jeux vidéo</value>
   </data>
   <data name="Advisor_Q4_A3" xml:space="preserve">
-    <value>Peu importe</value>
+    <value>Programmer ou faire de l'informatique avancée</value>
   </data>
   <data name="Advisor_Q5" xml:space="preserve">
-    <value>Pour les mises à jour, que préférez-vous ?</value>
+    <value>Quel style d'écran préférez-vous ?</value>
   </data>
   <data name="Advisor_Q5_A1" xml:space="preserve">
-    <value>La tranquillité : que tout marche, sans surprise</value>
+    <value>Proche de Windows : une barre des tâches et un menu en bas à gauche</value>
   </data>
   <data name="Advisor_Q5_A2" xml:space="preserve">
-    <value>Les dernières nouveautés, même s'il y a parfois un petit bug</value>
+    <value>Moderne et épuré, un peu comme sur un Mac</value>
   </data>
   <data name="Advisor_Q5_A3" xml:space="preserve">
     <value>Peu importe</value>
   </data>
   <data name="Advisor_Q6" xml:space="preserve">
-    <value>Accepteriez-vous de changer un réglage du BIOS de l'ordinateur ?</value>
-  </data>
-  <data name="Advisor_Q6_Hint" xml:space="preserve">
-    <value>Certaines distributions demandent de désactiver le « Secure Boot » dans les réglages de démarrage du PC.</value>
+    <value>Pour les mises à jour, que préférez-vous ?</value>
   </data>
   <data name="Advisor_Q6_A1" xml:space="preserve">
-    <value>Non, je préfère éviter</value>
+    <value>La tranquillité : que tout marche, sans surprise</value>
   </data>
   <data name="Advisor_Q6_A2" xml:space="preserve">
+    <value>Les dernières nouveautés, même s'il y a parfois un petit bug</value>
+  </data>
+  <data name="Advisor_Q6_A3" xml:space="preserve">
+    <value>Peu importe</value>
+  </data>
+  <data name="Advisor_Q7" xml:space="preserve">
+    <value>Accepteriez-vous de changer un réglage du BIOS de l'ordinateur ?</value>
+  </data>
+  <data name="Advisor_Q7_Hint" xml:space="preserve">
+    <value>Certaines distributions demandent de désactiver le « Secure Boot » dans les réglages de démarrage du PC.</value>
+  </data>
+  <data name="Advisor_Q7_A1" xml:space="preserve">
+    <value>Non, je préfère éviter</value>
+  </data>
+  <data name="Advisor_Q7_A2" xml:space="preserve">
     <value>Oui, si on m'explique comment faire</value>
   </data>
   <data name="AdvisorRecommend.Content" xml:space="preserve">
@@ -1064,6 +1100,12 @@ Cette opération est irréversible.</value>
   </data>
   <data name="AdvisorOthersTitle.Text" xml:space="preserve">
     <value>Autres bons choix</value>
+  </data>
+  <data name="AdvisorArmNote.Title" xml:space="preserve">
+    <value>Linux sur un PC ARM</value>
+  </data>
+  <data name="AdvisorArmNote.Message" xml:space="preserve">
+    <value>Peu de distributions existent pour les PC ARM, et Linux ne fonctionne encore que sur certains portables ARM. Avant d'installer, vérifiez sur le site de la distribution que votre modèle est pris en charge.</value>
   </data>
   <data name="Advisor_CreateBest" xml:space="preserve">
     <value>Créer ma clé avec {0}</value>
@@ -1134,6 +1176,12 @@ Cette opération est irréversible.</value>
   <data name="Simple_zorin-core" xml:space="preserve">
     <value>Conçue pour ceux qui viennent de Windows : son bureau lui ressemble beaucoup, et elle est très facile à prendre en main.</value>
   </data>
+  <data name="Simple_ubuntu-desktop-arm64" xml:space="preserve">
+    <value>Ubuntu, la distribution Linux la plus utilisée au monde, en version pour les PC à processeur ARM. On trouve de l'aide partout, et elle reçoit des mises à jour de sécurité pendant 5 ans.</value>
+  </data>
+  <data name="Simple_fedora-workstation-arm64" xml:space="preserve">
+    <value>Fedora en version pour les PC à processeur ARM : moderne et soignée, avec les toutes dernières versions des logiciels, deux fois par an.</value>
+  </data>
   <data name="Words_Title" xml:space="preserve">
     <value>Les mots expliqués simplement</value>
   </data>
@@ -1182,6 +1230,15 @@ Cette opération est irréversible.</value>
   <data name="DistroDetailsSecureBoot.Message" xml:space="preserve">
     <value>Cette distribution ne démarre pas avec le Secure Boot activé : il faudra le désactiver dans les réglages UEFI/BIOS de l'ordinateur.</value>
   </data>
+  <data name="DistroDetails_Fact_Processor" xml:space="preserve">
+    <value>Processeur</value>
+  </data>
+  <data name="DistroDetails_ProcessorValue" xml:space="preserve">
+    <value>Pour les PC à processeur {0}</value>
+  </data>
+  <data name="DistroDetailsArchitecture.Title" xml:space="preserve">
+    <value>Cette clé ne démarrera pas sur ce PC</value>
+  </data>
   <data name="DistroDetails_Website" xml:space="preserve">
     <value>Site officiel : {0}</value>
   </data>
@@ -1223,6 +1280,24 @@ Cette opération est irréversible.</value>
   </data>
   <data name="Word_memory-where_Meaning" xml:space="preserve">
     <value>Sous Windows, ouvrez Paramètres, puis Système, puis Informations système : elle est indiquée à la ligne « Mémoire RAM installée ».</value>
+  </data>
+  <data name="Word_processor" xml:space="preserve">
+    <value>Processeur</value>
+  </data>
+  <data name="Word_processor_Meaning" xml:space="preserve">
+    <value>La puce qui fait tous les calculs de l'ordinateur. Presque tous les PC ont un processeur Intel ou AMD. Une distribution est faite pour un type de processeur : sur un autre, elle ne démarre pas.</value>
+  </data>
+  <data name="Word_arm" xml:space="preserve">
+    <value>ARM</value>
+  </data>
+  <data name="Word_arm_Meaning" xml:space="preserve">
+    <value>Un autre type de processeur, économe en batterie, qu'on trouve dans les téléphones et dans certains portables récents (Snapdragon, certaines Surface…). Il lui faut une distribution faite pour ARM.</value>
+  </data>
+  <data name="Word_processor-where" xml:space="preserve">
+    <value>Où voir le processeur d'un PC ?</value>
+  </data>
+  <data name="Word_processor-where_Meaning" xml:space="preserve">
+    <value>Sous Windows, ouvrez Paramètres, puis Système, puis Informations système : la ligne « Type du système » indique « processeur x64 » (Intel ou AMD) ou « processeur ARM ».</value>
   </data>
   <data name="Word_office" xml:space="preserve">
     <value>Bureautique</value>

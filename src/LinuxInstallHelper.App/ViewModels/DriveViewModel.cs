@@ -54,6 +54,13 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private string _imageSummary = string.Empty;
 
+    /// <summary>Why the drive will not start on this PC; empty when it will. It never blocks: the drive may be for another PC.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowArchitectureWarning))]
+    private string _architectureWarning = string.Empty;
+
+    public bool ShowArchitectureWarning => ArchitectureWarning.Length > 0;
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(StartCommand))]
     private DriveItemViewModel? _selectedDrive;
@@ -95,6 +102,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
         }
 
         ImageSummary = _localizer.Format("Drive_ImageSummary", _wizard.SourceName, _formatter.Size(_wizard.ImageSize));
+        ArchitectureWarning = ProcessorText.Mismatch(_localizer, _wizard.ImageArchitecture);
         IsConfirmed = false;
         _ = RefreshAsync();
         _timer.Start();

@@ -16,6 +16,13 @@
                 <TextBlock Style="{StaticResource PageSubtitleStyle}" Text="{x:Bind ViewModel.ImageSummary, Mode=OneWay}" />
             </StackPanel>
 
+            <InfoBar
+                x:Uid="DriveArchitecture"
+                IsClosable="False"
+                Severity="Warning"
+                IsOpen="{x:Bind ViewModel.ShowArchitectureWarning, Mode=OneWay}"
+                Message="{x:Bind ViewModel.ArchitectureWarning, Mode=OneWay}" />
+
             <Border Style="{StaticResource CardBorderStyle}">
                 <StackPanel Style="{StaticResource CardStackStyle}">
                     <Grid Style="{StaticResource SettingRowGridStyle}">

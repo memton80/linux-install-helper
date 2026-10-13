@@ -1,5 +1,6 @@
 using System.Globalization;
 using LinuxInstallHelper.App.Services;
+using LinuxInstallHelper.Core;
 using LinuxInstallHelper.Core.Catalog;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
@@ -32,6 +33,8 @@ public sealed class DistroItemViewModel
         Categories = string.Join(" · ", distro.Categories.Select(c => localizer.Get("Category_" + c)));
         ShowSecureBootWarning = !distro.SecureBoot;
         SecureBootWarning = localizer.Get("Distro_NoSecureBoot");
+        ShowProcessorWarning = !MachineArchitecture.Boots(distro.Architecture);
+        ProcessorWarning = localizer.Format("Distro_OtherProcessor", ProcessorText.Name(localizer, distro.Architecture));
         AutomationName = $"{distro.DisplayName} {distro.Version}";
     }
 
@@ -54,6 +57,11 @@ public sealed class DistroItemViewModel
     public bool ShowSecureBootWarning { get; }
 
     public string SecureBootWarning { get; }
+
+    /// <summary>The image is made for another processor than the one of this PC (the drive may be for another PC).</summary>
+    public bool ShowProcessorWarning { get; }
+
+    public string ProcessorWarning { get; }
 
     public string AutomationName { get; }
 

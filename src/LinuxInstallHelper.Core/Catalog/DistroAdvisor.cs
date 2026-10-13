@@ -21,6 +21,19 @@ public enum ComputerPower
     Modest,
 }
 
+/// <summary>The processor of the computer: an image starts only on the processor it is made for.</summary>
+public enum ComputerProcessor
+{
+    /// <summary>Intel or AMD, like most PCs (<see cref="DistroArchitectures.X64"/>).</summary>
+    IntelOrAmd,
+
+    /// <summary>ARM, like Snapdragon laptops (<see cref="DistroArchitectures.Arm64"/>).</summary>
+    Arm,
+
+    /// <summary>The user does not know: most PCs have an Intel or AMD processor.</summary>
+    Unknown,
+}
+
 public enum MainUse
 {
     /// <summary>Web, office, photos and videos.</summary>
@@ -56,6 +69,7 @@ public enum UpdatePace
 /// <summary>The answers to the questionnaire.</summary>
 /// <param name="Experience">How well the user knows Linux.</param>
 /// <param name="Power">The computer the distribution is for.</param>
+/// <param name="Processor">The processor of that computer.</param>
 /// <param name="Use">What the computer is mostly used for.</param>
 /// <param name="Look">The preferred desktop style.</param>
 /// <param name="Updates">The preferred pace of updates.</param>
@@ -63,6 +77,7 @@ public enum UpdatePace
 public sealed record AdvisorAnswers(
     LinuxExperience Experience,
     ComputerPower Power,
+    ComputerProcessor Processor,
     MainUse Use,
     DesktopLook Look,
     UpdatePace Updates,
@@ -86,7 +101,8 @@ public sealed record DistroRecommendation(Distro Distro, int Score, IReadOnlyLis
 
 /// <summary>
 /// Suggests the distributions that best fit the answers of the questionnaire, from what the catalog says about them
-/// (categories, desktop, memory needed, Secure Boot). Only distributions with a graphical desktop are suggested.
+/// (categories, desktop, memory needed, Secure Boot). Only distributions with a graphical desktop, made for the processor
+/// of the computer, are suggested.
 /// </summary>
 public static class DistroAdvisor
 {
@@ -102,8 +118,10 @@ public static class DistroAdvisor
         ArgumentNullException.ThrowIfNull(distros);
         ArgumentNullException.ThrowIfNull(answers);
 
+        var architecture = ArchitectureFor(answers.Processor);
         return distros
             .Where(IsCandidate)
+            .Where(d => string.Equals(d.Architecture, architecture, StringComparison.Ordinal))
             .Select((distro, index) => (Recommendation: Evaluate(distro, answers), Index: index))
             .OrderByDescending(r => r.Recommendation.Score)
             .ThenBy(r => r.Index)
@@ -111,6 +129,10 @@ public static class DistroAdvisor
             .Select(r => r.Recommendation)
             .ToList();
     }
+
+    /// <summary>The architecture of the images that start on <paramref name="processor"/>.</summary>
+    public static string ArchitectureFor(ComputerProcessor processor) =>
+        processor == ComputerProcessor.Arm ? DistroArchitectures.Arm64 : DistroArchitectures.X64;
 
     /// <summary>A desktop distribution for everyday use: no server, security toolkit or text-only installer.</summary>
     public static bool IsCandidate(Distro distro)
