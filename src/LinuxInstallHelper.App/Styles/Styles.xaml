@@ -264,7 +264,6 @@
     <!-- Filters -->
     <Style x:Key="FilterBarGridStyle" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="12" />
-        <Setter Property="RowSpacing" Value="12" />
     </Style>
 
     <Style x:Key="FilterComboBoxStyle" TargetType="ComboBox">

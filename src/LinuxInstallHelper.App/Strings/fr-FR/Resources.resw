@@ -90,16 +90,13 @@
     <value>Rechercher</value>
   </data>
   <data name="DistrosSearch.PlaceholderText" xml:space="preserve">
-    <value>Nom, bureau, mot-clé…</value>
+    <value>Nom, bureau, mot-clé, ARM…</value>
   </data>
   <data name="DistrosFamily.Header" xml:space="preserve">
     <value>Famille</value>
   </data>
   <data name="DistrosCategory.Header" xml:space="preserve">
     <value>Usage</value>
-  </data>
-  <data name="DistrosProcessor.Header" xml:space="preserve">
-    <value>Processeur</value>
   </data>
   <data name="DistrosOffline.Title" xml:space="preserve">
     <value>Catalogue hors ligne</value>
@@ -121,9 +118,6 @@
   </data>
   <data name="Filter_AllCategories" xml:space="preserve">
     <value>Tous les usages</value>
-  </data>
-  <data name="Filter_AllProcessors" xml:space="preserve">
-    <value>Tous les processeurs</value>
   </data>
   <data name="Family_ubuntu" xml:space="preserve">
     <value>Famille Ubuntu</value>

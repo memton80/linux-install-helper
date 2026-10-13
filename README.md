@@ -32,7 +32,8 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   OpenPGP de la page finale, les messages bruts des erreurs. L'activer demande une confirmation, et un cadre orange entoure
   alors la fenêtre. Il est désactivé à chaque lancement et ne change aucune vérification ni confirmation.
 - **Catalogue de 19 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
-  Manjaro, Zorin OS…) avec recherche et filtres par famille, par usage (bureau, léger, serveur…) et par processeur.
+  Manjaro, Zorin OS…) avec recherche (« ARM » trouve les versions ARM) et filtres par famille et par usage (bureau,
+  léger, serveur…).
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
   Chaque distribution a sa page de présentation (en bref, configuration conseillée, site officiel) avant la
   création de la clé, et un bouton « ? » explique simplement les mots techniques, comme dans le questionnaire.

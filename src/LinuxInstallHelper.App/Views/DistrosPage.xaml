@@ -57,27 +57,20 @@
             </StackPanel>
         </Border>
 
-        <!-- The search takes a line of its own: the three filters do not fit next to it in a small window. -->
         <Grid Grid.Row="2" Style="{StaticResource FilterBarGridStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <AutoSuggestBox
                 x:Uid="DistrosSearch"
-                Grid.ColumnSpan="4"
                 VerticalAlignment="Bottom"
                 QueryIcon="Find"
                 Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <ComboBox
                 x:Uid="DistrosFamily"
-                Grid.Row="1"
+                Grid.Column="1"
                 Style="{StaticResource FilterComboBoxStyle}"
                 ItemsSource="{x:Bind ViewModel.Families}"
                 SelectedIndex="{x:Bind ViewModel.FamilyIndex, Mode=TwoWay}">
@@ -89,24 +82,10 @@
             </ComboBox>
             <ComboBox
                 x:Uid="DistrosCategory"
-                Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 Style="{StaticResource FilterComboBoxStyle}"
                 ItemsSource="{x:Bind ViewModel.Categories}"
                 SelectedIndex="{x:Bind ViewModel.CategoryIndex, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="vm:FilterOption">
-                        <TextBlock Text="{x:Bind Label}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ComboBox
-                x:Uid="DistrosProcessor"
-                Grid.Row="1"
-                Grid.Column="2"
-                Style="{StaticResource FilterComboBoxStyle}"
-                ItemsSource="{x:Bind ViewModel.Processors}"
-                SelectedIndex="{x:Bind ViewModel.ProcessorIndex, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:FilterOption">
                         <TextBlock Text="{x:Bind Label}" />
