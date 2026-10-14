@@ -3,7 +3,7 @@ using System.Globalization;
 namespace LinuxInstallHelper.Core.Catalog;
 
 /// <summary>Search and filters of the distributions screen.</summary>
-/// <param name="Text">Free text, matched against name, edition, version, desktop and description.</param>
+/// <param name="Text">Free text, matched against name, edition, version, desktop, family, architecture and description.</param>
 /// <param name="Family">One of <see cref="DistroFamilies"/>, or null for all.</param>
 /// <param name="Category">One of <see cref="DistroCategories"/>, or null for all.</param>
 /// <param name="Architecture">One of <see cref="DistroArchitectures"/>, or null for all.</param>
@@ -41,6 +41,7 @@ public static class DistroFilter
             || Contains(distro.Version, term)
             || Contains(distro.Desktop, term)
             || Contains(distro.Family, term)
+            || Contains(distro.Architecture, term)
             || Contains(distro.Description.Get(language), term)
             || Contains(distro.Description.En, term);
     }

@@ -1,7 +1,7 @@
 {
   "$schema": "./distros.schema.json",
   "schemaVersion": 1,
-  "updated": "2026-10-03",
+  "updated": "2026-10-13",
   "distros": [
     {
       "id": "ubuntu-desktop",
@@ -471,6 +471,134 @@
         ],
         "checksum": { "url": "https://distro.ibiblio.org/zorinos/18/SHA256SUMS.txt" },
         "resolve": { "type": "checksum-pattern", "pattern": "^Zorin-OS-(?<version>18(\\.[0-9]+)*)-Core-64-bit(-r[0-9]+)?\\.iso$" }
+      }
+    },
+    {
+      "id": "ubuntu-desktop-arm64",
+      "name": "Ubuntu",
+      "edition": "Desktop ARM",
+      "version": "26.04.1 LTS",
+      "family": "ubuntu",
+      "categories": ["beginner", "desktop"],
+      "desktop": "GNOME",
+      "description": {
+        "en": "Ubuntu Desktop for PCs with an ARM processor (Snapdragon…). Linux runs on only some ARM laptops so far: check that yours is supported.",
+        "fr": "Ubuntu Desktop pour les PC à processeur ARM (Snapdragon…). Linux ne fonctionne encore que sur certains portables ARM : vérifiez que le vôtre est pris en charge."
+      },
+      "homepage": "https://ubuntu.com/desktop",
+      "color": "#E95420",
+      "architecture": "aarch64",
+      "requirements": { "ramMb": 4096, "diskGb": 25 },
+      "image": {
+        "fileName": "ubuntu-26.04.1-desktop-arm64.iso",
+        "size": 4154798080,
+        "urls": [
+          "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/ubuntu-26.04.1-desktop-arm64.iso"
+        ],
+        "checksum": { "url": "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/SHA256SUMS" },
+        "signature": {
+          "kind": "detached",
+          "target": "checksum",
+          "url": "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/SHA256SUMS.gpg",
+          "fingerprints": ["843938DF228D22F7B3742BC0D94AA3F0EFE21092"]
+        },
+        "resolve": { "type": "checksum-pattern", "pattern": "^ubuntu-(?<version>26\\.04(\\.[0-9]+)*)-desktop-arm64\\.iso$" }
+      }
+    },
+    {
+      "id": "ubuntu-server-arm64",
+      "name": "Ubuntu Server",
+      "edition": "ARM",
+      "version": "26.04.1 LTS",
+      "family": "ubuntu",
+      "categories": ["server"],
+      "desktop": "None",
+      "description": {
+        "en": "Ubuntu Server for ARM machines: servers, home labs and virtual machines, with 5 years of support.",
+        "fr": "Ubuntu Server pour les machines ARM : serveurs, homelab et machines virtuelles, avec 5 ans de support."
+      },
+      "homepage": "https://ubuntu.com/server",
+      "color": "#E95420",
+      "architecture": "aarch64",
+      "requirements": { "ramMb": 2048, "diskGb": 10 },
+      "image": {
+        "fileName": "ubuntu-26.04.1-live-server-arm64.iso",
+        "size": 3076861952,
+        "urls": [
+          "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/ubuntu-26.04.1-live-server-arm64.iso"
+        ],
+        "checksum": { "url": "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/SHA256SUMS" },
+        "signature": {
+          "kind": "detached",
+          "target": "checksum",
+          "url": "https://cdimage.ubuntu.com/ubuntu/releases/26.04/release/SHA256SUMS.gpg",
+          "fingerprints": ["843938DF228D22F7B3742BC0D94AA3F0EFE21092"]
+        },
+        "resolve": { "type": "checksum-pattern", "pattern": "^ubuntu-(?<version>26\\.04(\\.[0-9]+)*)-live-server-arm64\\.iso$" }
+      }
+    },
+    {
+      "id": "debian-netinst-arm64",
+      "name": "Debian",
+      "edition": "netinst ARM",
+      "version": "13.7 (trixie)",
+      "family": "debian",
+      "categories": ["server", "lightweight"],
+      "desktop": "None",
+      "description": {
+        "en": "The small Debian network installer for ARM machines: a minimal server or a full desktop, as you choose.",
+        "fr": "Le petit installateur réseau de Debian pour les machines ARM : un serveur minimal ou un bureau complet, au choix."
+      },
+      "homepage": "https://www.debian.org/distrib/netinst",
+      "color": "#A80030",
+      "architecture": "aarch64",
+      "requirements": { "ramMb": 1024, "diskGb": 10 },
+      "image": {
+        "fileName": "debian-13.7.0-arm64-netinst.iso",
+        "size": 735358976,
+        "urls": [
+          "https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/debian-13.7.0-arm64-netinst.iso",
+          "https://mirrors.kernel.org/debian-cd/current/arm64/iso-cd/debian-13.7.0-arm64-netinst.iso"
+        ],
+        "checksum": { "url": "https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/SHA256SUMS" },
+        "signature": {
+          "kind": "detached",
+          "target": "checksum",
+          "url": "https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/SHA256SUMS.sign",
+          "fingerprints": ["DF9B9C49EAA9298432589D76DA87E80D6294BE9B"]
+        },
+        "resolve": { "type": "checksum-pattern", "pattern": "^debian-(?<version>13\\.[0-9]+\\.[0-9]+)-arm64-netinst\\.iso$" }
+      }
+    },
+    {
+      "id": "fedora-workstation-arm64",
+      "name": "Fedora",
+      "edition": "Workstation ARM",
+      "version": "44",
+      "family": "fedora",
+      "categories": ["desktop", "developer"],
+      "desktop": "GNOME",
+      "description": {
+        "en": "Fedora Workstation for PCs with an ARM processor. Linux runs on only some ARM laptops so far: check that yours is supported.",
+        "fr": "Fedora Workstation pour les PC à processeur ARM. Linux ne fonctionne encore que sur certains portables ARM : vérifiez que le vôtre est pris en charge."
+      },
+      "homepage": "https://fedoraproject.org/workstation/",
+      "color": "#51A2DA",
+      "architecture": "aarch64",
+      "requirements": { "ramMb": 4096, "diskGb": 20 },
+      "image": {
+        "fileName": "Fedora-Workstation-Live-44-1.7.aarch64.iso",
+        "size": 2689781760,
+        "urls": [
+          "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/Fedora-Workstation-Live-44-1.7.aarch64.iso",
+          "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/Fedora-Workstation-Live-44-1.7.aarch64.iso"
+        ],
+        "checksum": { "url": "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/Fedora-Workstation-44-1.7-aarch64-CHECKSUM" },
+        "signature": {
+          "kind": "clearsigned",
+          "target": "checksum",
+          "fingerprints": ["36F612DCF27F7D1A48A835E4DBFCF71C6D9F90A6"]
+        }
       }
     }
   ]

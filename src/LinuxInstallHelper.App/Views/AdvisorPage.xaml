@@ -53,6 +53,14 @@
                         <FontIcon Style="{StaticResource WarningIconStyle}" Glyph="&#xE7BA;" />
                         <TextBlock Grid.Column="1" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.SecureBootWarning}" />
                     </Grid>
+                    <Grid Style="{StaticResource IconTextGridStyle}" Visibility="{x:Bind helpers:Ui.Visible(Item.ShowProcessorWarning)}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Style="{StaticResource WarningIconStyle}" Glyph="&#xE7BA;" />
+                        <TextBlock Grid.Column="1" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Item.ProcessorWarning}" />
+                    </Grid>
                     <Button Style="{StaticResource AccentButtonStyle}" Content="{x:Bind ChooseLabel}" Command="{x:Bind ChooseCommand}" />
                 </StackPanel>
             </Border>
@@ -146,8 +154,13 @@
                         <TextBlock x:Uid="AdvisorBestTitle" Style="{StaticResource SectionTitleStyle}" />
                         <Button x:Uid="AdvisorEdit" Grid.Column="1" Command="{x:Bind ViewModel.EditAnswersCommand}" />
                     </Grid>
+                    <InfoBar
+                        x:Uid="AdvisorArmNote"
+                        IsClosable="False"
+                        Severity="Informational"
+                        IsOpen="{x:Bind ViewModel.ShowArmNote, Mode=OneWay}" />
                     <ItemsControl ItemsSource="{x:Bind ViewModel.Best}" ItemTemplate="{StaticResource AdvisorResultTemplate}" />
-                    <TextBlock x:Uid="AdvisorOthersTitle" Style="{StaticResource SectionTitleStyle}" />
+                    <TextBlock x:Uid="AdvisorOthersTitle" Style="{StaticResource SectionTitleStyle}" Visibility="{x:Bind helpers:Ui.Visible(ViewModel.HasAlternatives), Mode=OneWay}" />
                     <ItemsControl ItemsSource="{x:Bind ViewModel.Alternatives}" ItemTemplate="{StaticResource AdvisorResultTemplate}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

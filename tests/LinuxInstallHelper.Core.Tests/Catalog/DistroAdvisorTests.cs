@@ -13,7 +13,8 @@ public class DistroAdvisorTests
         MainUse use = MainUse.Everyday,
         DesktopLook look = DesktopLook.NoPreference,
         UpdatePace updates = UpdatePace.NoPreference,
-        bool avoidFirmware = true) => new(experience, power, use, look, updates, avoidFirmware);
+        bool avoidFirmware = true,
+        ComputerProcessor processor = ComputerProcessor.IntelOrAmd) => new(experience, power, processor, use, look, updates, avoidFirmware);
 
     private static string Best(AdvisorAnswers answers) => DistroAdvisor.Recommend(Catalog, answers)[0].Distro.Id;
 
@@ -84,5 +85,26 @@ public class DistroAdvisorTests
         Assert.Equal(3, suggestions.Count);
         Assert.Equal(3, suggestions.Select(r => r.Distro.Id).Distinct().Count());
         Assert.True(suggestions[0].Score >= suggestions[1].Score && suggestions[1].Score >= suggestions[2].Score);
+    }
+
+    [Theory]
+    [InlineData(ComputerProcessor.IntelOrAmd)]
+    [InlineData(ComputerProcessor.Unknown)]
+    public void Intel_and_amd_computers_and_unknown_processors_get_intel_and_amd_images(ComputerProcessor processor)
+    {
+        var everyone = DistroAdvisor.Recommend(Catalog, Answers(LinuxExperience.Comfortable, processor: processor, avoidFirmware: false), count: 100);
+
+        Assert.NotEmpty(everyone);
+        Assert.All(everyone, r => Assert.Equal(DistroArchitectures.X64, r.Distro.Architecture));
+    }
+
+    [Fact]
+    public void Arm_computers_get_arm_images_only()
+    {
+        var everyone = DistroAdvisor.Recommend(Catalog, Answers(processor: ComputerProcessor.Arm, avoidFirmware: false), count: 100);
+
+        Assert.All(everyone, r => Assert.Equal(DistroArchitectures.Arm64, r.Distro.Architecture));
+        Assert.Equal("ubuntu-desktop-arm64", everyone[0].Distro.Id);
+        Assert.DoesNotContain(everyone, r => r.Distro.Id == "ubuntu-server-arm64");
     }
 }

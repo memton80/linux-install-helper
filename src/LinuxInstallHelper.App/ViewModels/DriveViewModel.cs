@@ -2,9 +2,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LinuxInstallHelper.App.Services;
-using System.Runtime.InteropServices;
 using LinuxInstallHelper.Core;
-using LinuxInstallHelper.Core.Readiness;
 using LinuxInstallHelper.Core.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
@@ -101,9 +99,15 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private string _errorMessage = string.Empty;
 
-    /// <summary>The image is for another kind of processor: the drive will not start on this computer.</summary>
+    /// <summary>
+    /// Why the drive will not start on this computer: the image is for another kind of processor. Empty when it will start.
+    /// It never blocks: the drive may be for another computer.
+    /// </summary>
     [ObservableProperty]
-    private bool _showProcessorWarning;
+    [NotifyPropertyChangedFor(nameof(ShowProcessorWarning))]
+    private string _processorWarning = string.Empty;
+
+    public bool ShowProcessorWarning => ProcessorWarning.Length > 0;
 
     public void OnNavigatedTo(object? parameter)
     {
@@ -115,8 +119,7 @@ public sealed partial class DriveViewModel : ObservableObject, INavigationAware
 
         ImageSummary = _localizer.Format("Drive_ImageSummary", _wizard.SourceName, _formatter.Size(_wizard.ImageSize));
         CapacityTip = _localizer.Format("Alone_DriveCapacity", _formatter.Size(_wizard.ImageSize));
-        ShowProcessorWarning = _wizard.Distro is { } distro
-            && PcReadiness.CannotStart(PcFacts.ProcessorOf(RuntimeInformation.OSArchitecture), distro);
+        ProcessorWarning = ProcessorText.Mismatch(_localizer, _wizard.ImageArchitecture);
         IsConfirmed = false;
         _ = RefreshAsync();
         _timer.Start();

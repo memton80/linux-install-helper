@@ -121,13 +121,19 @@ public static class PcReadiness
     public static bool CannotStart(ProcessorKind processor, Distro distro)
     {
         ArgumentNullException.ThrowIfNull(distro);
-        return (processor, distro.Architecture) switch
-        {
-            (ProcessorKind.Arm64, DistroArchitectures.X64) => true,
-            (ProcessorKind.X64, DistroArchitectures.Arm64) => true,
-            _ => false,
-        };
+        return CannotStart(processor, distro.Architecture);
     }
+
+    /// <summary>
+    /// True when a drive made from an image for <paramref name="architecture"/> (<see cref="DistroArchitectures"/>) cannot
+    /// start on a computer with this processor; false when either is unknown.
+    /// </summary>
+    public static bool CannotStart(ProcessorKind processor, string? architecture) => (processor, architecture) switch
+    {
+        (ProcessorKind.Arm64, DistroArchitectures.X64) => true,
+        (ProcessorKind.X64, DistroArchitectures.Arm64) => true,
+        _ => false,
+    };
 
     private static ReadinessItem? Processor(PcFacts facts, Distro? distro)
     {
@@ -143,9 +149,9 @@ public static class PcReadiness
 
         if (facts.Processor == ProcessorKind.Arm64)
         {
-            // Without a chosen distribution: the catalog only has images for Intel and AMD processors.
+            // Without a chosen distribution: the ARM versions of the catalog start on it, and Linux supports some ARM laptops only.
             return distro is null
-                ? new(ReadinessCheck.Processor, ReadinessLevel.Blocker, "Arm64")
+                ? new(ReadinessCheck.Processor, ReadinessLevel.Info, "Arm64Choose")
                 : new(ReadinessCheck.Processor, ReadinessLevel.Ok, "Arm64Ok") { Name = distro.DisplayName };
         }
 

@@ -37,6 +37,12 @@ public sealed class WizardState
         : LocalIsoPath is not null ? Path.GetFileName(LocalIsoPath)
         : string.Empty;
 
+    /// <summary>
+    /// The processor the image is made for (<see cref="DistroArchitectures"/>), from the catalog or from the name of a local
+    /// ISO; null when the name does not say.
+    /// </summary>
+    public string? ImageArchitecture => Distro?.Architecture ?? DistroArchitectures.FromFileName(LocalIsoPath);
+
     /// <summary>Approximate size of the image, used to hide drives that are too small.</summary>
     public long ImageSize => Distro?.Image.Size ?? LocalIsoSize;
 

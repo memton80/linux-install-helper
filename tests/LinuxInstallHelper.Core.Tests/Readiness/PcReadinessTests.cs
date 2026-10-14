@@ -58,12 +58,38 @@ public class PcReadinessTests
     }
 
     [Fact]
-    public void An_arm_computer_is_a_blocker_without_a_chosen_distribution()
+    public void An_arm_computer_is_told_to_choose_an_arm_version_without_a_chosen_distribution()
     {
         var item = Single(PcReadiness.Evaluate(ReadyPc with { Processor = ProcessorKind.Arm64 }, null), ReadinessCheck.Processor);
 
-        Assert.Equal(ReadinessLevel.Blocker, item.Level);
-        Assert.Equal("Arm64", item.Variant);
+        Assert.Equal(ReadinessLevel.Info, item.Level);
+        Assert.Equal("Arm64Choose", item.Variant);
+    }
+
+    [Fact]
+    public void An_arm_computer_starts_an_arm_drive_and_an_intel_computer_does_not()
+    {
+        var arm = TestDistros.Get("ubuntu-desktop-arm64");
+
+        var onArm = Single(PcReadiness.Evaluate(ReadyPc with { Processor = ProcessorKind.Arm64 }, arm), ReadinessCheck.Processor);
+        var onIntel = Single(PcReadiness.Evaluate(ReadyPc, arm), ReadinessCheck.Processor);
+
+        Assert.Equal(ReadinessLevel.Ok, onArm.Level);
+        Assert.Equal("Arm64Ok", onArm.Variant);
+        Assert.Equal(ReadinessLevel.Blocker, onIntel.Level);
+        Assert.Equal("NeedsArm", onIntel.Variant);
+    }
+
+    [Theory]
+    [InlineData(ProcessorKind.X64, DistroArchitectures.Arm64, true)]
+    [InlineData(ProcessorKind.Arm64, DistroArchitectures.X64, true)]
+    [InlineData(ProcessorKind.X64, DistroArchitectures.X64, false)]
+    [InlineData(ProcessorKind.Arm64, DistroArchitectures.Arm64, false)]
+    [InlineData(ProcessorKind.Unknown, DistroArchitectures.Arm64, false)]
+    [InlineData(ProcessorKind.Arm64, null, false)]
+    public void A_drive_cannot_start_only_on_the_other_processor(ProcessorKind processor, string? architecture, bool cannotStart)
+    {
+        Assert.Equal(cannotStart, PcReadiness.CannotStart(processor, architecture));
     }
 
     [Fact]

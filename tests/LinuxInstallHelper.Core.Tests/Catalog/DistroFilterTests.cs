@@ -58,9 +58,22 @@ public class DistroFilterTests
     [Fact]
     public void Filters_combine()
     {
-        var result = DistroFilter.Apply(Distros, new DistroQuery("debian", DistroFamilies.Debian, DistroCategories.Server));
+        var intel = DistroFilter.Apply(Distros, new DistroQuery("debian", DistroFamilies.Debian, DistroCategories.Server, DistroArchitectures.X64));
+        var arm = DistroFilter.Apply(Distros, new DistroQuery("debian", DistroFamilies.Debian, DistroCategories.Server, DistroArchitectures.Arm64));
 
-        Assert.Equal(["debian-netinst"], result.Select(d => d.Id));
+        Assert.Equal(["debian-netinst"], intel.Select(d => d.Id));
+        Assert.Equal(["debian-netinst-arm64"], arm.Select(d => d.Id));
+    }
+
+    [Theory]
+    [InlineData("ARM")]
+    [InlineData("aarch64")]
+    public void Searching_arm_finds_the_arm_images_only(string text)
+    {
+        var result = DistroFilter.Apply(Distros, new DistroQuery(text), "fr");
+
+        Assert.NotEmpty(result);
+        Assert.Equal(Distros.Where(d => d.Architecture == DistroArchitectures.Arm64).Select(d => d.Id), result.Select(d => d.Id));
     }
 
     [Fact]

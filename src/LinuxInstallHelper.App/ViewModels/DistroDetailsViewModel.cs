@@ -74,6 +74,13 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
     [ObservableProperty]
     private bool _showSecureBootWarning;
 
+    /// <summary>Why the drive will not start on this PC; empty when it will.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowArchitectureWarning))]
+    private string _architectureWarning = string.Empty;
+
+    public bool ShowArchitectureWarning => ArchitectureWarning.Length > 0;
+
     public string WordsLabel { get; }
 
     public void OnNavigatedTo(object? parameter)
@@ -142,6 +149,7 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
         WebsiteLabel = _localizer.Format("DistroDetails_Website", Host(distro.Homepage));
         CreateLabel = _localizer.Format("Advisor_CreateBest", distro.Name);
         ShowSecureBootWarning = !distro.SecureBoot;
+        ArchitectureWarning = ProcessorText.Mismatch(_localizer, distro.Architecture);
     }
 
     private List<DistroFact> BuildFacts(Distro distro)
@@ -158,6 +166,9 @@ public sealed partial class DistroDetailsViewModel : ObservableObject, INavigati
         }
 
         facts.Add(new DistroFact(_localizer.Get("DistroDetails_Fact_Family"), _localizer.Get("Family_" + distro.Family)));
+        facts.Add(new DistroFact(
+            _localizer.Get("DistroDetails_Fact_Processor"),
+            _localizer.Format("DistroDetails_ProcessorValue", ProcessorText.Name(_localizer, distro.Architecture))));
         facts.Add(new DistroFact(_localizer.Get("DistroDetails_Fact_Download"), _formatter.Size(distro.Image.Size)));
         if (distro.Requirements is { RamMb: { } ram, DiskGb: { } disk })
         {

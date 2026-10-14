@@ -90,7 +90,7 @@
     <value>Search</value>
   </data>
   <data name="DistrosSearch.PlaceholderText" xml:space="preserve">
-    <value>Name, desktop, keyword…</value>
+    <value>Name, desktop, keyword, ARM…</value>
   </data>
   <data name="DistrosFamily.Header" xml:space="preserve">
     <value>Family</value>
@@ -163,6 +163,18 @@
   </data>
   <data name="Distro_NoSecureBoot" xml:space="preserve">
     <value>Secure Boot must be disabled</value>
+  </data>
+  <data name="Processor_x86_64" xml:space="preserve">
+    <value>Intel or AMD</value>
+  </data>
+  <data name="Processor_aarch64" xml:space="preserve">
+    <value>ARM</value>
+  </data>
+  <data name="Distro_OtherProcessor" xml:space="preserve">
+    <value>For {0} PCs: will not start here</value>
+  </data>
+  <data name="Architecture_Mismatch" xml:space="preserve">
+    <value>This image is made for PCs with an {0} processor, but this PC has an {1} processor. If the drive is for another computer, with an {0} processor, you can go on.</value>
   </data>
   <data name="LocalIsoHeader.Text" xml:space="preserve">
     <value>Use a local ISO image</value>
@@ -967,7 +979,7 @@ This cannot be undone.</value>
     <value>Which distribution should you choose?</value>
   </data>
   <data name="AdvisorSubtitle.Text" xml:space="preserve">
-    <value>Linux comes in many versions, called "distributions". Answer 6 questions: the application suggests the one that suits you best, explained simply.</value>
+    <value>Linux comes in many versions, called "distributions". Answer 7 questions: the application suggests the one that suits you best, explained simply.</value>
   </data>
   <data name="Advisor_QuestionTitle" xml:space="preserve">
     <value>{0}. {1}</value>
@@ -1000,51 +1012,66 @@ This cannot be undone.</value>
     <value>For reference, this PC has {0} GB of memory.</value>
   </data>
   <data name="Advisor_Q3" xml:space="preserve">
-    <value>What will you mostly do?</value>
+    <value>Which processor does that computer have?</value>
   </data>
   <data name="Advisor_Q3_A1" xml:space="preserve">
-    <value>Web, email, office, photos and videos</value>
+    <value>Intel or AMD, like most PCs</value>
   </data>
   <data name="Advisor_Q3_A2" xml:space="preserve">
-    <value>Play video games</value>
+    <value>ARM, for example a Snapdragon laptop</value>
   </data>
   <data name="Advisor_Q3_A3" xml:space="preserve">
-    <value>Programming or advanced computing</value>
+    <value>I don't know</value>
+  </data>
+  <data name="Advisor_ProcessorHint" xml:space="preserve">
+    <value>For reference, this PC has an {0} processor.</value>
   </data>
   <data name="Advisor_Q4" xml:space="preserve">
-    <value>Which screen style do you prefer?</value>
+    <value>What will you mostly do?</value>
   </data>
   <data name="Advisor_Q4_A1" xml:space="preserve">
-    <value>Close to Windows: a taskbar and a menu at the bottom left</value>
+    <value>Web, email, office, photos and videos</value>
   </data>
   <data name="Advisor_Q4_A2" xml:space="preserve">
-    <value>Modern and clean, a bit like a Mac</value>
+    <value>Play video games</value>
   </data>
   <data name="Advisor_Q4_A3" xml:space="preserve">
-    <value>No preference</value>
+    <value>Programming or advanced computing</value>
   </data>
   <data name="Advisor_Q5" xml:space="preserve">
-    <value>For updates, what do you prefer?</value>
+    <value>Which screen style do you prefer?</value>
   </data>
   <data name="Advisor_Q5_A1" xml:space="preserve">
-    <value>Peace of mind: everything works, no surprises</value>
+    <value>Close to Windows: a taskbar and a menu at the bottom left</value>
   </data>
   <data name="Advisor_Q5_A2" xml:space="preserve">
-    <value>The latest features, even with the odd small bug</value>
+    <value>Modern and clean, a bit like a Mac</value>
   </data>
   <data name="Advisor_Q5_A3" xml:space="preserve">
     <value>No preference</value>
   </data>
   <data name="Advisor_Q6" xml:space="preserve">
-    <value>Would you change a setting of the computer's BIOS?</value>
-  </data>
-  <data name="Advisor_Q6_Hint" xml:space="preserve">
-    <value>Some distributions need "Secure Boot" to be turned off in the PC's startup settings.</value>
+    <value>For updates, what do you prefer?</value>
   </data>
   <data name="Advisor_Q6_A1" xml:space="preserve">
-    <value>No, I would rather not</value>
+    <value>Peace of mind: everything works, no surprises</value>
   </data>
   <data name="Advisor_Q6_A2" xml:space="preserve">
+    <value>The latest features, even with the odd small bug</value>
+  </data>
+  <data name="Advisor_Q6_A3" xml:space="preserve">
+    <value>No preference</value>
+  </data>
+  <data name="Advisor_Q7" xml:space="preserve">
+    <value>Would you change a setting of the computer's BIOS?</value>
+  </data>
+  <data name="Advisor_Q7_Hint" xml:space="preserve">
+    <value>Some distributions need "Secure Boot" to be turned off in the PC's startup settings.</value>
+  </data>
+  <data name="Advisor_Q7_A1" xml:space="preserve">
+    <value>No, I would rather not</value>
+  </data>
+  <data name="Advisor_Q7_A2" xml:space="preserve">
     <value>Yes, if someone explains how</value>
   </data>
   <data name="AdvisorRecommend.Content" xml:space="preserve">
@@ -1064,6 +1091,12 @@ This cannot be undone.</value>
   </data>
   <data name="AdvisorOthersTitle.Text" xml:space="preserve">
     <value>Other good choices</value>
+  </data>
+  <data name="AdvisorArmNote.Title" xml:space="preserve">
+    <value>Linux on an ARM PC</value>
+  </data>
+  <data name="AdvisorArmNote.Message" xml:space="preserve">
+    <value>Few distributions exist for ARM PCs, and Linux works on only some ARM laptops so far. Before installing, check on the distribution's website that your model is supported.</value>
   </data>
   <data name="Advisor_CreateBest" xml:space="preserve">
     <value>Create my drive with {0}</value>
@@ -1134,6 +1167,12 @@ This cannot be undone.</value>
   <data name="Simple_zorin-core" xml:space="preserve">
     <value>Designed for people coming from Windows: its desktop looks a lot like it, and it is very easy to get started with.</value>
   </data>
+  <data name="Simple_ubuntu-desktop-arm64" xml:space="preserve">
+    <value>Ubuntu, the most widely used Linux distribution in the world, in its version for PCs with an ARM processor. Help is everywhere, and it gets security updates for 5 years.</value>
+  </data>
+  <data name="Simple_fedora-workstation-arm64" xml:space="preserve">
+    <value>Fedora in its version for PCs with an ARM processor: modern and polished, with the very latest versions of the software, twice a year.</value>
+  </data>
   <data name="Words_Title" xml:space="preserve">
     <value>The words, explained simply</value>
   </data>
@@ -1182,6 +1221,15 @@ This cannot be undone.</value>
   <data name="DistroDetailsSecureBoot.Message" xml:space="preserve">
     <value>This distribution does not start with Secure Boot on: it will have to be turned off in the computer's UEFI/BIOS settings.</value>
   </data>
+  <data name="DistroDetails_Fact_Processor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="DistroDetails_ProcessorValue" xml:space="preserve">
+    <value>For PCs with an {0} processor</value>
+  </data>
+  <data name="DistroDetailsArchitecture.Title" xml:space="preserve">
+    <value>This drive will not start on this PC</value>
+  </data>
   <data name="DistroDetails_Website" xml:space="preserve">
     <value>Official website: {0}</value>
   </data>
@@ -1223,6 +1271,24 @@ This cannot be undone.</value>
   </data>
   <data name="Word_memory-where_Meaning" xml:space="preserve">
     <value>In Windows, open Settings, then System, then About: it is shown on the "Installed RAM" line.</value>
+  </data>
+  <data name="Word_processor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="Word_processor_Meaning" xml:space="preserve">
+    <value>The chip that does all the computer's calculations. Almost every PC has an Intel or AMD processor. A distribution is made for one type of processor: on another one, it does not start.</value>
+  </data>
+  <data name="Word_arm" xml:space="preserve">
+    <value>ARM</value>
+  </data>
+  <data name="Word_arm_Meaning" xml:space="preserve">
+    <value>Another type of processor, easy on the battery, found in phones and in some recent laptops (Snapdragon, some Surface…). It needs a distribution made for ARM.</value>
+  </data>
+  <data name="Word_processor-where" xml:space="preserve">
+    <value>Where to see a PC's processor?</value>
+  </data>
+  <data name="Word_processor-where_Meaning" xml:space="preserve">
+    <value>In Windows, open Settings, then System, then About: the "System type" line says "x64-based processor" (Intel or AMD) or "ARM-based processor".</value>
   </data>
   <data name="Word_office" xml:space="preserve">
     <value>Office</value>
@@ -1501,19 +1567,25 @@ This cannot be undone.</value>
     <value>Intel or AMD processor</value>
   </data>
   <data name="Ready_Processor_X64_Message" xml:space="preserve">
-    <value>The distributions offered here are made for it.</value>
+    <value>Choose a distribution for Intel or AMD: every one offered here is, except the ARM versions.</value>
   </data>
   <data name="Ready_Processor_Arm64_Title" xml:space="preserve">
     <value>ARM processor: the drive will not start on this computer</value>
   </data>
   <data name="Ready_Processor_Arm64_Message" xml:space="preserve">
-    <value>This computer has an ARM processor (Snapdragon…). The distributions offered here are made for Intel and AMD processors (x86_64): a drive made with them starts on another computer, not on this one.</value>
+    <value>This computer has an ARM processor (Snapdragon…), and {0} is made for Intel and AMD processors (x86_64): the drive will start on another computer, not on this one. For this one, choose an ARM version, like Ubuntu Desktop ARM.</value>
   </data>
   <data name="Ready_Processor_Arm64Ok_Title" xml:space="preserve">
     <value>ARM processor</value>
   </data>
   <data name="Ready_Processor_Arm64Ok_Message" xml:space="preserve">
-    <value>{0} is made for ARM processors.</value>
+    <value>{0} is made for ARM processors. Linux works on only some ARM laptops so far: check on the distribution's website that this model is supported.</value>
+  </data>
+  <data name="Ready_Processor_Arm64Choose_Title" xml:space="preserve">
+    <value>ARM processor</value>
+  </data>
+  <data name="Ready_Processor_Arm64Choose_Message" xml:space="preserve">
+    <value>This computer has an ARM processor (Snapdragon…): choose an ARM version of a distribution, like Ubuntu Desktop ARM. Linux works on only some ARM laptops so far: check on the distribution's website that this model is supported.</value>
   </data>
   <data name="Ready_Processor_NeedsArm_Title" xml:space="preserve">
     <value>{0} is for ARM processors</value>
@@ -1755,9 +1827,6 @@ There, Secure Boot is often under "Security" or "Boot". Save the changes (often 
   </data>
   <data name="DriveProcessorWarning.Title" xml:space="preserve">
     <value>This drive will not start on this computer</value>
-  </data>
-  <data name="DriveProcessorWarning.Message" xml:space="preserve">
-    <value>This distribution is made for another kind of processor than the one of this computer (ARM, or Intel and AMD). The drive will work on another computer, not on this one.</value>
   </data>
   <data name="Backup_Measuring" xml:space="preserve">
     <value>Measuring…</value>
@@ -2122,15 +2191,18 @@ There, Secure Boot is often under "Security" or "Boot". Save the changes (often 
     <value>The answer is already selected from the memory of this computer: you can leave it as it is.</value>
   </data>
   <data name="Advisor_Q3_HintAlone" xml:space="preserve">
-    <value>When in doubt, pick the first answer: it suits most people.</value>
+    <value>The answer is already selected from this computer's processor: leave it as it is if the drive is for this computer. When in doubt, pick the first answer: it fits almost every PC.</value>
   </data>
   <data name="Advisor_Q4_HintAlone" xml:space="preserve">
-    <value>If you are used to Windows, the first answer will feel the most familiar.</value>
+    <value>When in doubt, pick the first answer: it suits most people.</value>
   </data>
   <data name="Advisor_Q5_HintAlone" xml:space="preserve">
-    <value>To get started, peace of mind is the safest choice.</value>
+    <value>If you are used to Windows, the first answer will feel the most familiar.</value>
   </data>
   <data name="Advisor_Q6_HintAlone" xml:space="preserve">
+    <value>To get started, peace of mind is the safest choice.</value>
+  </data>
+  <data name="Advisor_Q7_HintAlone" xml:space="preserve">
     <value>"No" is a very good choice: the application will suggest a distribution that starts without touching the computer's settings.</value>
   </data>
   <data name="Alone_DistroFitTitle.Text" xml:space="preserve">

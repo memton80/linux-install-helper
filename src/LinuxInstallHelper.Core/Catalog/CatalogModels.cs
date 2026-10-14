@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace LinuxInstallHelper.Core.Catalog;
 
@@ -198,8 +199,33 @@ public static class DistroCategories
     public static IReadOnlyList<string> All { get; } = [Beginner, Desktop, Lightweight, Server, Security, Rolling, Developer, Gaming];
 }
 
-public static class DistroArchitectures
+public static partial class DistroArchitectures
 {
     public const string X64 = "x86_64";
     public const string Arm64 = "aarch64";
+
+    public static IReadOnlyList<string> All { get; } = [X64, Arm64];
+
+    /// <summary>
+    /// The architecture that an ISO file name announces (<c>debian-13.7.0-arm64-netinst.iso</c>,
+    /// <c>Fedora-Workstation-Live-44-1.7.x86_64.iso</c>), or null when it does not say.
+    /// </summary>
+    public static string? FromFileName(string? fileName)
+    {
+        var name = Path.GetFileName(fileName);
+        if (string.IsNullOrEmpty(name))
+        {
+            return null;
+        }
+
+        var arm = ArmPattern().IsMatch(name);
+        var x64 = X64Pattern().IsMatch(name);
+        return arm == x64 ? null : arm ? Arm64 : X64;
+    }
+
+    [GeneratedRegex("(?<![a-z0-9])(aarch64|arm64)(?![a-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex ArmPattern();
+
+    [GeneratedRegex("(?<![a-z0-9])(x86_64|x86-64|amd64|x64)(?![a-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex X64Pattern();
 }

@@ -31,8 +31,9 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   inquiéter : le journal pendant la création de la clé, les détails techniques d'une erreur, les empreintes SHA-256 et
   OpenPGP de la page finale, les messages bruts des erreurs. L'activer demande une confirmation, et un cadre orange entoure
   alors la fenêtre. Il est désactivé à chaque lancement et ne change aucune vérification ni confirmation.
-- **Catalogue de 15 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
-  Manjaro, Zorin OS…) avec recherche et filtres par famille et par usage (bureau, léger, serveur…).
+- **Catalogue de 19 distributions** (Ubuntu, Debian, Linux Mint, Fedora, Arch, openSUSE, Pop!_OS, Kali,
+  Manjaro, Zorin OS…) avec recherche (« ARM » trouve les versions ARM) et filtres par famille et par usage (bureau,
+  léger, serveur…).
   Le catalogue est mis à jour en ligne au lancement, avec une copie embarquée pour fonctionner hors ligne.
   Chaque distribution a sa page de présentation (en bref, configuration conseillée, site officiel) avant la
   création de la clé, et un bouton « ? » explique simplement les mots techniques, comme dans le questionnaire.
@@ -60,6 +61,11 @@ workflow [Build](https://github.com/memton80/linux-install-helper/actions/workfl
   enregistrer dans Documents.
 - **Dépannage** : « Vérifier ma clé » relit la clé, sans rien y écrire, et la compare octet par octet à l'image ; les
   problèmes fréquents (clé absente du menu, Secure Boot, écran noir, aucun disque, pas de Wi-Fi…) et leurs solutions.
+- **PC Intel/AMD ou ARM** : le questionnaire demande le processeur de l'ordinateur (prérempli avec celui de ce PC)
+  et ne conseille que des distributions qui démarrent dessus. Toutes les versions restent proposées, car la clé peut
+  être pour un autre ordinateur : si l'image n'est pas faite pour le processeur de ce PC, l'application prévient
+  (liste, page de la distribution, choix de la clé) sans bloquer. Pour une ISO locale, le processeur est lu dans le
+  nom du fichier (`amd64`, `x86_64`, `arm64`, `aarch64`).
 - **ISO locale** : utilisez une image déjà téléchargée, avec contrôle facultatif de son SHA-256.
 - **Tutoriel illustré pour chaque distribution** pendant la création de la clé : démarrer sur la clé, son menu de
   démarrage avec les entrées exactes, l'essai et l'installation, le bureau, la logithèque, les mises à jour, le
@@ -95,6 +101,7 @@ Les images téléchargées, le catalogue en cache, les paramètres et les journa
 
 | Distribution | Version | Famille | Usage | Vérification |
 |---|---|---|---|---|
+| **Intel ou AMD (x86_64)** | | | | |
 | [Ubuntu Desktop](https://ubuntu.com/desktop) | 26.04.1 LTS | Ubuntu | débutant, bureau | SHA-256 + OpenPGP (checksums) |
 | [Ubuntu Server](https://ubuntu.com/server) | 26.04.1 LTS | Ubuntu | serveur | SHA-256 + OpenPGP (checksums) |
 | [Lubuntu](https://lubuntu.me) | 26.04.1 LTS | Ubuntu | léger, bureau | SHA-256 + OpenPGP (checksums) |
@@ -110,8 +117,16 @@ Les images téléchargées, le catalogue en cache, les paramètres et les journa
 | [Pop!_OS](https://system76.com/pop/) | 24.04 LTS | Ubuntu | débutant, bureau, dev | SHA-256 (API officielle) ⚠️ |
 | [Kali Linux Installer](https://www.kali.org) | 2026.2 | Debian | sécurité | SHA-256 + OpenPGP (checksums) |
 | [Zorin OS Core](https://zorin.com/os/) | 18.1 | Ubuntu | débutant, bureau | SHA-256 |
+| **ARM (aarch64)** | | | | |
+| [Ubuntu Desktop ARM](https://ubuntu.com/desktop) | 26.04.1 LTS | Ubuntu | débutant, bureau | SHA-256 + OpenPGP (checksums) |
+| [Ubuntu Server ARM](https://ubuntu.com/server) | 26.04.1 LTS | Ubuntu | serveur | SHA-256 + OpenPGP (checksums) |
+| [Debian netinst ARM](https://www.debian.org/distrib/netinst) | 13.7 (trixie) | Debian | serveur, léger | SHA-256 + OpenPGP (checksums) |
+| [Fedora Workstation ARM](https://fedoraproject.org/workstation/) | 44 | Fedora | bureau, dev | SHA-256 + OpenPGP (checksums) |
 
 ⚠️ Secure Boot à désactiver dans l'UEFI pour démarrer ces distributions (l'application le rappelle).
+
+Les versions ARM sont pour les PC à processeur ARM (portables Snapdragon, serveurs, machines virtuelles). Linux ne
+fonctionne encore que sur certains portables ARM : vérifiez que le modèle est pris en charge par la distribution.
 
 Les versions mineures (Debian 13.8, Ubuntu 26.04.2, nouvelle ISO mensuelle d'Arch…) sont suivies
 automatiquement grâce aux fichiers de checksums officiels. Le workflow
@@ -218,8 +233,10 @@ installing Linux. The "Prepare my PC" page checks this computer for the chosen d
 BIOS, Secure Boot, Intel RST/RAID, BitLocker, fast startup, free space, memory, NVIDIA, Broadcom Wi-Fi), gives the boot
 menu key of its maker, restarts it into the Windows startup options or the UEFI settings, and shows the saved Wi-Fi
 passwords on request; "My programs on Linux" tells what to use on Linux for each installed program; "Troubleshooting"
-reads a drive back (read only) to compare it with its image and lists the usual problems. It can also write a local ISO
-and restore a drive to a normal exFAT drive. At the first start, it asks whether someone who knows computers is helping
+reads a drive back (read only) to compare it with its image and lists the usual problems. The questionnaire asks for the computer's processor
+(Intel/AMD or ARM, prefilled with this PC's) and only suggests images that start on it; every image stays available,
+since the drive may be for another computer, and the app warns without blocking when an image is made for another
+processor than this PC's. It can also write a local ISO and restore a drive to a normal exFAT drive. At the first start, it asks whether someone who knows computers is helping
 you or whether you are on your own: on your own, every page adds step-by-step explanations in plain words (the journey in
 5 steps, how to read the list of distributions, what to check before plugging in the drive, what each creation step
 does, how to back up your files, the complete plan to start from the drive and go back to Windows), without removing any

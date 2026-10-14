@@ -2444,6 +2444,46 @@
       "terminal-apt",
       "generic-apps",
       "zorin-help"
+    ],
+    "ubuntu-desktop-arm64": [
+      "usb-boot",
+      "ubuntu-boot",
+      "ubuntu-start",
+      "ubuntu-desktop",
+      "ubuntu-software",
+      "ubuntu-updates",
+      "terminal-apt",
+      "generic-apps",
+      "ubuntu-help"
+    ],
+    "ubuntu-server-arm64": [
+      "usb-boot",
+      "ubuntu-server-boot",
+      "ubuntu-server-installer",
+      "ubuntu-server-login",
+      "server-ssh",
+      "ubuntu-server-help"
+    ],
+    "debian-netinst-arm64": [
+      "usb-boot",
+      "debian-netinst-boot",
+      "debian-netinst-network",
+      "debian-netinst-root",
+      "debian-netinst-software",
+      "debian-netinst-after",
+      "server-ssh",
+      "debian-help"
+    ],
+    "fedora-workstation-arm64": [
+      "usb-boot",
+      "fedora-boot",
+      "fedora-start",
+      "fedora-desktop",
+      "fedora-software",
+      "fedora-updates",
+      "terminal-dnf",
+      "generic-apps",
+      "fedora-help"
     ]
   }
 }

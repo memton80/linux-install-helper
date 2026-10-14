@@ -33,7 +33,7 @@ The [`check-links`](../.github/workflows/check-links.yml) workflow checks every 
 | `description` | yes | `{ "en": "...", "fr": "..." }`, one sentence, 300 characters max. |
 | `homepage` | yes | Official website (HTTPS). |
 | `color` | yes | Brand color `#RRGGBB`, used for the badge. |
-| `architecture` | yes | `x86_64` or `aarch64`. |
+| `architecture` | yes | `x86_64` (Intel or AMD) or `aarch64` (ARM). The questionnaire only suggests images for the processor the user picks, and the app warns when an image does not match this PC. Give an ARM image its own `id` (`ubuntu-desktop-arm64`) and a tour in `tour/tours.json`. |
 | `secureBoot` | no | `false` when the image does not boot with Secure Boot (a warning is shown). Default `true`. |
 | `requirements` | no | `{ "ramMb": 4096, "diskGb": 25 }`. |
 | `image` | yes | Where to download the ISO and how to verify it (below). |
